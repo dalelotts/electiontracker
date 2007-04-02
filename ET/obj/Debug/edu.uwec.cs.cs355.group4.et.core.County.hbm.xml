@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" table="county">
+		<id name="ID" column="CountyID" type="Int64">
+			<generator class="identity"/>
+		</id>
+		<property name="Name" column="CountyName" type="String" length="100" not-null="false"/>
+		<property name="Notes" column="CountyNotes" type="String" not-null="false"/>
+		<property name="WardCount" column="CountyWardCount" type="Int32" not-null="true"/>
+		<bag lazy="true" inverse="true" name="PhoneNumbers" >
+			<key column="CountyID"/>
+			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber, edu.uwec.cs.cs355.group4.et"/>
+		</bag>
+		<bag lazy="true" inverse="true" name="Attributes" >
+			<key column="CountyID"/>
+			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, edu.uwec.cs.cs355.group4.et"/>
+		</bag>
+		<bag lazy="true" name="Websites" inverse="true">
+			<key column="CountyID"/>
+			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyWebsite,edu.uwec.cs.cs355.group4.et"/>
+		</bag>	
+	</class>
+</hibernate-mapping>

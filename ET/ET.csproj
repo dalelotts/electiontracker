@@ -1,0 +1,279 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{01ACB36B-53D5-443B-9CC3-47EC018250E6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>edu.uwec.cs.cs355.group4.et</RootNamespace>
+    <AssemblyName>edu.uwec.cs.cs355.group4.et</AssemblyName>
+    <StartupObject>edu.uwec.cs.cs355.group4.et.core.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DBC_CHECK_ALL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\dev\log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\NHibernate\bin\net-2.0\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Core, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET-1.1.0 Preview 3\bin\net\2.0\release\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="core\AttributeType.cs" />
+    <Compile Include="core\Candidate.cs" />
+    <Compile Include="core\CandidateResponse.cs" />
+    <Compile Include="core\Contest.cs" />
+    <Compile Include="core\ContestCounty.cs" />
+    <Compile Include="core\ContestType.cs" />
+    <Compile Include="core\County.cs" />
+    <Compile Include="core\CountyAttribute.cs" />
+    <Compile Include="core\CountyPhoneNumber.cs" />
+    <Compile Include="core\CountyWebsite.cs" />
+    <Compile Include="core\CustomResponse.cs" />
+    <Compile Include="core\Election.cs" />
+    <Compile Include="core\ElectionContest.cs" />
+    <Compile Include="core\PhoneNumberType.cs" />
+    <Compile Include="core\PoliticalParty.cs" />
+    <Compile Include="core\PrintReport.cs" />
+    <Compile Include="core\Program.cs" />
+    <Compile Include="core\Response.cs" />
+    <Compile Include="core\ResponseValue.cs" />
+    <Compile Include="db\AttributeTypeDAO.cs" />
+    <Compile Include="db\CandidateDAO.cs" />
+    <Compile Include="db\ContestCountyDAO.cs" />
+    <Compile Include="db\ContestDAO.cs" />
+    <Compile Include="db\ContestTypeDAO.cs" />
+    <Compile Include="db\CountyAttributeDAO.cs" />
+    <Compile Include="db\CountyDAO.cs" />
+    <Compile Include="db\CountyPhoneNumberDAO.cs" />
+    <Compile Include="db\CountyWebsiteDAO.cs" />
+    <Compile Include="db\ElectionContestDAO.cs" />
+    <Compile Include="db\ElectionDAO.cs" />
+    <Compile Include="db\Fault.cs" />
+    <Compile Include="db\GenericDAO.cs" />
+    <Compile Include="db\HibernateDAO.cs" />
+    <Compile Include="db\PhoneNumberTypeDAO.cs" />
+    <Compile Include="db\PoliticalPartyDAO.cs" />
+    <Compile Include="db\ResponseDAO.cs" />
+    <Compile Include="db\ResponseValueDAO.cs" />
+    <Compile Include="events\CandidateArgs.cs" />
+    <Compile Include="events\ContestArgs.cs" />
+    <Compile Include="events\CountyFormArgs.cs" />
+    <Compile Include="events\DefaultShowMessageSender.cs" />
+    <Compile Include="events\ElectionReportArgs.cs" />
+    <Compile Include="events\EnterVotesArgs.cs" />
+    <Compile Include="events\EventRegistry.cs" />
+    <Compile Include="events\EventUtil.cs" />
+    <Compile Include="events\IShowMessageSender.cs" />
+    <Compile Include="events\PoliticalPartyArgs.cs" />
+    <Compile Include="events\ShowAboutBoxArgs.cs" />
+    <Compile Include="events\ElectionArgs.cs" />
+    <Compile Include="events\ShowErrorMessageArgs.cs" />
+    <Compile Include="events\ShowMessageArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\frmAboutBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmAboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\MDIForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MDIForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <EmbeddedResource Include="core\Election.hbm.xml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="db\HibernateUtil.cs" />
+    <Compile Include="type\DBEntity.cs" />
+    <Compile Include="type\NoSuchMemberException.cs" />
+    <Compile Include="ui\frmAboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmAboutBox.Designer.cs">
+      <DependentUpon>frmAboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmCounty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmCounty.designer.cs">
+      <DependentUpon>frmCounty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\DefaultUIController.cs" />
+    <Compile Include="ui\frmElection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmElection.Designer.cs">
+      <DependentUpon>frmElection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmCandidate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmCandidate.designer.cs">
+      <DependentUpon>frmCandidate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmContest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmContest.designer.cs">
+      <DependentUpon>frmContest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmElectionReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmElectionReport.designer.cs">
+      <DependentUpon>frmElectionReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmEnterVotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmEnterVotes.designer.cs">
+      <DependentUpon>frmEnterVotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmPoliticalParty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmPoliticalParty.designer.cs">
+      <DependentUpon>frmPoliticalParty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\MDIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\MDIForm.Designer.cs">
+      <DependentUpon>MDIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\UIController.cs" />
+    <Compile Include="ui\util\ActiveCandidateFilter.cs" />
+    <Compile Include="ui\util\ActiveContestFilter.cs" />
+    <Compile Include="ui\util\ActiveElectionFilter.cs" />
+    <Compile Include="ui\util\ActivePoliticalPartyFilter.cs" />
+    <Compile Include="ui\util\BaseTreeViewFilter.cs" />
+    <Compile Include="ui\util\ListItemWrapper.cs" />
+    <Compile Include="ui\util\CompositeFilter.cs" />
+    <Compile Include="ui\util\CountyFilter.cs" />
+    <Compile Include="ui\util\InactiveCandidateFilter.cs" />
+    <Compile Include="ui\util\InactiveContestFilter.cs" />
+    <Compile Include="ui\util\InactiveElectionFilter.cs" />
+    <Compile Include="ui\util\InactivePoliticalPartyFilter.cs" />
+    <Compile Include="ui\util\TreeViewFilter.cs" />
+    <Compile Include="util\DesignByContract.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\PoliticalParty.hbm.xml" />
+    <EmbeddedResource Include="ui\frmElection.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmElection.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\Candidate.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\ContestType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\Contest.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\County.hbm.xml" />
+    <EmbeddedResource Include="ui\frmCounty.resx">
+      <DependentUpon>frmCounty.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\frmCandidate.resx">
+      <DependentUpon>frmCandidate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\frmContest.resx">
+      <DependentUpon>frmContest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\frmPoliticalParty.resx">
+      <DependentUpon>frmPoliticalParty.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\AttributeType.hbm.xml" />
+    <EmbeddedResource Include="core\CountyAttribute.hbm.xml" />
+    <EmbeddedResource Include="core\CountyPhoneNumber.hbm.xml" />
+    <EmbeddedResource Include="core\CountyWebsite.hbm.xml" />
+    <EmbeddedResource Include="core\PhoneNumberType.hbm.xml" />
+    <EmbeddedResource Include="ui\frmElectionReport.resx">
+      <DependentUpon>frmElectionReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\ElectionContest.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\ContestCounty.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="core\CustomResponse.hbm.xml" />
+    <Content Include="core\ResponseValue.hbm.xml" />
+    <EmbeddedResource Include="core\Response.hbm.xml" />
+    <EmbeddedResource Include="ui\frmEnterVotes.resx">
+      <DependentUpon>frmEnterVotes.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

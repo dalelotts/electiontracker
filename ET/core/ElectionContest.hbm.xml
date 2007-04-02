@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" table="electioncontest">
+		<id name="ID" column="ElectionContestID" type="Int64">
+			<generator class="identity"/>
+		</id>
+    <bag lazy="true" inverse="true" name="Responses" cascade="all" >
+      <key column="ElectionContestID"/>
+      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.Response, edu.uwec.cs.cs355.group4.et"/>
+    </bag>
+    <bag lazy="true" inverse="true" name="Counties" cascade="all" >
+      <key column="ElectionContestID"/>
+      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ContestCounty, edu.uwec.cs.cs355.group4.et"/>
+    </bag>    
+		<many-to-one name="Election" class="edu.uwec.cs.cs355.group4.et.core.Election, edu.uwec.cs.cs355.group4.et" column="ElectionID"/>
+		<many-to-one name="Contest" class="edu.uwec.cs.cs355.group4.et.core.Contest, edu.uwec.cs.cs355.group4.et" column="ContestID"/>
+	</class>
+</hibernate-mapping>

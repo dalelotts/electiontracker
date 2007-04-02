@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="edu.uwec.cs.cs355.group4.et.core.Election, edu.uwec.cs.cs355.group4.et" table="election">
+    <id name="ID" column="ElectionID" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="Date" column="ElectionDate" type="DateTime" not-null="true" />
+    <property name="Notes" column="ElectionNotes" type="String" length="40" not-null="false"/>
+    <property name="IsActive" column="ElectionIsActive" type="Boolean" not-null="true" />
+		<bag name="ElectionContests" inverse="true" lazy="true" >
+			<key column="ElectionContestID" />
+			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" />
+		</bag>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,576 @@
+2007-04-01 01:33:08,984 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Error instantiating context 'spring.root'.
+System.Configuration.ConfigurationErrorsException: Error instantiating context 'spring.root'. ---> Spring.Objects.FatalObjectException: Cannot instantiate Type [Spring.Context.Support.XmlApplicationContext] using ctor [Void .ctor(System.String, Boolean, System.String[])] : 'Exception has been thrown by the target of an invocation.' ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> Spring.Objects.Factory.ObjectCreationException: Error thrown by a dependency of object 'UIController' defined in 'config [objects]' : Error setting property values: PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.MethodInvocationException: Property 'Filters' threw exception., Inner Exception: System.Exception: Exception of type 'System.Exception' was thrown.
+   at MySql.Data.MySqlClient.NativeDriver.Open()]
+ while resolving 'MDIForm' to 'MDIForm'  defined in 'config [objects]' ---> PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.MethodInvocationException: Property 'Filters' threw exception., Inner Exception: System.Exception: Exception of type 'System.Exception' was thrown.
+   at MySql.Data.MySqlClient.NativeDriver.Open()]
+   --- End of inner exception stack trace ---
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveReference(IConfigurableObjectDefinition definition, String name, String argumentName, RuntimeObjectReference reference)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveValueIfNecessary(String name, RootObjectDefinition definition, String argumentName, Object argumentValue)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ApplyPropertyValues(String name, RootObjectDefinition definition, IObjectWrapper wrapper, IPropertyValues properties)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.PopulateObject(String name, RootObjectDefinition definition, IObjectWrapper wrapper)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments, Boolean allowEagerCaching)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.CreateAndCacheSingletonInstance(String objectName, RootObjectDefinition objectDefinition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Type requiredType, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name)
+   at Spring.Objects.Factory.Support.DefaultListableObjectFactory.PreInstantiateSingletons()
+   at Spring.Context.Support.AbstractApplicationContext.Refresh()
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, IApplicationContext parentContext, String[] configurationLocations)
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, String[] configurationLocations)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle._InvokeConstructor(Object[] args, SignatureStruct& signature, IntPtr declaringType)
+   at System.RuntimeMethodHandle.InvokeConstructor(Object[] args, SignatureStruct signature, RuntimeTypeHandle declaringType)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.ConstructorInfo.Invoke(Object[] parameters)
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   --- End of inner exception stack trace ---
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   at Spring.Context.Support.ContextHandler.RootContextInstantiator.InvokeContextConstructor(ConstructorInfo ctor)
+   at Spring.Context.Support.ContextHandler.ContextInstantiator.InstantiateContext()
+   --- End of inner exception stack trace ---
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey, Boolean getLkg, Boolean checkPermission)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at Spring.Util.ConfigurationUtils.GetSection(String sectionName)
+   at Spring.Context.Support.ContextRegistry.InitializeContextIfNeeded()
+   at Spring.Context.Support.ContextRegistry.GetContext()
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 20
+2007-04-01 01:34:50,687 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Error instantiating context 'spring.root'.
+System.Configuration.ConfigurationErrorsException: Error instantiating context 'spring.root'. ---> Spring.Objects.FatalObjectException: Cannot instantiate Type [Spring.Context.Support.XmlApplicationContext] using ctor [Void .ctor(System.String, Boolean, System.String[])] : 'Exception has been thrown by the target of an invocation.' ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> Spring.Objects.Factory.ObjectCreationException: Error thrown by a dependency of object 'UIController' defined in 'config [objects]' : Error setting property values: PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.MethodInvocationException: Property 'Filters' threw exception., Inner Exception: System.Exception: Exception of type 'System.Exception' was thrown.
+   at MySql.Data.MySqlClient.NativeDriver.Open()]
+ while resolving 'MDIForm' to 'MDIForm'  defined in 'config [objects]' ---> PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.MethodInvocationException: Property 'Filters' threw exception., Inner Exception: System.Exception: Exception of type 'System.Exception' was thrown.
+   at MySql.Data.MySqlClient.NativeDriver.Open()]
+   --- End of inner exception stack trace ---
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveReference(IConfigurableObjectDefinition definition, String name, String argumentName, RuntimeObjectReference reference)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveValueIfNecessary(String name, RootObjectDefinition definition, String argumentName, Object argumentValue)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ApplyPropertyValues(String name, RootObjectDefinition definition, IObjectWrapper wrapper, IPropertyValues properties)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.PopulateObject(String name, RootObjectDefinition definition, IObjectWrapper wrapper)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments, Boolean allowEagerCaching)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.CreateAndCacheSingletonInstance(String objectName, RootObjectDefinition objectDefinition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Type requiredType, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name)
+   at Spring.Objects.Factory.Support.DefaultListableObjectFactory.PreInstantiateSingletons()
+   at Spring.Context.Support.AbstractApplicationContext.Refresh()
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, IApplicationContext parentContext, String[] configurationLocations)
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, String[] configurationLocations)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle._InvokeConstructor(Object[] args, SignatureStruct& signature, IntPtr declaringType)
+   at System.RuntimeMethodHandle.InvokeConstructor(Object[] args, SignatureStruct signature, RuntimeTypeHandle declaringType)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.ConstructorInfo.Invoke(Object[] parameters)
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   --- End of inner exception stack trace ---
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   at Spring.Context.Support.ContextHandler.RootContextInstantiator.InvokeContextConstructor(ConstructorInfo ctor)
+   at Spring.Context.Support.ContextHandler.ContextInstantiator.InstantiateContext()
+   --- End of inner exception stack trace ---
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey, Boolean getLkg, Boolean checkPermission)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at Spring.Util.ConfigurationUtils.GetSection(String sectionName)
+   at Spring.Context.Support.ContextRegistry.InitializeContextIfNeeded()
+   at Spring.Context.Support.ContextRegistry.GetContext()
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 20
+2007-04-01 01:40:45,937 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Error instantiating context 'spring.root'.
+System.Configuration.ConfigurationErrorsException: Error instantiating context 'spring.root'. ---> Spring.Objects.FatalObjectException: Cannot instantiate Type [Spring.Context.Support.XmlApplicationContext] using ctor [Void .ctor(System.String, Boolean, System.String[])] : 'Exception has been thrown by the target of an invocation.' ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> Spring.Objects.Factory.ObjectCreationException: Error thrown by a dependency of object 'UIController' defined in 'config [objects]' : Error setting property values: PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.MethodInvocationException: Property 'Filters' threw exception., Inner Exception: System.Exception: Exception of type 'System.Exception' was thrown.
+   at MySql.Data.MySqlClient.NativeDriver.Open()]
+ while resolving 'MDIForm' to 'MDIForm'  defined in 'config [objects]' ---> PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.MethodInvocationException: Property 'Filters' threw exception., Inner Exception: System.Exception: Exception of type 'System.Exception' was thrown.
+   at MySql.Data.MySqlClient.NativeDriver.Open()]
+   --- End of inner exception stack trace ---
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveReference(IConfigurableObjectDefinition definition, String name, String argumentName, RuntimeObjectReference reference)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveValueIfNecessary(String name, RootObjectDefinition definition, String argumentName, Object argumentValue)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ApplyPropertyValues(String name, RootObjectDefinition definition, IObjectWrapper wrapper, IPropertyValues properties)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.PopulateObject(String name, RootObjectDefinition definition, IObjectWrapper wrapper)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments, Boolean allowEagerCaching)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.CreateAndCacheSingletonInstance(String objectName, RootObjectDefinition objectDefinition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Type requiredType, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name)
+   at Spring.Objects.Factory.Support.DefaultListableObjectFactory.PreInstantiateSingletons()
+   at Spring.Context.Support.AbstractApplicationContext.Refresh()
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, IApplicationContext parentContext, String[] configurationLocations)
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, String[] configurationLocations)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle._InvokeConstructor(Object[] args, SignatureStruct& signature, IntPtr declaringType)
+   at System.RuntimeMethodHandle.InvokeConstructor(Object[] args, SignatureStruct signature, RuntimeTypeHandle declaringType)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.ConstructorInfo.Invoke(Object[] parameters)
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   --- End of inner exception stack trace ---
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   at Spring.Context.Support.ContextHandler.RootContextInstantiator.InvokeContextConstructor(ConstructorInfo ctor)
+   at Spring.Context.Support.ContextHandler.ContextInstantiator.InstantiateContext()
+   --- End of inner exception stack trace ---
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey, Boolean getLkg, Boolean checkPermission)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at Spring.Util.ConfigurationUtils.GetSection(String sectionName)
+   at Spring.Context.Support.ContextRegistry.InitializeContextIfNeeded()
+   at Spring.Context.Support.ContextRegistry.GetContext()
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 20
+2007-04-01 18:54:21,156 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.HibernateException: Creating a proxy instance failed ---> System.TypeLoadException: Access is denied: 'edu.uwec.cs.cs355.group4.et.core.County'.
+   at System.Reflection.Emit.TypeBuilder.TermCreateClass(Int32 handle, Module module)
+   at System.Reflection.Emit.TypeBuilder.CreateTypeNoLock()
+   at System.Reflection.Emit.TypeBuilder.CreateType()
+   at Castle.DynamicProxy.Builder.CodeBuilder.AbstractEasyType.BuildType()
+   at Castle.DynamicProxy.Builder.CodeGenerators.BaseCodeGenerator.CreateType()
+   at Castle.DynamicProxy.Builder.CodeGenerators.ClassProxyGenerator.GenerateCode(Type baseClass, Type[] interfaces)
+   at Castle.DynamicProxy.Builder.DefaultProxyBuilder.CreateClassProxy(Type theClass, Type[] interfaces)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type baseClass, Type[] interfaces, IInterceptor interceptor, Boolean checkAbstract, Object[] argumentsForConstructor)
+   at NHibernate.Proxy.CastleProxyFactory.GetProxy(Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Proxy.CastleProxyFactory.GetProxy(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.CreateProxy(Object id, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.DoLoadByClass(Type clazz, Object id, Boolean checkDeleted, Boolean allowProxyCreation)
+   at NHibernate.Impl.SessionImpl.InternalLoad(Type clazz, Object id, Boolean eager, Boolean isNullable)
+   at NHibernate.Type.EntityType.ResolveIdentifier(Object id, ISessionImplementor session)
+   at NHibernate.Type.EntityType.ResolveIdentifier(Object id, ISessionImplementor session, Object owner)
+   at NHibernate.Impl.SessionImpl.InitializeEntity(Object obj)
+   at NHibernate.Loader.Loader.InitializeEntitiesAndCollections(IList hydratedObjects, Object resultSetId, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollection(ISessionImplementor session, Object id, IType type)
+   at NHibernate.Loader.Collection.CollectionLoader.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Read()
+   at NHibernate.Collection.Generic.PersistentGenericBag`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 30
+2007-04-01 18:56:53,265 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Failed to lazily initialize a collection
+NHibernate.LazyInitializationException: Failed to lazily initialize a collection ---> NHibernate.HibernateException: Creating a proxy instance failed ---> System.TypeLoadException: Access is denied: 'edu.uwec.cs.cs355.group4.et.core.County'.
+   at System.Reflection.Emit.TypeBuilder.TermCreateClass(Int32 handle, Module module)
+   at System.Reflection.Emit.TypeBuilder.CreateTypeNoLock()
+   at System.Reflection.Emit.TypeBuilder.CreateType()
+   at Castle.DynamicProxy.Builder.CodeBuilder.AbstractEasyType.BuildType()
+   at Castle.DynamicProxy.Builder.CodeGenerators.BaseCodeGenerator.CreateType()
+   at Castle.DynamicProxy.Builder.CodeGenerators.ClassProxyGenerator.GenerateCode(Type baseClass, Type[] interfaces)
+   at Castle.DynamicProxy.Builder.DefaultProxyBuilder.CreateClassProxy(Type theClass, Type[] interfaces)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type baseClass, Type[] interfaces, IInterceptor interceptor, Boolean checkAbstract, Object[] argumentsForConstructor)
+   at NHibernate.Proxy.CastleProxyFactory.GetProxy(Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Proxy.CastleProxyFactory.GetProxy(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.CreateProxy(Object id, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.DoLoadByClass(Type clazz, Object id, Boolean checkDeleted, Boolean allowProxyCreation)
+   at NHibernate.Impl.SessionImpl.InternalLoad(Type clazz, Object id, Boolean eager, Boolean isNullable)
+   at NHibernate.Type.EntityType.ResolveIdentifier(Object id, ISessionImplementor session)
+   at NHibernate.Type.EntityType.ResolveIdentifier(Object id, ISessionImplementor session, Object owner)
+   at NHibernate.Impl.SessionImpl.InitializeEntity(Object obj)
+   at NHibernate.Loader.Loader.InitializeEntitiesAndCollections(IList hydratedObjects, Object resultSetId, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.LoadCollection(ISessionImplementor session, Object id, IType type)
+   at NHibernate.Loader.Collection.CollectionLoader.Initialize(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Initialize(Object key, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.InitializeCollection(IPersistentCollection collection, Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   --- End of inner exception stack trace ---
+   at NHibernate.Collection.AbstractPersistentCollection.Initialize(Boolean writing)
+   at NHibernate.Collection.AbstractPersistentCollection.Read()
+   at NHibernate.Collection.Generic.PersistentGenericBag`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 30
+2007-04-01 19:15:13,937 [9] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnElectionSave_Click
+NHibernate.HibernateException: Illegal attempt to associate a collection with two open sessions
+   at NHibernate.Collection.AbstractPersistentCollection.SetCurrentSession(ISessionImplementor session)
+   at NHibernate.Impl.OnUpdateVisitor.ProcessCollection(Object collection, CollectionType type)
+   at NHibernate.Impl.AbstractVisitor.ProcessValue(Object value, IType type)
+   at NHibernate.Impl.AbstractVisitor.ProcessValues(Object[] values, IType[] types)
+   at NHibernate.Impl.AbstractVisitor.Process(Object obj, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
+   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\db\HibernateDAO.cs:line 50
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnElectionSave_Click(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmElection.cs:line 127
+2007-04-01 19:52:08,687 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnElectionSave_Click
+NHibernate.HibernateException: Illegal attempt to associate a collection with two open sessions
+   at NHibernate.Collection.AbstractPersistentCollection.SetCurrentSession(ISessionImplementor session)
+   at NHibernate.Impl.OnUpdateVisitor.ProcessCollection(Object collection, CollectionType type)
+   at NHibernate.Impl.AbstractVisitor.ProcessValue(Object value, IType type)
+   at NHibernate.Impl.AbstractVisitor.ProcessValues(Object[] values, IType[] types)
+   at NHibernate.Impl.AbstractVisitor.Process(Object obj, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
+   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\db\HibernateDAO.cs:line 50
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnElectionSave_Click(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmElection.cs:line 127
+2007-04-01 22:14:43,984 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Error creating object with name 'edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes' defined in 'config [objects]' : Unsatisfied dependency expressed through constructor argument with index 3 of type [edu.uwec.cs.cs355.group4.et.db.ResponseValueDAO] : There are '0' objects of type [edu.uwec.cs.cs355.group4.et.db.ResponseValueDAO] for autowiring constructor. There should have been exactly 1 to be able to autowire the 'responseValueDAO' argument on the constructor of object 'edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes'.
+Spring.Objects.Factory.UnsatisfiedDependencyException: Error creating object with name 'edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes' defined in 'config [objects]' : Unsatisfied dependency expressed through constructor argument with index 3 of type [edu.uwec.cs.cs355.group4.et.db.ResponseValueDAO] : There are '0' objects of type [edu.uwec.cs.cs355.group4.et.db.ResponseValueDAO] for autowiring constructor. There should have been exactly 1 to be able to autowire the 'responseValueDAO' argument on the constructor of object 'edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes'.
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateArgumentArray(String name, RootObjectDefinition definition, ConstructorArgumentValues resolvedValues, MethodBase methodOrCtor)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.AutowireConstructor(String name, RootObjectDefinition definition, ConstructorArgumentValues argumentValues)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.AutowireConstructor(String name, RootObjectDefinition definition)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments, Boolean allowEagerCaching)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Type requiredType, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name)
+   at Spring.Context.Support.AbstractApplicationContext.GetObject(String name)
+   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.makeMDIChildForm[T]() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\DefaultUIController.cs:line 33
+   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.HandleEnterVotes(Object sender, EnterVotesArgs args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\DefaultUIController.cs:line 49
+   at edu.uwec.cs.cs355.group4.et.events.EventUtil.RaiseEvent[T,U](GenericEventHandler`2 targetEvent, T sender, U args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\events\EventUtil.cs:line 8
+   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.VoteResultsHandler(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\MDIForm.cs:line 58
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 38
+2007-04-01 22:20:07,562 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Creating a proxy instance failed
+NHibernate.HibernateException: Creating a proxy instance failed ---> System.TypeLoadException: Access is denied: 'edu.uwec.cs.cs355.group4.et.core.Election'.
+   at System.Reflection.Emit.TypeBuilder.TermCreateClass(Int32 handle, Module module)
+   at System.Reflection.Emit.TypeBuilder.CreateTypeNoLock()
+   at System.Reflection.Emit.TypeBuilder.CreateType()
+   at Castle.DynamicProxy.Builder.CodeBuilder.AbstractEasyType.BuildType()
+   at Castle.DynamicProxy.Builder.CodeGenerators.BaseCodeGenerator.CreateType()
+   at Castle.DynamicProxy.Builder.CodeGenerators.ClassProxyGenerator.GenerateCode(Type baseClass, Type[] interfaces)
+   at Castle.DynamicProxy.Builder.DefaultProxyBuilder.CreateClassProxy(Type theClass, Type[] interfaces)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type baseClass, Type[] interfaces, IInterceptor interceptor, Boolean checkAbstract, Object[] argumentsForConstructor)
+   at NHibernate.Proxy.CastleProxyFactory.GetProxy(Object id, ISessionImplementor session)
+   --- End of inner exception stack trace ---
+   at NHibernate.Proxy.CastleProxyFactory.GetProxy(Object id, ISessionImplementor session)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.CreateProxy(Object id, ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.DoLoadByClass(Type clazz, Object id, Boolean checkDeleted, Boolean allowProxyCreation)
+   at NHibernate.Impl.SessionImpl.InternalLoad(Type clazz, Object id, Boolean eager, Boolean isNullable)
+   at NHibernate.Type.EntityType.ResolveIdentifier(Object id, ISessionImplementor session)
+   at NHibernate.Type.EntityType.ResolveIdentifier(Object id, ISessionImplementor session, Object owner)
+   at NHibernate.Impl.SessionImpl.InitializeEntity(Object obj)
+   at NHibernate.Loader.Loader.InitializeEntitiesAndCollections(IList hydratedObjects, Object resultSetId, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet querySpaces, IType[] resultTypes)
+   at NHibernate.Loader.Custom.CustomLoader.List(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Impl.SessionImpl.ListCustomQuery(ICustomQuery customQuery, QueryParameters queryParameters, IList results)
+   at NHibernate.Impl.SessionImpl.List(NativeSQLQuerySpecification spec, QueryParameters queryParameters, IList results)
+   at NHibernate.Impl.SessionImpl.List[T](NativeSQLQuerySpecification spec, QueryParameters queryParameters)
+   at NHibernate.Impl.SqlQueryImpl.List[T]()
+   at edu.uwec.cs.cs355.group4.et.db.ElectionContestDAO.findContests(County c) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\db\ElectionContestDAO.cs:line 21
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.VoteEnterer..ctor(ResponseValueDAO rvd, ElectionContestDAO ec, County c) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 223
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.lstCounties_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 93
+   at System.Windows.Forms.ListBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ListBox.set_SelectedIndex(Int32 value)
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadCounties(Election elc) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 81
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.cmbElections_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 69
+   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadElections() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 65
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.frmEnterVotes_Load(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 51
+   at System.Windows.Forms.Form.OnLoad(EventArgs e)
+   at System.Windows.Forms.Form.OnCreateControl()
+   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   at System.Windows.Forms.Control.CreateControl()
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
+   at System.Windows.Forms.Form.WmShowWindow(Message& m)
+   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.IntCreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
+   at System.Windows.Forms.UnsafeNativeMethods.CreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
+   at System.Windows.Forms.NativeWindow.CreateHandle(CreateParams cp)
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.SetVisibleCore(Boolean value)
+   at System.Windows.Forms.Control.Show()
+   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.HandleEnterVotes(Object sender, EnterVotesArgs args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\DefaultUIController.cs:line 50
+   at edu.uwec.cs.cs355.group4.et.events.EventUtil.RaiseEvent[T,U](GenericEventHandler`2 targetEvent, T sender, U args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\events\EventUtil.cs:line 8
+   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.VoteResultsHandler(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\MDIForm.cs:line 58
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 38
+2007-04-01 22:21:16,312 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - could not execute query
+[ select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15; ]
+[SQL: select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15;]
+NHibernate.ADOException: could not execute query
+[ select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15; ]
+[SQL: select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15;] ---> System.IndexOutOfRangeException: Could not find specified column in results
+   at MySql.Data.MySqlClient.MySqlDataReader.GetOrdinal(String name)
+   at NHibernate.Driver.NHybridDataReader.GetOrdinal(String name)
+   at NHibernate.Type.NullableType.NullSafeGet(IDataReader rs, String name)
+   at NHibernate.Type.NullableType.NullSafeGet(IDataReader rs, String[] names, ISessionImplementor session, Object owner)
+   at NHibernate.Type.ManyToOneType.Hydrate(IDataReader rs, String[] names, ISessionImplementor session, Object owner)
+   at NHibernate.Loader.Loader.Hydrate(IDataReader rs, Object id, Object obj, ILoadable persister, ISessionImplementor session, String[][] suffixedPropertyColumns)
+   at NHibernate.Loader.Loader.LoadFromResultSet(IDataReader rs, Int32 i, Object obj, Type instanceClass, EntityKey key, LockMode lockMode, ILoadable rootPersister, ISessionImplementor session)
+   at NHibernate.Loader.Loader.InstanceNotYetLoaded(IDataReader dr, Int32 i, ILoadable persister, EntityKey key, LockMode lockMode, EntityKey optionalObjectKey, Object optionalObject, IList hydratedObjects, ISessionImplementor session)
+   at NHibernate.Loader.Loader.GetRow(IDataReader rs, ILoadable[] persisters, EntityKey[] keys, Object optionalObject, EntityKey optionalObjectKey, LockMode[] lockModes, IList hydratedObjects, ISessionImplementor session)
+   at NHibernate.Loader.Loader.GetRowFromResultSet(IDataReader resultSet, ISessionImplementor session, QueryParameters queryParameters, LockMode[] lockModeArray, EntityKey optionalObjectKey, IList hydratedObjects, EntityKey[] keys, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet querySpaces, IType[] resultTypes)
+   at NHibernate.Loader.Custom.CustomLoader.List(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Impl.SessionImpl.ListCustomQuery(ICustomQuery customQuery, QueryParameters queryParameters, IList results)
+   at NHibernate.Impl.SessionImpl.List(NativeSQLQuerySpecification spec, QueryParameters queryParameters, IList results)
+   at NHibernate.Impl.SessionImpl.List[T](NativeSQLQuerySpecification spec, QueryParameters queryParameters)
+   at NHibernate.Impl.SqlQueryImpl.List[T]()
+   at edu.uwec.cs.cs355.group4.et.db.ElectionContestDAO.findResponses(ElectionContest e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\db\ElectionContestDAO.cs:line 41
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.ContestDisplay.InitializeResponses() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 165
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.ContestDisplay..ctor(ElectionContestDAO ec, ResponseValueDAO rv, ContestCounty cc, ElectionContest elec) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 158
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.VoteEnterer..ctor(ResponseValueDAO rvd, ElectionContestDAO ec, County c) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 228
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.lstCounties_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 93
+   at System.Windows.Forms.ListBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ListBox.set_SelectedIndex(Int32 value)
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadCounties(Election elc) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 81
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.cmbElections_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 69
+   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadElections() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 65
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.frmEnterVotes_Load(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 51
+   at System.Windows.Forms.Form.OnLoad(EventArgs e)
+   at System.Windows.Forms.Form.OnCreateControl()
+   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   at System.Windows.Forms.Control.CreateControl()
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
+   at System.Windows.Forms.Form.WmShowWindow(Message& m)
+   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.IntCreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
+   at System.Windows.Forms.UnsafeNativeMethods.CreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
+   at System.Windows.Forms.NativeWindow.CreateHandle(CreateParams cp)
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.SetVisibleCore(Boolean value)
+   at System.Windows.Forms.Control.Show()
+   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.HandleEnterVotes(Object sender, EnterVotesArgs args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\DefaultUIController.cs:line 50
+   at edu.uwec.cs.cs355.group4.et.events.EventUtil.RaiseEvent[T,U](GenericEventHandler`2 targetEvent, T sender, U args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\events\EventUtil.cs:line 8
+   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.VoteResultsHandler(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\MDIForm.cs:line 58
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 38
+2007-04-01 22:27:59,484 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - could not execute query
+[ select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15; ]
+[SQL: select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15;]
+NHibernate.ADOException: could not execute query
+[ select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15; ]
+[SQL: select cr.ResponseID, cr.CandidateID from CandidateResponse cr join Response r on (r.ResponseID = cr.ResponseID) where r.ElectionContestID = 15;] ---> System.IndexOutOfRangeException: Could not find specified column in results
+   at MySql.Data.MySqlClient.MySqlDataReader.GetOrdinal(String name)
+   at NHibernate.Driver.NHybridDataReader.GetOrdinal(String name)
+   at NHibernate.Type.NullableType.NullSafeGet(IDataReader rs, String name)
+   at NHibernate.Type.NullableType.NullSafeGet(IDataReader rs, String[] names, ISessionImplementor session, Object owner)
+   at NHibernate.Type.ManyToOneType.Hydrate(IDataReader rs, String[] names, ISessionImplementor session, Object owner)
+   at NHibernate.Loader.Loader.Hydrate(IDataReader rs, Object id, Object obj, ILoadable persister, ISessionImplementor session, String[][] suffixedPropertyColumns)
+   at NHibernate.Loader.Loader.LoadFromResultSet(IDataReader rs, Int32 i, Object obj, Type instanceClass, EntityKey key, LockMode lockMode, ILoadable rootPersister, ISessionImplementor session)
+   at NHibernate.Loader.Loader.InstanceNotYetLoaded(IDataReader dr, Int32 i, ILoadable persister, EntityKey key, LockMode lockMode, EntityKey optionalObjectKey, Object optionalObject, IList hydratedObjects, ISessionImplementor session)
+   at NHibernate.Loader.Loader.GetRow(IDataReader rs, ILoadable[] persisters, EntityKey[] keys, Object optionalObject, EntityKey optionalObjectKey, LockMode[] lockModes, IList hydratedObjects, ISessionImplementor session)
+   at NHibernate.Loader.Loader.GetRowFromResultSet(IDataReader resultSet, ISessionImplementor session, QueryParameters queryParameters, LockMode[] lockModeArray, EntityKey optionalObjectKey, IList hydratedObjects, EntityKey[] keys, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters)
+   --- End of inner exception stack trace ---
+   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet querySpaces, IType[] resultTypes)
+   at NHibernate.Loader.Custom.CustomLoader.List(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Impl.SessionImpl.ListCustomQuery(ICustomQuery customQuery, QueryParameters queryParameters, IList results)
+   at NHibernate.Impl.SessionImpl.List(NativeSQLQuerySpecification spec, QueryParameters queryParameters, IList results)
+   at NHibernate.Impl.SessionImpl.List[T](NativeSQLQuerySpecification spec, QueryParameters queryParameters)
+   at NHibernate.Impl.SqlQueryImpl.List[T]()
+   at edu.uwec.cs.cs355.group4.et.db.ElectionContestDAO.findResponses(ElectionContest e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\db\ElectionContestDAO.cs:line 41
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.ContestDisplay.InitializeResponses() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 165
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.ContestDisplay..ctor(ElectionContestDAO ec, ResponseValueDAO rv, ContestCounty cc, ElectionContest elec) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 158
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.VoteEnterer..ctor(ResponseValueDAO rvd, ElectionContestDAO ec, County c) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 228
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.lstCounties_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 93
+   at System.Windows.Forms.ListBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ListBox.set_SelectedIndex(Int32 value)
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadCounties(Election elc) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 81
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.cmbElections_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 69
+   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadElections() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 65
+   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.frmEnterVotes_Load(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\frmEnterVotes.cs:line 51
+   at System.Windows.Forms.Form.OnLoad(EventArgs e)
+   at System.Windows.Forms.Form.OnCreateControl()
+   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   at System.Windows.Forms.Control.CreateControl()
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
+   at System.Windows.Forms.Form.WmShowWindow(Message& m)
+   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.IntCreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
+   at System.Windows.Forms.UnsafeNativeMethods.CreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
+   at System.Windows.Forms.NativeWindow.CreateHandle(CreateParams cp)
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.SetVisibleCore(Boolean value)
+   at System.Windows.Forms.Control.Show()
+   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.HandleEnterVotes(Object sender, EnterVotesArgs args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\DefaultUIController.cs:line 50
+   at edu.uwec.cs.cs355.group4.et.events.EventUtil.RaiseEvent[T,U](GenericEventHandler`2 targetEvent, T sender, U args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\events\EventUtil.cs:line 8
+   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.VoteResultsHandler(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\ui\MDIForm.cs:line 58
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 38
+2007-04-01 22:31:19,953 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Error instantiating context 'spring.root'.
+System.Configuration.ConfigurationErrorsException: Error instantiating context 'spring.root'. ---> Spring.Objects.FatalObjectException: Cannot instantiate Type [Spring.Context.Support.XmlApplicationContext] using ctor [Void .ctor(System.String, Boolean, System.String[])] : 'Exception has been thrown by the target of an invocation.' ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> Spring.Objects.Factory.ObjectCreationException: Error thrown by a dependency of object 'UIController' defined in 'config [objects]' : Error setting property values: PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.TypeMismatchException: Cannot convert property value of type [System.Collections.Generic.List`1[[edu.uwec.cs.cs355.group4.et.ui.util.TreeViewFilter, edu.uwec.cs.cs355.group4.et, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]] to required type [System.Collections.Generic.IList`1[[edu.uwec.cs.cs355.group4.et.ui.util.TreeViewFilter, edu.uwec.cs.cs355.group4.et, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]] for property 'Filters'., Inner Exception: System.InvalidCastException: Unable to cast object of type 'NHibernate.Collection.Generic.PersistentGenericSet`1[edu.uwec.cs.cs355.group4.et.core.ElectionContest]' to type 'System.Collections.Generic.IList`1[edu.uwec.cs.cs355.group4.et.core.ElectionContest]'.
+   at (Object , Object[] , SetterCallback )
+   at NHibernate.Bytecode.Lightweight.SetPropertyValuesInvoker.Invoke(Object obj, Object[] values, SetterCallback callback)
+   at NHibernate.Bytecode.Lightweight.AccessOptimizer.SetPropertyValues(Object target, Object[] values)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.SetPropertyValues(Object obj, Object[] values)]
+ while resolving 'MDIForm' to 'MDIForm'  defined in 'config [objects]' ---> PropertyAccessExceptionsException (1 errors); nested PropertyAccessExceptions are: 
+[Spring.Objects.TypeMismatchException: Cannot convert property value of type [System.Collections.Generic.List`1[[edu.uwec.cs.cs355.group4.et.ui.util.TreeViewFilter, edu.uwec.cs.cs355.group4.et, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]] to required type [System.Collections.Generic.IList`1[[edu.uwec.cs.cs355.group4.et.ui.util.TreeViewFilter, edu.uwec.cs.cs355.group4.et, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]] for property 'Filters'., Inner Exception: System.InvalidCastException: Unable to cast object of type 'NHibernate.Collection.Generic.PersistentGenericSet`1[edu.uwec.cs.cs355.group4.et.core.ElectionContest]' to type 'System.Collections.Generic.IList`1[edu.uwec.cs.cs355.group4.et.core.ElectionContest]'.
+   at (Object , Object[] , SetterCallback )
+   at NHibernate.Bytecode.Lightweight.SetPropertyValuesInvoker.Invoke(Object obj, Object[] values, SetterCallback callback)
+   at NHibernate.Bytecode.Lightweight.AccessOptimizer.SetPropertyValues(Object target, Object[] values)
+   at NHibernate.Persister.Entity.AbstractEntityPersister.SetPropertyValues(Object obj, Object[] values)]
+   --- End of inner exception stack trace ---
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveReference(IConfigurableObjectDefinition definition, String name, String argumentName, RuntimeObjectReference reference)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ResolveValueIfNecessary(String name, RootObjectDefinition definition, String argumentName, Object argumentValue)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.ApplyPropertyValues(String name, RootObjectDefinition definition, IObjectWrapper wrapper, IPropertyValues properties)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.PopulateObject(String name, RootObjectDefinition definition, IObjectWrapper wrapper)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments, Boolean allowEagerCaching)
+   at Spring.Objects.Factory.Support.AbstractAutowireCapableObjectFactory.CreateObject(String name, RootObjectDefinition definition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.CreateAndCacheSingletonInstance(String objectName, RootObjectDefinition objectDefinition, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Type requiredType, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name, Object[] arguments)
+   at Spring.Objects.Factory.Support.AbstractObjectFactory.GetObject(String name)
+   at Spring.Objects.Factory.Support.DefaultListableObjectFactory.PreInstantiateSingletons()
+   at Spring.Context.Support.AbstractApplicationContext.Refresh()
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, IApplicationContext parentContext, String[] configurationLocations)
+   at Spring.Context.Support.XmlApplicationContext..ctor(String name, Boolean caseSensitive, String[] configurationLocations)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle._InvokeConstructor(Object[] args, SignatureStruct& signature, IntPtr declaringType)
+   at System.RuntimeMethodHandle.InvokeConstructor(Object[] args, SignatureStruct signature, RuntimeTypeHandle declaringType)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.ConstructorInfo.Invoke(Object[] parameters)
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   --- End of inner exception stack trace ---
+   at Spring.Objects.ObjectUtils.InstantiateType(ConstructorInfo constructor, Object[] arguments)
+   at Spring.Context.Support.ContextHandler.RootContextInstantiator.InvokeContextConstructor(ConstructorInfo ctor)
+   at Spring.Context.Support.ContextHandler.ContextInstantiator.InstantiateContext()
+   --- End of inner exception stack trace ---
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey, Boolean getLkg, Boolean checkPermission)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at Spring.Util.ConfigurationUtils.GetSection(String sectionName)
+   at Spring.Context.Support.ContextRegistry.InitializeContextIfNeeded()
+   at Spring.Context.Support.ContextRegistry.GetContext()
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\ET\ET\core\Program.cs:line 20

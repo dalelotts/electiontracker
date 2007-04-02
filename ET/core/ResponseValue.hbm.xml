@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="edu.uwec.cs.cs355.group4.et.core.ResponseValue, edu.uwec.cs.cs355.group4.et" table="responsevalue">
+    <id name="ID" column="ResponseValueID" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <many-to-one name="Response" class="edu.uwec.cs.cs355.group4.et.core.Response, edu.uwec.cs.cs355.group4.et" column="ResponseID" />
+    <property name="VoteCount" column="VoteCount" type="Int32" length="100" not-null="true"/>
+  </class>
+</hibernate-mapping>

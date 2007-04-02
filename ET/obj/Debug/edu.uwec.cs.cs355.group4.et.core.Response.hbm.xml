@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="edu.uwec.cs.cs355.group4.et.core.Response, edu.uwec.cs.cs355.group4.et" table="response">
+    <id name="ID" column="ResponseID" type="Int64">
+      <generator class="identity" />
+    </id>
+    
+    <many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" column="ElectionContestID"/>
+    
+    <joined-subclass name="edu.uwec.cs.cs355.group4.et.core.CandidateResponse, edu.uwec.cs.cs355.group4.et" table="CandidateResponse">
+      <key column="ResponseID"/>
+      <many-to-one name="Candidate" class="edu.uwec.cs.cs355.group4.et.core.Candidate, edu.uwec.cs.cs355.group4.et" column="CandidateID"/>
+    </joined-subclass>
+    
+    <joined-subclass name="edu.uwec.cs.cs355.group4.et.core.CustomResponse, edu.uwec.cs.cs355.group4.et"  table="customresponse">
+      <key column="ResponseID"/>
+      <property name="Description" column="ResponseName" type="String"/>
+    </joined-subclass>
+  </class>
+</hibernate-mapping>

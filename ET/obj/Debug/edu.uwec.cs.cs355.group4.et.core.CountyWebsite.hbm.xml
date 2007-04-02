@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="edu.uwec.cs.cs355.group4.et.core.CountyWebsite, edu.uwec.cs.cs355.group4.et" table="countywebsite">
+    <id name="ID" column="CountyWebsiteID" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="URL" column="CountyWebsiteURL" type="String" length="255" not-null="false"/>
+    <many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID"/>
+  </class>
+</hibernate-mapping>
