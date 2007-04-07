@@ -15,13 +15,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
         }
 
         public override void apply(TreeNodeCollection nodes) {
-            TreeNode candidateNode = GetNodeByKey(nodes, DBEntity.CANDIDATE.ToString(), DBEntity.CANDIDATE.Label);
-
             IList<Candidate> candidates = dao.findInactive();
 
             foreach (Candidate candidate in candidates) {
-                TreeNode newNode = candidateNode.Nodes.Add(DBEntity.CANDIDATE + ";" + candidate.ID,
-                                                           candidate.LastName + ", " + candidate.FirstName + " " + candidate.MiddleName);
+                TreeNode newNode =
+                    nodes.Add(DBEntity.CANDIDATE + ";" + candidate.ID,
+                              candidate.LastName + ", " + candidate.FirstName + " " + candidate.MiddleName);
                 newNode.ToolTipText = candidate.Notes;
             }
         }

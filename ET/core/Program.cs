@@ -19,19 +19,39 @@ namespace edu.uwec.cs.cs355.group4.et.core {
                 XmlConfigurator.Configure();
                 IApplicationContext ctx = ContextRegistry.GetContext();
 
-                ElectionDAO electionDAO = (ElectionDAO) ctx.GetObject("ElectionDAO");
+//                ElectionDAO electionDAO = (ElectionDAO) ctx.GetObject("ElectionDAO");
+//
+//
+//                ContestCountyDAO contestCountyDAO = (ContestCountyDAO)ctx.GetObject("ContestCountyDAO");
+//
+//                IList<string> excluded = new List<string>();
+//                excluded.Add("ID");
+//                excluded.Add("WardCount");
+//                excluded.Add("WardsReporting");
+//
+//                IList<Election> elections = electionDAO.findActive();
+//
+//                foreach (Election election in elections) {
+//                    IList<ElectionContest> contests = election.ElectionContests;
+//                    foreach (ElectionContest contest in contests) {
+//                        IList<ContestCounty> counties = contest.Counties;
+//                        foreach (ContestCounty county in counties) {
+//                            Console.WriteLine(county.County.Name);
+//
+//                            ContestCounty example = new ContestCounty();
+//                            example.County = county.County;
+//                            example.ElectionContest = contest;
+//
+//                            IList<ContestCounty> contestCounties = contestCountyDAO.findByExample(example, excluded);
+//
+//                            foreach (ContestCounty contestCounty in contestCounties) {
+//                                Console.WriteLine(contestCounty.County.Name);  
+//                            }
+//
+//                        }
+//                    }
+//                }
 
-                IList<Election> elections = electionDAO.findActive();
-
-                foreach (Election election in elections) {
-                    IList<ElectionContest> contests = election.ElectionContests;
-                    foreach (ElectionContest contest in contests) {
-                        IList<ContestCounty> counties = contest.Counties;
-                        foreach (ContestCounty county in counties) {
-                            Console.WriteLine(county.County.Name);
-                        }
-                    }
-                }
 
 
                 UIController controller = (UIController) ctx.GetObject("UIController");

@@ -33,12 +33,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\dev\log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\NHibernate\bin\net-2.0\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="OutlookBar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TestOutlookBar\OutlookBar\bin\Release\OutlookBar.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Core, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -136,6 +141,15 @@
     <Compile Include="db\HibernateUtil.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
+    <Compile Include="ui\BaseMDIChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\BaseMDIChild.Designer.cs">
+      <DependentUpon>BaseMDIChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\ContestDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ui\frmAboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +211,7 @@
     <Compile Include="ui\util\ActiveElectionFilter.cs" />
     <Compile Include="ui\util\ActivePoliticalPartyFilter.cs" />
     <Compile Include="ui\util\BaseTreeViewFilter.cs" />
+    <Compile Include="ui\util\FilterButton.cs" />
     <Compile Include="ui\util\ListItemWrapper.cs" />
     <Compile Include="ui\util\CompositeFilter.cs" />
     <Compile Include="ui\util\CountyFilter.cs" />
@@ -205,7 +220,11 @@
     <Compile Include="ui\util\InactiveElectionFilter.cs" />
     <Compile Include="ui\util\InactivePoliticalPartyFilter.cs" />
     <Compile Include="ui\util\TreeViewFilter.cs" />
+    <Compile Include="ui\VoteEnterer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="util\DesignByContract.cs" />
+    <Compile Include="util\Map.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="core\PoliticalParty.hbm.xml" />
@@ -262,7 +281,21 @@
   <ItemGroup>
     <Content Include="core\CustomResponse.hbm.xml" />
     <Content Include="core\ResponseValue.hbm.xml" />
+    <Content Include="Resources\btnAdd.Image.png" />
+    <Content Include="Resources\btnDelete.Image.png" />
+    <Content Include="Resources\btnEdit.Image.png" />
+    <Content Include="Resources\btnNew.Image.png" />
+    <Content Include="Resources\btnReset.Image.png" />
+    <Content Include="Resources\btnSave.Image.png" />
+    <None Include="Resources\EditTableHS.png" />
+    <None Include="Resources\EditInformationHS.png" />
+    <None Include="Resources\NewCardHS.png" />
+    <None Include="Resources\saveHS.png" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
+    <EmbeddedResource Include="ui\BaseMDIChild.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BaseMDIChild.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\frmEnterVotes.resx">
       <DependentUpon>frmEnterVotes.cs</DependentUpon>
       <SubType>Designer</SubType>

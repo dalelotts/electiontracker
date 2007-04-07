@@ -15,11 +15,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
         }
 
         public override void apply(TreeNodeCollection nodes) {
-            TreeNode partyNode = GetNodeByKey(nodes, DBEntity.POLITICAL_PARTY.ToString(), DBEntity.POLITICAL_PARTY.Label);
-
             IList<PoliticalParty> parties = dao.findInactive();
             foreach (PoliticalParty party in parties) {
-                partyNode.Nodes.Add(DBEntity.POLITICAL_PARTY + ";" + party.ID, party.Name + " (Inactive)");
+                nodes.Add(DBEntity.POLITICAL_PARTY + ";" + party.ID, party.Name + " (Inactive)");
             }
         }
     }

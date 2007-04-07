@@ -7,8 +7,8 @@ using edu.uwec.cs.cs355.group4.et.events;
 using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
-    internal partial class frmElection : Form {
-        private readonly ElectionContestDAO electionContestDAO;
+    internal partial class frmElection : BaseMDIChild {
+
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
 
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmElection));
@@ -23,12 +23,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private ElectionContest currentElectionContest;
 
 
-        public frmElection(ElectionDAO electionDAO, ElectionContestDAO electionContestDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
+        //To Do: Add support for double clicking to add or remove contests, candidates, counties, etc.
+        //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
+
+        public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
             try {
                 InitializeComponent();
 
                 this.electionDAO = electionDAO;
-                this.electionContestDAO = electionContestDAO;
 
                 currentElection = new Election();
 
@@ -117,13 +119,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
                 currentElection.Notes = txtNotes.Text;
-
-                electionDAO.makePersistent(currentElection);
-
-                foreach (ElectionContest ec in lstElectionContests.Items) {
-                    electionContestDAO.makePersistent(ec);
-                }
-
                 electionDAO.makePersistent(currentElection);
 
             } catch (Exception ex) {
@@ -373,6 +368,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
                 EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
             }
+        }
+
+        private void tabDetails_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

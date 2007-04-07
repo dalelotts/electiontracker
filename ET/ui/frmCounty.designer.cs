@@ -29,6 +29,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private void InitializeComponent()
         {
             this.gbCounty = new System.Windows.Forms.GroupBox();
+            this.txtCountyWardCount = new System.Windows.Forms.MaskedTextBox();
             this.txtCountyName = new System.Windows.Forms.TextBox();
             this.lblCountyWardCount = new System.Windows.Forms.Label();
             this.lblCountyName = new System.Windows.Forms.Label();
@@ -46,6 +47,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblKey = new System.Windows.Forms.Label();
             this.cbKey = new System.Windows.Forms.ComboBox();
             this.gbPhone = new System.Windows.Forms.GroupBox();
+            this.txtPhoneNum = new System.Windows.Forms.MaskedTextBox();
+            this.txtAreaCode = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbPhoneNumberType = new System.Windows.Forms.ComboBox();
             this.btnRemovePhoneNum = new System.Windows.Forms.Button();
@@ -58,13 +61,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddWebsite = new System.Windows.Forms.Button();
             this.txtWebsite = new System.Windows.Forms.TextBox();
             this.lstWebsites = new System.Windows.Forms.ListBox();
-            this.btnCountySave = new System.Windows.Forms.Button();
-            this.btnCountyEdit = new System.Windows.Forms.Button();
-            this.btnCountyNew = new System.Windows.Forms.Button();
-            this.btnCountyReset = new System.Windows.Forms.Button();
-            this.txtCountyWardCount = new System.Windows.Forms.MaskedTextBox();
-            this.txtAreaCode = new System.Windows.Forms.MaskedTextBox();
-            this.txtPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.gbCounty.SuspendLayout();
             this.gbCountyNotes.SuspendLayout();
             this.tbDisplay.SuspendLayout();
@@ -88,17 +84,27 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.gbCounty.TabStop = false;
             this.gbCounty.Text = "County";
             // 
+            // txtCountyWardCount
+            // 
+            this.txtCountyWardCount.Location = new System.Drawing.Point(79, 43);
+            this.txtCountyWardCount.Mask = "0000";
+            this.txtCountyWardCount.Name = "txtCountyWardCount";
+            this.txtCountyWardCount.Size = new System.Drawing.Size(66, 20);
+            this.txtCountyWardCount.TabIndex = 6;
+            this.txtCountyWardCount.Tag = "lock=true";
+            // 
             // txtCountyName
             // 
-            this.txtCountyName.Location = new System.Drawing.Point(51, 17);
+            this.txtCountyName.Location = new System.Drawing.Point(79, 17);
             this.txtCountyName.Name = "txtCountyName";
-            this.txtCountyName.Size = new System.Drawing.Size(331, 20);
+            this.txtCountyName.Size = new System.Drawing.Size(324, 20);
             this.txtCountyName.TabIndex = 4;
+            this.txtCountyName.Tag = "lock=true";
             // 
             // lblCountyWardCount
             // 
             this.lblCountyWardCount.AutoSize = true;
-            this.lblCountyWardCount.Location = new System.Drawing.Point(6, 46);
+            this.lblCountyWardCount.Location = new System.Drawing.Point(7, 46);
             this.lblCountyWardCount.Name = "lblCountyWardCount";
             this.lblCountyWardCount.Size = new System.Drawing.Size(67, 13);
             this.lblCountyWardCount.TabIndex = 1;
@@ -130,15 +136,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(397, 410);
             this.txtNotes.TabIndex = 0;
+            this.txtNotes.Tag = "lock=true";
             // 
             // tbDisplay
             // 
             this.tbDisplay.Controls.Add(this.tabCounty);
             this.tbDisplay.Controls.Add(this.tabContact);
-            this.tbDisplay.Location = new System.Drawing.Point(12, 35);
+            this.tbDisplay.Location = new System.Drawing.Point(12, 28);
             this.tbDisplay.Name = "tbDisplay";
             this.tbDisplay.SelectedIndex = 0;
-            this.tbDisplay.Size = new System.Drawing.Size(429, 553);
+            this.tbDisplay.Size = new System.Drawing.Size(429, 550);
             this.tbDisplay.TabIndex = 2;
             // 
             // tabCounty
@@ -148,7 +155,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabCounty.Location = new System.Drawing.Point(4, 22);
             this.tabCounty.Name = "tabCounty";
             this.tabCounty.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCounty.Size = new System.Drawing.Size(421, 527);
+            this.tabCounty.Size = new System.Drawing.Size(421, 524);
             this.tabCounty.TabIndex = 0;
             this.tabCounty.Text = "County";
             this.tabCounty.UseVisualStyleBackColor = true;
@@ -161,7 +168,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabContact.Location = new System.Drawing.Point(4, 22);
             this.tabContact.Name = "tabContact";
             this.tabContact.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContact.Size = new System.Drawing.Size(421, 527);
+            this.tabContact.Size = new System.Drawing.Size(421, 524);
             this.tabContact.TabIndex = 1;
             this.tabContact.Text = "Contact Information";
             this.tabContact.UseVisualStyleBackColor = true;
@@ -188,6 +195,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveAttribute.Name = "btnRemoveAttribute";
             this.btnRemoveAttribute.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveAttribute.TabIndex = 6;
+            this.btnRemoveAttribute.Tag = "lock=true";
             this.btnRemoveAttribute.Text = "Remove";
             this.btnRemoveAttribute.UseVisualStyleBackColor = true;
             this.btnRemoveAttribute.Click += new System.EventHandler(this.btnRemoveAttribute_Click);
@@ -198,6 +206,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddAttribute.Name = "btnAddAttribute";
             this.btnAddAttribute.Size = new System.Drawing.Size(75, 23);
             this.btnAddAttribute.TabIndex = 5;
+            this.btnAddAttribute.Tag = "lock=true";
             this.btnAddAttribute.Text = "Add";
             this.btnAddAttribute.UseVisualStyleBackColor = true;
             this.btnAddAttribute.Click += new System.EventHandler(this.btnAddAttribute_Click);
@@ -216,6 +225,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(138, 20);
             this.txtValue.TabIndex = 3;
+            this.txtValue.Tag = "lock=true";
             // 
             // lblValue
             // 
@@ -242,6 +252,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cbKey.Name = "cbKey";
             this.cbKey.Size = new System.Drawing.Size(146, 21);
             this.cbKey.TabIndex = 0;
+            this.cbKey.Tag = "lock=true";
             // 
             // gbPhone
             // 
@@ -261,6 +272,24 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.gbPhone.TabStop = false;
             this.gbPhone.Text = "Phone Numbers";
             // 
+            // txtPhoneNum
+            // 
+            this.txtPhoneNum.Location = new System.Drawing.Point(219, 33);
+            this.txtPhoneNum.Mask = "000-0000";
+            this.txtPhoneNum.Name = "txtPhoneNum";
+            this.txtPhoneNum.Size = new System.Drawing.Size(76, 20);
+            this.txtPhoneNum.TabIndex = 9;
+            this.txtPhoneNum.Tag = "lock=true";
+            // 
+            // txtAreaCode
+            // 
+            this.txtAreaCode.Location = new System.Drawing.Point(155, 33);
+            this.txtAreaCode.Mask = "000";
+            this.txtAreaCode.Name = "txtAreaCode";
+            this.txtAreaCode.Size = new System.Drawing.Size(56, 20);
+            this.txtAreaCode.TabIndex = 8;
+            this.txtAreaCode.Tag = "lock=true";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -277,6 +306,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cbPhoneNumberType.Name = "cbPhoneNumberType";
             this.cbPhoneNumberType.Size = new System.Drawing.Size(146, 21);
             this.cbPhoneNumberType.TabIndex = 1;
+            this.cbPhoneNumberType.Tag = "lock=true";
             // 
             // btnRemovePhoneNum
             // 
@@ -284,6 +314,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemovePhoneNum.Name = "btnRemovePhoneNum";
             this.btnRemovePhoneNum.Size = new System.Drawing.Size(75, 23);
             this.btnRemovePhoneNum.TabIndex = 6;
+            this.btnRemovePhoneNum.Tag = "lock=true";
             this.btnRemovePhoneNum.Text = "Remove";
             this.btnRemovePhoneNum.UseVisualStyleBackColor = true;
             this.btnRemovePhoneNum.Click += new System.EventHandler(this.btnRemovePhoneNum_Click);
@@ -312,6 +343,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddPhoneNum.Name = "btnAddPhoneNum";
             this.btnAddPhoneNum.Size = new System.Drawing.Size(75, 23);
             this.btnAddPhoneNum.TabIndex = 1;
+            this.btnAddPhoneNum.Tag = "lock=true";
             this.btnAddPhoneNum.Text = "Add";
             this.btnAddPhoneNum.UseVisualStyleBackColor = true;
             this.btnAddPhoneNum.Click += new System.EventHandler(this.btnAddPhoneNum_Click);
@@ -343,6 +375,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveWebsite.Name = "btnRemoveWebsite";
             this.btnRemoveWebsite.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveWebsite.TabIndex = 3;
+            this.btnRemoveWebsite.Tag = "lock=true";
             this.btnRemoveWebsite.Text = "Remove";
             this.btnRemoveWebsite.UseVisualStyleBackColor = true;
             this.btnRemoveWebsite.Click += new System.EventHandler(this.btnRemoveWebsite_Click);
@@ -353,6 +386,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddWebsite.Name = "btnAddWebsite";
             this.btnAddWebsite.Size = new System.Drawing.Size(75, 23);
             this.btnAddWebsite.TabIndex = 2;
+            this.btnAddWebsite.Tag = "lock=true";
             this.btnAddWebsite.Text = "Add";
             this.btnAddWebsite.UseVisualStyleBackColor = true;
             this.btnAddWebsite.Click += new System.EventHandler(this.btnAddWebsite_Click);
@@ -363,6 +397,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtWebsite.Name = "txtWebsite";
             this.txtWebsite.Size = new System.Drawing.Size(290, 20);
             this.txtWebsite.TabIndex = 1;
+            this.txtWebsite.Tag = "lock=true";
             this.txtWebsite.Text = "http://";
             // 
             // lstWebsites
@@ -373,80 +408,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstWebsites.Size = new System.Drawing.Size(290, 95);
             this.lstWebsites.TabIndex = 0;
             // 
-            // btnCountySave
-            // 
-            this.btnCountySave.Location = new System.Drawing.Point(390, 6);
-            this.btnCountySave.Name = "btnCountySave";
-            this.btnCountySave.Size = new System.Drawing.Size(60, 23);
-            this.btnCountySave.TabIndex = 23;
-            this.btnCountySave.Text = "&Save";
-            this.btnCountySave.UseVisualStyleBackColor = true;
-            this.btnCountySave.Click += new System.EventHandler(this.btnCountySave_Click);
-            // 
-            // btnCountyEdit
-            // 
-            this.btnCountyEdit.Location = new System.Drawing.Point(324, 6);
-            this.btnCountyEdit.Name = "btnCountyEdit";
-            this.btnCountyEdit.Size = new System.Drawing.Size(60, 23);
-            this.btnCountyEdit.TabIndex = 22;
-            this.btnCountyEdit.Text = "&Edit";
-            this.btnCountyEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnCountyNew
-            // 
-            this.btnCountyNew.Location = new System.Drawing.Point(258, 6);
-            this.btnCountyNew.Name = "btnCountyNew";
-            this.btnCountyNew.Size = new System.Drawing.Size(60, 23);
-            this.btnCountyNew.TabIndex = 21;
-            this.btnCountyNew.Text = "&New";
-            this.btnCountyNew.UseVisualStyleBackColor = true;
-            // 
-            // btnCountyReset
-            // 
-            this.btnCountyReset.Location = new System.Drawing.Point(192, 6);
-            this.btnCountyReset.Name = "btnCountyReset";
-            this.btnCountyReset.Size = new System.Drawing.Size(60, 23);
-            this.btnCountyReset.TabIndex = 20;
-            this.btnCountyReset.Text = "&Reset";
-            this.btnCountyReset.UseVisualStyleBackColor = true;
-            // 
-            // txtCountyWardCount
-            // 
-            this.txtCountyWardCount.Location = new System.Drawing.Point(79, 39);
-            this.txtCountyWardCount.Mask = "0000";
-            this.txtCountyWardCount.Name = "txtCountyWardCount";
-            this.txtCountyWardCount.Size = new System.Drawing.Size(66, 20);
-            this.txtCountyWardCount.TabIndex = 6;
-            // 
-            // txtAreaCode
-            // 
-            this.txtAreaCode.Location = new System.Drawing.Point(155, 33);
-            this.txtAreaCode.Mask = "000";
-            this.txtAreaCode.Name = "txtAreaCode";
-            this.txtAreaCode.Size = new System.Drawing.Size(56, 20);
-            this.txtAreaCode.TabIndex = 8;
-            // 
-            // txtPhoneNum
-            // 
-            this.txtPhoneNum.Location = new System.Drawing.Point(219, 33);
-            this.txtPhoneNum.Mask = "000-0000";
-            this.txtPhoneNum.Name = "txtPhoneNum";
-            this.txtPhoneNum.Size = new System.Drawing.Size(76, 20);
-            this.txtPhoneNum.TabIndex = 9;
-            // 
             // frmCounty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 600);
-            this.Controls.Add(this.btnCountySave);
-            this.Controls.Add(this.btnCountyEdit);
-            this.Controls.Add(this.btnCountyNew);
-            this.Controls.Add(this.btnCountyReset);
+            this.ClientSize = new System.Drawing.Size(454, 590);
             this.Controls.Add(this.tbDisplay);
             this.Name = "frmCounty";
             this.Text = "County";
-            this.Load += new System.EventHandler(this.frmCounty_Load);
+            this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.gbCounty.ResumeLayout(false);
             this.gbCounty.PerformLayout();
             this.gbCountyNotes.ResumeLayout(false);
@@ -461,6 +431,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.gbWebsite.ResumeLayout(false);
             this.gbWebsite.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -496,10 +467,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.ListBox lstWebsites;
         private System.Windows.Forms.ComboBox cbPhoneNumberType;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCountySave;
-        private System.Windows.Forms.Button btnCountyEdit;
-        private System.Windows.Forms.Button btnCountyNew;
-        private System.Windows.Forms.Button btnCountyReset;
         private System.Windows.Forms.MaskedTextBox txtCountyWardCount;
         private System.Windows.Forms.MaskedTextBox txtPhoneNum;
         private System.Windows.Forms.MaskedTextBox txtAreaCode;

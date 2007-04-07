@@ -5,7 +5,7 @@
       <generator class="identity" />
     </id>
     
-    <many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" column="ElectionContestID"/>
+    <many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" column="ElectionContestID" not-null="true"/>
     
     <joined-subclass name="edu.uwec.cs.cs355.group4.et.core.CandidateResponse, edu.uwec.cs.cs355.group4.et" table="CandidateResponse">
       <key column="ResponseID"/>

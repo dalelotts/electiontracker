@@ -75,6 +75,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label11 = new System.Windows.Forms.Label();
             this.tabDetails = new System.Windows.Forms.TabPage();
             this.btnAddCustomResponse = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.btnAddAllCounties = new System.Windows.Forms.Button();
             this.btnRemoveCounty = new System.Windows.Forms.Button();
             this.btnRemoveAllCounties = new System.Windows.Forms.Button();
@@ -91,10 +92,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.btnElectionSave = new System.Windows.Forms.Button();
-            this.btnElectionEdit = new System.Windows.Forms.Button();
-            this.btnElectionNew = new System.Windows.Forms.Button();
-            this.btnElectionReset = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -388,10 +385,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tbDisplay.Controls.Add(this.tabElection);
             this.tbDisplay.Controls.Add(this.tabContests);
             this.tbDisplay.Controls.Add(this.tabDetails);
-            this.tbDisplay.Location = new System.Drawing.Point(12, 41);
+            this.tbDisplay.Location = new System.Drawing.Point(12, 28);
             this.tbDisplay.Name = "tbDisplay";
             this.tbDisplay.SelectedIndex = 0;
-            this.tbDisplay.Size = new System.Drawing.Size(493, 374);
+            this.tbDisplay.Size = new System.Drawing.Size(566, 418);
             this.tbDisplay.TabIndex = 0;
             // 
             // tabElection
@@ -404,7 +401,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabElection.Location = new System.Drawing.Point(4, 22);
             this.tabElection.Name = "tabElection";
             this.tabElection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabElection.Size = new System.Drawing.Size(485, 348);
+            this.tabElection.Size = new System.Drawing.Size(558, 392);
             this.tabElection.TabIndex = 0;
             this.tabElection.Text = "Election";
             this.tabElection.UseVisualStyleBackColor = true;
@@ -430,7 +427,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(406, 18);
+            this.chkActive.Location = new System.Drawing.Point(478, 18);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
             this.chkActive.TabIndex = 22;
@@ -442,7 +439,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtNotes.Location = new System.Drawing.Point(64, 50);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(404, 278);
+            this.txtNotes.Size = new System.Drawing.Size(476, 322);
             this.txtNotes.TabIndex = 20;
             // 
             // label7
@@ -467,14 +464,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabContests.Location = new System.Drawing.Point(4, 22);
             this.tabContests.Name = "tabContests";
             this.tabContests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContests.Size = new System.Drawing.Size(485, 348);
+            this.tabContests.Size = new System.Drawing.Size(558, 392);
             this.tabContests.TabIndex = 1;
             this.tabContests.Text = "Contests";
             this.tabContests.UseVisualStyleBackColor = true;
             // 
             // btnAddAllContests
             // 
-            this.btnAddAllContests.Location = new System.Drawing.Point(223, 114);
+            this.btnAddAllContests.Location = new System.Drawing.Point(258, 114);
             this.btnAddAllContests.Name = "btnAddAllContests";
             this.btnAddAllContests.Size = new System.Drawing.Size(30, 29);
             this.btnAddAllContests.TabIndex = 20;
@@ -484,7 +481,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnRemoveContest
             // 
-            this.btnRemoveContest.Location = new System.Drawing.Point(223, 187);
+            this.btnRemoveContest.Location = new System.Drawing.Point(258, 187);
             this.btnRemoveContest.Name = "btnRemoveContest";
             this.btnRemoveContest.Size = new System.Drawing.Size(30, 29);
             this.btnRemoveContest.TabIndex = 19;
@@ -494,7 +491,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnRemoveAllContests
             // 
-            this.btnRemoveAllContests.Location = new System.Drawing.Point(223, 222);
+            this.btnRemoveAllContests.Location = new System.Drawing.Point(258, 222);
             this.btnRemoveAllContests.Name = "btnRemoveAllContests";
             this.btnRemoveAllContests.Size = new System.Drawing.Size(30, 29);
             this.btnRemoveAllContests.TabIndex = 18;
@@ -504,7 +501,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnAddContest
             // 
-            this.btnAddContest.Location = new System.Drawing.Point(223, 149);
+            this.btnAddContest.Location = new System.Drawing.Point(258, 149);
             this.btnAddContest.Name = "btnAddContest";
             this.btnAddContest.Size = new System.Drawing.Size(30, 29);
             this.btnAddContest.TabIndex = 17;
@@ -515,10 +512,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // lstAllContests
             // 
             this.lstAllContests.FormattingEnabled = true;
-            this.lstAllContests.Location = new System.Drawing.Point(259, 31);
+            this.lstAllContests.Location = new System.Drawing.Point(294, 31);
             this.lstAllContests.Name = "lstAllContests";
             this.lstAllContests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAllContests.Size = new System.Drawing.Size(217, 303);
+            this.lstAllContests.Size = new System.Drawing.Size(258, 342);
             this.lstAllContests.TabIndex = 1;
             // 
             // lstElectionContests
@@ -527,7 +524,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstElectionContests.Location = new System.Drawing.Point(6, 31);
             this.lstElectionContests.Name = "lstElectionContests";
             this.lstElectionContests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstElectionContests.Size = new System.Drawing.Size(211, 303);
+            this.lstElectionContests.Size = new System.Drawing.Size(246, 342);
             this.lstElectionContests.TabIndex = 0;
             // 
             // label10
@@ -542,7 +539,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(260, 15);
+            this.label11.Location = new System.Drawing.Point(332, 15);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(18, 13);
             this.label11.TabIndex = 22;
@@ -551,6 +548,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // tabDetails
             // 
             this.tabDetails.Controls.Add(this.btnAddCustomResponse);
+            this.tabDetails.Controls.Add(this.textBox4);
             this.tabDetails.Controls.Add(this.btnAddAllCounties);
             this.tabDetails.Controls.Add(this.btnRemoveCounty);
             this.tabDetails.Controls.Add(this.btnRemoveAllCounties);
@@ -570,23 +568,31 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabDetails.Location = new System.Drawing.Point(4, 22);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetails.Size = new System.Drawing.Size(485, 348);
+            this.tabDetails.Size = new System.Drawing.Size(558, 392);
             this.tabDetails.TabIndex = 2;
             this.tabDetails.Text = "Contest Details";
             this.tabDetails.UseVisualStyleBackColor = true;
+            this.tabDetails.Click += new System.EventHandler(this.tabDetails_Click);
             // 
             // btnAddCustomResponse
             // 
-            this.btnAddCustomResponse.Location = new System.Drawing.Point(181, 163);
+            this.btnAddCustomResponse.Location = new System.Drawing.Point(348, 36);
             this.btnAddCustomResponse.Name = "btnAddCustomResponse";
-            this.btnAddCustomResponse.Size = new System.Drawing.Size(125, 21);
-            this.btnAddCustomResponse.TabIndex = 39;
-            this.btnAddCustomResponse.Text = "Add Custom Response";
+            this.btnAddCustomResponse.Size = new System.Drawing.Size(27, 22);
+            this.btnAddCustomResponse.TabIndex = 41;
+            this.btnAddCustomResponse.Text = "<";
             this.btnAddCustomResponse.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(381, 38);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(161, 20);
+            this.textBox4.TabIndex = 40;
             // 
             // btnAddAllCounties
             // 
-            this.btnAddAllCounties.Location = new System.Drawing.Point(311, 229);
+            this.btnAddAllCounties.Location = new System.Drawing.Point(348, 257);
             this.btnAddAllCounties.Name = "btnAddAllCounties";
             this.btnAddAllCounties.Size = new System.Drawing.Size(27, 22);
             this.btnAddAllCounties.TabIndex = 38;
@@ -596,7 +602,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnRemoveCounty
             // 
-            this.btnRemoveCounty.Location = new System.Drawing.Point(311, 275);
+            this.btnRemoveCounty.Location = new System.Drawing.Point(348, 303);
             this.btnRemoveCounty.Name = "btnRemoveCounty";
             this.btnRemoveCounty.Size = new System.Drawing.Size(27, 22);
             this.btnRemoveCounty.TabIndex = 37;
@@ -606,7 +612,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnRemoveAllCounties
             // 
-            this.btnRemoveAllCounties.Location = new System.Drawing.Point(311, 298);
+            this.btnRemoveAllCounties.Location = new System.Drawing.Point(348, 326);
             this.btnRemoveAllCounties.Name = "btnRemoveAllCounties";
             this.btnRemoveAllCounties.Size = new System.Drawing.Size(27, 22);
             this.btnRemoveAllCounties.TabIndex = 36;
@@ -616,7 +622,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnAddCounty
             // 
-            this.btnAddCounty.Location = new System.Drawing.Point(311, 252);
+            this.btnAddCounty.Location = new System.Drawing.Point(348, 280);
             this.btnAddCounty.Name = "btnAddCounty";
             this.btnAddCounty.Size = new System.Drawing.Size(27, 22);
             this.btnAddCounty.TabIndex = 35;
@@ -626,7 +632,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnAddAllCandidates
             // 
-            this.btnAddAllCandidates.Location = new System.Drawing.Point(310, 51);
+            this.btnAddAllCandidates.Location = new System.Drawing.Point(348, 73);
             this.btnAddAllCandidates.Name = "btnAddAllCandidates";
             this.btnAddAllCandidates.Size = new System.Drawing.Size(27, 22);
             this.btnAddAllCandidates.TabIndex = 34;
@@ -636,7 +642,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnRemoveCandidate
             // 
-            this.btnRemoveCandidate.Location = new System.Drawing.Point(310, 97);
+            this.btnRemoveCandidate.Location = new System.Drawing.Point(348, 119);
             this.btnRemoveCandidate.Name = "btnRemoveCandidate";
             this.btnRemoveCandidate.Size = new System.Drawing.Size(27, 22);
             this.btnRemoveCandidate.TabIndex = 33;
@@ -646,7 +652,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnRemoveAllCandidates
             // 
-            this.btnRemoveAllCandidates.Location = new System.Drawing.Point(310, 120);
+            this.btnRemoveAllCandidates.Location = new System.Drawing.Point(348, 142);
             this.btnRemoveAllCandidates.Name = "btnRemoveAllCandidates";
             this.btnRemoveAllCandidates.Size = new System.Drawing.Size(27, 22);
             this.btnRemoveAllCandidates.TabIndex = 32;
@@ -656,7 +662,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnAddCandidate
             // 
-            this.btnAddCandidate.Location = new System.Drawing.Point(310, 74);
+            this.btnAddCandidate.Location = new System.Drawing.Point(348, 96);
             this.btnAddCandidate.Name = "btnAddCandidate";
             this.btnAddCandidate.Size = new System.Drawing.Size(27, 22);
             this.btnAddCandidate.TabIndex = 31;
@@ -669,44 +675,44 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstElectionContestsDetails.FormattingEnabled = true;
             this.lstElectionContestsDetails.Location = new System.Drawing.Point(9, 35);
             this.lstElectionContestsDetails.Name = "lstElectionContestsDetails";
-            this.lstElectionContestsDetails.Size = new System.Drawing.Size(163, 290);
+            this.lstElectionContestsDetails.Size = new System.Drawing.Size(163, 342);
             this.lstElectionContestsDetails.TabIndex = 27;
             this.lstElectionContestsDetails.SelectedIndexChanged += new System.EventHandler(this.lstElectionContestsDetails_SelectedIndexChanged);
             // 
             // lstAllCounties
             // 
             this.lstAllCounties.FormattingEnabled = true;
-            this.lstAllCounties.Location = new System.Drawing.Point(342, 213);
+            this.lstAllCounties.Location = new System.Drawing.Point(381, 220);
             this.lstAllCounties.Name = "lstAllCounties";
             this.lstAllCounties.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAllCounties.Size = new System.Drawing.Size(125, 121);
+            this.lstAllCounties.Size = new System.Drawing.Size(161, 160);
             this.lstAllCounties.TabIndex = 26;
             // 
             // lstContestCounties
             // 
             this.lstContestCounties.FormattingEnabled = true;
-            this.lstContestCounties.Location = new System.Drawing.Point(181, 213);
+            this.lstContestCounties.Location = new System.Drawing.Point(181, 220);
             this.lstContestCounties.Name = "lstContestCounties";
             this.lstContestCounties.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstContestCounties.Size = new System.Drawing.Size(125, 121);
+            this.lstContestCounties.Size = new System.Drawing.Size(161, 160);
             this.lstContestCounties.TabIndex = 25;
             // 
             // lstAllCandidates
             // 
             this.lstAllCandidates.FormattingEnabled = true;
-            this.lstAllCandidates.Location = new System.Drawing.Point(342, 36);
+            this.lstAllCandidates.Location = new System.Drawing.Point(381, 73);
             this.lstAllCandidates.Name = "lstAllCandidates";
             this.lstAllCandidates.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAllCandidates.Size = new System.Drawing.Size(125, 121);
+            this.lstAllCandidates.Size = new System.Drawing.Size(161, 121);
             this.lstAllCandidates.TabIndex = 24;
             // 
             // lstContestCandidates
             // 
             this.lstContestCandidates.FormattingEnabled = true;
-            this.lstContestCandidates.Location = new System.Drawing.Point(181, 36);
+            this.lstContestCandidates.Location = new System.Drawing.Point(181, 34);
             this.lstContestCandidates.Name = "lstContestCandidates";
             this.lstContestCandidates.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstContestCandidates.Size = new System.Drawing.Size(125, 121);
+            this.lstContestCandidates.Size = new System.Drawing.Size(161, 160);
             this.lstContestCandidates.TabIndex = 23;
             // 
             // label13
@@ -730,59 +736,20 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(178, 197);
+            this.label14.Location = new System.Drawing.Point(178, 204);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(48, 13);
             this.label14.TabIndex = 30;
             this.label14.Text = "Counties";
             // 
-            // btnElectionSave
-            // 
-            this.btnElectionSave.Location = new System.Drawing.Point(442, 12);
-            this.btnElectionSave.Name = "btnElectionSave";
-            this.btnElectionSave.Size = new System.Drawing.Size(60, 23);
-            this.btnElectionSave.TabIndex = 19;
-            this.btnElectionSave.Text = "&Save";
-            this.btnElectionSave.UseVisualStyleBackColor = true;
-            this.btnElectionSave.Click += new System.EventHandler(this.btnElectionSave_Click);
-            // 
-            // btnElectionEdit
-            // 
-            this.btnElectionEdit.Location = new System.Drawing.Point(376, 12);
-            this.btnElectionEdit.Name = "btnElectionEdit";
-            this.btnElectionEdit.Size = new System.Drawing.Size(60, 23);
-            this.btnElectionEdit.TabIndex = 18;
-            this.btnElectionEdit.Text = "&Edit";
-            this.btnElectionEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnElectionNew
-            // 
-            this.btnElectionNew.Location = new System.Drawing.Point(310, 12);
-            this.btnElectionNew.Name = "btnElectionNew";
-            this.btnElectionNew.Size = new System.Drawing.Size(60, 23);
-            this.btnElectionNew.TabIndex = 17;
-            this.btnElectionNew.Text = "&New";
-            this.btnElectionNew.UseVisualStyleBackColor = true;
-            // 
-            // btnElectionReset
-            // 
-            this.btnElectionReset.Location = new System.Drawing.Point(244, 12);
-            this.btnElectionReset.Name = "btnElectionReset";
-            this.btnElectionReset.Size = new System.Drawing.Size(60, 23);
-            this.btnElectionReset.TabIndex = 16;
-            this.btnElectionReset.Text = "&Reset";
-            this.btnElectionReset.UseVisualStyleBackColor = true;
-            // 
             // frmElection
             // 
-            this.ClientSize = new System.Drawing.Size(517, 421);
-            this.Controls.Add(this.btnElectionSave);
-            this.Controls.Add(this.btnElectionEdit);
-            this.Controls.Add(this.btnElectionNew);
-            this.Controls.Add(this.btnElectionReset);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(593, 460);
             this.Controls.Add(this.tbDisplay);
             this.Name = "frmElection";
             this.Text = "Election";
+            this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -797,6 +764,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabDetails.ResumeLayout(false);
             this.tabDetails.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -840,10 +808,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnElectionSave;
-        private System.Windows.Forms.Button btnElectionEdit;
-        private System.Windows.Forms.Button btnElectionNew;
-        private System.Windows.Forms.Button btnElectionReset;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAddAllContests;
         private System.Windows.Forms.Button btnRemoveContest;
@@ -868,6 +832,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.Button btnRemoveCandidate;
         private System.Windows.Forms.Button btnRemoveAllCandidates;
         private System.Windows.Forms.Button btnAddCandidate;
+        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button btnAddCustomResponse;
 
     }

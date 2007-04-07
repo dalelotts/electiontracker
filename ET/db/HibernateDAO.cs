@@ -5,11 +5,10 @@ using NHibernate.Expression;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal abstract class HibernateDAO<T> : GenericDAO<T> {
-
-        protected static readonly     IList<ICriterion>   EMPTY_CRITERION = new List<ICriterion>();
+        protected static readonly IList<ICriterion> EMPTY_CRITERION = new List<ICriterion>();
         private readonly ISessionFactory factory;
-        private readonly ISession   session;
-        private readonly Type       objectType = typeof (T);
+        private readonly ISession session;
+        protected readonly Type objectType = typeof (T);
 
 
         public HibernateDAO(ISessionFactory factory) {
@@ -44,11 +43,9 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         public T makePersistent(T entity) {
-            ISession tmpSession = factory.OpenSession();
-            ITransaction tmpTransaction = tmpSession.BeginTransaction();
-         
-            tmpSession.SaveOrUpdate(entity);
-            tmpTransaction.Commit();
+            ITransaction transaction = session.BeginTransaction();
+            session.SaveOrUpdate(entity);
+            transaction.Commit();
             return entity;
         }
 

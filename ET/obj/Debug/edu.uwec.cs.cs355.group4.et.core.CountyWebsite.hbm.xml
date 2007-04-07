@@ -4,7 +4,7 @@
     <id name="ID" column="CountyWebsiteID" type="Int64">
       <generator class="identity"/>
     </id>
-    <property name="URL" column="CountyWebsiteURL" type="String" length="255" not-null="false"/>
-    <many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID"/>
+    <property name="URL" column="CountyWebsiteURL" type="String" length="255" not-null="true"/>
+    <many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID" not-null="true" />
   </class>
 </hibernate-mapping>

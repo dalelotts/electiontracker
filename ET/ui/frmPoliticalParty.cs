@@ -1,64 +1,64 @@
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 
-namespace edu.uwec.cs.cs355.group4.et.ui
-{
-    internal partial class frmPoliticalParty : Form
-    {
+namespace edu.uwec.cs.cs355.group4.et.ui {
+    internal partial class frmPoliticalParty : BaseMDIChild {
         private readonly PoliticalPartyDAO politicalPartyDAO;
 
-        public frmPoliticalParty(PoliticalPartyDAO politicalPartyDAO)
-        {
+        private PoliticalParty currentPoliticalParty;
+
+        public frmPoliticalParty(PoliticalPartyDAO politicalPartyDAO) {
             InitializeComponent();
             this.politicalPartyDAO = politicalPartyDAO;
+            currentPoliticalParty = new PoliticalParty();
         }
 
-        private void btnPPReset_Click(object sender, EventArgs e)
-        {
-            //TODO
+        private void refreshFields() {
+            txtName.Text = currentPoliticalParty.Name;
+            txtAbbrev.Text = currentPoliticalParty.Abbreviation;
+            chkActive.Checked = currentPoliticalParty.IsActive;
         }
 
-        private void btnPPNew_Click(object sender, EventArgs e)
-        {
-            //clear the fields
-            txtName.Text = "";
-            txtAbbrev.Text = "";
-            chkActive.Checked = true; //default to active
-
-            //make fields editable
-            txtName.Enabled = true;
-            txtAbbrev.Enabled = true;
-            chkActive.Enabled = true;
+        private void refreshGoToList() {
+            IList<PoliticalParty> politicalParties = politicalPartyDAO.findAll();
+            foreach (PoliticalParty politicalParty in politicalParties) {
+                cboGoTo.Items.Add(politicalParty);
+            }
         }
 
-        private void btnPPEdit_Click(object sender, EventArgs e)
-        {
-            //make fields editable
-            txtName.Enabled = true;
-            txtAbbrev.Enabled = true;
-            chkActive.Enabled = true;
+        public override void btnAdd_Click(object sender, EventArgs e) {
+            currentPoliticalParty = new PoliticalParty();
+            refreshFields();
+            base.btnAdd_Click(sender, e);
         }
 
-        private void btnPPSave_Click(object sender, EventArgs e)
-        {
+        public override void btnSave_Click(object sender, EventArgs e) {
             //TODO validate political party
-
-            PoliticalParty pp = new PoliticalParty();
-            pp.Name = txtName.Text;
-            pp.Abbreviation = txtAbbrev.Text;
-            pp.IsActive = chkActive.Checked;
-
-            //make fields uneditable
-            txtName.Enabled = false;
-            txtAbbrev.Enabled = false;
-            chkActive.Enabled = false;
+            currentPoliticalParty.Name = txtName.Text;
+            currentPoliticalParty.Abbreviation = txtAbbrev.Text;
+            currentPoliticalParty.IsActive = chkActive.Checked;
 
             //persist political party to db
-            politicalPartyDAO.makePersistent(pp);
+            politicalPartyDAO.makePersistent(currentPoliticalParty);
+            base.btnSave_Click(sender, e);
         }
 
+        public override void btnReset_Click(object sender, EventArgs e) {
+            refreshFields();
+            base.btnReset_Click(sender, e);
+        }
 
+        public override void btnDelete_Click(object sender, EventArgs e) {
+            //politicalPartyDAO.makeTransient(currentPoliticalParty);
+            base.btnDelete_Click(sender, e);
+        }
+
+        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
+            currentPoliticalParty = (PoliticalParty) cboGoTo.SelectedItem;
+            refreshFields();
+            base.cboGoTo_SelectedIndexChanged(sender, e);
+        }
     }
 }

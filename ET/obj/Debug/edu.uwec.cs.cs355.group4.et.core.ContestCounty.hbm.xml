@@ -6,7 +6,7 @@
 		</id>
 		<property name="WardsReporting" column="WardsReporting" type="Int32" length="100" not-null="true"/>
 		<property name="WardCount" column="WardCount" type="Int32" length="100" not-null="true"/>
-		<many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID"/>
-		<many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" column="ElectionContestID"/>
+		<many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID" not-null="true" />
+		<many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" column="ElectionContestID" not-null="true"/>
 	</class>
 </hibernate-mapping>

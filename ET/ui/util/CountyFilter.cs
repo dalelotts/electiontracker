@@ -15,13 +15,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
         }
 
         public override void apply(TreeNodeCollection nodes) {
-            TreeNode electionNode = GetNodeByKey(nodes, DBEntity.COUNTY.ToString(), DBEntity.COUNTY.Label);
-
             IList<County> counties = dao.findAll();
 
             foreach (County county in counties) {
                 string nodeText = county.Name;
-                TreeNode newNode = electionNode.Nodes.Add(DBEntity.COUNTY + ";" + county.ID, nodeText);
+                TreeNode newNode = nodes.Add(DBEntity.COUNTY + ";" + county.ID, nodeText);
                 newNode.ToolTipText = county.Notes;
             }
         }

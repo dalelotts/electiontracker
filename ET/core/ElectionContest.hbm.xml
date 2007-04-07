@@ -12,7 +12,7 @@
       <key column="ElectionContestID"/>
       <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ContestCounty, edu.uwec.cs.cs355.group4.et"/>
     </bag>    
-		<many-to-one name="Election" class="edu.uwec.cs.cs355.group4.et.core.Election, edu.uwec.cs.cs355.group4.et" column="ElectionID"/>
-		<many-to-one name="Contest" class="edu.uwec.cs.cs355.group4.et.core.Contest, edu.uwec.cs.cs355.group4.et" column="ContestID"/>
+		<many-to-one name="Election" class="edu.uwec.cs.cs355.group4.et.core.Election, edu.uwec.cs.cs355.group4.et" column="ElectionID" not-null="true"/>
+    <many-to-one name="Contest" class="edu.uwec.cs.cs355.group4.et.core.Contest, edu.uwec.cs.cs355.group4.et" column="ContestID" not-null="true"/>
 	</class>
 </hibernate-mapping>

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using log4net;
 using NHibernate;
-using NHibernate.Expression;
 
 namespace edu.uwec.cs.cs355.group4.et.db
 {

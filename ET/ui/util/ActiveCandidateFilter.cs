@@ -15,8 +15,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
         }
 
         public override void apply(TreeNodeCollection nodes) {
-            TreeNode candidateNode = GetNodeByKey(nodes, DBEntity.CANDIDATE.ToString(), DBEntity.CANDIDATE.Label);
-
             IList<Candidate> candidates = dao.findActive();
 
             foreach (Candidate candidate in candidates) {
@@ -24,7 +22,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
                 if (candidate.PoliticalParty != null) {
                     displayName += string.Format(" ({0})", candidate.PoliticalParty.Abbreviation);
                 }
-                TreeNode newNode = candidateNode.Nodes.Add(DBEntity.CANDIDATE + ";" + candidate.ID,
+                TreeNode newNode = nodes.Add(DBEntity.CANDIDATE + ";" + candidate.ID,
                                                            displayName);
                 newNode.ToolTipText = candidate.Notes;
             }

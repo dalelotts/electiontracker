@@ -1,3 +1,5 @@
+using System;
+
 namespace edu.uwec.cs.cs355.group4.et.ui
 {
     sealed internal partial class MDIForm
@@ -28,26 +30,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         /// </summary>
         private void InitializeComponent()
         {
+            Altea.OutlookBarButton outlookBarButton1 = new Altea.OutlookBarButton();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIForm));
-            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            Altea.OutlookBarButton outlookBarButton2 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton3 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton4 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton5 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton6 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton7 = new Altea.OutlookBarButton();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.btnCollapse = new System.Windows.Forms.Button();
-            this.btnExpand = new System.Windows.Forms.Button();
-            this.lblShow = new System.Windows.Forms.Label();
-            this.cboFilter = new System.Windows.Forms.ComboBox();
+            this.filterBar = new Altea.OutlookBar();
             this.mainTreeView = new System.Windows.Forms.TreeView();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +73,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.countyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.voteResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.electionReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,113 +84,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.electionReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainToolStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mainToolStrip
-            // 
-            this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripButton,
-            this.openToolStripButton,
-            this.saveToolStripButton,
-            this.printToolStripButton,
-            this.toolStripSeparator6,
-            this.cutToolStripButton,
-            this.copyToolStripButton,
-            this.pasteToolStripButton,
-            this.toolStripSeparator7,
-            this.helpToolStripButton});
-            this.mainToolStrip.Location = new System.Drawing.Point(0, 24);
-            this.mainToolStrip.Name = "mainToolStrip";
-            this.mainToolStrip.Size = new System.Drawing.Size(1121, 25);
-            this.mainToolStrip.TabIndex = 2;
-            this.mainToolStrip.Text = "toolStrip1";
-            // 
-            // newToolStripButton
-            // 
-            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
-            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "&New";
-            // 
-            // openToolStripButton
-            // 
-            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "&Open";
-            // 
-            // saveToolStripButton
-            // 
-            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
-            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripButton.Text = "&Save";
-            // 
-            // printToolStripButton
-            // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.printToolStripButton.Text = "&Print";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
-            // cutToolStripButton
-            // 
-            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
-            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cutToolStripButton.Name = "cutToolStripButton";
-            this.cutToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.cutToolStripButton.Text = "C&ut";
-            // 
-            // copyToolStripButton
-            // 
-            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
-            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.copyToolStripButton.Text = "&Copy";
-            // 
-            // pasteToolStripButton
-            // 
-            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pasteToolStripButton.Name = "pasteToolStripButton";
-            this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.pasteToolStripButton.Text = "&Paste";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
-            // helpToolStripButton
-            // 
-            this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.helpToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripButton.Image")));
-            this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.helpToolStripButton.Name = "helpToolStripButton";
-            this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.helpToolStripButton.Text = "He&lp";
             // 
             // mainStatusStrip
             // 
@@ -203,7 +96,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.toolStripStatusLabel1});
             this.mainStatusStrip.Location = new System.Drawing.Point(0, 676);
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.Size = new System.Drawing.Size(1121, 22);
+            this.mainStatusStrip.Size = new System.Drawing.Size(1104, 22);
             this.mainStatusStrip.TabIndex = 3;
             this.mainStatusStrip.Text = "statusStrip1";
             // 
@@ -220,64 +113,57 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.btnCollapse);
-            this.mainPanel.Controls.Add(this.btnExpand);
-            this.mainPanel.Controls.Add(this.lblShow);
-            this.mainPanel.Controls.Add(this.cboFilter);
+            this.mainPanel.Controls.Add(this.filterBar);
             this.mainPanel.Controls.Add(this.mainTreeView);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.mainPanel.Location = new System.Drawing.Point(0, 49);
+            this.mainPanel.Location = new System.Drawing.Point(0, 24);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(202, 627);
+            this.mainPanel.Size = new System.Drawing.Size(232, 652);
             this.mainPanel.TabIndex = 4;
             // 
-            // btnCollapse
+            // filterBar
             // 
-            this.btnCollapse.Location = new System.Drawing.Point(124, 35);
-            this.btnCollapse.Name = "btnCollapse";
-            this.btnCollapse.Size = new System.Drawing.Size(75, 23);
-            this.btnCollapse.TabIndex = 9;
-            this.btnCollapse.Text = "Collapse All";
-            this.btnCollapse.UseVisualStyleBackColor = true;
-            this.btnCollapse.Click += new System.EventHandler(this.btnCollapse_Click);
-            // 
-            // btnExpand
-            // 
-            this.btnExpand.Location = new System.Drawing.Point(6, 35);
-            this.btnExpand.Name = "btnExpand";
-            this.btnExpand.Size = new System.Drawing.Size(75, 23);
-            this.btnExpand.TabIndex = 8;
-            this.btnExpand.Text = "Expand All";
-            this.btnExpand.UseVisualStyleBackColor = true;
-            this.btnExpand.Click += new System.EventHandler(this.btnExpand_Click);
-            // 
-            // lblShow
-            // 
-            this.lblShow.AutoSize = true;
-            this.lblShow.Location = new System.Drawing.Point(3, 11);
-            this.lblShow.Name = "lblShow";
-            this.lblShow.Size = new System.Drawing.Size(37, 13);
-            this.lblShow.TabIndex = 7;
-            this.lblShow.Text = "Show:";
-            // 
-            // cboFilter
-            // 
-            this.cboFilter.FormattingEnabled = true;
-            this.cboFilter.Location = new System.Drawing.Point(46, 8);
-            this.cboFilter.Name = "cboFilter";
-            this.cboFilter.Size = new System.Drawing.Size(153, 21);
-            this.cboFilter.TabIndex = 6;
-            this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
+            outlookBarButton1.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton1.Image")));
+            outlookBarButton1.Text = "Elections";
+            outlookBarButton2.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton2.Image")));
+            outlookBarButton2.Text = "Contests";
+            outlookBarButton3.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton3.Image")));
+            outlookBarButton3.Text = "Candidates";
+            outlookBarButton4.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton4.Image")));
+            outlookBarButton4.Text = "Counties";
+            outlookBarButton5.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton5.Image")));
+            outlookBarButton5.Text = "Political Parties";
+            outlookBarButton6.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton6.Image")));
+            outlookBarButton6.Text = "Enter Votes";
+            outlookBarButton7.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton7.Image")));
+            outlookBarButton7.Text = "Reports";
+            this.filterBar.Buttons.Add(outlookBarButton1);
+            this.filterBar.Buttons.Add(outlookBarButton2);
+            this.filterBar.Buttons.Add(outlookBarButton3);
+            this.filterBar.Buttons.Add(outlookBarButton4);
+            this.filterBar.Buttons.Add(outlookBarButton5);
+            this.filterBar.Buttons.Add(outlookBarButton6);
+            this.filterBar.Buttons.Add(outlookBarButton7);
+            this.filterBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.filterBar.Location = new System.Drawing.Point(0, 484);
+            this.filterBar.MinimumSize = new System.Drawing.Size(16, 40);
+            this.filterBar.Name = "filterBar";
+            this.filterBar.Renderer = Altea.Renderer.Outlook2007;
+            this.filterBar.Size = new System.Drawing.Size(232, 168);
+            this.filterBar.TabIndex = 10;
+            this.filterBar.Text = "outlookBar1";
+            this.filterBar.Resize += new System.EventHandler(this.resizeHandler);
+            this.filterBar.ButtonClicked += new Altea.OutlookBar.ButtonClickedEventHandler(this.filterBar_ButtonClicked);
+            this.filterBar.SizeChanged += new System.EventHandler(this.resizeHandler);
             // 
             // mainTreeView
             // 
-            this.mainTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.mainTreeView.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainTreeView.HideSelection = false;
-            this.mainTreeView.Location = new System.Drawing.Point(3, 64);
+            this.mainTreeView.Location = new System.Drawing.Point(0, 0);
             this.mainTreeView.Name = "mainTreeView";
             this.mainTreeView.ShowNodeToolTips = true;
-            this.mainTreeView.Size = new System.Drawing.Size(196, 560);
+            this.mainTreeView.Size = new System.Drawing.Size(232, 243);
             this.mainTreeView.TabIndex = 5;
             // 
             // mainMenuStrip
@@ -294,7 +180,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainMenuStrip.MdiWindowListItem = this.windowToolStripMenuItem;
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.mainMenuStrip.Size = new System.Drawing.Size(1121, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1104, 24);
             this.mainMenuStrip.TabIndex = 1;
             this.mainMenuStrip.Text = "mainMenu";
             // 
@@ -321,7 +207,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -330,13 +216,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.openToolStripMenuItem.Text = "&Open";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(148, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -344,19 +230,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -364,7 +250,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -372,18 +258,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(148, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -515,6 +401,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.reportsToolStripMenuItem.Text = "&Reports";
             // 
+            // electionReportToolStripMenuItem
+            // 
+            this.electionReportToolStripMenuItem.Name = "electionReportToolStripMenuItem";
+            this.electionReportToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.electionReportToolStripMenuItem.Text = "Election Report";
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -527,13 +419,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.customizeToolStripMenuItem.Text = "&Customize";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // windowToolStripMenuItem
@@ -583,18 +475,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             // 
-            // electionReportToolStripMenuItem
-            // 
-            this.electionReportToolStripMenuItem.Name = "electionReportToolStripMenuItem";
-            this.electionReportToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.electionReportToolStripMenuItem.Text = "Election Report";
-            // 
             // MDIForm
             // 
-            this.ClientSize = new System.Drawing.Size(1121, 698);
+            this.ClientSize = new System.Drawing.Size(1104, 698);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.mainStatusStrip);
-            this.Controls.Add(this.mainToolStrip);
             this.Controls.Add(this.mainMenuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mainMenuStrip;
@@ -602,12 +487,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Election Tracker";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.mainToolStrip.ResumeLayout(false);
-            this.mainToolStrip.PerformLayout();
+            this.Resize += new System.EventHandler(this.resizeHandler);
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
             this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -617,7 +500,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip mainToolStrip;
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -655,21 +537,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton newToolStripButton;
-        private System.Windows.Forms.ToolStripButton openToolStripButton;
-        private System.Windows.Forms.ToolStripButton saveToolStripButton;
-        private System.Windows.Forms.ToolStripButton printToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton cutToolStripButton;
-        private System.Windows.Forms.ToolStripButton copyToolStripButton;
-        private System.Windows.Forms.ToolStripButton pasteToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-        private System.Windows.Forms.Label lblShow;
-        private System.Windows.Forms.ComboBox cboFilter;
-        private System.Windows.Forms.Button btnCollapse;
-        private System.Windows.Forms.Button btnExpand;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem candidateToolStripMenuItem;
@@ -677,6 +545,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.ToolStripMenuItem countyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem voteResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem electionReportToolStripMenuItem;
+        private Altea.OutlookBar filterBar;
 
     }
 }

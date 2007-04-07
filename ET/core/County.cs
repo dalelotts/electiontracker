@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class County {
@@ -7,9 +6,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private string name;
         private string notes;
         private int wardCount;
-        private IList<CountyPhoneNumber> phoneNumbers;
-        private IList<CountyAttribute> attributes;
-        private IList<CountyWebsite> websites;
+        private IList<CountyPhoneNumber> phoneNumbers = new List<CountyPhoneNumber>();
+        private IList<CountyAttribute> attributes = new List<CountyAttribute>();
+        private IList<CountyWebsite> websites = new List<CountyWebsite>();
 
         public virtual long ID {
             get { return id; }

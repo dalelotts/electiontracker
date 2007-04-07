@@ -6,7 +6,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private string lastName;
         private string notes;
         private PoliticalParty politicalParty;
-        private bool isActive;
+        private bool isActive = true;
 
 
         public virtual long ID {
@@ -44,9 +44,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { isActive = value; }
         }
 
-        public override string ToString()
-        {
-            return (lastName + ", " + firstName + " " + middleName);
+        public override string ToString() {
+            string name = lastName + ", " + firstName + " " + middleName;
+            return name + (politicalParty != null ? " (" + politicalParty.Abbreviation + ")"  : "");
         }
     }
 }

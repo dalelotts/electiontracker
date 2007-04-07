@@ -7,12 +7,15 @@ namespace edu.uwec.cs.cs355.group4.et.type {
         private readonly string name;
         private readonly string label;
 
-        public static readonly DBEntity ELECTION = new DBEntity("election", "Election");
         public static readonly DBEntity CANDIDATE = new DBEntity("candidate", "Candidate");
         public static readonly DBEntity CONTEST = new DBEntity("contest", "Contest");
+        public static readonly DBEntity CONTEST_COUNTY = new DBEntity("contest_county", "Contest County");
         public static readonly DBEntity COUNTY = new DBEntity("county", "County");
+        public static readonly DBEntity ELECTION = new DBEntity("election", "Election");
+        public static readonly DBEntity ELECTION_CONTEST = new DBEntity("election_contest", "Election Contest");
         public static readonly DBEntity POLITICAL_PARTY = new DBEntity("political_party", "Political Party");
-
+        public static readonly DBEntity RESPONSE = new DBEntity("response", "Response");
+        
         private static readonly IList<DBEntity> members = new List<DBEntity>();
 
         static DBEntity() {

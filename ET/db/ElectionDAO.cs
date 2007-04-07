@@ -15,7 +15,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             ORDER_BY_ELECTION_DATE.Add(new Order("Date", false));
         }
 
-
         public ElectionDAO(ISessionFactory factory) : base(factory) {}
 
         public IList<Election> findActive() {
@@ -25,30 +24,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         public IList<Election> findInactive() {
             return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
         }
-
-        // If an election is active, but has no counties associated with it,
-        // it will be omitted from the Vote Entry display because it cannot
-        // be used.
-        public IList<Election> findActiveWithCounties(){
-            IList<Election> lstElections    = this.findActive();
-            IList<Election> lstWithCounties = new List<Election>();
-            bool blnNotNull = false;
-            foreach (Election e in lstElections){
-                blnNotNull = false;
-                foreach (County c in this.findCounties(e)){
-                    if (c != null)
-                    {
-                        blnNotNull = true;
-                        break;
-                    }
-                }
-                if (blnNotNull){
-                    // Election has counties associated with it.
-                    lstWithCounties.Add(e);
-                } // if (findCounties(e).Count > 0){
-            } // foreach (Election e in lstElections){
-            return lstWithCounties;
-        } // public IList<Election> findActiveWithCounties(){
 
         public override IList<Fault> validate(Election entity) {
             return makeEmptyFaultList();
