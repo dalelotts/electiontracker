@@ -1,3 +1,5 @@
+using System;
+
 namespace edu.uwec.cs.cs355.group4.et.ui
 {
     internal partial class frmCandidate
@@ -188,5 +190,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.ComboBox cboPoliticalParty;
+
     }
 }

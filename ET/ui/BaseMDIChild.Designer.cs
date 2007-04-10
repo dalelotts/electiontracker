@@ -144,6 +144,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.ClientSize = new System.Drawing.Size(355, 136);
             this.Controls.Add(this.toolStrip1);
             this.Name = "BaseMDIChild";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "BaseMDIChild";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

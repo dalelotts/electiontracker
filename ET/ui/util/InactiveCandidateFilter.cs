@@ -19,7 +19,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
 
             foreach (Candidate candidate in candidates) {
                 TreeNode newNode =
-                    nodes.Add(DBEntity.CANDIDATE + ";" + candidate.ID,
+                    nodes.Add(DBEntity.CANDIDATE + "=" + candidate.ID,
                               candidate.LastName + ", " + candidate.FirstName + " " + candidate.MiddleName);
                 newNode.ToolTipText = candidate.Notes;
             }

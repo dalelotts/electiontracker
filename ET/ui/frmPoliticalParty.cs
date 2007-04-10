@@ -13,9 +13,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             InitializeComponent();
             this.politicalPartyDAO = politicalPartyDAO;
             currentPoliticalParty = new PoliticalParty();
+            refreshControls();
+            refreshGoToList();
         }
 
-        private void refreshFields() {
+        private void refreshControls() {
             txtName.Text = currentPoliticalParty.Name;
             txtAbbrev.Text = currentPoliticalParty.Abbreviation;
             chkActive.Checked = currentPoliticalParty.IsActive;
@@ -30,7 +32,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnAdd_Click(object sender, EventArgs e) {
             currentPoliticalParty = new PoliticalParty();
-            refreshFields();
+            refreshControls();
             base.btnAdd_Click(sender, e);
         }
 
@@ -42,23 +44,38 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
             //persist political party to db
             politicalPartyDAO.makePersistent(currentPoliticalParty);
+            refreshGoToList();
             base.btnSave_Click(sender, e);
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
-            refreshFields();
+            refreshControls();
             base.btnReset_Click(sender, e);
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
-            //politicalPartyDAO.makeTransient(currentPoliticalParty);
+            politicalPartyDAO.makeTransient(currentPoliticalParty);
+            currentPoliticalParty = new PoliticalParty();
+            refreshControls();
+            refreshGoToList();
             base.btnDelete_Click(sender, e);
         }
 
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             currentPoliticalParty = (PoliticalParty) cboGoTo.SelectedItem;
-            refreshFields();
+            refreshControls();
             base.cboGoTo_SelectedIndexChanged(sender, e);
+        }
+
+        public void loadPoliticalParty(long? id)
+        {
+            if (id.HasValue) {
+                PoliticalParty party = politicalPartyDAO.findById(id, false);
+                if (party != null) {
+                    currentPoliticalParty = party;
+                    refreshControls();
+                }
+            }
         }
     }
 }

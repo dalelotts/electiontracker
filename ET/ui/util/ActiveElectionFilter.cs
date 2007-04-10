@@ -18,9 +18,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
             IList<Election> activeElections = dao.findActive();
 
             foreach (Election election in activeElections) {
-                string nodeText = election.Date.ToString("dddd, MMMM dd yyyy");
                 string electionKey = DBEntity.ELECTION + "=" + election.ID;
-                TreeNode electionNode = nodes.Add(electionKey, nodeText);
+                TreeNode electionNode = nodes.Add(electionKey, election.ToString());
                 electionNode.ToolTipText = election.Notes;
 
                 TreeNode contestsNode =
@@ -45,8 +44,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
                     IList<ContestCounty> contestCounties = electionContest.Counties;
                     foreach (ContestCounty contestCounty in contestCounties) {
                         string contestCountyKey = electionContestNode + ";" + DBEntity.CONTEST_COUNTY + "=" + contestCounty.ID;
-                        TreeNode contestCountyNode = countiesNode.Nodes.Add(contestCountyKey, contestCounty.County.Name);
-                        contestCountyNode.ToolTipText = "(" + contestCounty.WardCount + " Wards) " + contestCounty.County.Notes;
+                        TreeNode contestCountyNode = countiesNode.Nodes.Add(contestCountyKey, contestCounty.County.Name + " (" + contestCounty.WardCount + " Wards) ");
+                        contestCountyNode.ToolTipText = contestCounty.County.Notes;
                     }                    
                 }
             }

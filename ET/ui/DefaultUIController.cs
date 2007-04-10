@@ -52,28 +52,32 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         public void HandleCountyForm(object sender, CountyFormArgs args) {
             frmCounty frmCounty = makeMDIChildForm<frmCounty>();
+            frmCounty.loadCounty(args.ID);
             frmCounty.Show();
         }
 
         public void HandleCandidate(object sender, CandidateArgs args) {
             frmCandidate candidateForm = makeMDIChildForm<frmCandidate>();
+            candidateForm.loadCandidate(args.ID);
             candidateForm.Show();
         }
 
         public void HandleContest(object sender, ContestArgs args) {
             frmContest contestForm = makeMDIChildForm<frmContest>();
+            contestForm.loadContest(args.ID);
             contestForm.Show();
         }
 
         public void HandlePoliticalParty(object sender, PoliticalPartyArgs args) {
             frmPoliticalParty politicalPartyForm = makeMDIChildForm<frmPoliticalParty>();
+            politicalPartyForm.loadPoliticalParty(args.ID);
             politicalPartyForm.Show();
         }
 
         public void HandleElection(object sender, ElectionArgs args)
         {
             frmElection electionForm = makeMDIChildForm<frmElection>();
-            electionForm.loadElection(args.ElectionID);
+            electionForm.loadElection(args.ID);
             electionForm.Show();
         }
 

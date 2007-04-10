@@ -17,7 +17,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
         public override void apply(TreeNodeCollection nodes) {
             IList<PoliticalParty> parties = dao.findActive();
             foreach (PoliticalParty party in parties) {
-                nodes.Add(DBEntity.POLITICAL_PARTY + ";" + party.ID, party.Name);
+                nodes.Add(DBEntity.POLITICAL_PARTY + "=" + party.ID, party.ToString());
             }
         }
     }

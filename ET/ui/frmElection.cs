@@ -8,7 +8,6 @@ using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
-
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
 
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmElection));
@@ -26,23 +25,20 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         //To Do: Add support for double clicking to add or remove contests, candidates, counties, etc.
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
-        public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
+        public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO,
+                           CountyDAO countyDAO) {
             try {
                 InitializeComponent();
 
                 this.electionDAO = electionDAO;
-
                 currentElection = new Election();
-
                 allContests = contestDAO.findAll();
-                refreshContestLists();
-
                 allCandidates = candidateDAO.findAll();
-                refreshCandidateLists();
-
                 allCounties = countyDAO.findAll();
-                refreshCountyLists();
 
+
+                refreshGoToList();
+                refreshControls();
             } catch (Exception ex) {
                 string message = "Encountered exception in frmElection constructor";
                 LOG.Error(message, ex);
@@ -51,11 +47,29 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
+        private void refreshControls() {
+            chkActive.Checked = currentElection.IsActive;
+            dtpDate.Value = currentElection.Date;
+            txtNotes.Text = currentElection.Notes;
+            refreshContestLists();
+            refreshCountyLists();
+            refreshCandidateLists();
+        }
+
+        private void refreshGoToList() {
+            IList<Election> elections = electionDAO.findAll();
+            cboGoTo.Items.Clear();
+            foreach (Election election in elections) {
+                cboGoTo.Items.Add(election);
+            }
+        }
+
+
         public void loadElection(long? id) {
             if (id != null) {
                 Election newElection = electionDAO.findById(id, false);
                 if (newElection != null) {
-                    currentElection = new Election();
+                    currentElection = newElection;
                     refreshCandidateLists();
                     refreshContestLists();
                     refreshCountyLists();
@@ -114,19 +128,45 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void btnElectionSave_Click(object sender, EventArgs e) {
+        public override void btnAdd_Click(object sender, EventArgs e) {
+            currentElection = new Election();
+            refreshControls();
+            base.btnAdd_Click(sender, e);
+        }
+
+        public override void btnSave_Click(object sender, EventArgs e) {
             try {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
                 currentElection.Notes = txtNotes.Text;
                 electionDAO.makePersistent(currentElection);
-
+                refreshControls();
+                refreshGoToList();
             } catch (Exception ex) {
                 string message = "Encountered exception in btnElectionSave_Click";
                 LOG.Error(message, ex);
                 ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
                 EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
             }
+        }
+
+        public override void btnReset_Click(object sender, EventArgs e) {
+            refreshControls();
+            base.btnReset_Click(sender, e);
+        }
+
+        public override void btnDelete_Click(object sender, EventArgs e) {
+            electionDAO.makeTransient(currentElection);
+            currentElection = new Election();
+            refreshControls();
+            refreshGoToList();
+            base.btnDelete_Click(sender, e);
+        }
+
+        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
+            currentElection = (Election) cboGoTo.SelectedItem;
+            refreshControls();
+            base.cboGoTo_SelectedIndexChanged(sender, e);
         }
 
         private void btnAddAllContests_Click(object sender, EventArgs e) {
@@ -329,7 +369,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     ListBox.SelectedObjectCollection selectedItems = lstContestCounties.SelectedItems;
                     if (selectedItems.Count > 0) {
                         foreach (ContestCounty contestCounty in selectedItems) {
-                            currentElectionContest.Counties.Remove(contestCounty);                            
+                            currentElectionContest.Counties.Remove(contestCounty);
                         }
                         refreshCountyLists();
                     }
@@ -359,7 +399,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void lstElectionContestsDetails_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                currentElectionContest = (ElectionContest)lstElectionContestsDetails.SelectedItem;
+                currentElectionContest = (ElectionContest) lstElectionContestsDetails.SelectedItem;
                 refreshCandidateLists();
                 refreshCountyLists();
             } catch (Exception ex) {
@@ -370,9 +410,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void tabDetails_Click(object sender, EventArgs e)
-        {
-
+        private void btnAddCustomResponse_Click(object sender, EventArgs e) {
+            string text = txtCustomResponse.Text;
+            if (text != null && text.Length > 0) {
+                // To Do: Validate response text does not alread exist.
+                CustomResponse response = new CustomResponse();
+                response.Description = text;
+                response.ElectionContest = currentElectionContest;
+                currentElectionContest.Responses.Add(response);
+                txtCustomResponse.Text = null;
+                refreshCandidateLists();
+            }
         }
     }
 }

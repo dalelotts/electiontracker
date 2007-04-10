@@ -22,7 +22,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
                 if (candidate.PoliticalParty != null) {
                     displayName += string.Format(" ({0})", candidate.PoliticalParty.Abbreviation);
                 }
-                TreeNode newNode = nodes.Add(DBEntity.CANDIDATE + ";" + candidate.ID,
+                TreeNode newNode = nodes.Add(DBEntity.CANDIDATE + "=" + candidate.ID,
                                                            displayName);
                 newNode.ToolTipText = candidate.Notes;
             }

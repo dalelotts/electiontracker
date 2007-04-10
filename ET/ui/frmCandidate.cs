@@ -48,18 +48,25 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             txtMiddleName.Text = currentCandidate.MiddleName;
             txtLastName.Text = currentCandidate.LastName;
             txtNotes.Text = currentCandidate.Notes;
-                
+
             if (currentCandidate.PoliticalParty == null) {
                 cboPoliticalParty.SelectedIndex = 0;
             } else {
-                for (int i = 1, limit = cboPoliticalParty.Items.Count; i < limit; i++)
-                {
-                    if (((ListItemWrapper<PoliticalParty>)cboPoliticalParty.Items[i]).Value.ID == currentCandidate.PoliticalParty.ID) {
+                for (int i = 1, limit = cboPoliticalParty.Items.Count; i < limit; i++) {
+                    if (((ListItemWrapper<PoliticalParty>) cboPoliticalParty.Items[i]).Value.ID ==
+                        currentCandidate.PoliticalParty.ID) {
                         cboPoliticalParty.SelectedIndex = i;
                     }
                 }
             }
-            chkActive.Checked = currentCandidate.IsActive; 
+            chkActive.Checked = currentCandidate.IsActive;
+        }
+
+        public override void btnDelete_Click(object sender, EventArgs e) {
+            candidateDAO.makeTransient(currentCandidate);
+            refreshControls();
+            refreshGoToList();
+            base.btnDelete_Click(sender, e);
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
@@ -67,7 +74,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             currentCandidate.FirstName = txtFirstName.Text;
             currentCandidate.MiddleName = txtMiddleName.Text;
             currentCandidate.LastName = txtLastName.Text;
-            currentCandidate.PoliticalParty = ((ListItemWrapper<PoliticalParty>)cboPoliticalParty.SelectedItem).Value;
+            currentCandidate.PoliticalParty = ((ListItemWrapper<PoliticalParty>) cboPoliticalParty.SelectedItem).Value;
             currentCandidate.Notes = txtNotes.Text;
             currentCandidate.IsActive = chkActive.Checked;
 
@@ -84,9 +91,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             // To Do: Detect Dirty
-            currentCandidate = (Candidate)cboGoTo.SelectedItem;
+            currentCandidate = (Candidate) cboGoTo.SelectedItem;
             refreshControls();
             base.cboGoTo_SelectedIndexChanged(sender, e);
+        }
+
+        public void loadCandidate(long? id) {
+            if (id.HasValue) {
+                Candidate candidate = candidateDAO.findById(id, false);
+                if (candidate != null) {
+                    currentCandidate = candidate;
+                    refreshControls();
+                }
+            }
         }
     }
 }

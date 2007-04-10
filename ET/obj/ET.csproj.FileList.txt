@@ -31,6 +31,7 @@ obj\Debug\edu.uwec.cs.cs355.group4.et.core.CountyWebsite.hbm.xml
 obj\Debug\edu.uwec.cs.cs355.group4.et.core.PhoneNumberType.hbm.xml
 obj\Debug\edu.uwec.cs.cs355.group4.et.core.ElectionContest.hbm.xml
 obj\Debug\edu.uwec.cs.cs355.group4.et.core.ContestCounty.hbm.xml
+obj\Debug\edu.uwec.cs.cs355.group4.et.core.ResponseValue.hbm.xml
 obj\Debug\edu.uwec.cs.cs355.group4.et.core.Response.hbm.xml
 obj\Debug\edu.uwec.cs.cs355.group4.et.Properties.Resources.resources
 obj\Debug\edu.uwec.cs.cs355.group4.et.ui.AboutBox.resources

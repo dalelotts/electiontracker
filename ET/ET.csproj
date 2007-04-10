@@ -97,6 +97,7 @@
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
     <Compile Include="events\CountyFormArgs.cs" />
+    <Compile Include="events\DBEntityArgs.cs" />
     <Compile Include="events\DefaultShowMessageSender.cs" />
     <Compile Include="events\ElectionReportArgs.cs" />
     <Compile Include="events\EnterVotesArgs.cs" />
@@ -208,16 +209,15 @@
     <Compile Include="ui\UIController.cs" />
     <Compile Include="ui\util\ActiveCandidateFilter.cs" />
     <Compile Include="ui\util\ActiveContestFilter.cs" />
-    <Compile Include="ui\util\ActiveElectionFilter.cs" />
     <Compile Include="ui\util\ActivePoliticalPartyFilter.cs" />
     <Compile Include="ui\util\BaseTreeViewFilter.cs" />
+    <Compile Include="ui\util\ElectionFilter.cs" />
     <Compile Include="ui\util\FilterButton.cs" />
     <Compile Include="ui\util\ListItemWrapper.cs" />
     <Compile Include="ui\util\CompositeFilter.cs" />
     <Compile Include="ui\util\CountyFilter.cs" />
     <Compile Include="ui\util\InactiveCandidateFilter.cs" />
     <Compile Include="ui\util\InactiveContestFilter.cs" />
-    <Compile Include="ui\util\InactiveElectionFilter.cs" />
     <Compile Include="ui\util\InactivePoliticalPartyFilter.cs" />
     <Compile Include="ui\util\TreeViewFilter.cs" />
     <Compile Include="ui\VoteEnterer.cs">
@@ -280,7 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="core\CustomResponse.hbm.xml" />
-    <Content Include="core\ResponseValue.hbm.xml" />
+    <EmbeddedResource Include="core\ResponseValue.hbm.xml" />
     <Content Include="Resources\btnAdd.Image.png" />
     <Content Include="Resources\btnDelete.Image.png" />
     <Content Include="Resources\btnEdit.Image.png" />

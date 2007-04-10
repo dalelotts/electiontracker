@@ -133,28 +133,27 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                County county = new County();
-                county.Name = txtCountyName.Text;
-                county.Notes = txtNotes.Text;
-                county.WardCount = int.Parse(txtCountyWardCount.Text);
+                
+                currentCounty.Name = txtCountyName.Text;
+                currentCounty.Notes = txtNotes.Text;
+                currentCounty.WardCount = int.Parse(txtCountyWardCount.Text);
 
+//                foreach (CountyPhoneNumber cfn in lstPhoneNums.Items) {
+//                    cfn.County = currentCounty;
+//                    currentCounty.PhoneNumbers.Add(cfn);
+//                }
+//
+//                foreach (CountyWebsite cws in lstWebsites.Items) {
+//                    cws.County = currentCounty;
+//                    currentCounty.Websites.Add(cws);
+//                }
+//
+//                foreach (CountyAttribute cat in lstAttributes.Items) {
+//                    cat.County = currentCounty;
+//                    currentCounty.Attributes.Add(cat);
+//                }
 
-                foreach (CountyPhoneNumber cfn in lstPhoneNums.Items) {
-                    cfn.County = county;
-                    county.PhoneNumbers.Add(cfn);
-                }
-
-                foreach (CountyWebsite cws in lstWebsites.Items) {
-                    cws.County = county;
-                    county.Websites.Add(cws);
-                }
-
-                foreach (CountyAttribute cat in lstAttributes.Items) {
-                    cat.County = county;
-                    county.Attributes.Add(cat);
-                }
-
-                countyDAO.makePersistent(county);
+                countyDAO.makePersistent(currentCounty);
                 refreshGoToList();
             } catch (Exception ex) {
                 LOG.Error("unable to save: operation failed", ex);
@@ -168,7 +167,26 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             currentCounty = (County) cboGoTo.SelectedItem;
+            refreshControls();
             base.cboGoTo_SelectedIndexChanged(sender, e);
+        }
+
+        public override void btnDelete_Click(object sender, EventArgs e) {
+            countyDAO.makeTransient(currentCounty);
+            currentCounty = new County();
+            refreshControls();
+            refreshGoToList();
+            base.btnDelete_Click(sender, e);
+        }
+
+        public void loadCounty(long? id) {
+            if (id.HasValue) {
+                County county = countyDAO.findById(id, false);
+                if (county != null) {
+                    currentCounty = county;
+                    refreshControls();
+                }
+            }
         }
     }
 }

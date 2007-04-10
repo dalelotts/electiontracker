@@ -33,5 +33,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             get { return isActive; }
             set { isActive = value; }
         }
+
+        public override string ToString() {
+            return name + " (" + abbreviation + ")";
+        }
     }
 }

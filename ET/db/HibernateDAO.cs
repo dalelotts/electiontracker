@@ -50,7 +50,9 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         public void makeTransient(T entity) {
+            ITransaction transaction = session.BeginTransaction();
             session.Delete(entity);
+            transaction.Commit();
         }
 
         public abstract IList<Fault> validate(T entity);

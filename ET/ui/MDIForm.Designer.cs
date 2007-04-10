@@ -30,8 +30,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         /// </summary>
         private void InitializeComponent()
         {
-            Altea.OutlookBarButton outlookBarButton1 = new Altea.OutlookBarButton();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIForm));
+            Altea.OutlookBarButton outlookBarButton1 = new Altea.OutlookBarButton();
             Altea.OutlookBarButton outlookBarButton2 = new Altea.OutlookBarButton();
             Altea.OutlookBarButton outlookBarButton3 = new Altea.OutlookBarButton();
             Altea.OutlookBarButton outlookBarButton4 = new Altea.OutlookBarButton();
@@ -41,9 +41,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.filterBar = new Altea.OutlookBar();
-            this.mainTreeView = new System.Windows.Forms.TreeView();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,9 +81,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.filterBar = new Altea.OutlookBar();
+            this.mainTreeView = new System.Windows.Forms.TreeView();
             this.mainStatusStrip.SuspendLayout();
-            this.mainPanel.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainStatusStrip
@@ -110,61 +110,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
             this.toolStripStatusLabel1.Text = "ready...";
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Controls.Add(this.filterBar);
-            this.mainPanel.Controls.Add(this.mainTreeView);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.mainPanel.Location = new System.Drawing.Point(0, 24);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(232, 652);
-            this.mainPanel.TabIndex = 4;
-            // 
-            // filterBar
-            // 
-            outlookBarButton1.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton1.Image")));
-            outlookBarButton1.Text = "Elections";
-            outlookBarButton2.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton2.Image")));
-            outlookBarButton2.Text = "Contests";
-            outlookBarButton3.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton3.Image")));
-            outlookBarButton3.Text = "Candidates";
-            outlookBarButton4.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton4.Image")));
-            outlookBarButton4.Text = "Counties";
-            outlookBarButton5.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton5.Image")));
-            outlookBarButton5.Text = "Political Parties";
-            outlookBarButton6.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton6.Image")));
-            outlookBarButton6.Text = "Enter Votes";
-            outlookBarButton7.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton7.Image")));
-            outlookBarButton7.Text = "Reports";
-            this.filterBar.Buttons.Add(outlookBarButton1);
-            this.filterBar.Buttons.Add(outlookBarButton2);
-            this.filterBar.Buttons.Add(outlookBarButton3);
-            this.filterBar.Buttons.Add(outlookBarButton4);
-            this.filterBar.Buttons.Add(outlookBarButton5);
-            this.filterBar.Buttons.Add(outlookBarButton6);
-            this.filterBar.Buttons.Add(outlookBarButton7);
-            this.filterBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.filterBar.Location = new System.Drawing.Point(0, 484);
-            this.filterBar.MinimumSize = new System.Drawing.Size(16, 40);
-            this.filterBar.Name = "filterBar";
-            this.filterBar.Renderer = Altea.Renderer.Outlook2007;
-            this.filterBar.Size = new System.Drawing.Size(232, 168);
-            this.filterBar.TabIndex = 10;
-            this.filterBar.Text = "outlookBar1";
-            this.filterBar.Resize += new System.EventHandler(this.resizeHandler);
-            this.filterBar.ButtonClicked += new Altea.OutlookBar.ButtonClickedEventHandler(this.filterBar_ButtonClicked);
-            this.filterBar.SizeChanged += new System.EventHandler(this.resizeHandler);
-            // 
-            // mainTreeView
-            // 
-            this.mainTreeView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.mainTreeView.HideSelection = false;
-            this.mainTreeView.Location = new System.Drawing.Point(0, 0);
-            this.mainTreeView.Name = "mainTreeView";
-            this.mainTreeView.ShowNodeToolTips = true;
-            this.mainTreeView.Size = new System.Drawing.Size(232, 243);
-            this.mainTreeView.TabIndex = 5;
             // 
             // mainMenuStrip
             // 
@@ -475,6 +420,62 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             // 
+            // mainPanel
+            // 
+            this.mainPanel.Controls.Add(this.filterBar);
+            this.mainPanel.Controls.Add(this.mainTreeView);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.mainPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.mainPanel.Location = new System.Drawing.Point(0, 24);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(232, 652);
+            this.mainPanel.TabIndex = 7;
+            // 
+            // filterBar
+            // 
+            outlookBarButton1.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton1.Image")));
+            outlookBarButton1.Text = "Elections";
+            outlookBarButton2.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton2.Image")));
+            outlookBarButton2.Text = "Contests";
+            outlookBarButton3.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton3.Image")));
+            outlookBarButton3.Text = "Candidates";
+            outlookBarButton4.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton4.Image")));
+            outlookBarButton4.Text = "Counties";
+            outlookBarButton5.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton5.Image")));
+            outlookBarButton5.Text = "Political Parties";
+            outlookBarButton6.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton6.Image")));
+            outlookBarButton6.Text = "Enter Votes";
+            outlookBarButton7.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton7.Image")));
+            outlookBarButton7.Text = "Reports";
+            this.filterBar.Buttons.Add(outlookBarButton1);
+            this.filterBar.Buttons.Add(outlookBarButton2);
+            this.filterBar.Buttons.Add(outlookBarButton3);
+            this.filterBar.Buttons.Add(outlookBarButton4);
+            this.filterBar.Buttons.Add(outlookBarButton5);
+            this.filterBar.Buttons.Add(outlookBarButton6);
+            this.filterBar.Buttons.Add(outlookBarButton7);
+            this.filterBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.filterBar.Location = new System.Drawing.Point(0, 484);
+            this.filterBar.MinimumSize = new System.Drawing.Size(16, 40);
+            this.filterBar.Name = "filterBar";
+            this.filterBar.Renderer = Altea.Renderer.Outlook2007;
+            this.filterBar.Size = new System.Drawing.Size(232, 168);
+            this.filterBar.TabIndex = 10;
+            this.filterBar.Text = "outlookBar1";
+            this.filterBar.ButtonClicked += new Altea.OutlookBar.ButtonClickedEventHandler(this.filterBar_ButtonClicked);
+            // 
+            // mainTreeView
+            // 
+            this.mainTreeView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainTreeView.HideSelection = false;
+            this.mainTreeView.HotTracking = true;
+            this.mainTreeView.Location = new System.Drawing.Point(0, 0);
+            this.mainTreeView.Name = "mainTreeView";
+            this.mainTreeView.ShowNodeToolTips = true;
+            this.mainTreeView.Size = new System.Drawing.Size(232, 243);
+            this.mainTreeView.TabIndex = 5;
+            this.mainTreeView.DoubleClick += new System.EventHandler(this.mainTreeView_DoubleClick);
+            // 
             // MDIForm
             // 
             this.ClientSize = new System.Drawing.Size(1104, 698);
@@ -490,9 +491,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Resize += new System.EventHandler(this.resizeHandler);
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
-            this.mainPanel.ResumeLayout(false);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -503,8 +504,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.TreeView mainTreeView;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -545,7 +544,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.ToolStripMenuItem countyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem voteResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem electionReportToolStripMenuItem;
+        private System.Windows.Forms.Panel mainPanel;
         private Altea.OutlookBar filterBar;
+        private System.Windows.Forms.TreeView mainTreeView;
 
     }
 }

@@ -11,7 +11,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
 
         public override void apply(TreeNodeCollection nodes) {
             foreach (TreeViewFilter filter in members) {
-                filter.apply(nodes);
+                TreeNode filterNode = nodes.Add(filter.ToString());
+                filter.apply(filterNode.Nodes);
             }
         }
     }

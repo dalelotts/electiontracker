@@ -179,9 +179,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.gbAttributes.Controls.Add(this.btnAddAttribute);
             this.gbAttributes.Controls.Add(this.lstAttributes);
             this.gbAttributes.Controls.Add(this.txtValue);
+            this.gbAttributes.Controls.Add(this.cbKey);
             this.gbAttributes.Controls.Add(this.lblValue);
             this.gbAttributes.Controls.Add(this.lblKey);
-            this.gbAttributes.Controls.Add(this.cbKey);
             this.gbAttributes.Location = new System.Drawing.Point(17, 344);
             this.gbAttributes.Name = "gbAttributes";
             this.gbAttributes.Size = new System.Drawing.Size(387, 161);
@@ -258,13 +258,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             this.gbPhone.Controls.Add(this.txtPhoneNum);
             this.gbPhone.Controls.Add(this.txtAreaCode);
-            this.gbPhone.Controls.Add(this.label1);
             this.gbPhone.Controls.Add(this.cbPhoneNumberType);
             this.gbPhone.Controls.Add(this.btnRemovePhoneNum);
-            this.gbPhone.Controls.Add(this.lblPhoneNum);
-            this.gbPhone.Controls.Add(this.lblAreaCode);
             this.gbPhone.Controls.Add(this.btnAddPhoneNum);
             this.gbPhone.Controls.Add(this.lstPhoneNums);
+            this.gbPhone.Controls.Add(this.label1);
+            this.gbPhone.Controls.Add(this.lblPhoneNum);
+            this.gbPhone.Controls.Add(this.lblAreaCode);
             this.gbPhone.Location = new System.Drawing.Point(17, 23);
             this.gbPhone.Name = "gbPhone";
             this.gbPhone.Size = new System.Drawing.Size(387, 162);

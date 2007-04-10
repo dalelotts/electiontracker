@@ -40,24 +40,21 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                Contest contest = new Contest();
-                contest.IsActive = chkActive.Checked;
-                contest.Name = txtName.Text;
-                contest.ContestType = ((ListItemWrapper<ContestType>) cbContestType.SelectedItem).Value;
-                contest.Notes = txtNotes.Text;
-                contestDAO.makePersistent(contest);
+                currentContest.IsActive = chkActive.Checked;
+                currentContest.Name = txtName.Text;
+                currentContest.ContestType = ((ListItemWrapper<ContestType>) cbContestType.SelectedItem).Value;
+                currentContest.Notes = txtNotes.Text;
+                contestDAO.makePersistent(currentContest);
                 refreshGoToList();
             } catch (Exception ex) {
                 LOG.Error("unable to save: operation failed", ex);
             }
         }
 
-        private void refreshGoToList()
-        {
+        private void refreshGoToList() {
             IList<Contest> contests = contestDAO.findAll();
             cboGoTo.Items.Clear();
-            foreach (Contest contest in contests)
-            {
+            foreach (Contest contest in contests) {
                 cboGoTo.Items.Add(contest);
             }
         }
@@ -88,6 +85,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             currentContest = (Contest) cboGoTo.SelectedItem;
             ;
+        }
+
+        public void loadContest(long? id) {
+            if (id.HasValue) {
+                Contest contest = contestDAO.findById(id, false);
+                if (contest != null) {
+                    currentContest = contest;
+                    refreshControls();
+                }
+            }
         }
     }
 }

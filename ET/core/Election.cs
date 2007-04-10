@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class Election {
         private long id;
-        private DateTime date;
+        private DateTime date = DateTime.Today;
         private string notes;
         private bool isActive = true;
         private IList<ElectionContest> electionContests;
@@ -42,7 +42,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         public override string ToString()
         {
-            return date.ToString();
+            return date.ToShortDateString();
         }
     }
 }

@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace edu.uwec.cs.cs355.group4.et.events
-{
-    class CountyFormArgs : EventArgs
-    {
+namespace edu.uwec.cs.cs355.group4.et.events {
+    internal class CountyFormArgs : DBEntityArgs {
+        public CountyFormArgs(long id) : base(id) {}
+        public CountyFormArgs() {}
     }
 }

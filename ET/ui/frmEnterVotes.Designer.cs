@@ -84,7 +84,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(106, 315);
+            this.btnNext.Location = new System.Drawing.Point(106, 321);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 2;
@@ -106,14 +106,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.gbContest.Controls.Add(this.btnSave);
             this.gbContest.Location = new System.Drawing.Point(212, 71);
             this.gbContest.Name = "gbContest";
-            this.gbContest.Size = new System.Drawing.Size(418, 350);
+            this.gbContest.Size = new System.Drawing.Size(480, 350);
             this.gbContest.TabIndex = 3;
             this.gbContest.TabStop = false;
             this.gbContest.Text = "Contests";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(337, 315);
+            this.btnSave.Location = new System.Drawing.Point(399, 321);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -125,7 +125,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 433);
+            this.ClientSize = new System.Drawing.Size(703, 433);
             this.Controls.Add(this.gbContest);
             this.Controls.Add(this.gbCounty);
             this.Controls.Add(this.gbElection);

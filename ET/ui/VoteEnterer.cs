@@ -17,7 +17,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         static VoteEnterer() {
             excluded.Add("ID");
             excluded.Add("WardCount");
-            excluded.Add("WardsRe");
+            excluded.Add("WardsReporting");
         }
 
         public VoteEnterer(Election election, County county, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) {
@@ -30,17 +30,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 //                example.ElectionContest = electionContest;
 //                IList<ContestCounty> contestCounties = contestCountyDAO.findByExample(example, excluded);
 
-                IList<ContestCounty> contestCounties = contestCountyDAO.find(county.ID, electionContest.ID);
-
-                if (contestCounties.Count == 1) {
-                    ContestDisplay display = new ContestDisplay(contestCounties[0], contestCountyDAO, responseValueDAO);
-                    display.Top = currentTop;
-                    currentTop += display.Height + 1;
-                    Controls.Add(display);
-                    displays.Add(display);
-                } else {
-                    LOG.Error("County is not a meber of this contest. " + county.Name);
-                }
+                ContestDisplay display = new ContestDisplay(county.ID, electionContest.ID, contestCountyDAO, responseValueDAO);
+                display.Top = currentTop;
+                currentTop += display.Height + 1;
+                Controls.Add(display);
+                displays.Add(display);
+            
             }
             AutoScroll = true;
             BorderStyle = BorderStyle.FixedSingle;

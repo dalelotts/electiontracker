@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Altea;
 using edu.uwec.cs.cs355.group4.et.events;
+using edu.uwec.cs.cs355.group4.et.type;
 using edu.uwec.cs.cs355.group4.et.ui.util;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
@@ -102,10 +103,45 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             mainTreeView.Nodes.Clear();
             ((FilterButton) filterBar.SelectedButton).Filter.apply(mainTreeView.Nodes);
             mainTreeView.ExpandAll();
+            if (mainTreeView.Nodes.Count > 0) {
+                mainTreeView.Nodes[0].EnsureVisible();
+            }
         }
 
         private void resizeHandler(object sender, EventArgs e) {
             mainTreeView.Height = filterBar.Top - mainTreeView.Top;
+        }
+
+        private void mainTreeView_DoubleClick(object sender, EventArgs e) {
+            TreeNode node = mainTreeView.SelectedNode;
+            string[] tokens = node.Name.Split(';');
+
+            if (tokens.Length > 0) {
+                string idString = tokens[0]; // The first token is the ID token.
+                string[] entityID = idString.Split('=');
+                if (entityID.Length == 2) {
+                    string entity = entityID[0].Trim();
+                    long id = long.Parse(entityID[1]);
+
+                    // To Do: Change to factory method.
+                    if (DBEntity.CANDIDATE.ToString().Equals(entity)) {
+                        CandidateArgs candidateArgs = new CandidateArgs(id);
+                        EventUtil.RaiseEvent<object, CandidateArgs>(candidate, this, candidateArgs);
+                    } else if (DBEntity.CONTEST.ToString().Equals(entity)) {
+                        ContestArgs contestArgs = new ContestArgs(id);
+                        EventUtil.RaiseEvent<object, ContestArgs>(contest, this, contestArgs);
+                    } else if (DBEntity.COUNTY.ToString().Equals(entity)) {
+                        CountyFormArgs countyFormArgs = new CountyFormArgs(id);
+                        EventUtil.RaiseEvent<object, CountyFormArgs>(countyForm, this, countyFormArgs);
+                    } else if (DBEntity.ELECTION.ToString().Equals(entity)) {
+                        ElectionArgs electionArgs = new ElectionArgs(id);
+                        EventUtil.RaiseEvent<object, ElectionArgs>(election, this, electionArgs);
+                    } else if (DBEntity.POLITICAL_PARTY.ToString().Equals(entity)) {
+                        PoliticalPartyArgs politicalPartyArgs = new PoliticalPartyArgs(id);
+                        EventUtil.RaiseEvent<object, PoliticalPartyArgs>(politicalParty, this, politicalPartyArgs);
+                    }
+                }
+            }
         }
     }
 }
