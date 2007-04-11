@@ -5,20 +5,24 @@ using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.util;
+using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal sealed class ContestDisplay : Panel {
-        private ContestCounty contestCounty;
+        private static readonly ILog LOG = LogManager.GetLogger(typeof (ContestDisplay));
+
+        private readonly ContestCounty contestCounty;
         private readonly ContestCountyDAO contestCountyDAO;
         private ResponseValueDAO responseValueDAO;
-        
+
         private TextBox txtReporting;
         private Boolean _bDirty;
         private readonly Map<ResponseValue, TextBox> responseToTextBox;
 
 
-        public ContestDisplay(long countyID, long electionContestID, ContestCountyDAO contestCountyDAO,
+        public ContestDisplay(ContestCounty contestCounty, ContestCountyDAO contestCountyDAO,
                               ResponseValueDAO responseValueDAO) {
+            this.contestCounty = contestCounty;
             this.responseValueDAO = responseValueDAO;
             this.contestCountyDAO = contestCountyDAO;
 
@@ -26,19 +30,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             BorderStyle = BorderStyle.FixedSingle;
             Visible = true;
 
-            IList<ContestCounty> contestCounties = contestCountyDAO.find(countyID, electionContestID);
-
-            if (contestCounties.Count != 1)
-                throw new ArgumentException("County is not a member of this contest", "countyID");
-
-            contestCounty = contestCounties[0];
 
             Label lblContest = new Label();
             lblContest.Left = 5;
             lblContest.Width = 300;
             lblContest.Text = contestCounty.ElectionContest.Contest.Name;
             Controls.Add(lblContest);
-            
+
             Label lblWardCount = new Label();
             lblWardCount.Text = " / " + contestCounty.WardCount;
             lblWardCount.Left = Width - 55;
@@ -75,16 +73,39 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public void Persist() {
-            contestCounty.WardsReporting = int.Parse(txtReporting.Text);
-            contestCountyDAO.makePersistent(contestCounty);
+            try {
+                contestCounty.WardsReporting = int.Parse(txtReporting.Text);
 
-            foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
-                ResponseValue responseValue = entry.Key;
-                TextBox textBox = entry.Value;
-                responseValue.VoteCount = int.Parse(textBox.Text);
-                responseValueDAO.makePersistent(responseValue);
+                // START HACK - For some reason this fixed the following exception
+                // NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
+                County county = contestCounty.County;
+                string s = county.Name;
+                ElectionContest electionContest = contestCounty.ElectionContest;
+                Contest contest = electionContest.Contest;
+                // END HACK
+
+                contestCountyDAO.makePersistent(contestCounty);
+                //contestCountyDAO.flush();
+
+                foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
+                    ResponseValue responseValue = entry.Key;
+                    TextBox textBox = entry.Value;
+                    responseValue.VoteCount = int.Parse(textBox.Text);
+
+                    // START HACK - For some reason this fixed the following exception
+                    // NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
+                    Response response = responseValue.Response;
+                    ElectionContest hack2 = response.ElectionContest;
+                    string hack3 = responseValue.ContestCounty.County.Name;
+                    // END HACK
+
+                    responseValueDAO.makePersistent(responseValue);
+                }
+
+                Dirty = false;
+            } catch (Exception ex) {
+                LOG.Error("Persist", ex);
             }
-            Dirty = false;
         }
 
         private void InitializeResponses(IList<Response> responses) {
@@ -96,8 +117,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 Label label = new Label();
                 label.Text = response.ToString();
                 label.Left = 5;
-                label.Width = 300; 
-                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height) * (responseToTextBox.Count + 1));
+                label.Width = 300;
+                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height)*(responseToTextBox.Count + 1));
                 Controls.Add(label);
 
                 TextBox textBox = new TextBox();
@@ -106,12 +127,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 textBox.Top = label.Top;
                 textBox.Left = txtReporting.Left;
                 textBox.Width = txtReporting.Width;
+                // To Do: Find out why find by example does not work
+//                ResponseValue example = new ResponseValue();
+//                example.Response = response;
+//                example.ContestCounty = contestCounty;
 
-                ResponseValue example = new ResponseValue();
-                example.Response = response;
-                example.ContestCounty = contestCounty;
-
-                IList<ResponseValue> values = responseValueDAO.findByExample(example, excluded);
+                IList<ResponseValue> values = responseValueDAO.find(response.ID, contestCounty.ID);
 
                 ResponseValue value;
 

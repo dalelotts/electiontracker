@@ -30,12 +30,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 //                example.ElectionContest = electionContest;
 //                IList<ContestCounty> contestCounties = contestCountyDAO.findByExample(example, excluded);
 
-                ContestDisplay display = new ContestDisplay(county.ID, electionContest.ID, contestCountyDAO, responseValueDAO);
-                display.Top = currentTop;
-                currentTop += display.Height + 1;
-                Controls.Add(display);
-                displays.Add(display);
-            
+                IList<ContestCounty> contestCounties = contestCountyDAO.find(county.ID, electionContest.ID);
+
+                if (contestCounties.Count == 1) {
+                    ContestDisplay display = new ContestDisplay(contestCounties[0], contestCountyDAO, responseValueDAO);
+                    display.Top = currentTop;
+                    currentTop += display.Height + 1;
+                    Controls.Add(display);
+                    displays.Add(display);
+                } else {
+                    LOG.Error("Unalbe to locate contest county where countyID =" + county.ID + " AND electionContestID =" + electionContest.ID);
+                }
             }
             AutoScroll = true;
             BorderStyle = BorderStyle.FixedSingle;

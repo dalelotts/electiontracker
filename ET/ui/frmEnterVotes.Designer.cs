@@ -131,6 +131,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.gbElection);
             this.Name = "frmEnterVotes";
             this.Text = "Enter Votes";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEnterVotes_FormClosing);
             this.Load += new System.EventHandler(this.frmEnterVotes_Load);
             this.gbElection.ResumeLayout(false);
             this.gbElection.PerformLayout();

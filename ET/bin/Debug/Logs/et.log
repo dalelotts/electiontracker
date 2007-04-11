@@ -1,253 +1,32 @@
-2007-04-10 00:13:26,725 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - deleted object would be re-saved by cascade (remove deleted object from associations): 15, of class: edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber
-NHibernate.ObjectDeletedException: deleted object would be re-saved by cascade (remove deleted object from associations): 15, of class: edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber
-   at NHibernate.Impl.SessionImpl.ForceFlush(EntityEntry e)
-   at NHibernate.Impl.SessionImpl.Save(Object obj)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at NHibernate.Engine.Cascades.CascadingAction.ActionSaveUpdateClass.Cascade(ISessionImplementor session, Object child, Object anything)
-   at NHibernate.Engine.Cascades.Cascade(ISessionImplementor session, Object child, IType type, CascadingAction action, CascadeStyle style, CascadePoint cascadeTo, Object anything)
-   at NHibernate.Engine.Cascades.CascadeCollection(CascadingAction action, CascadeStyle style, CollectionType collectionType, IType elemType, Object child, CascadePoint cascadeVia, ISessionImplementor session, Object anything)
-   at NHibernate.Engine.Cascades.Cascade(ISessionImplementor session, Object child, IType type, CascadingAction action, CascadeStyle style, CascadePoint cascadeTo, Object anything)
-   at NHibernate.Engine.Cascades.Cascade(ISessionImplementor session, IEntityPersister persister, Object parent, CascadingAction action, CascadePoint cascadeTo, Object anything)
-   at NHibernate.Engine.Cascades.Cascade(ISessionImplementor session, IEntityPersister persister, Object parent, CascadingAction action, CascadePoint cascadeTo)
-   at NHibernate.Impl.SessionImpl.PreFlushEntities()
-   at NHibernate.Impl.SessionImpl.FlushEverything()
-   at NHibernate.Impl.SessionImpl.AutoFlushIfRequired(ISet querySpaces)
-   at NHibernate.Impl.SessionImpl.Find(CriteriaImpl criteria, IList results)
-   at NHibernate.Impl.SessionImpl.Find[T](CriteriaImpl criteria)
-   at NHibernate.Impl.CriteriaImpl.List[T]()
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.findByCriteria(IList`1 criterion, IList`1 order) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 66
-   at edu.uwec.cs.cs355.group4.et.db.CountyDAO.findAll() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\CountyDAO.cs:line 20
-   at edu.uwec.cs.cs355.group4.et.ui.frmCounty.refreshGoToList() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmCounty.cs:line 41
-   at edu.uwec.cs.cs355.group4.et.ui.frmCounty.btnDelete_Click(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmCounty.cs:line 179
-   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
-   at System.Windows.Forms.ToolStripButton.OnClick(EventArgs e)
-   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
-   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
-   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
-   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
-   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
-   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
-   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.Run(Form mainForm)
-   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\core\Program.cs:line 58
-2007-04-10 00:31:43,061 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.frmContest [(null)] - unable to save: operation failed
-NHibernate.ADOException: could not insert: [edu.uwec.cs.cs355.group4.et.core.Contest][SQL: INSERT INTO contest (ContestName, ContestNotes, ContestTypeID, ContestIsActive) VALUES (?, ?, ?, ?)] ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry '87th Assembly-democrats' for key 2
-   at MySql.Data.MySqlClient.MySqlStream.OpenPacket()
-   at MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
-   at MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
-   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
-   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
-   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
-   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
-   at NHibernate.Impl.BatcherImpl.ExecuteNonQuery(IDbCommand cmd)
-   at NHibernate.Persister.Entity.AbstractEntityPersister.Insert(Object[] fields, Boolean[] notNull, SqlCommandInfo sql, Object obj, ISessionImplementor session)
-   --- End of inner exception stack trace ---
-   at NHibernate.Persister.Entity.AbstractEntityPersister.Insert(Object[] fields, Boolean[] notNull, SqlCommandInfo sql, Object obj, ISessionImplementor session)
-   at NHibernate.Persister.Entity.AbstractEntityPersister.Insert(Object[] fields, Object obj, ISessionImplementor session)
-   at NHibernate.Impl.ScheduledIdentityInsertion.Execute()
-   at NHibernate.Impl.SessionImpl.Execute(IExecutable executable)
-   at NHibernate.Impl.SessionImpl.DoSave(Object theObj, EntityKey key, IEntityPersister persister, Boolean replicate, Boolean useIdentityColumn, CascadingAction cascadeAction, Object anything)
-   at NHibernate.Impl.SessionImpl.DoSave(Object obj, Object id, IEntityPersister persister, Boolean useIdentityColumn, CascadingAction cascadeAction, Object anything)
-   at NHibernate.Impl.SessionImpl.SaveWithGeneratedIdentifier(Object obj, CascadingAction action, Object anything)
-   at NHibernate.Impl.SessionImpl.Save(Object obj)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
-   at edu.uwec.cs.cs355.group4.et.ui.frmContest.btnSave_Click(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmContest.cs:line 48
-2007-04-10 00:31:44,969 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - null id in entry (don't flush the Session after an exception occurs)
-NHibernate.AssertionFailure: null id in entry (don't flush the Session after an exception occurs)
-   at NHibernate.Impl.SessionImpl.CheckId(Object obj, IEntityPersister persister, Object id)
-   at NHibernate.Impl.SessionImpl.FlushEntity(Object obj, EntityEntry entry)
-   at NHibernate.Impl.SessionImpl.FlushEntities()
-   at NHibernate.Impl.SessionImpl.FlushEverything()
-   at NHibernate.Impl.SessionImpl.AutoFlushIfRequired(ISet querySpaces)
-   at NHibernate.Impl.SessionImpl.Find(CriteriaImpl criteria, IList results)
-   at NHibernate.Impl.SessionImpl.Find[T](CriteriaImpl criteria)
-   at NHibernate.Impl.CriteriaImpl.List[T]()
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.findByCriteria(IList`1 criterion, IList`1 order) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 66
-   at edu.uwec.cs.cs355.group4.et.db.ContestDAO.findActive() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\ContestDAO.cs:line 21
-   at edu.uwec.cs.cs355.group4.et.ui.util.ActiveContestFilter.apply(TreeNodeCollection nodes) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\util\ActiveContestFilter.cs:line 18
-   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.filterBar_ButtonClicked(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\MDIForm.cs:line 104
-   at Altea.OutlookBar.OutlookBar_MouseClick(Object sender, MouseEventArgs e) in C:\Documents and Settings\Walvis\My Documents\VISUAL STUDIO\MY COMMON FILES\The Code Project\TestOutlookBar\OutlookBar\OutlookBar.vb:line 84
-   at System.Windows.Forms.Control.OnMouseClick(MouseEventArgs e)
-   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
-   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.Run(Form mainForm)
-   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\core\Program.cs:line 58
-2007-04-10 00:36:32,371 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - County is not a member of this contest
-Parameter name: countyID
-System.ArgumentException: County is not a member of this contest
-Parameter name: countyID
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay..ctor(Int64 countyID, Int64 electionContestID, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 29
-   at edu.uwec.cs.cs355.group4.et.ui.VoteEnterer..ctor(Election election, County county, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\VoteEnterer.cs:line 34
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.lstCounties_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 78
-   at System.Windows.Forms.ListBox.OnSelectedIndexChanged(EventArgs e)
-   at System.Windows.Forms.ListBox.set_SelectedIndex(Int32 value)
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadCounties(Election election) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 66
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.cmbElections_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 46
-   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
-   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadElections() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 42
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.frmEnterVotes_Load(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 33
-   at System.Windows.Forms.Form.OnLoad(EventArgs e)
-   at System.Windows.Forms.Form.OnCreateControl()
-   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
-   at System.Windows.Forms.Control.CreateControl()
-   at System.Windows.Forms.Control.WmShowWindow(Message& m)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
-   at System.Windows.Forms.Form.WmShowWindow(Message& m)
-   at System.Windows.Forms.Form.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.IntCreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
-   at System.Windows.Forms.UnsafeNativeMethods.CreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
-   at System.Windows.Forms.NativeWindow.CreateHandle(CreateParams cp)
-   at System.Windows.Forms.Control.CreateHandle()
-   at System.Windows.Forms.Form.CreateHandle()
-   at System.Windows.Forms.Control.get_Handle()
-   at System.Windows.Forms.Form.SetVisibleCore(Boolean value)
-   at System.Windows.Forms.Control.Show()
-   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.HandleEnterVotes(Object sender, EnterVotesArgs args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\DefaultUIController.cs:line 50
-   at edu.uwec.cs.cs355.group4.et.events.EventUtil.RaiseEvent[T,U](GenericEventHandler`2 targetEvent, T sender, U args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\events\EventUtil.cs:line 8
-   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.VoteResultsHandler(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\MDIForm.cs:line 54
-   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
-   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
-   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
-   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
-   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
-   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
-   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
-   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
-   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
-   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
-   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.Run(Form mainForm)
-   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\core\Program.cs:line 58
-2007-04-10 01:00:56,398 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - County is not a member of this contest
-Parameter name: countyID
-System.ArgumentException: County is not a member of this contest
-Parameter name: countyID
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay..ctor(Int64 countyID, Int64 electionContestID, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 31
-   at edu.uwec.cs.cs355.group4.et.ui.VoteEnterer..ctor(Election election, County county, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\VoteEnterer.cs:line 33
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.lstCounties_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 78
-   at System.Windows.Forms.ListBox.OnSelectedIndexChanged(EventArgs e)
-   at System.Windows.Forms.ListBox.set_SelectedIndex(Int32 value)
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadCounties(Election election) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 66
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.cmbElections_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 46
-   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
-   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.LoadElections() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 42
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.frmEnterVotes_Load(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 33
-   at System.Windows.Forms.Form.OnLoad(EventArgs e)
-   at System.Windows.Forms.Form.OnCreateControl()
-   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
-   at System.Windows.Forms.Control.CreateControl()
-   at System.Windows.Forms.Control.WmShowWindow(Message& m)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
-   at System.Windows.Forms.Form.WmShowWindow(Message& m)
-   at System.Windows.Forms.Form.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.IntCreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
-   at System.Windows.Forms.UnsafeNativeMethods.CreateWindowEx(Int32 dwExStyle, String lpszClassName, String lpszWindowName, Int32 style, Int32 x, Int32 y, Int32 width, Int32 height, HandleRef hWndParent, HandleRef hMenu, HandleRef hInst, Object pvParam)
-   at System.Windows.Forms.NativeWindow.CreateHandle(CreateParams cp)
-   at System.Windows.Forms.Control.CreateHandle()
-   at System.Windows.Forms.Form.CreateHandle()
-   at System.Windows.Forms.Control.get_Handle()
-   at System.Windows.Forms.Form.SetVisibleCore(Boolean value)
-   at System.Windows.Forms.Control.Show()
-   at edu.uwec.cs.cs355.group4.et.ui.DefaultUIController.HandleEnterVotes(Object sender, EnterVotesArgs args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\DefaultUIController.cs:line 50
-   at edu.uwec.cs.cs355.group4.et.events.EventUtil.RaiseEvent[T,U](GenericEventHandler`2 targetEvent, T sender, U args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\events\EventUtil.cs:line 8
-   at edu.uwec.cs.cs355.group4.et.ui.MDIForm.VoteResultsHandler(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\MDIForm.cs:line 54
-   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
-   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
-   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
-   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
-   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
-   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
-   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
-   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
-   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
-   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
-   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.Run(Form mainForm)
-   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\core\Program.cs:line 58
-2007-04-10 01:04:46,160 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnElectionSave_Click
-NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
-   at NHibernate.Proxy.LazyInitializer.set_Session(ISessionImplementor value)
-   at NHibernate.Impl.SessionImpl.ReassociateProxy(LazyInitializer li, INHibernateProxy proxy)
-   at NHibernate.Impl.SessionImpl.UnproxyAndReassociate(Object maybeProxy)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 50
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnSave_Click(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmElection.cs:line 142
-2007-04-10 01:26:41,946 [10] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Illegally attempted to associate a proxy with two open Sessions
-NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
-   at NHibernate.Proxy.LazyInitializer.set_Session(ISessionImplementor value)
-   at NHibernate.Impl.SessionImpl.ReassociateProxy(LazyInitializer li, INHibernateProxy proxy)
-   at NHibernate.Impl.SessionImpl.ReassociateIfUninitializedProxy(Object value)
-   at NHibernate.Impl.ProxyVisitor.ProcessEntity(Object value, EntityType entityType)
-   at NHibernate.Impl.AbstractVisitor.ProcessValue(Object value, IType type)
-   at NHibernate.Impl.AbstractVisitor.ProcessValues(Object[] values, IType[] types)
-   at NHibernate.Impl.AbstractVisitor.Process(Object obj, IEntityPersister persister)
+2007-04-11 16:53:56,152 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
+NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 111, of class: edu.uwec.cs.cs355.group4.et.core.ContestCounty
+   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
    at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
    at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
    at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
    at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 77
-   at edu.uwec.cs.cs355.group4.et.ui.VoteEnterer.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\VoteEnterer.cs:line 46
-   at edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.btnSave_Click(Object sender, EventArgs e) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\frmEnterVotes.cs:line 109
-   at System.Windows.Forms.Control.OnClick(EventArgs e)
-   at System.Windows.Forms.Button.OnClick(EventArgs e)
-   at System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
-   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
-   at System.Windows.Forms.Control.WndProc(Message& m)
-   at System.Windows.Forms.ButtonBase.WndProc(Message& m)
-   at System.Windows.Forms.Button.WndProc(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
-   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
-   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
-   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
-   at System.Windows.Forms.Application.Run(Form mainForm)
-   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\core\Program.cs:line 58
+   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 87
+2007-04-11 16:53:56,792 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
+NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 117, of class: edu.uwec.cs.cs355.group4.et.core.ContestCounty
+   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
+   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
+   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
+   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 87
+2007-04-11 17:00:08,386 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
+NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 1, of class: edu.uwec.cs.cs355.group4.et.core.ResponseValue
+   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
+   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
+   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
+   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 102
+2007-04-11 17:00:11,261 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
+NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 9, of class: edu.uwec.cs.cs355.group4.et.core.ResponseValue
+   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
+   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
+   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
+   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
+   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 102

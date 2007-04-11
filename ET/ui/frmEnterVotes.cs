@@ -108,6 +108,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             foreach (VoteEnterer voteEnterer in countyToVoteEnterer.Values) {
                 voteEnterer.Persist();
             } // foreach(VoteEnterer...
+        }
+
+        private void frmEnterVotes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            responseValueDAO.flush();
+            contestCountyDAO.flush();
+            electionDAO.flush();
         } // btnSave_Click();
     }
 }
