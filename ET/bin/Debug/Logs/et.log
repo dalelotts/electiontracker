@@ -30,3 +30,39 @@ NHibernate.NonUniqueObjectException: a different object with the same identifier
    at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
    at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
    at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 102
+2007-04-22 21:15:15,078 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
+2007-04-22 21:15:19,312 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
+2007-04-22 21:15:21,328 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
+2007-04-22 21:15:22,812 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
+2007-04-22 21:15:29,000 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
+2007-04-22 21:15:30,671 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358

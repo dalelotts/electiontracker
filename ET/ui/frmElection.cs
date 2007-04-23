@@ -323,6 +323,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnAddAllCounties_Click(object sender, EventArgs e) {
             try {
+                txtWards.Enabled = false;
+                txtWards.Text = "";
                 if (currentElectionContest != null) {
                     foreach (County county in allCounties) {
                         ContestCounty contestCounty = new ContestCounty();
@@ -349,7 +351,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         ContestCounty contestCounty = new ContestCounty();
                         contestCounty.ElectionContest = currentElectionContest;
                         contestCounty.County = county;
-                        contestCounty.WardCount = county.WardCount;
+                        if (lstAllCounties.SelectedItems.Count == 1){
+                            // TODO: Error handling for invalid chars.
+                            contestCounty.WardCount = int.Parse(txtWards.Text);
+                            txtWards.Enabled = false;
+                            txtWards.Text = "";
+                        }
+                        else{
+                            contestCounty.WardCount = county.WardCount;
+                        }
                         contestCounty.WardsReporting = 0;
                         currentElectionContest.Counties.Add(contestCounty);
                     }
@@ -365,6 +375,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnRemoveCounty_Click(object sender, EventArgs e) {
             try {
+                txtWards.Enabled = false;
+                txtWards.Text = "";
                 if (currentElectionContest != null) {
                     ListBox.SelectedObjectCollection selectedItems = lstContestCounties.SelectedItems;
                     if (selectedItems.Count > 0) {
@@ -385,6 +397,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnRemoveAllCounties_Click(object sender, EventArgs e) {
             try {
+                txtWards.Enabled = false;
+                txtWards.Text = "";
                 if (currentElectionContest != null) {
                     currentElectionContest.Counties = new List<ContestCounty>(allCounties.Count);
                     refreshCountyLists();
@@ -420,6 +434,40 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentElectionContest.Responses.Add(response);
                 txtCustomResponse.Text = null;
                 refreshCandidateLists();
+            }
+        }
+
+        private void lstAllCounties_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstAllCounties.SelectedItems.Count == 1)
+            {
+                txtWards.Enabled = true;
+                txtWards.Text = ((County)lstAllCounties.SelectedItems[0]).WardCount.ToString();
+            }
+            else
+            {
+                txtWards.Enabled = false;
+                txtWards.Text = "";
+            }
+        }
+
+        private void lstAllCounties_LostFocus(object sender, EventArgs e)
+        {
+            if (!txtWards.Focused)
+            {
+
+                txtWards.Enabled = false;
+            }
+        }
+
+        private void lstContestCounties_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtWards.Enabled = false;
+            if (lstContestCounties.SelectedItems.Count == 1){
+                txtWards.Text = ((ContestCounty)lstContestCounties.SelectedItems[0]).WardCount.ToString();
+            }
+            else{
+                txtWards.Text = "";
             }
         }
     }

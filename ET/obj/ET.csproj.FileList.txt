@@ -1,11 +1,6 @@
 bin\Debug\edu.uwec.cs.cs355.group4.et.exe.config
 bin\Debug\edu.uwec.cs.cs355.group4.et.exe
 bin\Debug\edu.uwec.cs.cs355.group4.et.pdb
-bin\Debug\log4net.dll
-bin\Debug\MySql.Data.dll
-bin\Debug\NHibernate.dll
-bin\Debug\OutlookBar.dll
-bin\Debug\Spring.Core.dll
 bin\Debug\Common.Logging.dll
 bin\Debug\Iesi.Collections.dll
 bin\Debug\antlr.runtime.dll

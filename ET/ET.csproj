@@ -287,6 +287,7 @@
     <Content Include="Resources\btnNew.Image.png" />
     <Content Include="Resources\btnReset.Image.png" />
     <Content Include="Resources\btnSave.Image.png" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\EditTableHS.png" />
     <None Include="Resources\EditInformationHS.png" />
     <None Include="Resources\NewCardHS.png" />
