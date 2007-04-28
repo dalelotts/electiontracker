@@ -805,6 +805,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.tbDisplay);
             this.Name = "frmElection";
             this.Text = "Election";
+            this.Resize += new System.EventHandler(this.frmElection_Resize);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

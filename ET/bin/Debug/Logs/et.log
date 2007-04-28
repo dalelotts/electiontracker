@@ -1,68 +1,34 @@
-2007-04-11 16:53:56,152 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
-NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 111, of class: edu.uwec.cs.cs355.group4.et.core.ContestCounty
-   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
-   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 87
-2007-04-11 16:53:56,792 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
-NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 117, of class: edu.uwec.cs.cs355.group4.et.core.ContestCounty
-   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
-   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 87
-2007-04-11 17:00:08,386 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
-NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 1, of class: edu.uwec.cs.cs355.group4.et.core.ResponseValue
-   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
-   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 102
-2007-04-11 17:00:11,261 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.ContestDisplay [(null)] - Persist
-NHibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: 9, of class: edu.uwec.cs.cs355.group4.et.core.ResponseValue
-   at NHibernate.Impl.SessionImpl.CheckUniqueness(EntityKey key, Object obj)
-   at NHibernate.Impl.SessionImpl.DoUpdateMutable(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.DoUpdate(Object obj, Object id, IEntityPersister persister)
-   at NHibernate.Impl.SessionImpl.SaveOrUpdate(Object obj)
-   at edu.uwec.cs.cs355.group4.et.db.HibernateDAO`1.makePersistent(T entity) in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\db\HibernateDAO.cs:line 47
-   at edu.uwec.cs.cs355.group4.et.ui.ContestDisplay.Persist() in C:\Documents and Settings\dlotts\My Documents\Visual Studio 2005\Projects\cs355\ET\ui\ContestDisplay.cs:line 102
-2007-04-22 21:15:15,078 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
-System.FormatException: Input string was not in a correct format.
-   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
-2007-04-22 21:15:19,312 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
-System.FormatException: Input string was not in a correct format.
-   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
-2007-04-22 21:15:21,328 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
-System.FormatException: Input string was not in a correct format.
-   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
-2007-04-22 21:15:22,812 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
-System.FormatException: Input string was not in a correct format.
-   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
-2007-04-22 21:15:29,000 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
-System.FormatException: Input string was not in a correct format.
-   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
-2007-04-22 21:15:30,671 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.frmElection [(null)] - Encountered exception in btnAddCounty_Click
-System.FormatException: Input string was not in a correct format.
-   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCounty_Click(Object sender, EventArgs e) in F:\Documents and Settings\Dougan\Desktop\E T\ET\ui\frmElection.cs:line 358
+2007-04-28 14:17:51,765 [9] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 14:18:05,640 [9] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =43 AND electionContestID =33
+2007-04-28 14:18:06,484 [9] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =41 AND electionContestID =33
+2007-04-28 14:27:59,062 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 14:31:43,515 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 14:31:50,859 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =43 AND electionContestID =33
+2007-04-28 14:47:34,984 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 14:54:12,234 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 15:01:28,703 [10] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 15:03:06,828 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 15:05:05,875 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 15:07:09,078 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =34
+2007-04-28 15:07:20,875 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =41 AND electionContestID =33
+2007-04-28 15:07:22,468 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =43 AND electionContestID =33
+2007-04-28 15:38:18,343 [11] ERROR edu.uwec.cs.cs355.group4.et.ui.VoteEnterer [(null)] - Unalbe to locate contest county where countyID =37 AND electionContestID =40
+2007-04-28 16:23:16,843 [11] ERROR edu.uwec.cs.cs355.group4.et.core.Program [(null)] - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at edu.uwec.cs.cs355.group4.et.ui.frmElection.btnAddCustomResponse_Click(Object sender, EventArgs e) in D:\Documents and Settings\Dougan\Desktop\et\ET\ui\frmElection.cs:line 434
+   at System.Windows.Forms.Control.OnClick(EventArgs e)
+   at System.Windows.Forms.Button.OnClick(EventArgs e)
+   at System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   at System.Windows.Forms.Button.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at edu.uwec.cs.cs355.group4.et.core.Program.Main(String[] args) in D:\Documents and Settings\Dougan\Desktop\et\ET\core\Program.cs:line 58

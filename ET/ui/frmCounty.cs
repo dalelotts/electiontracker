@@ -188,5 +188,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             }
         }
+
+        private void frmCounty_Load(object sender, EventArgs e)
+        {
+           // System.Windows.Forms.MessageBox.Show(lblCountyWardCount.back);
+        }
     }
 }

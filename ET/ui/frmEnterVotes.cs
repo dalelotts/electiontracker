@@ -9,7 +9,7 @@ using edu.uwec.cs.cs355.group4.et.util;
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmEnterVotes : Form {
 
-        private Map<long , VoteEnterer> countyToVoteEnterer;
+        private Map<String , VoteEnterer> countyToVoteEnterer;
         private readonly ElectionDAO electionDAO;
         private readonly ContestCountyDAO contestCountyDAO;
         private readonly ResponseValueDAO responseValueDAO;
@@ -19,7 +19,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             this.electionDAO = electionDAO;
             this.contestCountyDAO = contestCountyDAO;
             this.responseValueDAO = responseValueDAO;
-            countyToVoteEnterer = new Map<long, VoteEnterer>();
+            countyToVoteEnterer = new Map<String, VoteEnterer>();
             InitializeComponent();
         }
 
@@ -72,7 +72,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             
             HideCurrentVoteEnterer();
 
-            VoteEnterer enterer = countyToVoteEnterer.Get(county.ID);
+            VoteEnterer enterer = countyToVoteEnterer.Get("" + election.ID + "_" + county.ID);
 
             if (enterer == null) {
                 enterer = new VoteEnterer(election, county, contestCountyDAO, responseValueDAO);
@@ -80,7 +80,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 enterer.Top = 18;
                 enterer.Left = 6;
                 enterer.Width = gbContest.Width - 10;               
-                countyToVoteEnterer.Put(county.ID, enterer);
+                countyToVoteEnterer.Put("" + election.ID + "_" + county.ID, enterer);
                 gbContest.Controls.Add(enterer);
             }
 
@@ -115,6 +115,23 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             responseValueDAO.flush();
             contestCountyDAO.flush();
             electionDAO.flush();
-        } // btnSave_Click();
+        }
+
+        private void frmEnterVotes_Resize(object sender, EventArgs e)
+        {
+            gbCounty.Height = this.Height - 117;
+            gbContest.Height = this.Height - 117;
+            btnNext.Top = gbCounty.Height - 30;
+            btnSave.Top = gbContest.Height - 30;
+            gbContest.Width = this.Width - 231;
+            btnSave.Left = gbContest.Width - 81;
+            lstCounties.Height = gbCounty.Height - 60;
+
+            // Resize vote enterer.
+            foreach (String k in countyToVoteEnterer.Keys){
+                countyToVoteEnterer.Get(k).Height = gbContest.Height - 60;
+                countyToVoteEnterer.Get(k).Width = gbContest.Width - 10;
+            }
+        } 
     }
 }

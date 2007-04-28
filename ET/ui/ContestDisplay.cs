@@ -19,7 +19,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private Boolean _bDirty;
         private readonly Map<ResponseValue, TextBox> responseToTextBox;
 
-
         public ContestDisplay(ContestCounty contestCounty, ContestCountyDAO contestCountyDAO,
                               ResponseValueDAO responseValueDAO) {
             this.contestCounty = contestCounty;
@@ -109,16 +108,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void InitializeResponses(IList<Response> responses) {
+            int i = 0;
             IList<string> excluded = new List<string>();
             excluded.Add("ID");
             excluded.Add("VoteCount");
 
             foreach (Response response in responses) {
+                i += 5;
                 Label label = new Label();
                 label.Text = response.ToString();
                 label.Left = 5;
+                label.BackColor = Color.Transparent;
                 label.Width = 300;
-                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height)*(responseToTextBox.Count + 1));
+                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height)*(responseToTextBox.Count + 1)) + i;
                 Controls.Add(label);
 
                 TextBox textBox = new TextBox();

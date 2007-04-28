@@ -30,148 +30,152 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtMiddleName = new System.Windows.Forms.TextBox();
+            this.gbCandidate = new System.Windows.Forms.GroupBox();
+            this.cboPoliticalParty = new System.Windows.Forms.ComboBox();
+            this.chkActive = new System.Windows.Forms.CheckBox();
+            this.txtNotes = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtNotes = new System.Windows.Forms.TextBox();
-            this.chkActive = new System.Windows.Forms.CheckBox();
-            this.cboPoliticalParty = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtMiddleName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.gbCandidate.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label2
+            // gbCandidate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "&First Name";
+            this.gbCandidate.Controls.Add(this.cboPoliticalParty);
+            this.gbCandidate.Controls.Add(this.chkActive);
+            this.gbCandidate.Controls.Add(this.txtNotes);
+            this.gbCandidate.Controls.Add(this.label6);
+            this.gbCandidate.Controls.Add(this.label5);
+            this.gbCandidate.Controls.Add(this.label4);
+            this.gbCandidate.Controls.Add(this.txtLastName);
+            this.gbCandidate.Controls.Add(this.label3);
+            this.gbCandidate.Controls.Add(this.txtMiddleName);
+            this.gbCandidate.Controls.Add(this.label2);
+            this.gbCandidate.Controls.Add(this.txtFirstName);
+            this.gbCandidate.Location = new System.Drawing.Point(12, 28);
+            this.gbCandidate.Name = "gbCandidate";
+            this.gbCandidate.Size = new System.Drawing.Size(369, 308);
+            this.gbCandidate.TabIndex = 11;
+            this.gbCandidate.TabStop = false;
+            this.gbCandidate.Text = "Candidate";
             // 
-            // txtFirstName
+            // cboPoliticalParty
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(91, 37);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(270, 20);
-            this.txtFirstName.TabIndex = 6;
-            this.txtFirstName.Tag = "lock=true";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 66);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "&Middle Name";
-            // 
-            // txtMiddleName
-            // 
-            this.txtMiddleName.Location = new System.Drawing.Point(91, 63);
-            this.txtMiddleName.Name = "txtMiddleName";
-            this.txtMiddleName.Size = new System.Drawing.Size(270, 20);
-            this.txtMiddleName.TabIndex = 8;
-            this.txtMiddleName.Tag = "lock=true";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 92);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "&Last Name";
-            // 
-            // txtLastName
-            // 
-            this.txtLastName.Location = new System.Drawing.Point(91, 89);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(270, 20);
-            this.txtLastName.TabIndex = 10;
-            this.txtLastName.Tag = "lock=true";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 118);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "&Political Party";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 149);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "N&otes:";
-            // 
-            // txtNotes
-            // 
-            this.txtNotes.Location = new System.Drawing.Point(18, 165);
-            this.txtNotes.Multiline = true;
-            this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(343, 136);
-            this.txtNotes.TabIndex = 15;
-            this.txtNotes.Tag = "lock=true";
+            this.cboPoliticalParty.FormattingEnabled = true;
+            this.cboPoliticalParty.Location = new System.Drawing.Point(88, 95);
+            this.cboPoliticalParty.Name = "cboPoliticalParty";
+            this.cboPoliticalParty.Size = new System.Drawing.Size(270, 21);
+            this.cboPoliticalParty.TabIndex = 30;
+            this.cboPoliticalParty.Tag = "lock=true";
             // 
             // chkActive
             // 
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(18, 307);
+            this.chkActive.Location = new System.Drawing.Point(15, 287);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
-            this.chkActive.TabIndex = 17;
+            this.chkActive.TabIndex = 29;
             this.chkActive.Tag = "lock=true";
             this.chkActive.Text = "Active?";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
-            // cboPoliticalParty
+            // txtNotes
             // 
-            this.cboPoliticalParty.FormattingEnabled = true;
-            this.cboPoliticalParty.Location = new System.Drawing.Point(91, 115);
-            this.cboPoliticalParty.Name = "cboPoliticalParty";
-            this.cboPoliticalParty.Size = new System.Drawing.Size(270, 21);
-            this.cboPoliticalParty.TabIndex = 19;
-            this.cboPoliticalParty.Tag = "lock=true";
+            this.txtNotes.Location = new System.Drawing.Point(15, 145);
+            this.txtNotes.Multiline = true;
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.Size = new System.Drawing.Size(343, 136);
+            this.txtNotes.TabIndex = 28;
+            this.txtNotes.Tag = "lock=true";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 129);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "N&otes:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 98);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "&Political Party";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "&Last Name";
+            // 
+            // txtLastName
+            // 
+            this.txtLastName.Location = new System.Drawing.Point(88, 69);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(270, 20);
+            this.txtLastName.TabIndex = 24;
+            this.txtLastName.Tag = "lock=true";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "&Middle Name";
+            // 
+            // txtMiddleName
+            // 
+            this.txtMiddleName.Location = new System.Drawing.Point(88, 43);
+            this.txtMiddleName.Name = "txtMiddleName";
+            this.txtMiddleName.Size = new System.Drawing.Size(270, 20);
+            this.txtMiddleName.TabIndex = 22;
+            this.txtMiddleName.Tag = "lock=true";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "&First Name";
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Location = new System.Drawing.Point(88, 17);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(270, 20);
+            this.txtFirstName.TabIndex = 20;
+            this.txtFirstName.Tag = "lock=true";
             // 
             // frmCandidate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 337);
-            this.Controls.Add(this.cboPoliticalParty);
-            this.Controls.Add(this.chkActive);
-            this.Controls.Add(this.txtNotes);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtLastName);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtMiddleName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtFirstName);
+            this.ClientSize = new System.Drawing.Size(388, 345);
+            this.Controls.Add(this.gbCandidate);
             this.Name = "frmCandidate";
             this.Text = "Candidate";
-            this.Controls.SetChildIndex(this.txtFirstName, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.txtMiddleName, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.txtLastName, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.txtNotes, 0);
-            this.Controls.SetChildIndex(this.chkActive, 0);
-            this.Controls.SetChildIndex(this.cboPoliticalParty, 0);
+            this.Controls.SetChildIndex(this.gbCandidate, 0);
+            this.gbCandidate.ResumeLayout(false);
+            this.gbCandidate.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,17 +183,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtFirstName;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtMiddleName;
+        private System.Windows.Forms.GroupBox gbCandidate;
+        private System.Windows.Forms.ComboBox cboPoliticalParty;
+        private System.Windows.Forms.CheckBox chkActive;
+        private System.Windows.Forms.TextBox txtNotes;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtLastName;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.CheckBox chkActive;
-        private System.Windows.Forms.ComboBox cboPoliticalParty;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtMiddleName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtFirstName;
+
 
     }
 }

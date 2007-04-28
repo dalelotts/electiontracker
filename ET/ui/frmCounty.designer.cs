@@ -43,19 +43,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddAttribute = new System.Windows.Forms.Button();
             this.lstAttributes = new System.Windows.Forms.ListBox();
             this.txtValue = new System.Windows.Forms.TextBox();
+            this.cbKey = new System.Windows.Forms.ComboBox();
             this.lblValue = new System.Windows.Forms.Label();
             this.lblKey = new System.Windows.Forms.Label();
-            this.cbKey = new System.Windows.Forms.ComboBox();
             this.gbPhone = new System.Windows.Forms.GroupBox();
             this.txtPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.txtAreaCode = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.cbPhoneNumberType = new System.Windows.Forms.ComboBox();
             this.btnRemovePhoneNum = new System.Windows.Forms.Button();
-            this.lblPhoneNum = new System.Windows.Forms.Label();
-            this.lblAreaCode = new System.Windows.Forms.Label();
             this.btnAddPhoneNum = new System.Windows.Forms.Button();
             this.lstPhoneNums = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblPhoneNum = new System.Windows.Forms.Label();
+            this.lblAreaCode = new System.Windows.Forms.Label();
             this.gbWebsite = new System.Windows.Forms.GroupBox();
             this.btnRemoveWebsite = new System.Windows.Forms.Button();
             this.btnAddWebsite = new System.Windows.Forms.Button();
@@ -227,6 +227,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtValue.TabIndex = 3;
             this.txtValue.Tag = "lock=true";
             // 
+            // cbKey
+            // 
+            this.cbKey.FormattingEnabled = true;
+            this.cbKey.Location = new System.Drawing.Point(6, 30);
+            this.cbKey.Name = "cbKey";
+            this.cbKey.Size = new System.Drawing.Size(146, 21);
+            this.cbKey.TabIndex = 0;
+            this.cbKey.Tag = "lock=true";
+            // 
             // lblValue
             // 
             this.lblValue.AutoSize = true;
@@ -244,15 +253,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblKey.Size = new System.Drawing.Size(25, 13);
             this.lblKey.TabIndex = 1;
             this.lblKey.Text = "Key";
-            // 
-            // cbKey
-            // 
-            this.cbKey.FormattingEnabled = true;
-            this.cbKey.Location = new System.Drawing.Point(6, 30);
-            this.cbKey.Name = "cbKey";
-            this.cbKey.Size = new System.Drawing.Size(146, 21);
-            this.cbKey.TabIndex = 0;
-            this.cbKey.Tag = "lock=true";
             // 
             // gbPhone
             // 
@@ -290,15 +290,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtAreaCode.TabIndex = 8;
             this.txtAreaCode.Tag = "lock=true";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Type";
-            // 
             // cbPhoneNumberType
             // 
             this.cbPhoneNumberType.FormattingEnabled = true;
@@ -319,24 +310,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemovePhoneNum.UseVisualStyleBackColor = true;
             this.btnRemovePhoneNum.Click += new System.EventHandler(this.btnRemovePhoneNum_Click);
             // 
-            // lblPhoneNum
-            // 
-            this.lblPhoneNum.AutoSize = true;
-            this.lblPhoneNum.Location = new System.Drawing.Point(218, 16);
-            this.lblPhoneNum.Name = "lblPhoneNum";
-            this.lblPhoneNum.Size = new System.Drawing.Size(78, 13);
-            this.lblPhoneNum.TabIndex = 5;
-            this.lblPhoneNum.Text = "Phone Number";
-            // 
-            // lblAreaCode
-            // 
-            this.lblAreaCode.AutoSize = true;
-            this.lblAreaCode.Location = new System.Drawing.Point(155, 16);
-            this.lblAreaCode.Name = "lblAreaCode";
-            this.lblAreaCode.Size = new System.Drawing.Size(57, 13);
-            this.lblAreaCode.TabIndex = 4;
-            this.lblAreaCode.Text = "Area Code";
-            // 
             // btnAddPhoneNum
             // 
             this.btnAddPhoneNum.Location = new System.Drawing.Point(302, 19);
@@ -355,6 +328,33 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstPhoneNums.Name = "lstPhoneNums";
             this.lstPhoneNums.Size = new System.Drawing.Size(290, 95);
             this.lstPhoneNums.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Type";
+            // 
+            // lblPhoneNum
+            // 
+            this.lblPhoneNum.AutoSize = true;
+            this.lblPhoneNum.Location = new System.Drawing.Point(218, 16);
+            this.lblPhoneNum.Name = "lblPhoneNum";
+            this.lblPhoneNum.Size = new System.Drawing.Size(78, 13);
+            this.lblPhoneNum.TabIndex = 5;
+            this.lblPhoneNum.Text = "Phone Number";
+            // 
+            // lblAreaCode
+            // 
+            this.lblAreaCode.AutoSize = true;
+            this.lblAreaCode.Location = new System.Drawing.Point(155, 16);
+            this.lblAreaCode.Name = "lblAreaCode";
+            this.lblAreaCode.Size = new System.Drawing.Size(57, 13);
+            this.lblAreaCode.TabIndex = 4;
+            this.lblAreaCode.Text = "Area Code";
             // 
             // gbWebsite
             // 
@@ -416,6 +416,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.tbDisplay);
             this.Name = "frmCounty";
             this.Text = "County";
+            this.Load += new System.EventHandler(this.frmCounty_Load);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.gbCounty.ResumeLayout(false);
             this.gbCounty.PerformLayout();

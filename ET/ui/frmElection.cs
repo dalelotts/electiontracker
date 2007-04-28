@@ -470,5 +470,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 txtWards.Text = "";
             }
         }
+
+        private void frmElection_Resize(object sender, EventArgs e)
+        {
+            tbDisplay.Height = this.Height - 76;
+        }
     }
 }
