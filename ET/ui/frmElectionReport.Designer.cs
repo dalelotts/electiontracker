@@ -29,12 +29,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private void InitializeComponent()
         {
             this.btnPrint = new System.Windows.Forms.Button();
-            this.rtbElectionReport = new System.Windows.Forms.RichTextBox();
+            this.lstElections = new System.Windows.Forms.ListBox();
+            this.ppcElection = new System.Windows.Forms.PrintPreviewControl();
             this.SuspendLayout();
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(12, 521);
+            this.btnPrint.Location = new System.Drawing.Point(93, 609);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(91, 23);
             this.btnPrint.TabIndex = 0;
@@ -42,23 +43,35 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // rtbElectionReport
+            // lstElections
             // 
-            this.rtbElectionReport.Location = new System.Drawing.Point(13, 13);
-            this.rtbElectionReport.Name = "rtbElectionReport";
-            this.rtbElectionReport.Size = new System.Drawing.Size(467, 491);
-            this.rtbElectionReport.TabIndex = 1;
-            this.rtbElectionReport.Text = "";
+            this.lstElections.FormattingEnabled = true;
+            this.lstElections.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.lstElections.Location = new System.Drawing.Point(12, 12);
+            this.lstElections.Name = "lstElections";
+            this.lstElections.Size = new System.Drawing.Size(172, 589);
+            this.lstElections.TabIndex = 2;
+            this.lstElections.SelectedIndexChanged += new System.EventHandler(this.lstElections_SelectedIndexChanged);
+            // 
+            // ppcElection
+            // 
+            this.ppcElection.Location = new System.Drawing.Point(190, 12);
+            this.ppcElection.Name = "ppcElection";
+            this.ppcElection.Size = new System.Drawing.Size(533, 620);
+            this.ppcElection.TabIndex = 3;
+            this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
             // 
             // frmElectionReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 556);
-            this.Controls.Add(this.rtbElectionReport);
+            this.ClientSize = new System.Drawing.Size(735, 644);
+            this.Controls.Add(this.ppcElection);
+            this.Controls.Add(this.lstElections);
             this.Controls.Add(this.btnPrint);
             this.Name = "frmElectionReport";
             this.Text = "Election Report";
+            this.Resize += new System.EventHandler(this.frmElectionReport_Resize);
             this.Load += new System.EventHandler(this.frmElectionReport_Load);
             this.ResumeLayout(false);
 
@@ -67,6 +80,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         #endregion
 
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.RichTextBox rtbElectionReport;
+        private System.Windows.Forms.ListBox lstElections;
+        private System.Windows.Forms.PrintPreviewControl ppcElection;
     }
 }
