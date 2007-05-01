@@ -143,5 +143,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             }
         }
+
+        private void electionReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

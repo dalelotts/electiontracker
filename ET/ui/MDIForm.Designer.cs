@@ -31,13 +31,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIForm));
-            Altea.OutlookBarButton outlookBarButton1 = new Altea.OutlookBarButton();
-            Altea.OutlookBarButton outlookBarButton2 = new Altea.OutlookBarButton();
-            Altea.OutlookBarButton outlookBarButton3 = new Altea.OutlookBarButton();
-            Altea.OutlookBarButton outlookBarButton4 = new Altea.OutlookBarButton();
-            Altea.OutlookBarButton outlookBarButton5 = new Altea.OutlookBarButton();
-            Altea.OutlookBarButton outlookBarButton6 = new Altea.OutlookBarButton();
-            Altea.OutlookBarButton outlookBarButton7 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton8 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton9 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton10 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton11 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton12 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton13 = new Altea.OutlookBarButton();
+            Altea.OutlookBarButton outlookBarButton14 = new Altea.OutlookBarButton();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -349,8 +349,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // electionReportToolStripMenuItem
             // 
             this.electionReportToolStripMenuItem.Name = "electionReportToolStripMenuItem";
-            this.electionReportToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.electionReportToolStripMenuItem.Text = "Election Report";
+            this.electionReportToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.electionReportToolStripMenuItem.Text = "Vote Tally Form";
+            this.electionReportToolStripMenuItem.Click += new System.EventHandler(this.electionReportToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -433,27 +434,27 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // filterBar
             // 
-            outlookBarButton1.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton1.Image")));
-            outlookBarButton1.Text = "Elections";
-            outlookBarButton2.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton2.Image")));
-            outlookBarButton2.Text = "Contests";
-            outlookBarButton3.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton3.Image")));
-            outlookBarButton3.Text = "Candidates";
-            outlookBarButton4.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton4.Image")));
-            outlookBarButton4.Text = "Counties";
-            outlookBarButton5.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton5.Image")));
-            outlookBarButton5.Text = "Political Parties";
-            outlookBarButton6.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton6.Image")));
-            outlookBarButton6.Text = "Enter Votes";
-            outlookBarButton7.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton7.Image")));
-            outlookBarButton7.Text = "Reports";
-            this.filterBar.Buttons.Add(outlookBarButton1);
-            this.filterBar.Buttons.Add(outlookBarButton2);
-            this.filterBar.Buttons.Add(outlookBarButton3);
-            this.filterBar.Buttons.Add(outlookBarButton4);
-            this.filterBar.Buttons.Add(outlookBarButton5);
-            this.filterBar.Buttons.Add(outlookBarButton6);
-            this.filterBar.Buttons.Add(outlookBarButton7);
+            outlookBarButton8.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton8.Image")));
+            outlookBarButton8.Text = "Elections";
+            outlookBarButton9.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton9.Image")));
+            outlookBarButton9.Text = "Contests";
+            outlookBarButton10.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton10.Image")));
+            outlookBarButton10.Text = "Candidates";
+            outlookBarButton11.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton11.Image")));
+            outlookBarButton11.Text = "Counties";
+            outlookBarButton12.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton12.Image")));
+            outlookBarButton12.Text = "Political Parties";
+            outlookBarButton13.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton13.Image")));
+            outlookBarButton13.Text = "Enter Votes";
+            outlookBarButton14.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton14.Image")));
+            outlookBarButton14.Text = "Reports";
+            this.filterBar.Buttons.Add(outlookBarButton8);
+            this.filterBar.Buttons.Add(outlookBarButton9);
+            this.filterBar.Buttons.Add(outlookBarButton10);
+            this.filterBar.Buttons.Add(outlookBarButton11);
+            this.filterBar.Buttons.Add(outlookBarButton12);
+            this.filterBar.Buttons.Add(outlookBarButton13);
+            this.filterBar.Buttons.Add(outlookBarButton14);
             this.filterBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.filterBar.Location = new System.Drawing.Point(0, 484);
             this.filterBar.MinimumSize = new System.Drawing.Size(16, 40);

@@ -31,6 +31,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnPrint = new System.Windows.Forms.Button();
             this.lstElections = new System.Windows.Forms.ListBox();
             this.ppcElection = new System.Windows.Forms.PrintPreviewControl();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPrint
@@ -61,11 +63,33 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.ppcElection.TabIndex = 3;
             this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
             // 
+            // btnUp
+            // 
+            this.btnUp.Location = new System.Drawing.Point(730, 291);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(21, 23);
+            this.btnUp.TabIndex = 4;
+            this.btnUp.Text = "^";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.Location = new System.Drawing.Point(730, 320);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(20, 23);
+            this.btnDown.TabIndex = 5;
+            this.btnDown.Text = "v";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
             // frmElectionReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 644);
+            this.ClientSize = new System.Drawing.Size(762, 644);
+            this.Controls.Add(this.btnDown);
+            this.Controls.Add(this.btnUp);
             this.Controls.Add(this.ppcElection);
             this.Controls.Add(this.lstElections);
             this.Controls.Add(this.btnPrint);
@@ -82,5 +106,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ListBox lstElections;
         private System.Windows.Forms.PrintPreviewControl ppcElection;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnDown;
     }
 }

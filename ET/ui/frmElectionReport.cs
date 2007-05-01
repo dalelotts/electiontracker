@@ -10,6 +10,7 @@ using System.IO;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElectionReport : Form {
+        private int intPages;
         private ElectionDAO electionDAO;
         private PrintDocument docToPrint;
         private Font printFont;
@@ -29,7 +30,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             foreach (Election election in elections){
                 lstElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString(), election));
             }
-            if (elections.Count > 0) lstElections.SelectedIndex = 0;
         }
 
         private void frmElectionReport_Load(object sender, EventArgs e){
@@ -65,18 +65,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             {
                 text = " " + text;
             }
-
             return text;
         }
 
         private void CreateReport(Election elc)
         {
             intCount = 0;
+            intPages = 0;
             lstToPrint = new List<string>();
-            docToPrint = new PrintDocument();
-            docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
-            ppcElection.Document = null;
-            ppcElection.Document = docToPrint;
+            
             List<County> lstCounties = new List<County>();
             // Establish what counties to print for.
             IList<ElectionContest> electionContests = elc.ElectionContests;
@@ -132,15 +129,27 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 lstToPrint.Add("<BREAK>");
             }
 
+            this.Controls.Remove(ppcElection);
+            docToPrint = new PrintDocument();
+            docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+            ppcElection = new PrintPreviewControl();
+            ppcElection.Document = null;
+            ppcElection.Document = docToPrint;
 
-            //TODO: Generage list.
-            for (int i = 0; i < 800; i++){
-                lstToPrint.Add("TEST"+i);
-            }
+            
+            this.ppcElection.Location = new System.Drawing.Point(190, 12);
+            this.ppcElection.Name = "ppcElection";
+            ppcElection.Width = this.Width - 237;
+            ppcElection.Height = this.Height - 58;
+            this.ppcElection.TabIndex = 3;
+            this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
+            this.Controls.Add(this.ppcElection);
+
         }
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
         {
+            intPages++;
             float linesPerPage = 0;
             float yPos = 0;
             int intPageCount = 0;
@@ -182,6 +191,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            intPages = 0;
             docToPrint.Print();
         }
 
@@ -189,44 +199,29 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         {
             lstElections.Height = this.Height - 89;
             btnPrint.Top = this.Height - 69;
-            ppcElection.Width = this.Width - 210;
+            ppcElection.Width = this.Width - 237;
             ppcElection.Height = this.Height - 58;
+            btnUp.Left = this.Width - 40;
+            btnDown.Left = this.Width - 40;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+        
+        }
 
-        /*
-        public frmElectionReport(ElectionDAO electionDAO) {
-            InitializeComponent();
-
-            IList<Election> elections = electionDAO.findActive();
-            foreach (Election election in elections) {
-                rtbElectionReport.AppendText(election.Date.ToShortDateString() + "\n");
-
-                IList<ElectionContest> electionContests = election.ElectionContests;
-
-                foreach (ElectionContest electionContest in electionContests) {
-                    rtbElectionReport.AppendText("   " + electionContest.Contest.Name + "\n");
-
-                    IList<Response> responses = electionContest.Responses;
-
-                    foreach (Response response in responses) {
-                        rtbElectionReport.AppendText("      " + response + "   _____________ \n");
-                    }
-
-                    rtbElectionReport.AppendText("\n");
-                }
-
-                rtbElectionReport.AppendText("\n");
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            if (ppcElection.StartPage > 0)
+            {
+                ppcElection.StartPage--;
             }
-            rtbElectionReport.AppendText("\n");
         }
 
-        private void frmElectionReport_Load(object sender, EventArgs e) {}
-
-        private void btnPrint_Click(object sender, EventArgs e) {
-            PrintReport pr = new PrintReport();
-            pr.print(rtbElectionReport.Text);
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            if (ppcElection.StartPage < intPages)
+            ppcElection.StartPage++;
         }
-         */
     }
 }
