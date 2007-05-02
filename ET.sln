@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ET", "ET\ET.csproj", "{01ACB36B-53D5-443B-9CC3-47EC018250E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETTest", "TestET\ETTest.csproj", "{AA9E0CF3-A7F5-4261-95DC-758E685484B2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{01ACB36B-53D5-443B-9CC3-47EC018250E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01ACB36B-53D5-443B-9CC3-47EC018250E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01ACB36B-53D5-443B-9CC3-47EC018250E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA9E0CF3-A7F5-4261-95DC-758E685484B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA9E0CF3-A7F5-4261-95DC-758E685484B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA9E0CF3-A7F5-4261-95DC-758E685484B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA9E0CF3-A7F5-4261-95DC-758E685484B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

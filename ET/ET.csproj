@@ -41,6 +41,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\NHibernate\bin\net-2.0\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.4.0.2, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="OutlookBar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\TestOutlookBar\OutlookBar\bin\Release\OutlookBar.dll</HintPath>
@@ -81,10 +82,7 @@
     <Compile Include="db\ContestCountyDAO.cs" />
     <Compile Include="db\ContestDAO.cs" />
     <Compile Include="db\ContestTypeDAO.cs" />
-    <Compile Include="db\CountyAttributeDAO.cs" />
     <Compile Include="db\CountyDAO.cs" />
-    <Compile Include="db\CountyPhoneNumberDAO.cs" />
-    <Compile Include="db\CountyWebsiteDAO.cs" />
     <Compile Include="db\ElectionContestDAO.cs" />
     <Compile Include="db\ElectionDAO.cs" />
     <Compile Include="db\Fault.cs" />
@@ -140,6 +138,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="db\HibernateUtil.cs" />
+    <Compile Include="Test\TestAttributeTypeDAO.cs" />
+    <Compile Include="Test\TestCandidate.cs" />
+    <Compile Include="Test\TestContestCounty.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
     <Compile Include="ui\BaseMDIChild.cs">
@@ -287,12 +288,10 @@
     <Content Include="Resources\btnNew.Image.png" />
     <Content Include="Resources\btnReset.Image.png" />
     <Content Include="Resources\btnSave.Image.png" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="Resources\EditTableHS.png" />
-    <None Include="Resources\EditInformationHS.png" />
-    <None Include="Resources\NewCardHS.png" />
-    <None Include="Resources\saveHS.png" />
+    <Content Include="Resources\EditInformationHS.png" />
+    <Content Include="Resources\EditTableHS.png" />
+    <Content Include="Resources\NewCardHS.png" />
+    <Content Include="Resources\saveHS.png" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
     <EmbeddedResource Include="ui\BaseMDIChild.resx">
       <SubType>Designer</SubType>
