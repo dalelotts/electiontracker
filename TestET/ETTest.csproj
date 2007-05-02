@@ -34,10 +34,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="core\AttributeTypeTest.cs" />
-    <Compile Include="MyTestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ET\ET.csproj">
+      <Project>{01ACB36B-53D5-443B-9CC3-47EC018250E6}</Project>
+      <Name>ET</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="db\" />

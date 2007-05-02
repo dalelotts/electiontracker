@@ -1,23 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Documents and Settings\DEGENST\Desktop\New Folder\TestET\bin\Debug\TestET.dll" total="1" failures="1" not-run="0" date="2007-05-02" time="16:16:18">
-  <environment nunit-version="2.4.0.2" clr-version="2.0.50727.42" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\Documents and Settings\DEGENST\Desktop\New Folder\TestET\bin\Debug" machine-name="LAB-P177-15" user="DEGENST" user-domain="UWEC" />
+<test-results name="C:\Documents and Settings\Dan\My Documents\Visual Studio 2005\Projects\ETsvn\TestET\bin\Debug\TestET.dll" total="1" failures="0" not-run="0" date="2007-05-02" time="17:00:11">
+  <environment nunit-version="2.4.0.2" clr-version="2.0.50727.42" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\Documents and Settings\Dan\My Documents\Visual Studio 2005\Projects\ETsvn\TestET\bin\Debug" machine-name="GYROCHRONITON" user="Dan" user-domain="GYROCHRONITON" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="C:\Documents and Settings\DEGENST\Desktop\New Folder\TestET\bin\Debug\TestET.dll" success="False" time="0.110" asserts="0">
+  <test-suite name="C:\Documents and Settings\Dan\My Documents\Visual Studio 2005\Projects\ETsvn\TestET\bin\Debug\TestET.dll" success="True" time="0.078" asserts="0">
     <results>
-      <test-suite name="TestET" success="False" time="0.110" asserts="0">
+      <test-suite name="TestET" success="True" time="0.078" asserts="0">
         <results>
-          <test-suite name="MyTestClass" success="False" time="0.047" asserts="0">
+          <test-suite name="core" success="True" time="0.063" asserts="0">
             <results>
-              <test-case name="TestET.MyTestClass.TestFunction" executed="True" success="False" time="0.031" asserts="1">
-                <failure>
-                  <message><![CDATA[  Expected: 1
-  But was:  2
-]]></message>
-                  <stack-trace><![CDATA[   at TestET.MyTestClass.TestFunction() in C:\Documents and Settings\DEGENST\Desktop\New Folder\TestET\MyTestClass.cs:line 14
-]]></stack-trace>
-                </failure>
-              </test-case>
+              <test-suite name="AttributeTypeTest" success="True" time="0.031" asserts="0">
+                <results>
+                  <test-case name="TestET.core.AttributeTypeTest.testID" executed="True" success="True" time="0.031" asserts="2" />
+                </results>
+              </test-suite>
             </results>
           </test-suite>
         </results>

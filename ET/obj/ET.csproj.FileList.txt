@@ -42,3 +42,5 @@ obj\Debug\edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes.resources
 obj\Debug\ET.csproj.GenerateResource.Cache
 obj\Debug\edu.uwec.cs.cs355.group4.et.exe
 obj\Debug\edu.uwec.cs.cs355.group4.et.pdb
+bin\Debug\NHibernate.dll
+bin\Debug\Spring.Core.dll
