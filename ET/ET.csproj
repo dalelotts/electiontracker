@@ -281,18 +281,18 @@
   <ItemGroup>
     <Content Include="core\CustomResponse.hbm.xml" />
     <EmbeddedResource Include="core\ResponseValue.hbm.xml" />
-    <Content Include="Resources\btnAdd.Image.png" />
-    <Content Include="Resources\btnDelete.Image.png" />
-    <Content Include="Resources\btnEdit.Image.png" />
-    <Content Include="Resources\btnNew.Image.png" />
-    <Content Include="Resources\btnReset.Image.png" />
-    <Content Include="Resources\btnSave.Image.png" />
+    <Content Include="resources\btnAdd.Image.png" />
+    <Content Include="resources\btnDelete.Image.png" />
+    <Content Include="resources\btnEdit.Image.png" />
+    <Content Include="resources\btnNew.Image.png" />
+    <Content Include="resources\btnReset.Image.png" />
+    <Content Include="resources\btnSave.Image.png" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
-    <None Include="Resources\EditTableHS.png" />
-    <None Include="Resources\EditInformationHS.png" />
-    <None Include="Resources\NewCardHS.png" />
-    <None Include="Resources\saveHS.png" />
+    <None Include="resources\EditTableHS.png" />
+    <None Include="resources\EditInformationHS.png" />
+    <None Include="resources\NewCardHS.png" />
+    <None Include="resources\saveHS.png" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
     <EmbeddedResource Include="ui\BaseMDIChild.resx">
       <SubType>Designer</SubType>

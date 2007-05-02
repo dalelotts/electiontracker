@@ -1,0 +1,7 @@
+bin\Debug\TestET.dll
+bin\Debug\TestET.pdb
+bin\Debug\nunit.framework.dll
+bin\Debug\nunit.framework.xml
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\TestET.dll
+obj\Debug\TestET.pdb
