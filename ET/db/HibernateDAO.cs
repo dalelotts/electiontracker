@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DesignByContract;
 using NHibernate;
 using NHibernate.Expression;
 
@@ -12,6 +13,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
 
         public HibernateDAO(ISessionFactory factory) {
+            Check.Assert(factory != null, "Null:factory");
             this.factory = factory;
             session = this.factory.OpenSession();
         }
