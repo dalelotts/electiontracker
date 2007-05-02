@@ -13,15 +13,18 @@ namespace TestET.core
         public void testID()
         {
             AttributeType test_AttributeType = new AttributeType();
-            test_AttributeType.ID = 1;
-            test_AttributeType.Name = "Hello";
+            string test_string = "Test";
+            long test_long = 123;
+
+            test_AttributeType.ID = test_long;
+            test_AttributeType.Name = test_string;
 
             long test_ID = test_AttributeType.ID;
             string test_Name = test_AttributeType.Name;
 
-            
-            Assert.AreEqual(1, test_ID);
-            Assert.AreEqual("Hello", test_Name);
+
+            Assert.AreEqual(test_long, test_ID);
+            Assert.AreEqual(test_string, test_Name);
 
         }
     }
