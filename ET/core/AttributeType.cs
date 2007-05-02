@@ -12,5 +12,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             get { return name; }
             set { name = value; }
         }
+
+        public void dothis() { }
     }
 }
