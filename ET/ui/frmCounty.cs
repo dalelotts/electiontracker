@@ -9,6 +9,7 @@ using System.Windows.Forms;
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmCounty : BaseMDIChild {
         private readonly CountyDAO countyDAO;
+        private readonly PhoneNumberTypeDAO phoneNumberTypeDAO;
 
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmContest));
 
@@ -18,13 +19,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             InitializeComponent();
 
             this.countyDAO = countyDAO;
+            this.phoneNumberTypeDAO = phoneNumberTypeDAO;
 
-            IList<PhoneNumberType> phoneNumberTypes = phoneNumberTypeDAO.findAll();
-            foreach (PhoneNumberType phoneNumberType in phoneNumberTypes) {
-                cbPhoneNumberType.Items.Add(new ListItemWrapper<PhoneNumberType>(phoneNumberType.Name, phoneNumberType));
-            }
-
-            if (phoneNumberTypes.Count > 0) cbPhoneNumberType.SelectedIndex = 0;
+            refreshPhoneNumberTypes();
 
             IList<AttributeType> attributeTypes = attributeTypeDAO.findAll();
             foreach (AttributeType attributeType in attributeTypes) {
@@ -63,6 +60,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             foreach (CountyPhoneNumber phoneNumber in phoneNumbers) {
                 lstPhoneNums.Items.Add(phoneNumber);
             }
+        }
+
+        private void refreshPhoneNumberTypes()
+        {
+            cbPhoneNumberType.Items.Clear();
+            IList<PhoneNumberType> phoneNumberTypes = phoneNumberTypeDAO.findAll();
+            foreach (PhoneNumberType phoneNumberType in phoneNumberTypes)
+            {
+                cbPhoneNumberType.Items.Add(new ListItemWrapper<PhoneNumberType>(phoneNumberType.Name, phoneNumberType));
+            }
+
+            if (phoneNumberTypes.Count > 0) cbPhoneNumberType.SelectedIndex = 0;
         }
 
         private void refreshWebsites() {
@@ -222,6 +231,35 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void frmCounty_Load(object sender, EventArgs e)
         {
            // System.Windows.Forms.MessageBox.Show(lblCountyWardCount.back);
+        }
+
+        private void cbPhoneNumberType_Leave(object sender, EventArgs e)
+        {
+            if (cbPhoneNumberType.SelectedIndex == -1)
+            {
+                String newTypeName = cbPhoneNumberType.Text;
+                String message = "Phone number type \"" + newTypeName + "\" does not exist.\nWould you like to create it?";
+                String caption = "Unidentified Type";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, caption, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    PhoneNumberType newType = new PhoneNumberType();
+                    newType.Name = newTypeName;
+                    phoneNumberTypeDAO.makePersistent(newType);
+                    refreshPhoneNumberTypes();
+                    
+                    for (int i = 0; i < cbPhoneNumberType.Items.Count; i++)
+                    {
+                        if ((((ListItemWrapper<PhoneNumberType>)cbPhoneNumberType.Items[i]).Value).Name.Equals(newTypeName))
+                        {
+                            cbPhoneNumberType.SelectedIndex = i;
+                        }
+                    }
+                }
+
+                
+            }
         }
     }
 }

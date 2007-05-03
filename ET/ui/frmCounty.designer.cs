@@ -298,6 +298,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cbPhoneNumberType.Size = new System.Drawing.Size(146, 21);
             this.cbPhoneNumberType.TabIndex = 1;
             this.cbPhoneNumberType.Tag = "lock=true";
+            this.cbPhoneNumberType.Leave += new System.EventHandler(this.cbPhoneNumberType_Leave);
             // 
             // btnRemovePhoneNum
             // 
