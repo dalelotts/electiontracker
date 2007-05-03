@@ -83,24 +83,83 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 Contest contest = electionContest.Contest;
                 // END HACK
 
-                contestCountyDAO.makePersistent(contestCounty);
-                //contestCountyDAO.flush();
+                IList<Fault> faultLst = contestCountyDAO.validate(contestCounty);
+                bool persistData = true;
 
-                foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
-                    ResponseValue responseValue = entry.Key;
-                    TextBox textBox = entry.Value;
-                    responseValue.VoteCount = int.Parse(textBox.Text);
-
-                    // START HACK - For some reason this fixed the following exception
-                    // NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
-                    Response response = responseValue.Response;
-                    ElectionContest hack2 = response.ElectionContest;
-                    string hack3 = responseValue.ContestCounty.County.Name;
-                    // END HACK
-
-                    responseValueDAO.makePersistent(responseValue);
+                //Go through the list of faults and display warnings and errors.
+                foreach (Fault fault in faultLst)
+                {
+                    if (persistData)
+                    {
+                        if (fault.IsError)
+                        {
+                            persistData = false;
+                            MessageBox.Show("Error: " + fault.Message);
+                        }
+                        else
+                        {
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                            if (result == System.Windows.Forms.DialogResult.No)
+                            {
+                                persistData = false;
+                            }
+                        }
+                    }
                 }
 
+                //If there were no errors, persist data to the database
+                if (persistData)
+                {
+                    contestCountyDAO.makePersistent(contestCounty);
+                    //contestCountyDAO.flush();
+
+                    foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox)
+                    {
+                        ResponseValue responseValue = entry.Key;
+                        TextBox textBox = entry.Value;
+                        responseValue.VoteCount = int.Parse(textBox.Text);
+
+                        // START HACK - For some reason this fixed the following exception
+                        // NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
+                        Response response = responseValue.Response;
+                        ElectionContest hack2 = response.ElectionContest;
+                        string hack3 = responseValue.ContestCounty.County.Name;
+                        // END HACK
+
+                        IList<Fault> faults = responseValueDAO.validate(responseValue);
+                        bool persistResponseValue = true;
+
+                        //Go through the list of faults and display warnings and errors.
+                        foreach (Fault fault in faults)
+                        {
+                            if (persistResponseValue)
+                            {
+                                if (fault.IsError)
+                                {
+                                    persistResponseValue = false;
+                                    MessageBox.Show("Error: " + fault.Message);
+                                }
+                                else
+                                {
+                                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                                    DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                                    if (result == System.Windows.Forms.DialogResult.No)
+                                    {
+                                        persistResponseValue = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        //If there were no errors, persist data to the database
+                        if (persistResponseValue)
+                        {
+                            responseValueDAO.makePersistent(responseValue);
+                        }
+                    }
+
+                }
                 Dirty = false;
             } catch (Exception ex) {
                 LOG.Error("Persist", ex);

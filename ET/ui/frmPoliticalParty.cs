@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
+using System.Windows.Forms;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmPoliticalParty : BaseMDIChild {
@@ -17,35 +18,68 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             refreshGoToList();
         }
 
-        private void refreshControls() {
+        private void refreshControls()
+        {
             txtName.Text = currentPoliticalParty.Name;
             txtAbbrev.Text = currentPoliticalParty.Abbreviation;
             chkActive.Checked = currentPoliticalParty.IsActive;
         }
 
-        private void refreshGoToList() {
+        private void refreshGoToList()
+        {
             IList<PoliticalParty> politicalParties = politicalPartyDAO.findAll();
-            foreach (PoliticalParty politicalParty in politicalParties) {
+            foreach (PoliticalParty politicalParty in politicalParties)
+            {
                 cboGoTo.Items.Add(politicalParty);
             }
         }
 
-        public override void btnAdd_Click(object sender, EventArgs e) {
+        public override void btnAdd_Click(object sender, EventArgs e)
+        {
             currentPoliticalParty = new PoliticalParty();
             refreshControls();
             base.btnAdd_Click(sender, e);
         }
 
-        public override void btnSave_Click(object sender, EventArgs e) {
+        public override void btnSave_Click(object sender, EventArgs e)
+        {
             //TODO validate political party
             currentPoliticalParty.Name = txtName.Text;
             currentPoliticalParty.Abbreviation = txtAbbrev.Text;
             currentPoliticalParty.IsActive = chkActive.Checked;
 
-            //persist political party to db
-            politicalPartyDAO.makePersistent(currentPoliticalParty);
-            refreshGoToList();
-            base.btnSave_Click(sender, e);
+            IList<Fault> faultLst = politicalPartyDAO.validate(currentPoliticalParty);
+            bool persistData = true;
+
+            //Go through the list of faults and display warnings and errors.
+            foreach (Fault fault in faultLst)
+            {
+                if (persistData)
+                {
+                    if (fault.IsError)
+                    {
+                        persistData = false;
+                        MessageBox.Show("Error: " + fault.Message);
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                        if (result == System.Windows.Forms.DialogResult.No)
+                        {
+                            persistData = false;
+                        }
+                    }
+                }
+            }
+
+            //If there were no errors, persist data to the database
+            if (persistData)
+            {
+                politicalPartyDAO.makePersistent(currentPoliticalParty);
+                refreshGoToList();
+                base.btnSave_Click(sender, e);
+            }
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {

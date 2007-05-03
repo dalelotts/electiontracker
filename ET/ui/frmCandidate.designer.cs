@@ -164,6 +164,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtFirstName.Size = new System.Drawing.Size(270, 20);
             this.txtFirstName.TabIndex = 20;
             this.txtFirstName.Tag = "lock=true";
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // frmCandidate
             // 

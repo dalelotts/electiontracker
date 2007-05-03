@@ -139,9 +139,39 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
                 currentElection.Notes = txtNotes.Text;
-                electionDAO.makePersistent(currentElection);
-                refreshControls();
-                refreshGoToList();
+
+                IList<Fault> faultLst = electionDAO.validate(currentElection);
+                bool persistData = true;
+
+                //Go through the list of faults and display warnings and errors.
+                foreach (Fault fault in faultLst)
+                {
+                    if (persistData)
+                    {
+                        if (fault.IsError)
+                        {
+                            persistData = false;
+                            MessageBox.Show("Error: " + fault.Message);
+                        }
+                        else
+                        {
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                            if (result == System.Windows.Forms.DialogResult.No)
+                            {
+                                persistData = false;
+                            }
+                        }
+                    }
+                }
+                
+                //If there were no errors, persist data to the database
+                if (persistData)
+                {
+                    electionDAO.makePersistent(currentElection);
+                    refreshControls();
+                    refreshGoToList();
+                }
             } catch (Exception ex) {
                 string message = "Encountered exception in btnElectionSave_Click";
                 LOG.Error(message, ex);

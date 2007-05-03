@@ -4,6 +4,7 @@ using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
 using log4net;
+using System.Windows.Forms;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmContest : BaseMDIChild {
@@ -44,8 +45,39 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentContest.Name = txtName.Text;
                 currentContest.ContestType = ((ListItemWrapper<ContestType>) cbContestType.SelectedItem).Value;
                 currentContest.Notes = txtNotes.Text;
-                contestDAO.makePersistent(currentContest);
-                refreshGoToList();
+
+                //Validate the current data and get a list of faults.
+                IList<Fault> faultLst = contestDAO.validate(currentContest);
+                bool persistData = true;
+
+                //Go through the list of faults and display warnings and errors.
+                foreach (Fault fault in faultLst)
+                {
+                    if (persistData)
+                    {
+                        if (fault.IsError)
+                        {
+                            persistData = false;
+                            MessageBox.Show("Error: " + fault.Message);
+                        }
+                        else
+                        {
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                            if (result == System.Windows.Forms.DialogResult.No)
+                            {
+                                persistData = false;
+                            }
+                        }
+                    }
+                }
+                
+                //If there were no errors, persist data to the database
+                if (persistData)
+                {
+                    contestDAO.makePersistent(currentContest);
+                    refreshGoToList();
+                }
             } catch (Exception ex) {
                 LOG.Error("unable to save: operation failed", ex);
             }

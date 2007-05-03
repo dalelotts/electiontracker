@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmCandidate : BaseMDIChild {
@@ -78,10 +80,39 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             currentCandidate.Notes = txtNotes.Text;
             currentCandidate.IsActive = chkActive.Checked;
 
-            //persist candidate to db
-            candidateDAO.makePersistent(currentCandidate);
-            refreshGoToList();
-            base.btnSave_Click(sender, e);
+            //Validate the current data and get a list of faults.
+            IList<Fault> faultLst = candidateDAO.validate(currentCandidate);
+            bool persistData = true;
+
+            //Go through the list of faults and display warnings and errors.
+            foreach (Fault fault in faultLst)
+            {
+                if (persistData)
+                {
+                    if (fault.IsError)
+                    {
+                        persistData = false;
+                        MessageBox.Show("Error: " + fault.Message);
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                        if (result == System.Windows.Forms.DialogResult.No)
+                        {
+                            persistData = false;
+                        }
+                    }
+                }
+            }
+
+            //If there were no errors, persist data to the database
+            if(persistData)
+            {
+                candidateDAO.makePersistent(currentCandidate);
+                refreshGoToList();
+                base.btnSave_Click(sender, e);
+            }
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
@@ -104,6 +135,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshControls();
                 }
             }
+        }
+
+        private void txtFirstName_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
