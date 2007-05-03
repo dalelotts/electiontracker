@@ -141,6 +141,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
             this.Controls.Remove(ppcElection);
             docToPrint = new PrintDocument();
+            docToPrint.DefaultPageSettings.Landscape = true;
             docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
             ppcElection = new PrintPreviewControl();
             ppcElection.Document = null;

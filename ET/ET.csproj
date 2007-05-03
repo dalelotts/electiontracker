@@ -101,6 +101,8 @@
     <Compile Include="db\ResponseValueDAO.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
+    <Compile Include="events\ContestVoteSumryArgs.cs" />
+    <Compile Include="events\CountyContactFormArgs.cs" />
     <Compile Include="events\CountyFormArgs.cs" />
     <Compile Include="events\DBEntityArgs.cs" />
     <Compile Include="events\DefaultShowMessageSender.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="events\EventUtil.cs" />
     <Compile Include="events\IShowMessageSender.cs" />
     <Compile Include="events\PoliticalPartyArgs.cs" />
+    <Compile Include="events\ProofingSheetArgs.cs" />
     <Compile Include="events\ShowAboutBoxArgs.cs" />
     <Compile Include="events\ElectionArgs.cs" />
     <Compile Include="events\ShowErrorMessageArgs.cs" />
@@ -165,6 +168,12 @@
     <Compile Include="ui\frmAboutBox.Designer.cs">
       <DependentUpon>frmAboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\frmContestVoteSumry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmContestVoteSumry.Designer.cs">
+      <DependentUpon>frmContestVoteSumry.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\frmCounty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +181,12 @@
       <DependentUpon>frmCounty.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\DefaultUIController.cs" />
+    <Compile Include="ui\frmCountyContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmCountyContactForm.Designer.cs">
+      <DependentUpon>frmCountyContactForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\frmElection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +222,12 @@
     </Compile>
     <Compile Include="ui\frmPoliticalParty.designer.cs">
       <DependentUpon>frmPoliticalParty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\frmProofingSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmProofingSheet.Designer.cs">
+      <DependentUpon>frmProofingSheet.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\MDIForm.cs">
       <SubType>Form</SubType>

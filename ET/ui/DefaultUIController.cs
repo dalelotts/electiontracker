@@ -74,6 +74,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             politicalPartyForm.Show();
         }
 
+        public void HandleProofingSheet(object sender, ProofingSheetArgs args)
+        {
+            frmProofingSheet proofingSheetForm = makeMDIChildForm<frmProofingSheet>();
+            proofingSheetForm.Show();
+        }
+
         public void HandleElection(object sender, ElectionArgs args)
         {
             frmElection electionForm = makeMDIChildForm<frmElection>();
@@ -90,6 +96,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         {
             frmElectionReport electionReportForm = makeMDIChildForm<frmElectionReport>();
             electionReportForm.Show();
+        }
+        public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args)
+        {
+            frmContestVoteSumry contestVoteSumry = makeMDIChildForm<frmContestVoteSumry>();
+            contestVoteSumry.Show();
+        }
+        public void HandleCountyContactForm(object sender, CountyContactFormArgs args)
+        {
+            frmCountyContactForm countyContactForm = makeMDIChildForm<frmCountyContactForm>();
+            countyContactForm.Show();
         }
     }
 }

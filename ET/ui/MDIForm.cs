@@ -17,6 +17,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public event GenericEventHandler<object, PoliticalPartyArgs> politicalParty;
         public event GenericEventHandler<object, ElectionArgs> election;
         public event GenericEventHandler<object, ElectionReportArgs> electionReport;
+        public event GenericEventHandler<object, ProofingSheetArgs> proofingSheet;
+        public event GenericEventHandler<object, CountyContactFormArgs> countyContactForm;
+        public event GenericEventHandler<object, ContestVoteSumryArgs> contestVoteSumry;
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
 
         private static readonly ShowMessageArgs NOT_IMPLEMENTED_MESSAGE_ARGS =
@@ -33,6 +36,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             politicalPartyToolStripMenuItem.Click += new EventHandler(PoliticalPartyHandler);
             electionToolStripMenuItem.Click += new EventHandler(ElectionHandler);
             electionReportToolStripMenuItem.Click += new EventHandler(ElectionReportHandler);
+            proofingSheetToolStripMenuItem.Click += new EventHandler(ProofingSheetHandler);
+            contestVoteSummaryToolStripMenuItem.Click += new EventHandler(ContestVoteSumryHandler);
+            countyContactFormToolStripMenuItem.Click += new EventHandler(CountyContactFormHandler);
 
             ToolStripItemCollection menuStripItems = mainMenuStrip.Items;
             foreach (ToolStripItem menuStripItem in menuStripItems) {
@@ -42,7 +48,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         if (dropDownItem != aboutToolStripMenuItem && dropDownItem != voteResultsToolStripMenuItem &&
                             dropDownItem != countyToolStripMenuItem && dropDownItem != candidateToolStripMenuItem &&
                             dropDownItem != contestToolStripMenuItem && dropDownItem != politicalPartyToolStripMenuItem &&
-                            dropDownItem != electionToolStripMenuItem && dropDownItem != electionReportToolStripMenuItem) {
+                            dropDownItem != electionToolStripMenuItem && dropDownItem != electionReportToolStripMenuItem &&
+                            dropDownItem != proofingSheetToolStripMenuItem && dropDownItem != countyContactFormToolStripMenuItem &&
+                            dropDownItem != contestVoteSummaryToolStripMenuItem) {
                             dropDownItem.Click += new EventHandler(NotImplementedMessageHandler);
                         }
                     }
@@ -76,6 +84,21 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void ElectionReportHandler(object sender, EventArgs e) {
             EventUtil.RaiseEvent<object, ElectionReportArgs>(electionReport, this, new ElectionReportArgs());
+        }
+
+        private void CountyContactFormHandler(object sender, EventArgs e)
+        {
+            EventUtil.RaiseEvent<object, CountyContactFormArgs>(countyContactForm, this, new CountyContactFormArgs());
+        }
+
+        private void ContestVoteSumryHandler(object sender, EventArgs e)
+        {
+            EventUtil.RaiseEvent<object, ContestVoteSumryArgs>(contestVoteSumry, this, new ContestVoteSumryArgs());
+        }
+
+        private void ProofingSheetHandler(object sender, EventArgs e)
+        {
+            EventUtil.RaiseEvent<object, ProofingSheetArgs>(proofingSheet, this, new ProofingSheetArgs());
         }
 
         public IList<TreeViewFilter> Filters {
@@ -145,6 +168,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void electionReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void countyVotesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contestVoteSummaryToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
