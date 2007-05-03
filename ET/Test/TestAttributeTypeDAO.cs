@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using NHibernate;
+using NMock2;
 using NUnit.Framework;
 
 namespace edu.uwec.cs.cs355.group4.et.test.db {
@@ -11,7 +12,10 @@ namespace edu.uwec.cs.cs355.group4.et.test.db {
 
         [SetUp()]
         public void SetUp() {
-            ISessionFactory factory = null;
+            Mockery mocks = new Mockery();
+            ISession session = (ISession) mocks.NewMock(typeof (ISession));
+            ISessionFactory factory = (ISessionFactory)mocks.NewMock(typeof(ISessionFactory));
+            Expect.AtLeastOnce.On(factory).Method("OpenSession").Will(Return.Value(session));
             _unitUnderTest = new AttributeTypeDAO(factory);
         }
 
@@ -19,15 +23,14 @@ namespace edu.uwec.cs.cs355.group4.et.test.db {
         public void TearDown() {
             _unitUnderTest = null;
         }
-
+        
         [Test()]
         public void TestValidate() {
             AttributeType entity = new AttributeType();
             IList<Fault> expectedIList = new List<Fault>();
-            IList<Fault> resultIList = null;
-            resultIList = _unitUnderTest.validate(entity);
+            IList<Fault> resultIList = _unitUnderTest.validate(entity);
             Assert.AreEqual(expectedIList, resultIList, "validate method returned unexpected result.");
-            Assert.Fail("Create or modify test(s).");
+            Assert.IsTrue(resultIList.Count ==0, "Expected count of zero.");
         }
     }
 }
