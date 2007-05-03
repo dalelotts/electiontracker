@@ -1,3 +1,5 @@
+using edu.uwec.cs.cs355.group4.et.db;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class PhoneNumberType {
         private long id;
@@ -9,6 +11,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("Phone Number Type Name")]
         public virtual string Name {
             get { return name; }
             set { name = value; }

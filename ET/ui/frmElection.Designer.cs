@@ -28,10 +28,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -106,42 +102,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabContests.SuspendLayout();
             this.tabDetails.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(358, 12);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(60, 23);
-            this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "&Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(292, 12);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(60, 23);
-            this.btnEdit.TabIndex = 6;
-            this.btnEdit.Text = "&Edit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Location = new System.Drawing.Point(226, 12);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(60, 23);
-            this.btnNew.TabIndex = 5;
-            this.btnNew.Text = "&New";
-            this.btnNew.UseVisualStyleBackColor = true;
-            // 
-            // btnReset
-            // 
-            this.btnReset.Location = new System.Drawing.Point(160, 12);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(60, 23);
-            this.btnReset.TabIndex = 4;
-            this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -827,10 +787,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.Button btnReset;
+        
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;

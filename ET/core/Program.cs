@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui;
 using log4net;
 using log4net.Config;

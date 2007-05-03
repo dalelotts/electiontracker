@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Spring.Collections;
+using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class PoliticalParty {
@@ -19,11 +19,13 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("Political Party Name")]
         public virtual string Name {
             get { return name; }
             set { name = value; }
         }
 
+        [RequiredProperty("Political Party Abbreviation")]
         public virtual string Abbreviation {
             get { return abbreviation; }
             set { abbreviation = value; }

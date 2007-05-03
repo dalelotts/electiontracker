@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class County {
@@ -15,6 +16,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("County Name")]
         public virtual string Name {
             get { return name; }
             set { name = value; }

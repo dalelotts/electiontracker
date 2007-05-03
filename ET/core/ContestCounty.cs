@@ -1,3 +1,5 @@
+using edu.uwec.cs.cs355.group4.et.db;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class ContestCounty {
         private long id;
@@ -11,12 +13,14 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("Contest County County")]
         public virtual County County {
             get { return county; }
             set { county = value; }
         }
 
 
+        [RequiredProperty("Contest County Election Contest")]
         public virtual ElectionContest ElectionContest {
             get { return electionContest; }
             set { electionContest = value; }

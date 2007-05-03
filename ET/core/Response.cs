@@ -1,4 +1,4 @@
-using System;
+using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public abstract class Response {
@@ -10,7 +10,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
-
+        [RequiredProperty("Response Election Contest")]
         public virtual ElectionContest ElectionContest {
             get { return electionContest; }
             set { electionContest = value; }

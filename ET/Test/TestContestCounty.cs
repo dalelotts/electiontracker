@@ -8,6 +8,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         [SetUp()]
         public void SetUp() {
             _unitUnderTest = new ContestCounty();
+            County county = new County();
+            county.Name = "TestContestCounty";
+            _unitUnderTest.County = county;
         }
 
         [TearDown()]
@@ -17,11 +20,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         [Test()]
         public void TestToString() {
-            string expectedString = null;
-            string resultString = null;
-            resultString = _unitUnderTest.ToString();
+            string expectedString = "TestContestCounty";
+            string resultString = _unitUnderTest.ToString();
             Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
-            Assert.Fail("Create or modify test(s).");
         }
     }
 }

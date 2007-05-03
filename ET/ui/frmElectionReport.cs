@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
-using System.Drawing.Printing;
-using System.IO;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElectionReport : Form {
@@ -86,7 +85,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             }
             foreach (County county in lstCounties){
-                lstToPrint.Add(System.DateTime.Now.ToString() + "      VOTE COUNTY TALLY SHEET");
+                lstToPrint.Add(DateTime.Now.ToString() + "      VOTE COUNTY TALLY SHEET");
                 lstToPrint.Add("");
                 lstToPrint.Add("");
                 lstToPrint.Add(CenterText("ELECTION DATE " + elc.Date.ToString()));
@@ -137,12 +136,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             ppcElection.Document = docToPrint;
 
             
-            this.ppcElection.Location = new System.Drawing.Point(190, 12);
+            this.ppcElection.Location = new Point(190, 12);
             this.ppcElection.Name = "ppcElection";
             ppcElection.Width = this.Width - 237;
             ppcElection.Height = this.Height - 58;
             this.ppcElection.TabIndex = 3;
-            this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
+            this.ppcElection.Click += new EventHandler(this.ppcElection_Click);
             this.Controls.Add(this.ppcElection);
 
         }

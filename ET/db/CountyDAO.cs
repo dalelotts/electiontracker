@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
@@ -20,8 +19,9 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
         }
 
-        public override IList<Fault> validate(County entity) {
-            throw new NotImplementedException();
+        protected override IList<Fault> performValidation(County entity)
+        {
+            return makeEmptyFaultList();
         }
 
         public IList<Contest> findContests(Election e, County cty)

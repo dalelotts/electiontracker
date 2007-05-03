@@ -1,3 +1,5 @@
+using edu.uwec.cs.cs355.group4.et.db;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class Candidate {
         private long id;
@@ -14,6 +16,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("Candidate First Name")]
         public virtual string FirstName {
             get { return firstName; }
             set { firstName = value; }
@@ -24,6 +27,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { middleName = value; }
         }
 
+        [RequiredProperty("Candidate Last Name")]
         public virtual string LastName {
             get { return lastName; }
             set { lastName = value; }

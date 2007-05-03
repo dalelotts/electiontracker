@@ -30,7 +30,8 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return findByCriteria(EMPTY_CRITERION, ORDER_BY_NAME);
         }
 
-        public override IList<Fault> validate(Contest entity) {
+        protected override IList<Fault> performValidation(Contest entity)
+        {
             return makeEmptyFaultList();
         }
 

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
 using log4net;
-using System.Windows.Forms;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmCounty : BaseMDIChild {
@@ -62,12 +62,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void refreshPhoneNumberTypes()
-        {
+        private void refreshPhoneNumberTypes() {
             cbPhoneNumberType.Items.Clear();
             IList<PhoneNumberType> phoneNumberTypes = phoneNumberTypeDAO.findAll();
-            foreach (PhoneNumberType phoneNumberType in phoneNumberTypes)
-            {
+            foreach (PhoneNumberType phoneNumberType in phoneNumberTypes) {
                 cbPhoneNumberType.Items.Add(new ListItemWrapper<PhoneNumberType>(phoneNumberType.Name, phoneNumberType));
             }
 
@@ -143,7 +141,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                
                 currentCounty.Name = txtCountyName.Text;
                 currentCounty.Notes = txtNotes.Text;
                 currentCounty.WardCount = int.Parse(txtCountyWardCount.Text);
@@ -167,30 +164,25 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 bool persistData = true;
 
                 //Go through the list of faults and display warnings and errors.
-                foreach (Fault fault in faultLst)
-                {
-                    if (persistData)
-                    {
-                        if (fault.IsError)
-                        {
+                foreach (Fault fault in faultLst) {
+                    if (persistData) {
+                        if (fault.IsError) {
                             persistData = false;
                             MessageBox.Show("Error: " + fault.Message);
-                        }
-                        else
-                        {
+                        } else {
                             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                            if (result == System.Windows.Forms.DialogResult.No)
-                            {
+                            DialogResult result =
+                                MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?",
+                                                "Warning Message", buttons);
+                            if (result == DialogResult.No) {
                                 persistData = false;
                             }
                         }
                     }
                 }
-                
+
                 //If there were no errors, persist data to the database
-                if (persistData)
-                {
+                if (persistData) {
                     countyDAO.makePersistent(currentCounty);
                     refreshGoToList();
                 }
@@ -228,37 +220,28 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void frmCounty_Load(object sender, EventArgs e)
-        {
-           // System.Windows.Forms.MessageBox.Show(lblCountyWardCount.back);
-        }
-
-        private void cbPhoneNumberType_Leave(object sender, EventArgs e)
-        {
-            if (cbPhoneNumberType.SelectedIndex == -1)
-            {
+        private void cbPhoneNumberType_Leave(object sender, EventArgs e) {
+            if (cbPhoneNumberType.SelectedIndex == -1) {
                 String newTypeName = cbPhoneNumberType.Text;
-                String message = "Phone number type \"" + newTypeName + "\" does not exist.\nWould you like to create it?";
+                String message = "Phone number type \"" + newTypeName +
+                                 "\" does not exist.\nWould you like to create it?";
                 String caption = "Unidentified Type";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, caption, buttons);
-                if (result == DialogResult.Yes)
-                {
+                if (result == DialogResult.Yes) {
                     PhoneNumberType newType = new PhoneNumberType();
                     newType.Name = newTypeName;
                     phoneNumberTypeDAO.makePersistent(newType);
                     refreshPhoneNumberTypes();
-                    
-                    for (int i = 0; i < cbPhoneNumberType.Items.Count; i++)
-                    {
-                        if ((((ListItemWrapper<PhoneNumberType>)cbPhoneNumberType.Items[i]).Value).Name.Equals(newTypeName))
-                        {
+
+                    for (int i = 0; i < cbPhoneNumberType.Items.Count; i++) {
+                        if (
+                            (((ListItemWrapper<PhoneNumberType>) cbPhoneNumberType.Items[i]).Value).Name.Equals(
+                                newTypeName)) {
                             cbPhoneNumberType.SelectedIndex = i;
                         }
                     }
                 }
-
-                
             }
         }
     }

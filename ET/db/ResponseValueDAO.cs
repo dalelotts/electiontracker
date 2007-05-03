@@ -6,7 +6,8 @@ namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ResponseValueDAO : HibernateDAO<ResponseValue> {
         public ResponseValueDAO(ISessionFactory factory) : base(factory) {}
 
-        public override IList<Fault> validate(ResponseValue entity) {
+        protected override IList<Fault> performValidation(ResponseValue entity)
+        {
             return makeEmptyFaultList();
         }
 

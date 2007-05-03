@@ -1,3 +1,5 @@
+using edu.uwec.cs.cs355.group4.et.db;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class CountyWebsite {
         private long id;
@@ -9,11 +11,13 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("County Website URL")]
         public virtual string URL {
             get { return url; }
             set { url = value; }
         }
 
+        [RequiredProperty("County Website County")]
 
         public virtual County County
         {

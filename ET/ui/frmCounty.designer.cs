@@ -417,7 +417,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.tbDisplay);
             this.Name = "frmCounty";
             this.Text = "County";
-            this.Load += new System.EventHandler(this.frmCounty_Load);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.gbCounty.ResumeLayout(false);
             this.gbCounty.PerformLayout();

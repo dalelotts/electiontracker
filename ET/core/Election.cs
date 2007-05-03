@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class Election {
@@ -19,6 +20,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("Election Date")]
         public virtual DateTime Date {
             get { return date; }
             set { date = value; }
@@ -34,6 +36,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { isActive = value; }
         }
 
+        [RequiredProperty("Election Contests")]
         public virtual IList<ElectionContest> ElectionContests
         {
             get { return electionContests; }

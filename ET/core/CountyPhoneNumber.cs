@@ -1,3 +1,5 @@
+using edu.uwec.cs.cs355.group4.et.db;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class CountyPhoneNumber {
         private long id;
@@ -13,16 +15,19 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { id = value; }
         }
 
+        [RequiredProperty("County Phone Number Type")]
         public virtual PhoneNumberType Type {
             get { return type; }
             set { type = value; }
         }
 
+        [RequiredProperty("County Phone Number Area Code")]
         public virtual string AreaCode {
             get { return areaCode; }
             set { areaCode = value; }
         }
 
+        [RequiredProperty("County Phone Number")]
         public virtual string PhoneNumber {
             get { return phoneNumber; }
             set { phoneNumber = value; }
@@ -33,6 +38,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { extension = value; }
         }
 
+        [RequiredProperty("County Phone Number County")]
         public virtual County County
         {
             get { return county; }

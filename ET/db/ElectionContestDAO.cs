@@ -50,7 +50,7 @@ namespace edu.uwec.cs.cs355.group4.et.db
             }
         }
 
-        public override IList<Fault> validate(ElectionContest entity)
+        protected override IList<Fault> performValidation(ElectionContest entity)
         {
             return makeEmptyFaultList();
         }

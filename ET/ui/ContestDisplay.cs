@@ -100,7 +100,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         {
                             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                             DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                            if (result == System.Windows.Forms.DialogResult.No)
+                            if (result == DialogResult.No)
                             {
                                 persistData = false;
                             }
@@ -144,7 +144,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                                 {
                                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                                     DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                                    if (result == System.Windows.Forms.DialogResult.No)
+                                    if (result == DialogResult.No)
                                     {
                                         persistResponseValue = false;
                                     }

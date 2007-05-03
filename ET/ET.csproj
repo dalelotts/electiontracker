@@ -96,6 +96,7 @@
     <Compile Include="db\HibernateDAO.cs" />
     <Compile Include="db\PhoneNumberTypeDAO.cs" />
     <Compile Include="db\PoliticalPartyDAO.cs" />
+    <Compile Include="db\RequiredProperty.cs" />
     <Compile Include="db\ResponseDAO.cs" />
     <Compile Include="db\ResponseValueDAO.cs" />
     <Compile Include="events\CandidateArgs.cs" />

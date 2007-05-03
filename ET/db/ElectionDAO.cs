@@ -25,7 +25,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
         }
 
-        public override IList<Fault> validate(Election entity) {
+        protected override IList<Fault> performValidation(Election entity) {
             return makeEmptyFaultList();
         }
 

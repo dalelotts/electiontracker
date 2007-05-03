@@ -4,7 +4,6 @@ using edu.uwec.cs.cs355.group4.et.db;
 using NHibernate;
 using NMock2;
 using NUnit.Framework;
-using System.Collections;
 
 namespace edu.uwec.cs.cs355.group4.et.test.db {
     [TestFixture()]

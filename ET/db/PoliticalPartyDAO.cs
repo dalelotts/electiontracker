@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
@@ -18,8 +17,9 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         
         public PoliticalPartyDAO(ISessionFactory factory) : base(factory) {}
 
-        public override IList<Fault> validate(PoliticalParty entity) {
-            throw new NotImplementedException();
+        protected override IList<Fault> performValidation(PoliticalParty entity)
+        {
+            return makeEmptyFaultList();
         }
 
         public IList<PoliticalParty> findActive() {

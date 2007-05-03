@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing.Printing;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace edu.uwec.cs.cs355.group4.et.core

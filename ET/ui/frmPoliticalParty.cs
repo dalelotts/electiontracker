@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
-using System.Windows.Forms;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmPoliticalParty : BaseMDIChild {
@@ -43,7 +43,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnSave_Click(object sender, EventArgs e)
         {
-            //TODO validate political party
+            //TODO performValidation political party
             currentPoliticalParty.Name = txtName.Text;
             currentPoliticalParty.Abbreviation = txtAbbrev.Text;
             currentPoliticalParty.IsActive = chkActive.Checked;
@@ -65,7 +65,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     {
                         MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                         DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                        if (result == System.Windows.Forms.DialogResult.No)
+                        if (result == DialogResult.No)
                         {
                             persistData = false;
                         }

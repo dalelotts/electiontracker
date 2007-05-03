@@ -17,7 +17,7 @@ namespace edu.uwec.cs.cs355.group4.et.Properties {
     [CompilerGenerated()]
     [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "8.0.0.0")]
     internal sealed partial class Settings : ApplicationSettingsBase {
-        private static Settings defaultInstance = ((Settings) (ApplicationSettingsBase.Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings) (Synchronized(new Settings())));
 
         public static Settings Default {
             get { return defaultInstance; }
