@@ -19,7 +19,9 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         protected static IList<Fault> makeEmptyFaultList() {
-            return new List<Fault>();
+            List<Fault> result = new List<Fault>();
+            result.Add(new Fault(false, "Validation is not implemented."));
+            return result;
         }
 
         protected ISession getCurrentSession() {
