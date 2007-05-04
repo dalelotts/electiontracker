@@ -177,9 +177,6 @@
     <Compile Include="ui\frmContestVoteSumry.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\frmContestVoteSumry.Designer.cs">
-      <DependentUpon>frmContestVoteSumry.cs</DependentUpon>
-    </Compile>
     <Compile Include="ui\frmCounty.cs">
       <SubType>Form</SubType>
     </Compile>
