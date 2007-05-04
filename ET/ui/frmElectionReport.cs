@@ -1,76 +1,40 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Text;
 using System.Drawing.Printing;
+using edu.uwec.cs.cs355.group4.et.db;
+using System.Drawing;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
-    internal partial class frmElectionReport : Form {
-        private int intPages;
-        private ElectionDAO electionDAO;
-        private PrintDocument docToPrint;
-        private Font printFont;
+namespace edu.uwec.cs.cs355.group4.et.ui
+{
+    class frmElectionReport : frmAbstractReport 
+    {
+        
+        //private Font printFont;
         private List<string> lstToPrint;
         private List<string> lstHeader;
         private int intCount;
         private ContestCountyDAO contestCountyDAO;
 
-        public frmElectionReport(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO){
-            InitializeComponent();
+        public frmElectionReport(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO) : base(electionDAO){
             lstHeader = new List<string>();
             this.contestCountyDAO = contestCountyDAO;
-            this.electionDAO = electionDAO;
-            printFont = new Font("Courier New", 10);
-        }
-
-        private void LoadElections(){
-            IList<Election> elections = electionDAO.findActive();
-            foreach (Election election in elections){
-                lstElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString(), election));
-            }
-        }
-
-        private void frmElectionReport_Load(object sender, EventArgs e){
-            LoadElections();
-        }
-
-        private void lstElections_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CreateReport(((ListItemWrapper<Election>)lstElections.SelectedItem).Value);
-        }
-
-        private static string CenterText(string text)
-        {
-            return CenterText(text, ' ');
-        }
-
-        private static string CenterText(string text, char space)
-        {
-            
-                int length = text.Length;
-                for (int i = 0; i <= ((75 - length) / 2); i++)
-                {
-                    text = "" + space + text + space;
-                }
-                return text;
             
         }
 
-        private static string AlignRight(string text)
-        {
-            int length = text.Length;
-            for (int i = 0; i <= ((75 - length)); i++)
-            {
-                text = " " + text;
-            }
-            return text;
+        protected override IList<Election> GetElections()   {
+            return electionDAO.findActive();
+            
         }
 
-        private void CreateReport(Election elc)
-        {
+        protected override string GetTitle()        {
+            return "Tally Form";
+        }
+
+        protected override void CreateReport(Election elc)        {
             intCount = 0;
             intPages = 0;
             lstToPrint = new List<string>();
@@ -78,27 +42,22 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             List<County> lstCounties = new List<County>();
             // Establish what counties to print for.
             IList<ElectionContest> electionContests = elc.ElectionContests;
-            foreach (ElectionContest contest in electionContests)
-            {
+            foreach (ElectionContest contest in electionContests)            {
                 IList<ContestCounty> contestCounties = contest.Counties;
-                foreach (ContestCounty county in contestCounties)
-                {
-                    if (!lstCounties.Contains(county.County))
-                    {
+                foreach (ContestCounty county in contestCounties)                {
+                    if (!lstCounties.Contains(county.County))                    {
                         lstCounties.Add(county.County);
                     }
                 }
             }
-            foreach (County county in lstCounties)
-            {
+            foreach (County county in lstCounties)            {
                 lstToPrint.Add("<HEADER>");
                 lstToPrint.Add(System.DateTime.Now.ToString() + "      VOTE COUNTY TALLY SHEET");
                 lstToPrint.Add("");
                 lstToPrint.Add("");
                 lstToPrint.Add(CenterText("ELECTION DATE " + elc.Date.ToString()));
                 lstToPrint.Add(CenterText(county.Name));
-                foreach (CountyPhoneNumber cpn in county.PhoneNumbers)
-                {
+                foreach (CountyPhoneNumber cpn in county.PhoneNumbers)                {
                     lstToPrint.Add(AlignRight("Phone: " + cpn.PhoneNumber));
                 }
                 lstToPrint.Add("");
@@ -109,18 +68,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 // TODO: This could probably be better-done with some sort of
                 // SQL or Hibernate query.
-                foreach (ElectionContest ec in elc.ElectionContests)
-                {
-                    foreach (ContestCounty cc in ec.Counties)
-                    {
-                        if (cc.County.ID == county.ID)
-                        {
+                foreach (ElectionContest ec in elc.ElectionContests)                {
+                    foreach (ContestCounty cc in ec.Counties)                    {
+                        if (cc.County.ID == county.ID)                        {
                             lstToPrint.Add("<CONTEST>");
                             // Good.
-                            lstToPrint.Add(CenterText(ec.Contest.Name, '='));
+                            lstToPrint.Add(CenterText(" " + ec.Contest.Name + " ", '='));
                             lstToPrint.Add("");
-                            foreach (Response r in ec.Responses)
-                            {
+                            foreach (Response r in ec.Responses)                            {
                                 lstToPrint.Add("" + r.ToString());
                                 lstToPrint.Add("Current Vote Count: _________________________");
                                 lstToPrint.Add("");
@@ -133,15 +88,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         }
                     }
                 }
-
-
-
                 lstToPrint.Add("<BREAK>");
             }
 
             this.Controls.Remove(ppcElection);
             docToPrint = new PrintDocument();
-            docToPrint.DefaultPageSettings.Landscape = true;
+            //docToPrint.DefaultPageSettings.Landscape = true;
             docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
             ppcElection = new PrintPreviewControl();
             ppcElection.Document = null;
@@ -153,9 +105,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             ppcElection.Width = this.Width - 237;
             ppcElection.Height = this.Height - 58;
             this.ppcElection.TabIndex = 3;
-            this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
+            //this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
             this.Controls.Add(this.ppcElection);
-
         }
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
@@ -172,67 +123,52 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             // Calculate the number of lines per page.
             linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
 
-            while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
-            {
+            while (intPageCount < linesPerPage && intCount < lstToPrint.Count)            {
                 // Check to see if we're putting a contest in.  If we are, make sure it fits
                 //  on one page.  If not, break page.
-                if (lstToPrint[intCount] == "<CONTEST>")
-                {
+                if (lstToPrint[intCount] == "<CONTEST>")                {
                     intContestSize = 0;
-                    for (int i = intCount; i < lstToPrint.Count; i++)
-                    {
-                        if (lstToPrint[i] == "</CONTEST>")
-                        {
+                    for (int i = intCount; i < lstToPrint.Count; i++)                    {
+                        if (lstToPrint[i] == "</CONTEST>")                        {
                             break;
                         }
-                        else
-                        {
+                        else                        {
                             intContestSize++;
                         }
                     }
-                    if (intContestSize + intPageCount > linesPerPage)
-                    {
+                    if (intContestSize + intPageCount > linesPerPage)                    {
                         intCount++;
                         break;
                     }
-                    else
-                    {
+                    else                    {
                         intCount++;
                     }
                 }
-                else if (lstToPrint[intCount] == "</CONTEST>")
-                {
+                else if (lstToPrint[intCount] == "</CONTEST>")                {
                     intCount++;
                 }
                 // We'll store the current header here in case we have to go to multiple
                 //  pages.
-                else if (lstToPrint[intCount] == "<HEADER>")
-                {
+                else if (lstToPrint[intCount] == "<HEADER>")                {
                     blnHeader = true;
                     lstHeader = new List<string>();
                     intCount++;
                 }
-                else if (lstToPrint[intCount] == "</HEADER>")
-                {
+                else if (lstToPrint[intCount] == "</HEADER>")                {
                     blnHeader = false;
                     intCount++;
                 }
-                else if (lstToPrint[intCount] == "<BREAK>")
-                {
+                else if (lstToPrint[intCount] == "<BREAK>")                {
                     intCount++;
                     break;
                 }
-                else if (blnHeader)
-                {
+                else if (blnHeader)                {
                     lstHeader.Add(lstToPrint[intCount]);
                     intCount++;
                 }
-                else
-                {
-                    if (intPageCount == 0)
-                    {
-                        foreach (string s in lstHeader)
-                        {
+                else                {
+                    if (intPageCount == 0)                    {
+                        foreach (string s in lstHeader)                        {
                             yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
                             ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
                             intPageCount++;
@@ -248,56 +184,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             // If more lines exist, print another page.
             if (intCount < lstToPrint.Count)
                 ev.HasMorePages = true;
-            else
-            {
+            else            {
                 ev.HasMorePages = false;
                 intCount = 0;
             }
-        }
-
-        private void ppcElection_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void printPreviewDialog1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            intPages = 0;
-            docToPrint.Print();
-        }
-
-        private void frmElectionReport_Resize(object sender, EventArgs e)
-        {
-            lstElections.Height = this.Height - 89;
-            btnPrint.Top = this.Height - 69;
-            ppcElection.Width = this.Width - 237;
-            ppcElection.Height = this.Height - 58;
-            btnUp.Left = this.Width - 40;
-            btnDown.Left = this.Width - 40;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        
-        }
-
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-            if (ppcElection.StartPage > 0)
-            {
-                ppcElection.StartPage--;
-            }
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-            if (ppcElection.StartPage < intPages)
-            ppcElection.StartPage++;
         }
     }
 }

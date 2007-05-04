@@ -168,6 +168,12 @@
     <Compile Include="ui\frmAboutBox.Designer.cs">
       <DependentUpon>frmAboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\frmAbstractReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmAbstractReport.Designer.cs">
+      <DependentUpon>frmAbstractReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\frmContestVoteSumry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,9 +214,6 @@
     <Compile Include="ui\frmElectionReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\frmElectionReport.designer.cs">
-      <DependentUpon>frmElectionReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="ui\frmEnterVotes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,9 +228,6 @@
     </Compile>
     <Compile Include="ui\frmProofingSheet.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ui\frmProofingSheet.Designer.cs">
-      <DependentUpon>frmProofingSheet.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\MDIForm.cs">
       <SubType>Form</SubType>
@@ -296,10 +296,6 @@
     <EmbeddedResource Include="core\CountyPhoneNumber.hbm.xml" />
     <EmbeddedResource Include="core\CountyWebsite.hbm.xml" />
     <EmbeddedResource Include="core\PhoneNumberType.hbm.xml" />
-    <EmbeddedResource Include="ui\frmElectionReport.resx">
-      <DependentUpon>frmElectionReport.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="core\ElectionContest.hbm.xml" />
@@ -324,6 +320,10 @@
     <EmbeddedResource Include="ui\BaseMDIChild.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BaseMDIChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\frmAbstractReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmAbstractReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\frmEnterVotes.resx">
       <DependentUpon>frmEnterVotes.cs</DependentUpon>
