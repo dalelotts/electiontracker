@@ -187,9 +187,6 @@
     <Compile Include="ui\frmCountyContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\frmCountyContactForm.Designer.cs">
-      <DependentUpon>frmCountyContactForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ui\frmElection.cs">
       <SubType>Form</SubType>
     </Compile>
