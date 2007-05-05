@@ -9,6 +9,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private IList<Response> responses;
         private IList<ContestCounty> counties;
 
+        #region Properties
         public virtual long ID {
             get { return id; }
             set { id = value; }
@@ -38,6 +39,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { counties = value; }
         }
 
+        #endregion
+
         public override string ToString() {
             if (contest != null) {
                 return contest.Name;
@@ -49,9 +52,10 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         public virtual int GetTotalVotes(){
             int result = 0;
             foreach (ContestCounty cc in Counties){
-                foreach (ResponseValue rv in cc.ResponseValues){
+                /*foreach (ResponseValue rv in cc.ResponseValues){
                     result += rv.VoteCount;
-                }
+                }*/
+                result += cc.GetTotalVotes();
             }
             return result;
         }

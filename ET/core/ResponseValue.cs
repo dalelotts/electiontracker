@@ -1,5 +1,5 @@
 using edu.uwec.cs.cs355.group4.et.db;
-
+using System.Collections.Generic;
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class ResponseValue {
         private Response response;
@@ -7,13 +7,13 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private int voteCount;
         private long id;
 
+        #region Properties
         public virtual long ID {
             get { return id; }
             set { id = value; }
         }
 
         [RequiredProperty("Response Value Response")]
-
         public virtual Response Response {
             get { return response; }
             set { response = value; }
@@ -29,6 +29,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             get { return voteCount; }
             set { voteCount = value; }
         }
+        #endregion
 
         public virtual double GetVotePercentage(){
             return ContestCounty.GetTotalVotes() != 0 

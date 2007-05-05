@@ -1,5 +1,5 @@
 using NUnit.Framework;
-
+using System.Collections.Generic;
 namespace edu.uwec.cs.cs355.group4.et.core {
     [TestFixture()]
     public class TestContestCounty {
@@ -11,6 +11,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             County county = new County();
             county.Name = "TestContestCounty";
             _unitUnderTest.County = county;
+
         }
 
         [TearDown()]
@@ -23,6 +24,20 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             string expectedString = "TestContestCounty";
             string resultString = _unitUnderTest.ToString();
             Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
+        }
+
+        [Test()]
+        public void TestGetAllVotes(){
+            _unitUnderTest.ResponseValues = new List<ResponseValue>();
+            ResponseValue r = new ResponseValue();
+            r.VoteCount = 7;
+            _unitUnderTest.ResponseValues.Add(r);
+            r = new ResponseValue();
+            r.VoteCount = 5;
+            _unitUnderTest.ResponseValues.Add(r);
+            int expected = 12;
+            int result = _unitUnderTest.GetTotalVotes();
+            Assert.AreEqual(expected, result, "GetAllVotes returned unexpected result.");
         }
     }
 }

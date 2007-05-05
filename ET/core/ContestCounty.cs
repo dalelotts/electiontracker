@@ -9,6 +9,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private int wardsReporting;
         private ElectionContest electionContest;
 
+        #region Properties
+
         public virtual long ID {
             get { return id; }
             set { id = value; }
@@ -44,6 +46,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { wardsReporting = value; }
         }
 
+        #endregion
 
         public override string ToString() {
             return county != null ? county.Name : "NULL COUNTY: UNKNOWN";
