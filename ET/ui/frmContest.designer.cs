@@ -98,6 +98,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cbContestType.Name = "cbContestType";
             this.cbContestType.Size = new System.Drawing.Size(309, 21);
             this.cbContestType.TabIndex = 5;
+            this.cbContestType.Leave += new System.EventHandler(this.cbContestType_Leave);
             // 
             // frmContest
             // 

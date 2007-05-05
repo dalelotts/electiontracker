@@ -25,12 +25,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void frmContest_Load(object sender, EventArgs e) {
-            IList<ContestType> contestTypes = contestTypeDAO.findAll();
-            foreach (ContestType contestType in contestTypes) {
-                cbContestType.Items.Add(new ListItemWrapper<ContestType>(contestType.Name, contestType));
-            }
-
-            if (contestTypes.Count > 0) cbContestType.SelectedIndex = 0;
+            refreshContestTypes();
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
@@ -109,6 +104,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             chkActive.Checked = currentContest.IsActive;
         }
 
+        private void refreshContestTypes()
+        {
+            cbContestType.Items.Clear();
+            IList<ContestType> contestTypes = contestTypeDAO.findAll();
+            foreach (ContestType contestType in contestTypes)
+            {
+                cbContestType.Items.Add(new ListItemWrapper<ContestType>(contestType.Name, contestType));
+            }
+
+            if (contestTypes.Count > 0) cbContestType.SelectedIndex = 0;
+        }
+
         public override void btnReset_Click(object sender, EventArgs e) {
             refreshControls();
             base.btnReset_Click(sender, e);
@@ -125,6 +132,40 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 if (contest != null) {
                     currentContest = contest;
                     refreshControls();
+                }
+            }
+        }
+
+        private void cbContestType_Leave(object sender, EventArgs e)
+        {
+            if ((cbContestType.SelectedIndex == -1) && (!cbContestType.Text.Equals("")))
+            {
+                String newTypeName = cbContestType.Text;
+                String message = "Contest Type \"" + newTypeName +
+                                 "\" does not exist.\nWould you like to create it?";
+                String caption = "Unidentified Type";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, caption, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    ContestType newType = new ContestType();
+                    newType.Name = newTypeName;
+                    contestTypeDAO.makePersistent(newType);
+                    refreshContestTypes();
+
+                    for (int i = 0; i < cbContestType.Items.Count; i++)
+                    {
+                        if (
+                            (((ListItemWrapper<ContestType>)cbContestType.Items[i]).Value).Name.Equals(
+                                newTypeName))
+                        {
+                            cbContestType.SelectedIndex = i;
+                        }
+                    }
+                }
+                if (result == DialogResult.No)
+                {
+                    cbContestType.SelectedIndex = 0;
                 }
             }
         }
