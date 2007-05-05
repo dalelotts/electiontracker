@@ -78,7 +78,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(91, 23);
             this.btnPrint.TabIndex = 6;
-            this.btnPrint.Text = "Print Report";
+            this.btnPrint.Text = "&Print Report";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 

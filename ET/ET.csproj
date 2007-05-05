@@ -187,6 +187,9 @@
     <Compile Include="ui\frmCountyContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ui\frmCountyContactForm.Designer.cs">
+      <DependentUpon>frmCountyContactForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\frmElection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +321,10 @@
     <EmbeddedResource Include="ui\frmAbstractReport.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmAbstractReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\frmCountyContactForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmCountyContactForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\frmEnterVotes.resx">
       <DependentUpon>frmEnterVotes.cs</DependentUpon>
