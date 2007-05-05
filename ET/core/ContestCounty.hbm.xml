@@ -4,6 +4,10 @@
 		<id name="ID" column="ContestCountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
+    <bag lazy="true" inverse="true" name="ResponseValues" cascade="all" >
+      <key column="ContestCountyID"/>
+      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ResponseValue, edu.uwec.cs.cs355.group4.et"/>
+    </bag>
 		<property name="WardsReporting" column="WardsReporting" type="Int32" length="100" not-null="true"/>
 		<property name="WardCount" column="WardCount" type="Int32" length="100" not-null="true"/>
 		<many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID" not-null="true" />

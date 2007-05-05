@@ -81,31 +81,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             }
             return text;
         }
-        /*
-        protected static string CenterLandText(string text, char space)
-        {
 
-            int length = text.Length;
-            for (int i = 0; i <= ((105 - length) / 2); i++)
-            {
-                text = "" + space + text + space;
-            }
-            return text;
-
-        }
-
-        protected static string AlignLandRight(string text)
-        {
-            int length = text.Length;
-            for (int i = 0; i <= ((105 - length)); i++)
-            {
-                text = " " + text;
-            }
-            return text;
-        }
-        */
-        #region Events
-        private void LoadElections()
+        public void LoadElections()
         {
             IList<Election> e = this.GetElections();
             lstElections.Items.Clear();
@@ -114,6 +91,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                 lstElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString(), election));
             }
         }
+        #region Events
+
 
 
         protected void btnPrint_Click(object sender, EventArgs e){
@@ -129,7 +108,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         protected void btnDown_Click(object sender, EventArgs e){
             if (ppcElection.StartPage < intPages)
+            {
                 ppcElection.StartPage++;
+            }
         }
 
         protected void lstElections_SelectedIndexChanged(object sender, EventArgs e)

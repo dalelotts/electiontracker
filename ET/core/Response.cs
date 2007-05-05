@@ -17,5 +17,21 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         public abstract override string ToString();
+        
+        public  virtual int GetTotalVotes()
+        {
+            int result = 0;
+            foreach (ContestCounty cc in ElectionContest.Counties)
+            {
+                foreach (ResponseValue rv in cc.ResponseValues)
+                {
+                    if (rv.Response.ID == ID)
+                    {
+                        result += rv.VoteCount;
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

@@ -1,7 +1,7 @@
 using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
-    internal class ResponseValue {
+    public class ResponseValue {
         private Response response;
         private ContestCounty contestCounty;
         private int voteCount;
@@ -25,10 +25,15 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { contestCounty = value; }
         }
 
-
         public virtual int VoteCount {
             get { return voteCount; }
             set { voteCount = value; }
+        }
+
+        public virtual double GetVotePercentage(){
+            return ContestCounty.GetTotalVotes() != 0 
+                ? (double)voteCount / (double)ContestCounty.GetTotalVotes() 
+                : 0;
         }
     }
 }

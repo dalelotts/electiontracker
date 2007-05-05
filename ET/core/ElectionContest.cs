@@ -45,5 +45,37 @@ namespace edu.uwec.cs.cs355.group4.et.core {
                 return "NULL CONTEST: unknown";
             }
         }
+
+        public virtual int GetTotalVotes(){
+            int result = 0;
+            foreach (ContestCounty cc in Counties){
+                foreach (ResponseValue rv in cc.ResponseValues){
+                    result += rv.VoteCount;
+                }
+            }
+            return result;
+        }
+
+        public virtual int GetWardsReporting(){
+            int result = 0;
+            foreach (ContestCounty cc in Counties){
+                result += cc.WardsReporting;
+            }
+            return result;
+        }
+
+        public virtual int GetWardCount(){
+            int result = 0;
+            foreach (ContestCounty cc in Counties){
+                result += cc.WardCount;
+            }
+            return result;
+        }
+
+        public virtual double GetWardsReportingPercentage(){
+            if (GetWardCount() == 0)
+                return 0;
+            return ((double)GetWardsReporting() / (double)GetWardCount());
+        }
     }
 }
