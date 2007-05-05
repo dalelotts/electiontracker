@@ -46,8 +46,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             lstToPrint.Add(CenterText("ELECTION DATE " + elc.Date.ToString()));
             lstToPrint.Add("");
             lstToPrint.Add("");
-            lstToPrint.Add("CONTEST                     WARDS   COUNTY                  RESPONSE  ");
-            lstToPrint.Add("-------                     -----   ------                  --------  ");
+            lstToPrint.Add("CONTEST                     WARDS   COUNTY                  RESPONSE                     SORT ORDER");
+            lstToPrint.Add("-------                     -----   ------                  --------                     ----------");
             lstToPrint.Add("</HEADER>");
             lstToPrint.Add("");
 
@@ -72,6 +72,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                     }
                     if (i < intResponses){
                         strResponsePart = FormatTextLength(contest.Responses[i].ToString(), 30);
+                        strResponsePart += contest.Responses[i].SortOrder;
                     }
                     else{
                         strResponsePart = FormatTextLength(" ", 30);

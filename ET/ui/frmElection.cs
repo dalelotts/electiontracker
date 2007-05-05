@@ -135,6 +135,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
+            foreach (ElectionContest ec in currentElection.ElectionContests){
+                foreach (Response r in ec.Responses){
+                    r.SortOrder = ec.Responses.IndexOf(r);
+                }
+            }
             try {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
@@ -504,6 +509,38 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void frmElection_Resize(object sender, EventArgs e)
         {
             tbDisplay.Height = this.Height - 76;
+        }
+
+        private void btnResponseUp_Click(object sender, EventArgs e)
+        {
+            Object o = lstContestCandidates.SelectedItem;
+            int ind = lstContestCandidates.SelectedIndex;
+            int ind2;
+            if (ind > 0)
+            {
+                lstContestCandidates.Items.RemoveAt(ind);
+                lstContestCandidates.Items.Insert(ind - 1, o);
+                lstContestCandidates.SelectedIndex = ind - 1;
+                ind2 = currentElectionContest.Responses.IndexOf((Response)o);
+                currentElectionContest.Responses.RemoveAt(ind2);
+                currentElectionContest.Responses.Insert(ind2 - 1, (Response)o);
+            }
+        }
+
+        private void btnResponseDown_Click(object sender, EventArgs e)
+        {
+            Object o = lstContestCandidates.SelectedItem;
+            int ind = lstContestCandidates.SelectedIndex;
+            int ind2;
+            if (ind < lstContestCandidates.Items.Count - 1)
+            {
+                lstContestCandidates.Items.RemoveAt(ind);
+                lstContestCandidates.Items.Insert(ind+1, o);
+                lstContestCandidates.SelectedIndex = ind+1;
+                ind2 = currentElectionContest.Responses.IndexOf((Response)o);
+                currentElectionContest.Responses.RemoveAt(ind2);
+                currentElectionContest.Responses.Insert(ind2 + 1, (Response)o);
+            }
         }
     }
 }

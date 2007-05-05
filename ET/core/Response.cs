@@ -3,6 +3,7 @@ using edu.uwec.cs.cs355.group4.et.db;
 namespace edu.uwec.cs.cs355.group4.et.core {
     public abstract class Response {
         private long id;
+        private int sortorder;
         private ElectionContest electionContest;
 
         public virtual long ID {
@@ -14,6 +15,12 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         public virtual ElectionContest ElectionContest {
             get { return electionContest; }
             set { electionContest = value; }
+        }
+
+        public virtual int SortOrder
+        {
+            get { return sortorder; }
+            set { sortorder = value; }
         }
 
         public abstract override string ToString();

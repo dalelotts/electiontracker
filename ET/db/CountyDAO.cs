@@ -16,7 +16,11 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         public CountyDAO(ISessionFactory factory) : base(factory) {}
 
         public override IList<County> findAll() {
-            return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
+
+            /*IQuery iqQuery = getCurrentSession().CreateSQLQuery("select * from county;").AddEntity(typeof(County));
+            return iqQuery.List<County>();
+            //sdegen hack v44 - Wasn't working.
+            //*/return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
         }
 
         protected override IList<Fault> performValidation(County entity)
