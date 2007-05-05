@@ -34,7 +34,49 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected override IList<Fault> performValidation(Candidate entity)
         {
-            return makeEmptyFaultList();
+            List<Fault> result = new List<Fault>();
+
+
+            if (entity == null)
+            {
+                result.Add(new Fault(true, "Candidate is null."));
+            } else {
+
+                if (entity.LastName == null)
+                {
+                    result.Add(new Fault(true, "Candidate last name is null."));
+                }
+                else if (entity.LastName == "")
+                {
+                    result.Add(new Fault(true, "Candidate last name is empty."));
+                }
+
+                if (entity.FirstName == null)
+                {
+                    result.Add(new Fault(true, "Candidate first name is null."));
+                }
+                else if (entity.FirstName == "")
+                {
+                    result.Add(new Fault(true, "Candidate first name is empty."));
+                }
+
+                if (result.Count == 0) 
+                {
+                    ISession currentSession = getCurrentSession();
+
+                    // TODO: This checks First name and Last name right now as the only identifiers
+                    // Might want to do a findall() and see if the 'entity' is listed in the return
+                    IQuery validQuery =
+                        currentSession.CreateSQLQuery("select * from candidate where FirstName = " + entity.FirstName + 
+                                        " and LastName = " + entity.LastName + ";");
+                    if (validQuery.List().Count > 0)
+                    {
+                        result.Add(new Fault(true, "Candidate already exists"));
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

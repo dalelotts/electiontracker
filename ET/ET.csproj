@@ -150,6 +150,7 @@
     <Compile Include="db\HibernateUtil.cs" />
     <Compile Include="Test\TestAttributeTypeDAO.cs" />
     <Compile Include="Test\TestCandidate.cs" />
+    <Compile Include="Test\TestCandidateDAO.cs" />
     <Compile Include="Test\TestContestCounty.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
