@@ -235,6 +235,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cbKey.Size = new System.Drawing.Size(146, 21);
             this.cbKey.TabIndex = 0;
             this.cbKey.Tag = "lock=true";
+            this.cbKey.Leave += new System.EventHandler(this.cbKey_Leave);
             // 
             // lblValue
             // 

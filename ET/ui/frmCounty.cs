@@ -10,6 +10,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmCounty : BaseMDIChild {
         private readonly CountyDAO countyDAO;
         private readonly PhoneNumberTypeDAO phoneNumberTypeDAO;
+        private readonly AttributeTypeDAO attributeTypeDAO;
 
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmContest));
 
@@ -19,17 +20,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             InitializeComponent();
 
             this.countyDAO = countyDAO;
+            this.attributeTypeDAO = attributeTypeDAO;
             this.phoneNumberTypeDAO = phoneNumberTypeDAO;
 
             refreshPhoneNumberTypes();
-
-            IList<AttributeType> attributeTypes = attributeTypeDAO.findAll();
-            foreach (AttributeType attributeType in attributeTypes) {
-                cbKey.Items.Add(new ListItemWrapper<AttributeType>(attributeType.Name, attributeType));
-            }
-
-            if (attributeTypes.Count > 0) cbKey.SelectedIndex = 0;
-
+            refreshAttributeTypes();
+                        
             currentCounty = new County();
             refreshGoToList();
         }
@@ -86,6 +82,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             foreach (CountyAttribute attribute in attributes) {
                 lstAttributes.Items.Add(attribute);
             }
+        }
+
+        private void refreshAttributeTypes()
+        {
+            cbKey.Items.Clear();
+            IList<AttributeType> attributeTypes = attributeTypeDAO.findAll();
+            foreach (AttributeType attributeType in attributeTypes)
+            {
+                cbKey.Items.Add(new ListItemWrapper<AttributeType>(attributeType.Name, attributeType));
+            }
+
+            if (attributeTypes.Count > 0) cbKey.SelectedIndex = 0;
         }
 
         private void btnAddPhoneNum_Click(object sender, EventArgs e) {
@@ -221,7 +229,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void cbPhoneNumberType_Leave(object sender, EventArgs e) {
-            if (cbPhoneNumberType.SelectedIndex == -1) {
+            if ((cbPhoneNumberType.SelectedIndex == -1) && (!cbPhoneNumberType.Text.Equals("")))
+            {
                 String newTypeName = cbPhoneNumberType.Text;
                 String message = "Phone number type \"" + newTypeName +
                                  "\" does not exist.\nWould you like to create it?";
@@ -242,7 +251,49 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         }
                     }
                 }
+                if (result == DialogResult.No)
+                {
+                    cbPhoneNumberType.SelectedIndex = 0;
+                }
             }
         }
+
+        private void cbKey_Leave(object sender, EventArgs e)
+        {
+            if ((cbKey.SelectedIndex == -1) && (!cbKey.Text.Equals("")))
+            {
+                String newTypeName = cbKey.Text;
+                String message = "Attribute \"" + newTypeName +
+                                 "\" does not exist.\nWould you like to create it?";
+                String caption = "Unidentified Attribute";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, caption, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    AttributeType newType = new AttributeType();
+                    newType.Name = newTypeName;
+                    attributeTypeDAO.makePersistent(newType);
+                    refreshAttributeTypes();
+
+                    for (int i = 0; i < cbKey.Items.Count; i++)
+                    {
+                        if (
+                            (((ListItemWrapper<AttributeType>)cbKey.Items[i]).Value).Name.Equals(
+                                newTypeName))
+                        {
+                            cbKey.SelectedIndex = i;
+                        }
+                    }
+                }
+                if (result == DialogResult.No)
+                {
+                    cbKey.SelectedIndex = 0;
+                }
+            }
+        }
+
+        
+
+
     }
 }
