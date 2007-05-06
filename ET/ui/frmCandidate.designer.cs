@@ -73,6 +73,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cboPoliticalParty.Size = new System.Drawing.Size(270, 21);
             this.cboPoliticalParty.TabIndex = 30;
             this.cboPoliticalParty.Tag = "lock=true";
+            this.cboPoliticalParty.Leave += new System.EventHandler(this.cboPoliticalParty_Leave);
             // 
             // chkActive
             // 

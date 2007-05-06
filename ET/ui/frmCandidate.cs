@@ -140,5 +140,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         {
 
         }
+
+        private void cboPoliticalParty_Leave(object sender, EventArgs e)
+        {
+            if (cboPoliticalParty.SelectedIndex == -1)
+            {
+                System.Windows.Forms.MessageBox.Show("Please use \"Insert > Political Party\" if you wish to create a new political party.");
+                cboPoliticalParty.SelectedIndex = 0;
+            }
+        }
     }
 }
