@@ -123,8 +123,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                     lstResponses.Add(b);
                     lstResponses.Add(c);
                 }
-
-                strHeaderNames = FormatTextLength(lstResponses[0].ToString(), 20) + " ";
+                if (lstResponses.Count > 0)
+                    strHeaderNames = FormatTextLength(lstResponses[0].ToString(), 20) + " ";
+                else
+                    strHeaderNames = FormatTextLength(" ", 20) + " ";
                 if (lstResponses.Count > 1)
                     strHeaderNames += FormatTextLength(lstResponses[1].ToString(), 20) + " ";
                 else
