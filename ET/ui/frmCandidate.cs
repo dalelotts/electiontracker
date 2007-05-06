@@ -5,19 +5,23 @@ using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
-    internal partial class frmCandidate : BaseMDIChild {
+namespace edu.uwec.cs.cs355.group4.et.ui
+{
+    internal partial class frmCandidate : BaseMDIChild
+    {
         private readonly CandidateDAO candidateDAO;
         private Candidate currentCandidate;
 
-        public frmCandidate(CandidateDAO candidateDAO, PoliticalPartyDAO politicalPartyDAO) {
+        public frmCandidate(CandidateDAO candidateDAO, PoliticalPartyDAO politicalPartyDAO)
+        {
             InitializeComponent();
             this.candidateDAO = candidateDAO;
 
             cboPoliticalParty.Items.Add(new ListItemWrapper<PoliticalParty>("< NONE >", null));
 
             IList<PoliticalParty> politicalParties = politicalPartyDAO.findActive();
-            foreach (PoliticalParty politicalParty in politicalParties) {
+            foreach (PoliticalParty politicalParty in politicalParties)
+            {
                 cboPoliticalParty.Items.Add(new ListItemWrapper<PoliticalParty>(politicalParty.Name, politicalParty));
             }
 
@@ -28,34 +32,52 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             refreshGoToList();
         }
 
-        private void refreshGoToList() {
+        private void refreshGoToList()
+        {
             IList<Candidate> candidates = candidateDAO.findAll();
             cboGoTo.Items.Clear();
-            foreach (Candidate candidate in candidates) {
+            foreach (Candidate candidate in candidates)
+            {
                 cboGoTo.Items.Add(candidate);
             }
         }
 
-        public override void btnAdd_Click(object sender, EventArgs e) {
-            // To Do: Detect Dirty
-            currentCandidate = new Candidate();
-            refreshControls();
-            base.btnAdd_Click(sender, e);
+        public override void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // To Do: Detect Dirty
+                currentCandidate = new Candidate();
+                refreshControls();
+                base.btnAdd_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
+            }
         }
 
-        private void refreshControls() {
+        private void refreshControls()
+        {
             //clear the fields
             txtFirstName.Text = currentCandidate.FirstName;
             txtMiddleName.Text = currentCandidate.MiddleName;
             txtLastName.Text = currentCandidate.LastName;
             txtNotes.Text = currentCandidate.Notes;
 
-            if (currentCandidate.PoliticalParty == null) {
+            if (currentCandidate.PoliticalParty == null)
+            {
                 cboPoliticalParty.SelectedIndex = 0;
-            } else {
-                for (int i = 1, limit = cboPoliticalParty.Items.Count; i < limit; i++) {
-                    if (((ListItemWrapper<PoliticalParty>) cboPoliticalParty.Items[i]).Value.ID ==
-                        currentCandidate.PoliticalParty.ID) {
+            }
+            else
+            {
+                for (int i = 1, limit = cboPoliticalParty.Items.Count; i < limit; i++)
+                {
+                    if (((ListItemWrapper<PoliticalParty>)cboPoliticalParty.Items[i]).Value.ID ==
+                        currentCandidate.PoliticalParty.ID)
+                    {
                         cboPoliticalParty.SelectedIndex = i;
                     }
                 }
@@ -63,73 +85,116 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             chkActive.Checked = currentCandidate.IsActive;
         }
 
-        public override void btnDelete_Click(object sender, EventArgs e) {
-            candidateDAO.makeTransient(currentCandidate);
-            refreshControls();
-            refreshGoToList();
-            base.btnDelete_Click(sender, e);
+        public override void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                candidateDAO.makeTransient(currentCandidate);
+                refreshControls();
+                refreshGoToList();
+                base.btnDelete_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
+            }
         }
 
-        public override void btnSave_Click(object sender, EventArgs e) {
-            // To Do: Validate Candidate
-            currentCandidate.FirstName = txtFirstName.Text;
-            currentCandidate.MiddleName = txtMiddleName.Text;
-            currentCandidate.LastName = txtLastName.Text;
-            currentCandidate.PoliticalParty = ((ListItemWrapper<PoliticalParty>) cboPoliticalParty.SelectedItem).Value;
-            currentCandidate.Notes = txtNotes.Text;
-            currentCandidate.IsActive = chkActive.Checked;
-
-            //Validate the current data and get a list of faults.
-            IList<Fault> faultLst = candidateDAO.validate(currentCandidate);
-            bool persistData = true;
-
-            //Go through the list of faults and display warnings and errors.
-            foreach (Fault fault in faultLst)
+        public override void btnSave_Click(object sender, EventArgs e)
+        {
+            try
             {
-                if (persistData)
+                // To Do: Validate Candidate
+                currentCandidate.FirstName = txtFirstName.Text;
+                currentCandidate.MiddleName = txtMiddleName.Text;
+                currentCandidate.LastName = txtLastName.Text;
+                currentCandidate.PoliticalParty = ((ListItemWrapper<PoliticalParty>)cboPoliticalParty.SelectedItem).Value;
+                currentCandidate.Notes = txtNotes.Text;
+                currentCandidate.IsActive = chkActive.Checked;
+
+                //Validate the current data and get a list of faults.
+                IList<Fault> faultLst = candidateDAO.validate(currentCandidate);
+                bool persistData = true;
+
+                //Go through the list of faults and display warnings and errors.
+                foreach (Fault fault in faultLst)
                 {
-                    if (fault.IsError)
+                    if (persistData)
                     {
-                        persistData = false;
-                        MessageBox.Show("Error: " + fault.Message);
-                    }
-                    else
-                    {
-                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                        DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                        if (result == DialogResult.No)
+                        if (fault.IsError)
                         {
                             persistData = false;
+                            MessageBox.Show("Error: " + fault.Message);
+                        }
+                        else
+                        {
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
+                            if (result == DialogResult.No)
+                            {
+                                persistData = false;
+                            }
                         }
                     }
                 }
-            }
 
-            //If there were no errors, persist data to the database
-            if(persistData)
+                //If there were no errors, persist data to the database
+                if (persistData)
+                {
+                    candidateDAO.makePersistent(currentCandidate);
+                    refreshGoToList();
+                    base.btnSave_Click(sender, e);
+                }
+            }
+            catch (Exception ex)
             {
-                candidateDAO.makePersistent(currentCandidate);
-                refreshGoToList();
-                base.btnSave_Click(sender, e);
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
             }
         }
 
-        public override void btnReset_Click(object sender, EventArgs e) {
-            refreshControls();
-            base.btnReset_Click(sender, e);
+        public override void btnReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                refreshControls();
+                base.btnReset_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
+            }
         }
 
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            // To Do: Detect Dirty
-            currentCandidate = (Candidate) cboGoTo.SelectedItem;
-            refreshControls();
-            base.cboGoTo_SelectedIndexChanged(sender, e);
+        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // To Do: Detect Dirty
+                currentCandidate = (Candidate)cboGoTo.SelectedItem;
+                refreshControls();
+                base.cboGoTo_SelectedIndexChanged(sender, e);
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
+            }
         }
 
-        public void loadCandidate(long? id) {
-            if (id.HasValue) {
+        public void loadCandidate(long? id)
+        {
+            if (id.HasValue)
+            {
                 Candidate candidate = candidateDAO.findById(id, false);
-                if (candidate != null) {
+                if (candidate != null)
+                {
                     currentCandidate = candidate;
                     refreshControls();
                 }
@@ -143,10 +208,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void cboPoliticalParty_Leave(object sender, EventArgs e)
         {
-            if (cboPoliticalParty.SelectedIndex == -1)
+            try
             {
-                System.Windows.Forms.MessageBox.Show("Please use \"Insert > Political Party\" if you wish to create a new political party.");
-                cboPoliticalParty.SelectedIndex = 0;
+                if (cboPoliticalParty.SelectedIndex == -1)
+                {
+                    System.Windows.Forms.MessageBox.Show("Please use \"Insert > Political Party\" if you wish to create a new political party.");
+                    cboPoliticalParty.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
             }
         }
     }

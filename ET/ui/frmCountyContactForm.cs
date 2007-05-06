@@ -33,10 +33,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         private void frmCountyContactForm_Load(object sender, EventArgs e)
         {
-            toPrint = new PrintDocument();
-            toPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
-            CreateReport();
-            ppcViewer.Document = toPrint;
+            try
+            {
+                toPrint = new PrintDocument();
+                toPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+                CreateReport();
+                ppcViewer.Document = toPrint;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.ToString());
+            }
         }
 
         private void CreateReport()
@@ -53,16 +60,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             foreach (County c in countyDAO.findAll())
             {
                 lstToPrint.Add(c.Name);
-                foreach (CountyPhoneNumber cpn in c.PhoneNumbers){
-                    lstToPrint.Add("   " + cpn.Type.Name + ": (" + cpn.AreaCode + ")" + cpn.PhoneNumber + 
+                foreach (CountyPhoneNumber cpn in c.PhoneNumbers)
+                {
+                    lstToPrint.Add("   " + cpn.Type.Name + ": (" + cpn.AreaCode + ")" + cpn.PhoneNumber +
                         ((cpn.Extension != "" && cpn.Extension != null)
                         ? ("(" + cpn.Extension + ")")
                         : ""));
                 }
-                foreach (CountyWebsite cw in c.Websites){
+                foreach (CountyWebsite cw in c.Websites)
+                {
                     lstToPrint.Add("   " + cw.URL);
                 }
-                foreach (CountyAttribute ca in c.Attributes){
+                foreach (CountyAttribute ca in c.Attributes)
+                {
                     lstToPrint.Add("   " + ca.Type.Name + ": " + ca.Value);
                 }
             }
@@ -70,93 +80,128 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
         {
-            intPages++;
-            float linesPerPage = 0;
-            float yPos = 0;
-            bool blnHeader = false;
-            int intPageCount = 0;
-            float leftMargin = ev.MarginBounds.Left;
-            float topMargin = ev.MarginBounds.Top;
-
-            // Calculate the number of lines per page.
-            linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
-
-            while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
+            try
             {
-                if (lstToPrint[intCount] == "<HEADER>")
+                intPages++;
+                float linesPerPage = 0;
+                float yPos = 0;
+                bool blnHeader = false;
+                int intPageCount = 0;
+                float leftMargin = ev.MarginBounds.Left;
+                float topMargin = ev.MarginBounds.Top;
+
+                // Calculate the number of lines per page.
+                linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
+
+                while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
                 {
-                    lstHeader = new List<string>();
-                    blnHeader = true;
-                    intCount++;
+                    if (lstToPrint[intCount] == "<HEADER>")
+                    {
+                        lstHeader = new List<string>();
+                        blnHeader = true;
+                        intCount++;
+                    }
+                    else if (lstToPrint[intCount] == "</HEADER>")
+                    {
+                        blnHeader = false;
+                        intCount++;
+                    }
+                    else if (blnHeader)
+                    {
+                        lstHeader.Add(lstToPrint[intCount]);
+                        intCount++;
+                    }
+                    else
+                    {
+                        if (intPageCount == 0)
+                        {
+                            foreach (string s in lstHeader)
+                            {
+                                yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                                ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                                intPageCount++;
+                            }
+                        }
+                        yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                        ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                        intCount++;
+                        intPageCount++;
+                    }
                 }
-                else if (lstToPrint[intCount] == "</HEADER>")
-                {
-                    blnHeader = false;
-                    intCount++;
-                }
-                else if (blnHeader)
-                {
-                    lstHeader.Add(lstToPrint[intCount]);
-                    intCount++;
-                }
+
+                // If more lines exist, print another page.
+                if (intCount < lstToPrint.Count)
+                    ev.HasMorePages = true;
                 else
                 {
-                    if (intPageCount == 0)
-                    {
-                        foreach (string s in lstHeader)
-                        {
-                            yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
-                            ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
-                            intPageCount++;
-                        }
-                    }
-                    yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
-                    ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
-                    intCount++;
-                    intPageCount++;
+                    ev.HasMorePages = false;
+                    intCount = 0;
                 }
             }
-
-            // If more lines exist, print another page.
-            if (intCount < lstToPrint.Count)
-                ev.HasMorePages = true;
-            else
+            catch (Exception ex)
             {
-                ev.HasMorePages = false;
-                intCount = 0;
+                MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
         protected void btnUp_Click(object sender, EventArgs e)
         {
-            if (ppcViewer.StartPage > 0)
+            try
             {
-                ppcViewer.StartPage--;
+                if (ppcViewer.StartPage > 0)
+                {
+                    ppcViewer.StartPage--;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
         protected void btnDown_Click(object sender, EventArgs e)
         {
-            if (ppcViewer.StartPage < intPages)
+            try
             {
-                ppcViewer.StartPage++;
+                if (ppcViewer.StartPage < intPages)
+                {
+                    ppcViewer.StartPage++;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
         protected void btnPrint_Click(object sender, EventArgs e)
         {
-            intPages = 0;
-            toPrint.Print();
+            try
+            {
+                intPages = 0;
+                toPrint.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.ToString());
+            }
         }
 
         private void frmCountyContactForm_Resize(object sender, EventArgs e)
         {
-            btnUp.Left = this.Width - 40;
-            btnDown.Left = this.Width - 40;
-            ppcViewer.Width = this.Width - 53;
-            ppcViewer.Height = this.Height - 81;
-            btnPrint.Top = this.Height - 63;
-            btnPrint.Left = this.Width - 116;
+            try
+            {
+                btnUp.Left = this.Width - 40;
+                btnDown.Left = this.Width - 40;
+                ppcViewer.Width = this.Width - 53;
+                ppcViewer.Height = this.Height - 81;
+                btnPrint.Top = this.Height - 63;
+                btnPrint.Left = this.Width - 116;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.ToString());
+            }
         }
 
     }

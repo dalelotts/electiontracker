@@ -37,18 +37,22 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             return "Vote Counts";
         }
 
-        private int GetVoteTotals(ElectionContest ec, Response r){
+        private int GetVoteTotals(ElectionContest ec, Response r)
+        {
             int total = 0;
-            foreach (ContestCounty cc in ec.Counties){
-                foreach (ResponseValue rv in cc.ResponseValues){
-                    if (rv.Response == r){
+            foreach (ContestCounty cc in ec.Counties)
+            {
+                foreach (ResponseValue rv in cc.ResponseValues)
+                {
+                    if (rv.Response == r)
+                    {
                         total += rv.VoteCount;
                     }
                 }
             }
             return total;
         }
-        
+
         /*
         private ResponseValue GetResponseValue(Response r, ContestCounty cc)
         {
@@ -68,22 +72,26 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             ResponseValue res = null;
             foreach (ResponseValue rv in cc.ResponseValues)
             {
-                if (rv.Response.ID == r.ID){
+                if (rv.Response.ID == r.ID)
+                {
                     res = rv;
                     break;
                 }
             }
-            if (res == null){
+            if (res == null)
+            {
                 return "                     ";
             }
-            else{
+            else
+            {
                 return FormatTextLength(res.VoteCount.ToString(), 6) + "(" +
                        FormatTextLength((res.GetVotePercentage() * 100).ToString(), 4) + "%)        ";
             }
         }
 
-        protected override void CreateReport(Election elc){
-            Response a,b,c;
+        protected override void CreateReport(Election elc)
+        {
+            Response a, b, c;
             IList<Response> lstResponses;
             intCount = 0;
             intPages = 0;
@@ -93,27 +101,36 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             string strTotals;
 
             IList<ElectionContest> lstContests = elc.ElectionContests;
-            foreach (ElectionContest ec in lstContests){
+            foreach (ElectionContest ec in lstContests)
+            {
                 a = b = c = null;
                 // First, determine the responses.  If there's more than three, we can only
                 //  fit three, so pick the three most important.
                 lstResponses = ec.Responses;
-                if (lstResponses.Count > 3){
-                    foreach (Response r in lstResponses){
+                if (lstResponses.Count > 3)
+                {
+                    foreach (Response r in lstResponses)
+                    {
                         if (a == null)
                             a = r;
-                        else if (GetVoteTotals(ec, c) <= GetVoteTotals(ec, r)){
-                            if (GetVoteTotals(ec, b) <= GetVoteTotals(ec, r)){
-                                if (GetVoteTotals(ec, a) <= GetVoteTotals(ec, r))                                {
+                        else if (GetVoteTotals(ec, c) <= GetVoteTotals(ec, r))
+                        {
+                            if (GetVoteTotals(ec, b) <= GetVoteTotals(ec, r))
+                            {
+                                if (GetVoteTotals(ec, a) <= GetVoteTotals(ec, r))
+                                {
                                     c = b;
                                     b = a;
                                     a = r;
-                                }else{
+                                }
+                                else
+                                {
                                     c = b;
                                     b = r;
                                 }
                             }
-                            else{
+                            else
+                            {
                                 c = r;
                             }
                         }
@@ -146,12 +163,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                                "Wards               Votes");
 
                 lstToPrint.Add("</HEADER>");
-                foreach (ContestCounty cc in ec.Counties){
+                foreach (ContestCounty cc in ec.Counties)
+                {
                     strVoteCounts = FormatTextLength(cc.County.Name, 17);
-                    for (int i = 0; i <= 2; i++){
+                    for (int i = 0; i <= 2; i++)
+                    {
                         if (lstResponses.Count > i)
                             strVoteCounts += GetVoteNumbers(lstResponses[i], cc);
-                        else{
+                        else
+                        {
                             strVoteCounts += "                     ";
                         }
                     }
@@ -180,22 +200,25 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                 for (int i = 0; i <= 2; i++)
                 {
                     if (lstResponses.Count > i)
-                        if (ec.GetTotalVotes() > 0){
+                        if (ec.GetTotalVotes() > 0)
+                        {
                             strTotals += FormatTextLength(FormatTextLength("" + GetVoteTotals(ec, lstResponses[i]), 5) + " (" +
                                                          ((double)GetVoteTotals(ec, lstResponses[i]) /
                                                          (double)ec.GetTotalVotes()).ToString("0.0" + "%)"), 21);
                         }
-                        else{
+                        else
+                        {
                             strTotals += FormatTextLength(FormatTextLength("" + GetVoteTotals(ec, lstResponses[i]), 5) + " (" +
-                                                         "00.0%)", 21);     
+                                                         "00.0%)", 21);
                         }
-                        else{
-                            strTotals += "                     ";
-                        }
+                    else
+                    {
+                        strTotals += "                     ";
+                    }
                 }
                 strTotals += FormatTextLength("" + ec.GetWardsReporting(), 3) + "/" +
                              FormatTextLength("" + ec.GetWardCount(), 3) + "(" +
-                             FormatTextLength((ec.GetWardsReportingPercentage()* 100).ToString("0.0") + "%)", 12) + 
+                             FormatTextLength((ec.GetWardsReportingPercentage() * 100).ToString("0.0") + "%)", 12) +
                              ec.GetTotalVotes();
                 lstToPrint.Add(strTotals);
                 lstToPrint.Add("<BREAK>");
@@ -217,67 +240,77 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.ppcElection);
         }
 
-        private void pd_PrintPage(object sender, PrintPageEventArgs ev){
-            intPages++;
-            float linesPerPage = 0;
-            float yPos = 0;
-            bool blnHeader = false;
-            int intPageCount = 0;
-            float leftMargin = ev.MarginBounds.Left;
-            float topMargin = ev.MarginBounds.Top;
+        private void pd_PrintPage(object sender, PrintPageEventArgs ev)
+        {
+            try
+            {
+                intPages++;
+                float linesPerPage = 0;
+                float yPos = 0;
+                bool blnHeader = false;
+                int intPageCount = 0;
+                float leftMargin = ev.MarginBounds.Left;
+                float topMargin = ev.MarginBounds.Top;
 
-            // Calculate the number of lines per page.
-            linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
+                // Calculate the number of lines per page.
+                linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
 
-            while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
-            {         
-                // We'll store the current header here in case we have to go to multiple
-                //  pages.
-                if (lstToPrint[intCount] == "<HEADER>")
+                while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
                 {
-                    blnHeader = true;
-                    lstHeader = new List<string>();
-                    intCount++;
+                    // We'll store the current header here in case we have to go to multiple
+                    //  pages.
+                    if (lstToPrint[intCount] == "<HEADER>")
+                    {
+                        blnHeader = true;
+                        lstHeader = new List<string>();
+                        intCount++;
+                    }
+                    else if (lstToPrint[intCount] == "</HEADER>")
+                    {
+                        blnHeader = false;
+                        intCount++;
+                    }
+                    else if (lstToPrint[intCount] == "<BREAK>")
+                    {
+                        intCount++;
+                        break;
+                    }
+                    else if (blnHeader)
+                    {
+                        lstHeader.Add(lstToPrint[intCount]);
+                        intCount++;
+                    }
+                    else
+                    {
+                        if (intPageCount == 0)
+                        {
+                            foreach (string s in lstHeader)
+                            {
+                                yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                                ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                                intPageCount++;
+                            }
+                        }
+                        yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                        ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                        intCount++;
+                        intPageCount++;
+                    }
                 }
-                else if (lstToPrint[intCount] == "</HEADER>")
-                {
-                    blnHeader = false;
-                    intCount++;
-                }
-                else if (lstToPrint[intCount] == "<BREAK>")
-                {
-                    intCount++;
-                    break;
-                }
-                else if (blnHeader)
-                {
-                    lstHeader.Add(lstToPrint[intCount]);
-                    intCount++;
-                }
+                // If more lines exist, print another page.
+                if (intCount < lstToPrint.Count)
+                    ev.HasMorePages = true;
                 else
                 {
-                    if (intPageCount == 0)
-                    {
-                        foreach (string s in lstHeader)
-                        {
-                            yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
-                            ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
-                            intPageCount++;
-                        }
-                    }
-                    yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
-                    ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
-                    intCount++;
-                    intPageCount++;
+                    ev.HasMorePages = false;
+                    intCount = 0;
                 }
             }
-            // If more lines exist, print another page.
-            if (intCount < lstToPrint.Count)
-                ev.HasMorePages = true;
-            else
+            catch (Exception ex)
             {
-                ev.HasMorePages = false;
-                intCount = 0;
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
             }
         }
 
@@ -299,12 +332,30 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         private void ResizeSumry(object sender, EventArgs e)
         {
-            cmbElectionType.Top = lstElections.Height + 18;
+            try
+            {
+                cmbElectionType.Top = lstElections.Height + 18;
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
+            }
         }
 
         private void IndexChanged(object sender, EventArgs e)
         {
-            LoadElections();
+            try
+            {
+                LoadElections();
+            }
+            catch (Exception ex)
+            {
+                string message = "Operation failed";
+                MessageBox.Show(message + "\n\n" + ex.ToString());
+                //LOG.Error(message, ex);
+            }
         }
     }
 }

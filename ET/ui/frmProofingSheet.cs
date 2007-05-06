@@ -18,7 +18,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private int intCount;
         private List<string> lstToPrint;
         private List<string> lstHeader;
-        public frmProofingSheet(ElectionDAO electionDAO) : base(electionDAO){
+        public frmProofingSheet(ElectionDAO electionDAO)
+            : base(electionDAO)
+        {
             blnLandscape = true;
         }
 
@@ -27,7 +29,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             return "Proofing Sheet";
         }
 
-        protected override IList<Election> GetElections(){
+        protected override IList<Election> GetElections()
+        {
             return electionDAO.findActive();
         }
 
@@ -57,34 +60,42 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             bool b;
             string strCountyPart, strResponsePart, strContestPart;
             IList<ElectionContest> electionContests = elc.ElectionContests;
-            foreach (ElectionContest contest in electionContests){
+            foreach (ElectionContest contest in electionContests)
+            {
                 b = true;
                 i = j = 0;
                 intResponses = contest.Responses.Count;
                 intCounties = contest.Counties.Count;
-                while (i < intResponses || j < intCounties)                {
-                    if (b){
+                while (i < intResponses || j < intCounties)
+                {
+                    if (b)
+                    {
                         b = false;
                         strContestPart = FormatTextLength(contest.Contest.Name, 30);
                     }
-                    else{
+                    else
+                    {
                         strContestPart = FormatTextLength(" ", 30);
                     }
-                    if (i < intResponses){
+                    if (i < intResponses)
+                    {
                         strResponsePart = FormatTextLength(contest.Responses[i].ToString(), 30);
                         strResponsePart += contest.Responses[i].SortOrder;
                     }
-                    else{
+                    else
+                    {
                         strResponsePart = FormatTextLength(" ", 30);
                     }
-                    if (j < intCounties){
-                        strCountyPart = FormatTextLength("" + contest.Counties[j].WardCount, 6) + 
+                    if (j < intCounties)
+                    {
+                        strCountyPart = FormatTextLength("" + contest.Counties[j].WardCount, 6) +
                                         FormatTextLength(contest.Counties[j].County.Name, 24);
                     }
-                    else{
+                    else
+                    {
                         strCountyPart = FormatTextLength(" ", 30);
                     }
-                    lstToPrint.Add(strContestPart + strCountyPart + strResponsePart);             
+                    lstToPrint.Add(strContestPart + strCountyPart + strResponsePart);
                     i++; j++;
                 }
                 lstToPrint.Add("");
@@ -109,60 +120,69 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
         {
-            intPages++;
-            float linesPerPage = 0;
-            float yPos = 0;
-            //int intContestSize = 0;
-            bool blnHeader = false;
-            int intPageCount = 0;
-            float leftMargin = ev.MarginBounds.Left;
-            float topMargin = ev.MarginBounds.Top;
-
-            // Calculate the number of lines per page.
-            linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
-            while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
+            try
             {
-                if (lstToPrint[intCount] == "<HEADER>")                {
-                    lstHeader = new List<string>();
-                    blnHeader = true;
-                    intCount++;
-                }
-                else if (lstToPrint[intCount] == "</HEADER>")
+                intPages++;
+                float linesPerPage = 0;
+                float yPos = 0;
+                //int intContestSize = 0;
+                bool blnHeader = false;
+                int intPageCount = 0;
+                float leftMargin = ev.MarginBounds.Left;
+                float topMargin = ev.MarginBounds.Top;
+
+                // Calculate the number of lines per page.
+                linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
+                while (intPageCount < linesPerPage && intCount < lstToPrint.Count)
                 {
-                    blnHeader = false;
-                    intCount++;
-                }
-                else if (blnHeader)
-                {
-                    lstHeader.Add(lstToPrint[intCount]);
-                    intCount++;
-                }
-                else{
-                    if (intPageCount == 0)
+                    if (lstToPrint[intCount] == "<HEADER>")
                     {
-                        foreach (string s in lstHeader)
-                        {
-                            yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
-                            ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
-                            intPageCount++;
-                        }
+                        lstHeader = new List<string>();
+                        blnHeader = true;
+                        intCount++;
                     }
-                    yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
-                    ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
-                    intCount++;
-                    intPageCount++;
-                }
-                
-                //break;
-            }
+                    else if (lstToPrint[intCount] == "</HEADER>")
+                    {
+                        blnHeader = false;
+                        intCount++;
+                    }
+                    else if (blnHeader)
+                    {
+                        lstHeader.Add(lstToPrint[intCount]);
+                        intCount++;
+                    }
+                    else
+                    {
+                        if (intPageCount == 0)
+                        {
+                            foreach (string s in lstHeader)
+                            {
+                                yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                                ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                                intPageCount++;
+                            }
+                        }
+                        yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                        ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                        intCount++;
+                        intPageCount++;
+                    }
 
-            // If more lines exist, print another page.
-            if (intCount < lstToPrint.Count)
-                ev.HasMorePages = true;
-            else
+                    //break;
+                }
+
+                // If more lines exist, print another page.
+                if (intCount < lstToPrint.Count)
+                    ev.HasMorePages = true;
+                else
+                {
+                    ev.HasMorePages = false;
+                    intCount = 0;
+                }
+            }
+            catch (Exception ex)
             {
-                ev.HasMorePages = false;
-                intCount = 0;
+                MessageBox.Show("Error: " + ex.ToString());
             }
         }
     }
