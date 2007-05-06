@@ -5,7 +5,7 @@ using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.events;
 using log4net;
-
+using edu.uwec.cs.cs355.group4.et.util;
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
@@ -94,17 +94,38 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void refreshCountyLists() {
-            lstAllCounties.Items.Clear();
-            foreach (County county in allCounties) {
-                lstAllCounties.Items.Add(county);
+            Dictionary<County, int> mapCounts = new Dictionary<County, int>();
+            object[] o = new object[2];
+            int i;
+            foreach (DataGridViewRow row in dgvCounties.Rows){
+                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i))
+                {
+                    mapCounts.Add(((County)row.Cells[0].Value), i);
+                }
             }
-
+            dgvCounties.Rows.Clear();
+            foreach (County county in allCounties){
+                o[0] = county;
+                i = 0;
+                if (mapCounts.TryGetValue(county, out i)){
+                    o[1] = i;
+                }
+                else{
+                    o[1] = county.WardCount;
+                }
+                dgvCounties.Rows.Add(o);
+            }
             lstContestCounties.Items.Clear();
 
-            if (currentElectionContest != null) {
-                foreach (ContestCounty contestCounty in currentElectionContest.Counties) {
+            if (currentElectionContest != null){
+                foreach (ContestCounty contestCounty in currentElectionContest.Counties){
                     lstContestCounties.Items.Add(contestCounty);
-                    lstAllCounties.Items.Remove(contestCounty.County);
+                    foreach(DataGridViewRow row in dgvCounties.Rows){
+                        if (((County)row.Cells[0].Value).ID == contestCounty.County.ID){
+                            dgvCounties.Rows.Remove(row);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -358,8 +379,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnAddAllCounties_Click(object sender, EventArgs e) {
             try {
-                txtWards.Enabled = false;
-                txtWards.Text = "";
                 if (currentElectionContest != null) {
                     foreach (County county in allCounties) {
                         ContestCounty contestCounty = new ContestCounty();
@@ -380,27 +399,34 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
-            try {
-                if (currentElectionContest != null) {
-                    foreach (County county in lstAllCounties.SelectedItems) {
-                        ContestCounty contestCounty = new ContestCounty();
+            County county;
+            //MessageBox.Show("" + dgvCounties.SelectedRows.Count );
+            int i;
+            ContestCounty contestCounty;
+            try{
+                if (currentElectionContest != null)
+                {
+                    foreach (DataGridViewRow row in dgvCounties.SelectedRows)
+                    {
+                        county = (County)row.Cells[0].Value;
+                        contestCounty = new ContestCounty();
                         contestCounty.ElectionContest = currentElectionContest;
                         contestCounty.County = county;
-                        if (lstAllCounties.SelectedItems.Count == 1){
-                            // TODO: Error handling for invalid chars.
-                            contestCounty.WardCount = int.Parse(txtWards.Text);
-                            txtWards.Enabled = false;
-                            txtWards.Text = "";
+                        if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)){
+                            contestCounty.WardCount = i;
                         }
                         else{
-                            contestCounty.WardCount = county.WardCount;
+                            contestCounty.WardCount = 0;
                         }
                         contestCounty.WardsReporting = 0;
                         currentElectionContest.Counties.Add(contestCounty);
+
                     }
                     refreshCountyLists();
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 string message = "Encountered exception in btnAddCounty_Click";
                 LOG.Error(message, ex);
                 ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
@@ -410,8 +436,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnRemoveCounty_Click(object sender, EventArgs e) {
             try {
-                txtWards.Enabled = false;
-                txtWards.Text = "";
                 if (currentElectionContest != null) {
                     ListBox.SelectedObjectCollection selectedItems = lstContestCounties.SelectedItems;
                     if (selectedItems.Count > 0) {
@@ -432,8 +456,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void btnRemoveAllCounties_Click(object sender, EventArgs e) {
             try {
-                txtWards.Enabled = false;
-                txtWards.Text = "";
                 if (currentElectionContest != null) {
                     currentElectionContest.Counties = new List<ContestCounty>(allCounties.Count);
                     refreshCountyLists();
@@ -472,40 +494,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void lstAllCounties_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lstAllCounties.SelectedItems.Count == 1)
-            {
-                txtWards.Enabled = true;
-                txtWards.Text = ((County)lstAllCounties.SelectedItems[0]).WardCount.ToString();
-            }
-            else
-            {
-                txtWards.Enabled = false;
-                txtWards.Text = "";
-            }
-        }
-
-        private void lstAllCounties_LostFocus(object sender, EventArgs e)
-        {
-            if (!txtWards.Focused)
-            {
-
-                txtWards.Enabled = false;
-            }
-        }
-
-        private void lstContestCounties_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtWards.Enabled = false;
-            if (lstContestCounties.SelectedItems.Count == 1){
-                txtWards.Text = ((ContestCounty)lstContestCounties.SelectedItems[0]).WardCount.ToString();
-            }
-            else{
-                txtWards.Text = "";
-            }
-        }
-
         private void frmElection_Resize(object sender, EventArgs e)
         {
             tbDisplay.Height = this.Height - 76;
@@ -541,6 +529,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentElectionContest.Responses.RemoveAt(ind2);
                 currentElectionContest.Responses.Insert(ind2 + 1, (Response)o);
             }
+        }
+
+        private void dgvCounties_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
