@@ -16,4 +16,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return query.List<ContestCounty>();
         }
     }
+
+
 }

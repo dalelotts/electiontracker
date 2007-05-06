@@ -152,6 +152,9 @@
     <Compile Include="Test\TestCandidate.cs" />
     <Compile Include="Test\TestCandidateDAO.cs" />
     <Compile Include="Test\TestContestCounty.cs" />
+    <Compile Include="Test\TestContestCountyDAO.cs" />
+    <Compile Include="Test\TestElectionContest.cs" />
+    <Compile Include="Test\TestResponseValue.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
     <Compile Include="ui\BaseMDIChild.cs">
