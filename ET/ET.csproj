@@ -79,7 +79,6 @@
     <Compile Include="core\ElectionContest.cs" />
     <Compile Include="core\PhoneNumberType.cs" />
     <Compile Include="core\PoliticalParty.cs" />
-    <Compile Include="core\PrintReport.cs" />
     <Compile Include="core\Program.cs" />
     <Compile Include="core\Response.cs" />
     <Compile Include="core\ResponseValue.cs" />
