@@ -87,21 +87,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 bool persistData = true;
 
                 //Go through the list of faults and display warnings and errors.
-                foreach (Fault fault in faultLst)
-                {
-                    if (persistData)
-                    {
-                        if (fault.IsError)
-                        {
+                foreach (Fault fault in faultLst) {
+                    if (persistData) {
+                        if (fault.IsError) {
                             persistData = false;
                             MessageBox.Show("Error: " + fault.Message);
-                        }
-                        else
-                        {
+                        } else {
                             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                            if (result == DialogResult.No)
-                            {
+                            DialogResult result =
+                                MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?",
+                                                "Warning Message", buttons);
+                            if (result == DialogResult.No) {
                                 persistData = false;
                             }
                         }
@@ -109,13 +105,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
 
                 //If there were no errors, persist data to the database
-                if (persistData)
-                {
+                if (persistData) {
                     contestCountyDAO.makePersistent(contestCounty);
                     //contestCountyDAO.flush();
 
-                    foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox)
-                    {
+                    foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
                         ResponseValue responseValue = entry.Key;
                         TextBox textBox = entry.Value;
                         responseValue.VoteCount = int.Parse(textBox.Text);
@@ -131,21 +125,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         bool persistResponseValue = true;
 
                         //Go through the list of faults and display warnings and errors.
-                        foreach (Fault fault in faults)
-                        {
-                            if (persistResponseValue)
-                            {
-                                if (fault.IsError)
-                                {
+                        foreach (Fault fault in faults) {
+                            if (persistResponseValue) {
+                                if (fault.IsError) {
                                     persistResponseValue = false;
                                     MessageBox.Show("Error: " + fault.Message);
-                                }
-                                else
-                                {
+                                } else {
                                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                                    DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                                    if (result == DialogResult.No)
-                                    {
+                                    DialogResult result =
+                                        MessageBox.Show(
+                                            "Warning: " + fault.Message + "\n\nWould you like to save anyway?",
+                                            "Warning Message", buttons);
+                                    if (result == DialogResult.No) {
                                         persistResponseValue = false;
                                     }
                                 }
@@ -153,12 +144,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         }
 
                         //If there were no errors, persist data to the database
-                        if (persistResponseValue)
-                        {
+                        if (persistResponseValue) {
                             responseValueDAO.makePersistent(responseValue);
                         }
                     }
-
                 }
                 Dirty = false;
             } catch (Exception ex) {

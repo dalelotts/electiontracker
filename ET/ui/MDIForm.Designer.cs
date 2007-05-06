@@ -1,4 +1,3 @@
-using System;
 
 namespace edu.uwec.cs.cs355.group4.et.ui
 {
@@ -349,7 +348,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.electionReportToolStripMenuItem.Name = "electionReportToolStripMenuItem";
             this.electionReportToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.electionReportToolStripMenuItem.Text = "Vote Tally Form";
-            this.electionReportToolStripMenuItem.Click += new System.EventHandler(this.electionReportToolStripMenuItem_Click);
+
             // 
             // proofingSheetToolStripMenuItem
             // 
@@ -438,7 +437,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.contestVoteSummaryToolStripMenuItem.Name = "contestVoteSummaryToolStripMenuItem";
             this.contestVoteSummaryToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.contestVoteSummaryToolStripMenuItem.Text = "Contest Vote Summary";
-            this.contestVoteSummaryToolStripMenuItem.Click += new System.EventHandler(this.contestVoteSummaryToolStripMenuItem_Click);
             // 
             // countyContactFormToolStripMenuItem
             // 

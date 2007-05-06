@@ -50,7 +50,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         public override string ToString() {
             string name = lastName + ", " + firstName + " " + middleName;
-            return name + (politicalParty != null ? " (" + politicalParty.Abbreviation + ")"  : "");
+            return name + (politicalParty != null ? " (" + politicalParty.Abbreviation + ")" : "");
         }
     }
 }

@@ -50,9 +50,11 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return retVal;
         }
 
-        public IList<County> findCounties(Election e)
-        {
-            IQuery iqQuery = getCurrentSession().CreateSQLQuery("select c.CountyID, c.CountyName, c.CountyNotes, c.CountyWardCount from election e left join ElectionContest ec on (ec.ElectionID = e.ElectionID) left join ContestCounty cc on (ec.ElectionContestID = cc.ElectionContestID) left join County c on (cc.CountyID = c.CountyID) where e.ElectionID = " + e.ID + ";").AddEntity(typeof(County));
+        public IList<County> findCounties(Election e) {
+            IQuery iqQuery =
+                getCurrentSession().CreateSQLQuery(
+                    "select c.CountyID, c.CountyName, c.CountyNotes, c.CountyWardCount from election e left join ElectionContest ec on (ec.ElectionID = e.ElectionID) left join ContestCounty cc on (ec.ElectionContestID = cc.ElectionContestID) left join County c on (cc.CountyID = c.CountyID) where e.ElectionID = " +
+                    e.ID + ";").AddEntity(typeof (County));
             return iqQuery.List<County>();
         }
     }

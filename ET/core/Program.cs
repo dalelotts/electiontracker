@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.ui;
+using ExceptionManager;
 using log4net;
 using log4net.Config;
 using Spring.Context;
@@ -13,49 +14,22 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         [STAThread]
         public static void Main(string[] args) {
             try {
+                UnhandledExceptionManager.AddHandler(false);
+                UnhandledExceptionManager.TakeScreenshot = true;
+                UnhandledExceptionManager.LogToFile = true;
                 Application.EnableVisualStyles();
                 XmlConfigurator.Configure();
                 IApplicationContext ctx = ContextRegistry.GetContext();
-
-//                ElectionDAO electionDAO = (ElectionDAO) ctx.GetObject("ElectionDAO");
-//
-//
-//                ContestCountyDAO contestCountyDAO = (ContestCountyDAO)ctx.GetObject("ContestCountyDAO");
-//
-//                IList<string> excluded = new List<string>();
-//                excluded.Add("ID");
-//                excluded.Add("WardCount");
-//                excluded.Add("WardsReporting");
-//
-//                IList<Election> elections = electionDAO.findActive();
-//
-//                foreach (Election election in elections) {
-//                    IList<ElectionContest> contests = election.ElectionContests;
-//                    foreach (ElectionContest contest in contests) {
-//                        IList<ContestCounty> counties = contest.Counties;
-//                        foreach (ContestCounty county in counties) {
-//                            Console.WriteLine(county.County.Name);
-//
-//                            ContestCounty example = new ContestCounty();
-//                            example.County = county.County;
-//                            example.ElectionContest = contest;
-//
-//                            IList<ContestCounty> contestCounties = contestCountyDAO.findByExample(example, excluded);
-//
-//                            foreach (ContestCounty contestCounty in contestCounties) {
-//                                Console.WriteLine(contestCounty.County.Name);  
-//                            }
-//
-//                        }
-//                    }
-//                }
-
-
-
                 UIController controller = (UIController) ctx.GetObject("UIController");
                 Application.Run(controller.getMDIForm());
             } catch (Exception ex) {
                 LOG.Error(ex.Message, ex);
+                HandledExceptionManager.ShowDialog(
+                    "Unexpected Error - " + ex.GetType().Name + ".  This may be due to a programming bug.",
+                    "When you click OK, applicaiton will close.",
+                    "Restart the application, and try repeating your last action. Try alternative methods of performing the same action.",
+                    ex, MessageBoxButtons.OK, MessageBoxIcon.Error,
+                    HandledExceptionManager.UserErrorDefaultButton.Default);
             }
         }
     }

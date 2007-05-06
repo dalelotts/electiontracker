@@ -255,7 +255,6 @@ namespace DesignByContract {
         private static bool useAssertions = false;
 
         #endregion // Implementation
-
     } // End Check
 
     #region Exceptions

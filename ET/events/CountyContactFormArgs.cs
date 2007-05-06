@@ -1,10 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace edu.uwec.cs.cs355.group4.et.events
-{
-    class CountyContactFormArgs : EventArgs
-    {
-    }
+namespace edu.uwec.cs.cs355.group4.et.events {
+    internal class CountyContactFormArgs : EventArgs {}
 }

@@ -6,8 +6,7 @@ using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal sealed class VoteEnterer : Panel {
-
-        private static readonly ILog LOG = LogManager.GetLogger(typeof(VoteEnterer));
+        private static readonly ILog LOG = LogManager.GetLogger(typeof (VoteEnterer));
 
         private static readonly IList<string> excluded = new List<string>();
 
@@ -19,7 +18,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             excluded.Add("WardsReporting");
         }
 
-        public VoteEnterer(Election election, County county, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) {
+        public VoteEnterer(Election election, County county, ContestCountyDAO contestCountyDAO,
+                           ResponseValueDAO responseValueDAO) {
             int currentTop = 0;
 
             foreach (ElectionContest electionContest in election.ElectionContests) {
@@ -38,7 +38,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     Controls.Add(display);
                     displays.Add(display);
                 } else {
-                    LOG.Error("Unalbe to locate contest county where countyID =" + county.ID + " AND electionContestID =" + electionContest.ID);
+                    LOG.Error("Unalbe to locate contest county where countyID =" + county.ID +
+                              " AND electionContestID =" + electionContest.ID);
                 }
             }
             AutoScroll = true;

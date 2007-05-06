@@ -1,17 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
 using edu.uwec.cs.cs355.group4.et.core;
+using NUnit.Framework;
 
-namespace edu.uwec.cs.cs355.group4.et.Test
-{
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
-    public class TestElectionContest
-    {
-        ElectionContest _unitUnderTest;
+    public class TestElectionContest {
+        private ElectionContest _unitUnderTest;
+
         [SetUp()]
-        public void SetUp(){
+        public void SetUp() {
             _unitUnderTest = new ElectionContest();
             Contest c = new Contest();
             c.Name = "TEST CONTEST";
@@ -19,22 +16,19 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         }
 
         [TearDown()]
-        public void TearDown()
-        {
+        public void TearDown() {
             _unitUnderTest = null;
         }
 
         [Test()]
-        public void TestToString()
-        {
+        public void TestToString() {
             string expectedString = "TEST CONTEST";
             string resultString = _unitUnderTest.ToString();
             Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
         }
 
         [Test()]
-        public void TestGetTotalVotes()
-        {
+        public void TestGetTotalVotes() {
             _unitUnderTest.Counties = new List<ContestCounty>();
             ContestCounty cc = new ContestCounty();
             cc.ResponseValues = new List<ResponseValue>();
@@ -57,8 +51,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         }
 
         [Test()]
-        public void TestGetWardsReporting()
-        {
+        public void TestGetWardsReporting() {
             _unitUnderTest.Counties = new List<ContestCounty>();
             ContestCounty cc = new ContestCounty();
             cc.WardsReporting = 7;
@@ -72,8 +65,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         }
 
         [Test()]
-        public void TestGetWardCount()
-        {
+        public void TestGetWardCount() {
             _unitUnderTest.Counties = new List<ContestCounty>();
             ContestCounty cc = new ContestCounty();
             cc.WardCount = 17;
@@ -87,8 +79,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         }
 
         [Test()]
-        public void TestGetWardsReportingPercentage()
-        {
+        public void TestGetWardsReportingPercentage() {
             _unitUnderTest.Counties = new List<ContestCounty>();
             ContestCounty cc = new ContestCounty();
             cc.WardCount = 17;

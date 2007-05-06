@@ -3,32 +3,43 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
+<<<<<<< .mine
+namespace edu.uwec.cs.cs355.group4.et.ui {
+    internal sealed partial class AboutBox : Form {
+        public AboutBox() {
+=======
 namespace edu.uwec.cs.cs355.group4.et.ui
 {
     sealed partial class AboutBox : Form
     {
         public AboutBox()
         {
+>>>>>>> .r61
             InitializeComponent();
 
             //  Initialize the AboutBox to display the product information from the assembly information.
             //  Change assembly information settings for your application through either:
             //  - Project->Properties->Application->Assembly Information
             //  - AssemblyInfo.cs
-            this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            Text = String.Format("About {0}", AssemblyTitle);
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
         }
 
         #region Assembly Attribute Accessors
 
+<<<<<<< .mine
+        public static string AssemblyTitle {
+            get {
+=======
         public string AssemblyTitle
         {
             get
             {
+>>>>>>> .r61
                 // Get all Title attributes on this assembly
                 object[] attributes =
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
@@ -46,15 +57,24 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             }
         }
 
+<<<<<<< .mine
+        public static string AssemblyVersion {
+=======
         public string AssemblyVersion
         {
+>>>>>>> .r61
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
+<<<<<<< .mine
+        public static string AssemblyDescription {
+            get {
+=======
         public string AssemblyDescription
         {
             get
             {
+>>>>>>> .r61
                 // Get all Description attributes on this assembly
                 object[] attributes =
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
@@ -66,10 +86,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             }
         }
 
+<<<<<<< .mine
+        public static string AssemblyProduct {
+            get {
+=======
         public string AssemblyProduct
         {
             get
             {
+>>>>>>> .r61
                 // Get all Product attributes on this assembly
                 object[] attributes =
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
@@ -81,10 +106,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             }
         }
 
+<<<<<<< .mine
+        public static string AssemblyCopyright {
+            get {
+=======
         public string AssemblyCopyright
         {
             get
             {
+>>>>>>> .r61
                 // Get all Copyright attributes on this assembly
                 object[] attributes =
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
@@ -96,10 +126,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             }
         }
 
+<<<<<<< .mine
+        public static string AssemblyCompany {
+            get {
+=======
         public string AssemblyCompany
         {
             get
             {
+>>>>>>> .r61
                 // Get all Company attributes on this assembly
                 object[] attributes =
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
@@ -113,8 +148,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private void okButton_Click(object sender, EventArgs e)
-        {
+        private void okButton_Click(object sender, EventArgs e) {
             try
             {
                 Dispose();

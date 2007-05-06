@@ -37,9 +37,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             //EnableControls(Controls, false);
         }
 
-        public virtual void btnDelete_Click(object sender, EventArgs e) {
-            
-        }
+        public virtual void btnDelete_Click(object sender, EventArgs e) {}
 
         public virtual void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             //EnableControls(Controls, false);

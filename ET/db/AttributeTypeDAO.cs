@@ -9,28 +9,18 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         protected override IList<Fault> performValidation(AttributeType entity) {
             List<Fault> retVal = new List<Fault>();
 
-            if (entity == null)
-            {
+            if (entity == null) {
                 retVal.Add(new Fault(true, "AttributeType is null."));
-            }
-            else
-            {
-
-                if (entity.Name == null)
-                {
+            } else {
+                if (entity.Name == null) {
                     retVal.Add(new Fault(true, "AttributeType name is null."));
-                }
-                else if (entity.Name == "")
-                {
+                } else if (entity.Name == "") {
                     retVal.Add(new Fault(true, "AttributeType name is empty."));
-                }
-                else
-                {
+                } else {
                     ISession currentSession = getCurrentSession();
                     IQuery validQuery =
                         currentSession.CreateSQLQuery("select * from attributetype where Name = " + entity.Name + ";");
-                    if (validQuery.List().Count > 0)
-                    {
+                    if (validQuery.List().Count > 0) {
                         retVal.Add(new Fault(true, "Name entered for Attribute Type already exists"));
                     }
                 }

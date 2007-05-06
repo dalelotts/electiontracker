@@ -37,20 +37,17 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { phoneNumbers = value; }
         }
 
-        public virtual IList<CountyWebsite> Websites
-        {
+        public virtual IList<CountyWebsite> Websites {
             get { return websites; }
             set { websites = value; }
         }
 
-        public virtual IList<CountyAttribute> Attributes
-        {
+        public virtual IList<CountyAttribute> Attributes {
             get { return attributes; }
             set { attributes = value; }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return name;
         }
     }

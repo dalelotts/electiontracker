@@ -4,11 +4,9 @@ using NHibernate;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class PhoneNumberTypeDAO : HibernateDAO<PhoneNumberType> {
-
         public PhoneNumberTypeDAO(ISessionFactory factory) : base(factory) {}
 
-        protected override IList<Fault> performValidation(PhoneNumberType entity)
-        {
+        protected override IList<Fault> performValidation(PhoneNumberType entity) {
             IList<Fault> retVal = new List<Fault>();
 
             if (entity == null)
@@ -41,6 +39,5 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
             return retVal;
         }
-
     }
 }
