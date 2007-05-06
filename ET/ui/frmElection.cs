@@ -18,6 +18,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private readonly IList<Candidate> allCandidates;
         private readonly IList<County> allCounties;
 
+        private readonly IList<ElectionContest> addedContests;
+
         private Election currentElection;
         private ElectionContest currentElectionContest;
 
@@ -36,6 +38,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 allCandidates = candidateDAO.findAll();
                 allCounties = countyDAO.findAll();
 
+                addedContests = new List<ElectionContest>();
 
                 refreshGoToList();
                 refreshControls();
@@ -48,7 +51,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void refreshControls() {
-            Console.WriteLine("currentElection.Date = " + currentElection.Date);
             chkActive.Checked = currentElection.IsActive;
             dtpDate.Value = currentElection.Date;
             txtNotes.Text = currentElection.Notes;
@@ -89,9 +91,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
 
             foreach (ElectionContest electionContest in currentElection.ElectionContests) {
-                lstElectionContests.Items.Add(electionContest);
-                lstElectionContestsDetails.Items.Add(electionContest);
-                lstAllContests.Items.Remove(electionContest.Contest);
+                    lstElectionContests.Items.Add(electionContest);
+                    lstElectionContestsDetails.Items.Add(electionContest);
+                    //lstAllContests.Items.Remove(electionContest.Contest);
+                    int removeAt = 0;
+                    foreach (Contest c in lstAllContests.Items)
+                    {
+                        if (c.Name == electionContest.Contest.Name)
+                            removeAt = lstAllContests.Items.IndexOf(c);
+                    }
+                    lstAllContests.Items.RemoveAt(removeAt);
             }
         }
 
@@ -158,6 +167,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
+            addedContests.Clear();
             foreach (ElectionContest ec in currentElection.ElectionContests){
                 foreach (Response r in ec.Responses){
                     r.SortOrder = ec.Responses.IndexOf(r);
@@ -208,9 +218,64 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
+        private void resetContestTab()
+        {
+        }
+
         public override void btnReset_Click(object sender, EventArgs e) {
-            refreshControls();
+            resetControls();
             base.btnReset_Click(sender, e);
+        }
+
+        private void resetControls()
+        {
+            chkActive.Checked = currentElection.IsActive;
+            dtpDate.Value = currentElection.Date;
+            txtNotes.Text = currentElection.Notes;
+
+            resetContestLists();
+            refreshCountyLists();
+            refreshCandidateLists();
+        }
+
+        private void resetContestLists()
+        {
+            lstElectionContests.Items.Clear();
+            lstElectionContestsDetails.Items.Clear();
+            lstAllContests.Items.Clear();
+
+            foreach (Contest contest in allContests)
+            {
+                lstAllContests.Items.Add(contest);
+            }
+
+            IList<ElectionContest> removeList = new List<ElectionContest>();
+            foreach (ElectionContest electionContest in currentElection.ElectionContests)
+            {
+                if (!addedContests.Contains(electionContest))
+                {
+                    lstElectionContests.Items.Add(electionContest);
+                    lstElectionContestsDetails.Items.Add(electionContest);
+                    lstAllContests.Items.Remove(electionContest.Contest);
+
+                    int removeAt = 0;
+                    foreach (Contest c in lstAllContests.Items)
+                    {
+                        if (c.Name == electionContest.Contest.Name)
+                            removeAt = lstAllContests.Items.IndexOf(c);
+                    }
+                    lstAllContests.Items.RemoveAt(removeAt);
+                }
+                else
+                {
+                    removeList.Add(electionContest);
+                }
+            }
+
+            foreach (ElectionContest ec in removeList)
+            {
+                currentElection.ElectionContests.Remove(ec);
+            }
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
@@ -233,6 +298,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 foreach (Contest contest in allContests) {
                     ElectionContest electionContest = makeElectionContest(contest);
                     currentElection.ElectionContests.Add(electionContest);
+                    addedContests.Add(electionContest);
                 }
 
                 refreshContestLists();
@@ -261,6 +327,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     foreach (Contest contest in selectedItems) {
                         ElectionContest electionContest = makeElectionContest(contest);
                         currentElection.ElectionContests.Add(electionContest);
+                        addedContests.Add(electionContest);
                     }
 
                     refreshContestLists();
