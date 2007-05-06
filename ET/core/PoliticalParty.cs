@@ -9,6 +9,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private IList<Candidate> candidates;
         private bool    isActive = true;
 
+        #region Properties
         public virtual IList<Candidate>  Candidates {
             get { return candidates; }
             set { candidates = value; }
@@ -35,7 +36,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             get { return isActive; }
             set { isActive = value; }
         }
-
+        #endregion
         public override string ToString() {
             return name + " (" + abbreviation + ")";
         }

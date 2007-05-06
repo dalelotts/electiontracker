@@ -155,6 +155,7 @@
     <Compile Include="Test\TestContestDAO.cs" />
     <Compile Include="Test\TestContestTypeDAO.cs" />
     <Compile Include="Test\TestElectionContest.cs" />
+    <Compile Include="Test\TestPoliticalParty.cs" />
     <Compile Include="Test\TestResponseValue.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
