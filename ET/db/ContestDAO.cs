@@ -32,7 +32,42 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected override IList<Fault> performValidation(Contest entity)
         {
-            return makeEmptyFaultList();
+            List<Fault> result = new List<Fault>();
+
+            if (entity == null)
+            {
+                result.Add(new Fault(true, "Contest is null."));
+            }
+            else
+            {
+                if (entity.Name == null)
+                {
+                    result.Add(new Fault(true, "Contest name is null."));
+                }
+                else if (entity.Name == "")
+                {
+                    result.Add(new Fault(true, "Contest name is empty."));
+                }
+                if (entity.ContestType == null)
+                {
+                    result.Add(new Fault(true, "Contest type is null."));
+                }
+                if (result.Count == 0) 
+                {
+                    ISession currentSession = getCurrentSession();
+
+                    IQuery validQuery =
+                        currentSession.CreateSQLQuery("select * from contest where name = " + entity.Name + ";");
+
+                    if (validQuery.List().Count > 0)
+                    {
+                        result.Add(new Fault(true, "Contest already exists"));
+                    }
+                }
+            }
+
+
+            return result;
         }
 
         public IList<Candidate> findCandidates()
