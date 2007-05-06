@@ -154,6 +154,7 @@
     <Compile Include="Test\TestContestCountyDAO.cs" />
     <Compile Include="Test\TestContestDAO.cs" />
     <Compile Include="Test\TestContestTypeDAO.cs" />
+    <Compile Include="Test\TestCountyDAO.cs" />
     <Compile Include="Test\TestElectionContest.cs" />
     <Compile Include="Test\TestPoliticalParty.cs" />
     <Compile Include="Test\TestResponseValue.cs" />

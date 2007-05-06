@@ -25,7 +25,30 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected override IList<Fault> performValidation(County entity)
         {
-            return makeEmptyFaultList();
+            IList<Fault> retVal = new List<Fault>();
+
+            if (entity == null)
+            {
+                retVal.Add(new Fault(true, "County is null."));
+            }
+            else
+            {
+                if (entity.Name == null)
+                {
+                    retVal.Add(new Fault(true, "County name is null."));
+                }
+                else if (entity.Name == "")
+                {
+                    retVal.Add(new Fault(true, "County name is empty."));
+                }
+
+                if (entity.WardCount < 1)
+                {
+                    retVal.Add(new Fault(false, "County ward count is less than one."));
+                }
+            }
+
+            return retVal;
         }
 
         public IList<Contest> findContests(Election e, County cty)

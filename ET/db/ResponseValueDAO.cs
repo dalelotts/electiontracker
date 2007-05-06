@@ -8,7 +8,30 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected override IList<Fault> performValidation(ResponseValue entity)
         {
-            return makeEmptyFaultList();
+            IList<Fault> retVal = new List<Fault>();
+
+            if (entity == null)
+            {
+                retVal.Add(new Fault(true, "ResponseValue is null."));
+            }
+            else
+            {
+                if (entity.ContestCounty == null)
+                {
+                    retVal.Add(new Fault(true, "ContestCounty in ResponseValue is null."));
+                }
+
+                if (entity.Response == null)
+                {
+                    retVal.Add(new Fault(true, "Response in ResponseValue is null."));
+                }
+
+            }
+
+            
+            
+
+            return retVal;
         }
 
 
