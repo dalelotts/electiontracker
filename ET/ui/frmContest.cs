@@ -131,8 +131,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             {
                 for (int i = 1, limit = cbContestType.Items.Count; i < limit; i++)
                 {
-                    Console.WriteLine("currentContestType = " + currentContest.ContestType.ID);
-                    Console.WriteLine("items[" + i + "].Name = " + ((ListItemWrapper<ContestType>)cbContestType.Items[i]).Value.ID);
                     if (((ListItemWrapper<ContestType>)cbContestType.Items[i]).Value.ID ==
                         currentContest.ContestType.ID)
                     {
@@ -152,7 +150,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                 cbContestType.Items.Add(new ListItemWrapper<ContestType>(contestType.Name, contestType));
             }
 
-            if (contestTypes.Count > 0) cbContestType.SelectedIndex = 0;
+            //if (cbContestType.SelectedIndex != -1) cbContestType.SelectedIndex = 0;
+            refreshControls();
         }
 
         public override void btnReset_Click(object sender, EventArgs e)
@@ -196,6 +195,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                     refreshControls();
                 }
             }
+            refreshControls();
         }
 
         private void cbContestType_Leave(object sender, EventArgs e)

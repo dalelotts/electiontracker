@@ -48,6 +48,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void refreshControls() {
+            Console.WriteLine("currentElection.Date = " + currentElection.Date);
             chkActive.Checked = currentElection.IsActive;
             dtpDate.Value = currentElection.Date;
             txtNotes.Text = currentElection.Notes;
@@ -75,6 +76,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshCountyLists();
                 }
             }
+            refreshControls();
         }
 
         private void refreshContestLists() {
