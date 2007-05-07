@@ -101,7 +101,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             txtNotes.Text = currentContest.Notes;
 
             if (currentContest.ContestType == null) {
-                cbContestType.SelectedIndex = 0;
+                try
+                {
+                    cbContestType.SelectedIndex = 0;
+                }
+                catch (Exception e)
+                {
+                }
             } else {
                 for (int i = 1, limit = cbContestType.Items.Count; i < limit; i++) {
                     if (((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value.ID ==
