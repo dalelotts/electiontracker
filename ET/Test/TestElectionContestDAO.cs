@@ -33,7 +33,8 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         }
 
         [TearDown()]
-        public void TearDown() {
+        public void TearDown()
+        {
             _unitUnderTest = null;
         }
 
@@ -101,7 +102,26 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         {
             ElectionContest entity = new ElectionContest();
             IList<Fault> tstValidate = _unitUnderTest.validate(entity);
-            Assert.IsNotNull(tstValidate);
+            Assert.IsTrue(tstValidate.Count == 4);
+
+            entity.Contest = new Contest();
+            entity.Contest.Name = "a";
+            tstValidate = _unitUnderTest.validate(entity);
+            Assert.IsTrue(tstValidate.Count == 3);
+
+            entity.Election = new Election();
+            tstValidate = _unitUnderTest.validate(entity);
+            Assert.IsTrue(tstValidate.Count == 2);
+
+            entity.Responses = new List<Response>();
+            entity.Responses.Add(new CandidateResponse());
+            tstValidate = _unitUnderTest.validate(entity);
+            Assert.IsTrue(tstValidate.Count == 1);
+
+            entity.Counties = new List<ContestCounty>();
+            entity.Counties.Add(new ContestCounty());
+            tstValidate = _unitUnderTest.validate(entity);
+            Assert.IsTrue(tstValidate.Count == 0);
         }
 
     }

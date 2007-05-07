@@ -33,6 +33,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test
             Expect.AtLeastOnce.On(criteria).Method("Add");
             Expect.AtLeastOnce.On(criteria).Method("AddOrder");
             Expect.AtLeastOnce.On(session).Method("CreateSQLQuery").Will(Return.Value(query));
+            Expect.AtLeastOnce.On(query).Method("AddEntity").Will(Return.Value(query));
             Expect.AtLeastOnce.On(query).Method("List").Will(Return.Value(strlist));
             _unitUnderTest = new CandidateDAO(factory);
         }
