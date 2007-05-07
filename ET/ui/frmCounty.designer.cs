@@ -330,6 +330,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstPhoneNums.Name = "lstPhoneNums";
             this.lstPhoneNums.Size = new System.Drawing.Size(290, 95);
             this.lstPhoneNums.TabIndex = 4;
+            this.lstPhoneNums.SelectedIndexChanged += new System.EventHandler(this.lstPhoneNums_SelectedIndexChanged);
             // 
             // label1
             // 
