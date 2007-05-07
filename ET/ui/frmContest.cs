@@ -29,7 +29,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshContestTypes();
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
+                MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
         }
@@ -41,7 +41,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 base.btnAdd_Click(sender, e);
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
+                MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
         }
@@ -82,7 +82,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             } catch (Exception ex) {
                 string message = "Unable to save: Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
+                MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
         }
@@ -100,14 +100,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             txtName.Text = currentContest.Name;
             txtNotes.Text = currentContest.Notes;
 
-            if (currentContest.ContestType == null) {
-                try
-                {
-                    cbContestType.SelectedIndex = 0;
-                }
-                catch (Exception e)
-                {
-                }
+            if (currentContest.ContestType == null && cbContestType.Items.Count > 0) {
+                cbContestType.SelectedIndex = 0;
             } else {
                 for (int i = 1, limit = cbContestType.Items.Count; i < limit; i++) {
                     if (((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value.ID ==
@@ -136,7 +130,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
+                MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
         }
@@ -147,7 +141,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 ;
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
+                MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
         }
@@ -190,7 +184,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
+                MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
         }
