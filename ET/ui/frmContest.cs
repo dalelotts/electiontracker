@@ -47,6 +47,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
+            cbContestType_Leave(null, null);
             try {
                 currentContest.IsActive = chkActive.Checked;
                 currentContest.Name = txtName.Text;
@@ -119,9 +120,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             foreach (ContestType contestType in contestTypes) {
                 cbContestType.Items.Add(new ListItemWrapper<ContestType>(contestType.Name, contestType));
             }
-
-            //if (cbContestType.SelectedIndex != -1) cbContestType.SelectedIndex = 0;
-            refreshControls();
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
@@ -177,6 +175,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         for (int i = 0; i < cbContestType.Items.Count; i++) {
                             if ((((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value).Name.Equals(newTypeName)) {
                                 cbContestType.SelectedIndex = i;
+                                //MessageBox.Show("TEST");
                             }
                         }
                     }
