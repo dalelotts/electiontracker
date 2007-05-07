@@ -10,7 +10,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             List<Fault> result = new List<Fault>();
 
             ISession currentSession = getCurrentSession();
-            IQuery validQuery = currentSession.CreateSQLQuery("select * from contesttype where name = " + entity.Name + ";");
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from contesttype where contesttypename = " + entity.Name + " and ContestTypeID != " + entity.ID + ";");
 
             if (validQuery.List().Count > 0)
             {

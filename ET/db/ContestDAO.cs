@@ -35,7 +35,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
             ISession currentSession = getCurrentSession();
 
-            IQuery validQuery = currentSession.CreateSQLQuery("select * from contest where contestname = '" + entity.Name + "';").AddEntity(objectType) ;
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from contest where contestname = '" + entity.Name + "' and contestid != " + entity.ID + ";").AddEntity(objectType) ;
 
             if (validQuery.List().Count > 0){
                 result.Add(new Fault(true, "Contest already exists"));

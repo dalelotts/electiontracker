@@ -24,7 +24,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             IList<Fault> retVal = new List<Fault>();
 
             ISession currentSession = getCurrentSession();
-            IQuery validQuery = currentSession.CreateSQLQuery("select * from county where CountyName = '" + entity.Name + "';").AddEntity(objectType);
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from county where CountyName = '" + entity.Name + "' and CountyID != " + entity.ID + ";").AddEntity(objectType);
             if (validQuery.List().Count > 0)
             {
                 retVal.Add(new Fault(true, "Name entered for County already exists"));
