@@ -5,7 +5,7 @@ using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.events;
 using log4net;
-using edu.uwec.cs.cs355.group4.et.util;
+
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
@@ -91,16 +91,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
 
             foreach (ElectionContest electionContest in currentElection.ElectionContests) {
-                    lstElectionContests.Items.Add(electionContest);
-                    lstElectionContestsDetails.Items.Add(electionContest);
-                    //lstAllContests.Items.Remove(electionContest.Contest);
-                    int removeAt = 0;
-                    foreach (Contest c in lstAllContests.Items)
-                    {
-                        if (c.Name == electionContest.Contest.Name)
-                            removeAt = lstAllContests.Items.IndexOf(c);
-                    }
-                    lstAllContests.Items.RemoveAt(removeAt);
+                lstElectionContests.Items.Add(electionContest);
+                lstElectionContestsDetails.Items.Add(electionContest);
+                lstAllContests.Items.Remove(electionContest.Contest);
+//                int removeAt = 0;
+//                foreach (Contest c in lstAllContests.Items) {
+//                    if (c.Name == electionContest.Contest.Name)
+//                        removeAt = lstAllContests.Items.IndexOf(c);
+//                }
+//                lstAllContests.Items.RemoveAt(removeAt);
             }
         }
 
@@ -108,31 +107,29 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             Dictionary<County, int> mapCounts = new Dictionary<County, int>();
             object[] o = new object[2];
             int i;
-            foreach (DataGridViewRow row in dgvCounties.Rows){
-                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i))
-                {
-                    mapCounts.Add(((County)row.Cells[0].Value), i);
+            foreach (DataGridViewRow row in dgvCounties.Rows) {
+                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)) {
+                    mapCounts.Add(((County) row.Cells[0].Value), i);
                 }
             }
             dgvCounties.Rows.Clear();
-            foreach (County county in allCounties){
+            foreach (County county in allCounties) {
                 o[0] = county;
-                i = 0;
-                if (mapCounts.TryGetValue(county, out i)){
+
+                if (mapCounts.TryGetValue(county, out i)) {
                     o[1] = i;
-                }
-                else{
+                } else {
                     o[1] = county.WardCount;
                 }
                 dgvCounties.Rows.Add(o);
             }
             lstContestCounties.Items.Clear();
 
-            if (currentElectionContest != null){
-                foreach (ContestCounty contestCounty in currentElectionContest.Counties){
+            if (currentElectionContest != null) {
+                foreach (ContestCounty contestCounty in currentElectionContest.Counties) {
                     lstContestCounties.Items.Add(contestCounty);
-                    foreach(DataGridViewRow row in dgvCounties.Rows){
-                        if (((County)row.Cells[0].Value).ID == contestCounty.County.ID){
+                    foreach (DataGridViewRow row in dgvCounties.Rows) {
+                        if (((County) row.Cells[0].Value).ID == contestCounty.County.ID) {
                             dgvCounties.Rows.Remove(row);
                             break;
                         }
@@ -168,8 +165,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             addedContests.Clear();
-            foreach (ElectionContest ec in currentElection.ElectionContests){
-                foreach (Response r in ec.Responses){
+            foreach (ElectionContest ec in currentElection.ElectionContests) {
+                foreach (Response r in ec.Responses) {
                     r.SortOrder = ec.Responses.IndexOf(r);
                 }
             }
@@ -178,34 +175,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentElection.Date = dtpDate.Value;
                 currentElection.Notes = txtNotes.Text;
 
-                IList<Fault> faultLst = electionDAO.validate(currentElection);
-                bool persistData = true;
+                IList<Fault> faults = electionDAO.validate(currentElection);
+                bool persistData = reportFaults(faults);
 
-                //Go through the list of faults and display warnings and errors.
-                foreach (Fault fault in faultLst)
-                {
-                    if (persistData)
-                    {
-                        if (fault.IsError)
-                        {
-                            persistData = false;
-                            MessageBox.Show("Error: " + fault.Message);
-                        }
-                        else
-                        {
-                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result = MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?", "Warning Message", buttons);
-                            if (result == DialogResult.No)
-                            {
-                                persistData = false;
-                            }
-                        }
-                    }
-                }
-                
                 //If there were no errors, persist data to the database
-                if (persistData)
-                {
+                if (persistData) {
                     electionDAO.makePersistent(currentElection);
                     refreshControls();
                     refreshGoToList();
@@ -218,17 +192,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void resetContestTab()
-        {
-        }
 
         public override void btnReset_Click(object sender, EventArgs e) {
             resetControls();
             base.btnReset_Click(sender, e);
         }
 
-        private void resetControls()
-        {
+        private void resetControls() {
             chkActive.Checked = currentElection.IsActive;
             dtpDate.Value = currentElection.Date;
             txtNotes.Text = currentElection.Notes;
@@ -238,42 +208,34 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             refreshCandidateLists();
         }
 
-        private void resetContestLists()
-        {
+        private void resetContestLists() {
             lstElectionContests.Items.Clear();
             lstElectionContestsDetails.Items.Clear();
             lstAllContests.Items.Clear();
 
-            foreach (Contest contest in allContests)
-            {
+            foreach (Contest contest in allContests) {
                 lstAllContests.Items.Add(contest);
             }
 
             IList<ElectionContest> removeList = new List<ElectionContest>();
-            foreach (ElectionContest electionContest in currentElection.ElectionContests)
-            {
-                if (!addedContests.Contains(electionContest))
-                {
+            foreach (ElectionContest electionContest in currentElection.ElectionContests) {
+                if (!addedContests.Contains(electionContest)) {
                     lstElectionContests.Items.Add(electionContest);
                     lstElectionContestsDetails.Items.Add(electionContest);
                     lstAllContests.Items.Remove(electionContest.Contest);
 
                     int removeAt = 0;
-                    foreach (Contest c in lstAllContests.Items)
-                    {
+                    foreach (Contest c in lstAllContests.Items) {
                         if (c.Name == electionContest.Contest.Name)
                             removeAt = lstAllContests.Items.IndexOf(c);
                     }
                     lstAllContests.Items.RemoveAt(removeAt);
-                }
-                else
-                {
+                } else {
                     removeList.Add(electionContest);
                 }
             }
 
-            foreach (ElectionContest ec in removeList)
-            {
+            foreach (ElectionContest ec in removeList) {
                 currentElection.ElectionContests.Remove(ec);
             }
         }
@@ -468,34 +430,28 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
-            County county;
             //MessageBox.Show("" + dgvCounties.SelectedRows.Count );
-            int i;
-            ContestCounty contestCounty;
-            try{
-                if (currentElectionContest != null)
-                {
-                    foreach (DataGridViewRow row in dgvCounties.SelectedRows)
-                    {
-                        county = (County)row.Cells[0].Value;
+            try {
+                if (currentElectionContest != null) {
+                    foreach (DataGridViewRow row in dgvCounties.SelectedRows) {
+                        County county;
+                        county = (County) row.Cells[0].Value;
+                        ContestCounty contestCounty;
                         contestCounty = new ContestCounty();
                         contestCounty.ElectionContest = currentElectionContest;
                         contestCounty.County = county;
-                        if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)){
+                        int i;
+                        if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)) {
                             contestCounty.WardCount = i;
-                        }
-                        else{
+                        } else {
                             contestCounty.WardCount = 0;
                         }
                         contestCounty.WardsReporting = 0;
                         currentElectionContest.Counties.Add(contestCounty);
-
                     }
                     refreshCountyLists();
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 string message = "Encountered exception in btnAddCounty_Click";
                 LOG.Error(message, ex);
                 ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
@@ -563,46 +519,34 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void frmElection_Resize(object sender, EventArgs e)
-        {
-            tbDisplay.Height = this.Height - 76;
+        private void frmElection_Resize(object sender, EventArgs e) {
+            tbDisplay.Height = Height - 76;
         }
 
-        private void btnResponseUp_Click(object sender, EventArgs e)
-        {
+        private void btnResponseUp_Click(object sender, EventArgs e) {
             Object o = lstContestCandidates.SelectedItem;
             int ind = lstContestCandidates.SelectedIndex;
-            int ind2;
-            if (ind > 0)
-            {
+            if (ind > 0) {
                 lstContestCandidates.Items.RemoveAt(ind);
                 lstContestCandidates.Items.Insert(ind - 1, o);
                 lstContestCandidates.SelectedIndex = ind - 1;
-                ind2 = currentElectionContest.Responses.IndexOf((Response)o);
+                int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
                 currentElectionContest.Responses.RemoveAt(ind2);
-                currentElectionContest.Responses.Insert(ind2 - 1, (Response)o);
+                currentElectionContest.Responses.Insert(ind2 - 1, (Response) o);
             }
         }
 
-        private void btnResponseDown_Click(object sender, EventArgs e)
-        {
+        private void btnResponseDown_Click(object sender, EventArgs e) {
             Object o = lstContestCandidates.SelectedItem;
             int ind = lstContestCandidates.SelectedIndex;
-            int ind2;
-            if (ind < lstContestCandidates.Items.Count - 1)
-            {
+            if (ind < lstContestCandidates.Items.Count - 1) {
                 lstContestCandidates.Items.RemoveAt(ind);
-                lstContestCandidates.Items.Insert(ind+1, o);
-                lstContestCandidates.SelectedIndex = ind+1;
-                ind2 = currentElectionContest.Responses.IndexOf((Response)o);
+                lstContestCandidates.Items.Insert(ind + 1, o);
+                lstContestCandidates.SelectedIndex = ind + 1;
+                int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
                 currentElectionContest.Responses.RemoveAt(ind2);
-                currentElectionContest.Responses.Insert(ind2 + 1, (Response)o);
+                currentElectionContest.Responses.Insert(ind2 + 1, (Response) o);
             }
-        }
-
-        private void dgvCounties_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
