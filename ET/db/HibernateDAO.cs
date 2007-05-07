@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
@@ -121,12 +122,14 @@ namespace edu.uwec.cs.cs355.group4.et.db {
                                 new Fault(true,
                                           "The " + attribute.FriendlyName + " property cannot be a zero length string."));
                         }
-                    } else if (typeof(ICollection<Object>).IsAssignableFrom(propertyResult.GetType()) && attribute.AllowEmptyList == false) {
-                        ICollection<Object> collectionResult = (ICollection<object>) propertyResult;
+                    } else if (typeof (ICollection).IsAssignableFrom(propertyResult.GetType()) &&
+                               attribute.AllowEmptyList == false) {
+                        ICollection collectionResult = (ICollection) propertyResult;
                         if (collectionResult.Count == 0) {
                             result.Add(
                                 new Fault(true,
-                                          "The " + attribute.FriendlyName + " property must have one or more members."));                            
+                                          "The " + attribute.FriendlyName +
+                                          " property must have one or more members."));
                         }
                     }
                 }
