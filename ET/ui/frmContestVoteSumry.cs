@@ -41,19 +41,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return total;
         }
 
-        /*
-        private ResponseValue GetResponseValue(Response r, ContestCounty cc)
-        {
-            foreach (ResponseValue rv in cc.ResponseValues)
-            {
-                if (rv.Response.ID == r.ID)
-                    return rv;
-            }
-            MessageBox.Show("RETURNING NULL " + r.ToString());
-            return null;
-        }*/
-
-
         private string GetVoteNumbers(Response r, ContestCounty cc) {
             ResponseValue res = null;
             foreach (ResponseValue rv in cc.ResponseValues) {
@@ -158,7 +145,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                     strVoteCounts += "" + cc.GetTotalVotes();
                     lstToPrint.Add(strVoteCounts);
-                    //lstToPrint.Add(cc.County.Name + "     " + GetResponseValue(lstResponses[0], cc).GetVotePercentage().ToString());
                 }
                 lstToPrint.Add("");
                 lstToPrint.Add("");
@@ -267,6 +253,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             cmbElectionType = new ComboBox();
             cmbElectionType.Items.Add("Active");
             cmbElectionType.Items.Add("Inactive");
+            cmbElectionType.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbElectionType.FormattingEnabled = true;
             cmbElectionType.Location = new Point(13, 581);
             cmbElectionType.Name = "cmbElectionType";
