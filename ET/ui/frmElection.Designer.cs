@@ -560,7 +560,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.dgvCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCounties.Size = new System.Drawing.Size(172, 160);
             this.dgvCounties.TabIndex = 49;
-            this.dgvCounties.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCounties_CellContentClick);
             // 
             // dgvCounty
             // 
