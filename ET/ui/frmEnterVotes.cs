@@ -41,7 +41,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void LoadElections() {
             IList<Election> elections = electionDAO.findActive();
             foreach (Election election in elections) {
-                cmbElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString(), election));
+                cmbElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString("d"), election));
             }
             if (elections.Count > 0) cmbElections.SelectedIndex = 0;
         }
