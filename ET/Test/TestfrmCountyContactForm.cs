@@ -25,7 +25,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             frmCountyContactForm testfrmCountyContactForm = new frmCountyContactForm(electionDAO, countyDAO);
             Assert.IsNotNull(testfrmCountyContactForm,
                              "Constructor of type, frmCountyContactForm failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
     }
 }

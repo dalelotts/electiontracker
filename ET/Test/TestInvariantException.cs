@@ -21,7 +21,6 @@ namespace DesignByContract {
             InvariantException testInvariantException = new InvariantException();
             Assert.IsNotNull(testInvariantException,
                              "Constructor of type, InvariantException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]
@@ -30,17 +29,16 @@ namespace DesignByContract {
             InvariantException testInvariantException = new InvariantException(message);
             Assert.IsNotNull(testInvariantException,
                              "Constructor of type, InvariantException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]
         public void TestConstructorInvariantExceptionMessageInner() {
             string message = null;
-            Exception inner = null;
+            Exception inner = new Exception("Inner");
             InvariantException testInvariantException = new InvariantException(message, inner);
             Assert.IsNotNull(testInvariantException,
                              "Constructor of type, InvariantException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
+            Assert.AreEqual(inner, testInvariantException.InnerException);
         }
     }
 }

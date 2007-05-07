@@ -21,26 +21,24 @@ namespace DesignByContract {
             PostconditionException testPostconditionException = new PostconditionException();
             Assert.IsNotNull(testPostconditionException,
                              "Constructor of type, PostconditionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]
         public void TestConstructorPostconditionExceptionMessage() {
-            string message = null;
+            string message = "Message";
             PostconditionException testPostconditionException = new PostconditionException(message);
             Assert.IsNotNull(testPostconditionException,
                              "Constructor of type, PostconditionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]
         public void TestConstructorPostconditionExceptionMessageInner() {
-            string message = null;
-            Exception inner = null;
+            string message = "Message";
+            Exception inner = new Exception("inner");
             PostconditionException testPostconditionException = new PostconditionException(message, inner);
             Assert.IsNotNull(testPostconditionException,
                              "Constructor of type, PostconditionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
+            Assert.AreEqual(inner, testPostconditionException.InnerException);
         }
     }
 }

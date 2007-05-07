@@ -9,7 +9,6 @@ namespace DesignByContract {
             AssertionException testAssertionException = new AssertionException();
             Assert.IsNotNull(testAssertionException,
                              "Constructor of type, AssertionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]

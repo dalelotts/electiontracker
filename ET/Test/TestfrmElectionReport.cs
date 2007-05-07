@@ -24,7 +24,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             ContestCountyDAO contestCountyDAO = null;
             frmElectionReport testfrmElectionReport = new frmElectionReport(electionDAO, contestCountyDAO);
             Assert.IsNotNull(testfrmElectionReport, "Constructor of type, frmElectionReport failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
     }
 }

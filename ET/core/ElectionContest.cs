@@ -7,9 +7,10 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private Election election;
         private Contest contest;
         private IList<Response> responses;
-        private IList<ContestCounty> counties;
+        private IList<ContestCounty> counties = new List<ContestCounty>();
 
         #region Properties
+
         public virtual long ID {
             get { return id; }
             set { id = value; }
@@ -49,9 +50,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             }
         }
 
-        public virtual int GetTotalVotes(){
+        public virtual int GetTotalVotes() {
             int result = 0;
-            foreach (ContestCounty cc in Counties){
+            foreach (ContestCounty cc in Counties) {
                 /*foreach (ResponseValue rv in cc.ResponseValues){
                     result += rv.VoteCount;
                 }*/
@@ -60,26 +61,26 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             return result;
         }
 
-        public virtual int GetWardsReporting(){
+        public virtual int GetWardsReporting() {
             int result = 0;
-            foreach (ContestCounty cc in Counties){
+            foreach (ContestCounty cc in Counties) {
                 result += cc.WardsReporting;
             }
             return result;
         }
 
-        public virtual int GetWardCount(){
+        public virtual int GetWardCount() {
             int result = 0;
-            foreach (ContestCounty cc in Counties){
+            foreach (ContestCounty cc in Counties) {
                 result += cc.WardCount;
             }
             return result;
         }
 
-        public virtual double GetWardsReportingPercentage(){
+        public virtual double GetWardsReportingPercentage() {
             if (GetWardCount() == 0)
                 return 0;
-            return ((double)GetWardsReporting() / (double)GetWardCount());
+            return ((double) GetWardsReporting()/(double) GetWardCount());
         }
     }
 }

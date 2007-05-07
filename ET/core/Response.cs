@@ -17,24 +17,21 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { electionContest = value; }
         }
 
-        public virtual int SortOrder
-        {
+        public virtual int SortOrder {
             get { return sortorder; }
             set { sortorder = value; }
         }
 
         public abstract override string ToString();
-        
-        public  virtual int GetTotalVotes()
-        {
+
+        public virtual int GetTotalVotes() {
             int result = 0;
-            foreach (ContestCounty cc in ElectionContest.Counties)
-            {
-                foreach (ResponseValue rv in cc.ResponseValues)
-                {
-                    if (rv.Response.ID == ID)
-                    {
-                        result += rv.VoteCount;
+            if (electionContest != null) {
+                foreach (ContestCounty cc in electionContest.Counties) {
+                    foreach (ResponseValue rv in cc.ResponseValues) {
+                        if (rv.Response.ID == ID) {
+                            result += rv.VoteCount;
+                        }
                     }
                 }
             }

@@ -21,7 +21,6 @@ namespace DesignByContract {
             PreconditionException testPreconditionException = new PreconditionException();
             Assert.IsNotNull(testPreconditionException,
                              "Constructor of type, PreconditionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]
@@ -30,17 +29,16 @@ namespace DesignByContract {
             PreconditionException testPreconditionException = new PreconditionException(message);
             Assert.IsNotNull(testPreconditionException,
                              "Constructor of type, PreconditionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
         }
 
         [Test()]
         public void TestConstructorPreconditionExceptionMessageInner() {
-            string message = null;
-            Exception inner = null;
+            string message = "Message";
+            Exception inner = new Exception("Inner");
             PreconditionException testPreconditionException = new PreconditionException(message, inner);
             Assert.IsNotNull(testPreconditionException,
                              "Constructor of type, PreconditionException failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
+            Assert.AreEqual(inner, testPreconditionException.InnerException);
         }
     }
 }
