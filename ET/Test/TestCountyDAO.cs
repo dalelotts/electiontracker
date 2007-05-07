@@ -17,18 +17,13 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
             ISessionFactory factory = (ISessionFactory) mocks.NewMock(typeof (ISessionFactory));
             ISQLQuery query = (ISQLQuery) mocks.NewMock(typeof (ISQLQuery));
             ICriteria criteria = (ICriteria) mocks.NewMock(typeof (ICriteria));
-            IList<Candidate> list = new List<Candidate>();
-            IList<string> strlist = new List<string>();
-            strlist.Add("a");
-
+            IList<County> list = new List<County>();
+            list.Add(new County());
 
             Expect.AtLeastOnce.On(factory).Method("OpenSession").Will(Return.Value(session));
             Expect.AtLeastOnce.On(session).Method("CreateCriteria").Will(Return.Value(criteria));
-            Expect.AtLeastOnce.On(criteria).Method("List").Will(Return.Value(list));
-            Expect.AtLeastOnce.On(criteria).Method("Add");
-            Expect.AtLeastOnce.On(criteria).Method("AddOrder");
             Expect.AtLeastOnce.On(session).Method("CreateSQLQuery").Will(Return.Value(query));
-            Expect.AtLeastOnce.On(query).Method("List").Will(Return.Value(strlist));
+            Expect.AtLeastOnce.On(query).Method("List").Will(Return.Value(list));
             _unitUnderTest = new CountyDAO(factory);
         }
 
@@ -38,6 +33,21 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
         }
 
         [Test()]
-        public void TestValidate() {}
+        public void TestValidate() {
+            County entity = new County();
+
+            entity.Name = null;
+            IList<Fault> resultIList = _unitUnderTest.validate(entity);
+            Assert.IsTrue(resultIList.Count == 1, "Expected count of one (null name).");
+
+            entity.Name = "";
+            resultIList = _unitUnderTest.validate(entity);
+            Assert.IsTrue(resultIList.Count == 1, "Expected count of one (empty name).");
+
+            entity.Name = "a";
+            resultIList = _unitUnderTest.validate(entity);
+            Assert.IsTrue(resultIList.Count > 0, "Returned count of 0 (should return at least 1 for duplicate County name).");
+        
+        }
     }
 }
