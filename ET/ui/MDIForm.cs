@@ -140,6 +140,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void mainTreeView_DoubleClick(object sender, EventArgs e) {
             try {
                 TreeNode node = mainTreeView.SelectedNode;
+                if (node == null) return;
                 string[] tokens = node.Name.Split(';');
 
                 if (tokens.Length > 0) {
