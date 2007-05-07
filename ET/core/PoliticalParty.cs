@@ -9,40 +9,88 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private IList<Candidate> candidates;
         private bool isActive = true;
 
-<<<<<<< .mine
+    <<<<<<< .
+        mine
         public virtual IList<Candidate> Candidates {
-=======
+    =======
+
         #region Properties
-        public virtual IList<Candidate>  Candidates {
->>>>>>> .r61
-            get { return candidates; }
-            set { candidates = value; }
+
+        public virtual IList<Candidate> Candidates {
+    >>>>>>> .
+
+        private r61 get {
+            return 
+            candidates;
         }
 
-        public virtual long ID {
-            get { return id; }
-            set { id = value; }
-        }
-
-        [RequiredProperty("Political Party Name")]
-        public virtual string Name {
-            get { return name; }
-            set { name = value; }
-        }
-
-        [RequiredProperty("Political Party Abbreviation")]
-        public virtual string Abbreviation {
-            get { return abbreviation; }
-            set { abbreviation = value; }
-        }
-
-        public virtual bool IsActive {
-            get { return isActive; }
-            set { isActive = value; }
-        }
-        #endregion
-        public override string ToString() {
-            return name + " (" + abbreviation + ")";
-        }
+        set
+    {
+        candidates = value;
     }
+    }
+
+    public virtual
+long ID
+{
+    get
+    {
+        return id;
+    }
+    set
+    {
+        id = value;
+    }
+}
+
+    [RequiredProperty("Political Party Name")]
+    public virtual
+string Name
+{
+    get
+    {
+        return name;
+    }
+    set
+    {
+        name = value;
+    }
+}
+
+    [RequiredProperty("Political Party Abbreviation")]
+    public virtual
+string Abbreviation
+{
+    get
+    {
+        return abbreviation;
+    }
+    set
+    {
+        abbreviation = value;
+    }
+}
+
+    public virtual
+bool IsActive
+{
+    get
+    {
+        return isActive;
+    }
+    set
+    {
+        isActive = value;
+    }
+}
+
+    #endregion
+
+    public override
+string ToString()
+{
+    return name + " (" + abbreviation + ")";
+}
+}
+
 }

@@ -6,19 +6,16 @@ using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
 using edu.uwec.cs.cs355.group4.et.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui
-{
-    internal partial class frmEnterVotes : Form
-    {
-
+namespace edu.uwec.cs.cs355.group4.et.ui {
+    internal partial class frmEnterVotes : Form {
         private Map<String, VoteEnterer> countyToVoteEnterer;
         private readonly ElectionDAO electionDAO;
         private readonly ContestCountyDAO contestCountyDAO;
         private readonly ResponseValueDAO responseValueDAO;
 
 
-        public frmEnterVotes(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO)
-        {
+        public frmEnterVotes(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO,
+                             ResponseValueDAO responseValueDAO) {
             this.electionDAO = electionDAO;
             this.contestCountyDAO = contestCountyDAO;
             this.responseValueDAO = responseValueDAO;
@@ -26,87 +23,67 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             InitializeComponent();
         }
 
-        public void HideCurrentVoteEnterer()
-        {
-            foreach (VoteEnterer enterer in countyToVoteEnterer.Values)
-            {
+        public void HideCurrentVoteEnterer() {
+            foreach (VoteEnterer enterer in countyToVoteEnterer.Values) {
                 enterer.Visible = false;
             }
         }
 
-        private void frmEnterVotes_Load(object sender, EventArgs e)
-        {
-            try
-            {
+        private void frmEnterVotes_Load(object sender, EventArgs e) {
+            try {
                 LoadElections();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
         // Loads the elections into the listbox.
-        private void LoadElections()
-        {
+        private void LoadElections() {
             IList<Election> elections = electionDAO.findActive();
-            foreach (Election election in elections)
-            {
+            foreach (Election election in elections) {
                 cmbElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString(), election));
             }
             if (elections.Count > 0) cmbElections.SelectedIndex = 0;
         }
 
-        private void cmbElections_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadCounties(((ListItemWrapper<Election>)cmbElections.SelectedItem).Value);
-            }
-            catch (Exception ex)
-            {
+        private void cmbElections_SelectedIndexChanged(object sender, EventArgs e) {
+            try {
+                LoadCounties(((ListItemWrapper<Election>) cmbElections.SelectedItem).Value);
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
-        private void LoadCounties(Election election)
-        {
+        private void LoadCounties(Election election) {
             lstCounties.Items.Clear();
             IDictionary<long, County> counties = new Dictionary<long, County>();
 
             IList<ElectionContest> electionContests = election.ElectionContests;
-            foreach (ElectionContest contest in electionContests)
-            {
+            foreach (ElectionContest contest in electionContests) {
                 IList<ContestCounty> contestCounties = contest.Counties;
-                foreach (ContestCounty county in contestCounties)
-                {
-                    if (!counties.ContainsKey(county.County.ID))
-                    {
+                foreach (ContestCounty county in contestCounties) {
+                    if (!counties.ContainsKey(county.County.ID)) {
                         counties.Add(county.County.ID, county.County);
                     }
                 }
             }
 
-            foreach (KeyValuePair<long, County> county in counties)
-            {
+            foreach (KeyValuePair<long, County> county in counties) {
                 lstCounties.Items.Add(new ListItemWrapper<County>(county.Value.Name, county.Value));
             }
             if (lstCounties.Items.Count > 0) lstCounties.SelectedIndex = 0;
         }
 
-        private void lstCounties_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Election election = ((ListItemWrapper<Election>)cmbElections.SelectedItem).Value;
-                County county = ((ListItemWrapper<County>)lstCounties.SelectedItem).Value;
+        private void lstCounties_SelectedIndexChanged(object sender, EventArgs e) {
+            try {
+                Election election = ((ListItemWrapper<Election>) cmbElections.SelectedItem).Value;
+                County county = ((ListItemWrapper<County>) lstCounties.SelectedItem).Value;
 
                 HideCurrentVoteEnterer();
 
                 VoteEnterer enterer = countyToVoteEnterer.Get("" + election.ID + "_" + county.ID);
 
-                if (enterer == null)
-                {
+                if (enterer == null) {
                     enterer = new VoteEnterer(election, county, contestCountyDAO, responseValueDAO);
                     enterer.Height = gbContest.Height - 60;
                     enterer.Top = 18;
@@ -117,9 +94,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
                 }
 
                 enterer.Visible = true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
@@ -129,79 +104,58 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         // This subclass is a GUI collection of ContestDisplays.
 
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void btnNext_Click(object sender, EventArgs e) {
+            try {
                 // ToDo: prompt user with yes / no message box before moving to 
                 // next county if enterer is dirty.
 
-                if (lstCounties.SelectedIndex != lstCounties.Items.Count - 1)
-                {
+                if (lstCounties.SelectedIndex != lstCounties.Items.Count - 1) {
                     lstCounties.SelectedIndex++;
-                }
-                else
-                {
+                } else {
                     lstCounties.SelectedIndex = 0;
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void btnSave_Click(object sender, EventArgs e) {
+            try {
                 // TODO: Save contest information.
-                foreach (VoteEnterer voteEnterer in countyToVoteEnterer.Values)
-                {
+                foreach (VoteEnterer voteEnterer in countyToVoteEnterer.Values) {
                     voteEnterer.Persist();
                 } // foreach(VoteEnterer...
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
-        private void frmEnterVotes_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
+        private void frmEnterVotes_FormClosing(object sender, FormClosingEventArgs e) {
+            try {
                 responseValueDAO.flush();
                 contestCountyDAO.flush();
                 electionDAO.flush();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
-        private void frmEnterVotes_Resize(object sender, EventArgs e)
-        {
-            try
-            {
-                gbCounty.Height = this.Height - 117;
-                gbContest.Height = this.Height - 117;
+        private void frmEnterVotes_Resize(object sender, EventArgs e) {
+            try {
+                gbCounty.Height = Height - 117;
+                gbContest.Height = Height - 117;
                 btnNext.Top = gbCounty.Height - 30;
                 btnSave.Top = gbContest.Height - 30;
-                gbContest.Width = this.Width - 231;
+                gbContest.Width = Width - 231;
                 btnSave.Left = gbContest.Width - 81;
                 lstCounties.Height = gbCounty.Height - 60;
 
                 // Resize vote enterer.
-                foreach (String k in countyToVoteEnterer.Keys)
-                {
+                foreach (String k in countyToVoteEnterer.Keys) {
                     countyToVoteEnterer.Get(k).Height = gbContest.Height - 60;
                     countyToVoteEnterer.Get(k).Width = gbContest.Width - 10;
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }

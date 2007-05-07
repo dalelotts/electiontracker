@@ -1,10 +1,41 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     public partial class BaseMDIChild : Form {
         public BaseMDIChild() {
             InitializeComponent();
+        }
+
+        internal static bool reportFaults(IList<Fault> faults) {
+            bool result = faults.Count == 0;
+            bool encounteredError = false;
+            string message = "";
+            //Go through the list of faults and build message for user.
+            foreach (Fault fault in faults) {
+                if (fault.IsError) {
+                    encounteredError = true;
+                    message += "Error: " + fault.Message;
+                } else {
+                    message += "Warning: " + fault.Message;
+                }
+                message += "\n\n";
+            }
+
+            if (encounteredError) {
+                MessageBox.Show(message, "Validation Failure", buttons);
+            } else {
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult messageResult =
+                    MessageBox.Show(message + "Would you like to save anyway?", "Validation Failure", buttons);
+                if (messageResult == DialogResult.Yes) {
+                    result = true;
+                }
+            }
+
+            return result;
         }
 
 //        protected static void EnableControls(Control.ControlCollection controls, bool enabled) {

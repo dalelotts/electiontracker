@@ -49,7 +49,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                             dropDownItem != countyToolStripMenuItem && dropDownItem != candidateToolStripMenuItem &&
                             dropDownItem != contestToolStripMenuItem && dropDownItem != politicalPartyToolStripMenuItem &&
                             dropDownItem != electionToolStripMenuItem && dropDownItem != electionReportToolStripMenuItem &&
-                            dropDownItem != proofingSheetToolStripMenuItem && dropDownItem != countyContactFormToolStripMenuItem &&
+                            dropDownItem != proofingSheetToolStripMenuItem &&
+                            dropDownItem != countyContactFormToolStripMenuItem &&
                             dropDownItem != contestVoteSummaryToolStripMenuItem) {
                             dropDownItem.Click += new EventHandler(NotImplementedMessageHandler);
                         }
@@ -86,18 +87,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             EventUtil.RaiseEvent<object, ElectionReportArgs>(electionReport, this, new ElectionReportArgs());
         }
 
-        private void CountyContactFormHandler(object sender, EventArgs e)
-        {
+        private void CountyContactFormHandler(object sender, EventArgs e) {
             EventUtil.RaiseEvent<object, CountyContactFormArgs>(countyContactForm, this, new CountyContactFormArgs());
         }
 
-        private void ContestVoteSumryHandler(object sender, EventArgs e)
-        {
+        private void ContestVoteSumryHandler(object sender, EventArgs e) {
             EventUtil.RaiseEvent<object, ContestVoteSumryArgs>(contestVoteSumry, this, new ContestVoteSumryArgs());
         }
 
-        private void ProofingSheetHandler(object sender, EventArgs e)
-        {
+        private void ProofingSheetHandler(object sender, EventArgs e) {
             EventUtil.RaiseEvent<object, ProofingSheetArgs>(proofingSheet, this, new ProofingSheetArgs());
         }
 
@@ -123,18 +121,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void filterBar_ButtonClicked(object sender, EventArgs e) {
-            try
-            {
+            try {
                 mainTreeView.Nodes.Clear();
-                ((FilterButton)filterBar.SelectedButton).Filter.apply(mainTreeView.Nodes);
+                ((FilterButton) filterBar.SelectedButton).Filter.apply(mainTreeView.Nodes);
                 mainTreeView.ExpandAll();
-                if (mainTreeView.Nodes.Count > 0)
-                {
+                if (mainTreeView.Nodes.Count > 0) {
                     mainTreeView.Nodes[0].EnsureVisible();
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
@@ -144,68 +138,45 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void mainTreeView_DoubleClick(object sender, EventArgs e) {
-            try
-            {
+            try {
                 TreeNode node = mainTreeView.SelectedNode;
                 string[] tokens = node.Name.Split(';');
 
-                if (tokens.Length > 0)
-                {
+                if (tokens.Length > 0) {
                     string idString = tokens[0]; // The first token is the ID token.
                     string[] entityID = idString.Split('=');
-                    if (entityID.Length == 2)
-                    {
+                    if (entityID.Length == 2) {
                         string entity = entityID[0].Trim();
                         long id = long.Parse(entityID[1]);
 
                         // To Do: Change to factory method.
-                        if (DBEntity.CANDIDATE.ToString().Equals(entity))
-                        {
+                        if (DBEntity.CANDIDATE.ToString().Equals(entity)) {
                             CandidateArgs candidateArgs = new CandidateArgs(id);
                             EventUtil.RaiseEvent<object, CandidateArgs>(candidate, this, candidateArgs);
-                        }
-                        else if (DBEntity.CONTEST.ToString().Equals(entity))
-                        {
+                        } else if (DBEntity.CONTEST.ToString().Equals(entity)) {
                             ContestArgs contestArgs = new ContestArgs(id);
                             EventUtil.RaiseEvent<object, ContestArgs>(contest, this, contestArgs);
-                        }
-                        else if (DBEntity.COUNTY.ToString().Equals(entity))
-                        {
+                        } else if (DBEntity.COUNTY.ToString().Equals(entity)) {
                             CountyFormArgs countyFormArgs = new CountyFormArgs(id);
                             EventUtil.RaiseEvent<object, CountyFormArgs>(countyForm, this, countyFormArgs);
-                        }
-                        else if (DBEntity.ELECTION.ToString().Equals(entity))
-                        {
+                        } else if (DBEntity.ELECTION.ToString().Equals(entity)) {
                             ElectionArgs electionArgs = new ElectionArgs(id);
                             EventUtil.RaiseEvent<object, ElectionArgs>(election, this, electionArgs);
-                        }
-                        else if (DBEntity.POLITICAL_PARTY.ToString().Equals(entity))
-                        {
+                        } else if (DBEntity.POLITICAL_PARTY.ToString().Equals(entity)) {
                             PoliticalPartyArgs politicalPartyArgs = new PoliticalPartyArgs(id);
                             EventUtil.RaiseEvent<object, PoliticalPartyArgs>(politicalParty, this, politicalPartyArgs);
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
 
-        private void electionReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void electionReportToolStripMenuItem_Click(object sender, EventArgs e) {}
 
-        }
+        private void countyVotesReportToolStripMenuItem_Click(object sender, EventArgs e) {}
 
-        private void countyVotesReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contestVoteSummaryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void contestVoteSummaryToolStripMenuItem_Click(object sender, EventArgs e) {}
     }
 }

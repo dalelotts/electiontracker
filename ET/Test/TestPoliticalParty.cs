@@ -1,31 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
 using edu.uwec.cs.cs355.group4.et.core;
+using NUnit.Framework;
 
-namespace edu.uwec.cs.cs355.group4.et.Test
-{
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
-    public class TestPoliticalParty
-    {
-        PoliticalParty _unitUnderTest;
+    public class TestPoliticalParty {
+        private PoliticalParty _unitUnderTest;
+
         [SetUp()]
-        public void SetUp()
-        {
+        public void SetUp() {
             _unitUnderTest = new PoliticalParty();
         }
 
         [TearDown()]
-        public void TearDown()
-        {
+        public void TearDown() {
             _unitUnderTest = null;
         }
 
         [Test()]
-
-        public void TestToString()
-        {
+        public void TestToString() {
             _unitUnderTest.Name = "THE_NAME";
             _unitUnderTest.Abbreviation = "TST";
             string expected = "THE_NAME (TST)";
