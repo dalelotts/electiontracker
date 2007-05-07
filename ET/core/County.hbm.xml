@@ -7,15 +7,15 @@
 		<property name="Name" column="CountyName" type="String" length="100" not-null="false"/>
 		<property name="Notes" column="CountyNotes" type="String" not-null="false"/>
 		<property name="WardCount" column="CountyWardCount" type="Int32" not-null="true"/>    
-		<bag lazy="true" inverse="true" name="PhoneNumbers" cascade="all" >
+		<bag lazy="true" inverse="true" name="PhoneNumbers" cascade="all-delete-orphan" >
       <key column="CountyID"/>
       <one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber, edu.uwec.cs.cs355.group4.et"/>
     </bag>
-    <bag lazy="true" inverse="true" name="Attributes" cascade="all">
+    <bag lazy="true" inverse="true" name="Attributes" cascade="all-delete-orphan">
 			<key column="CountyID"/>
 			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, edu.uwec.cs.cs355.group4.et"/>
 		</bag>
-		<bag lazy="true" name="Websites" inverse="true" cascade="all">
+		<bag lazy="true" name="Websites" inverse="true" cascade="all-delete-orphan">
 			<key column="CountyID"/>
 			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyWebsite,edu.uwec.cs.cs355.group4.et"/>
 		</bag>	

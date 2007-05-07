@@ -2,7 +2,7 @@ using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class Contest {
-        private long id;
+        private long? id;
         private string name;
         private ContestType contestType;
         private string notes;
@@ -10,7 +10,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
 
         public virtual long ID {
-            get { return id; }
+            get { return id.HasValue ? id.Value : 0; }
             set { id = value; }
         }
 
@@ -36,9 +36,19 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { isActive = value; }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return Name;
+        }
+
+        public override bool Equals(object obj) {
+            if (this == obj) return true;
+            if (!GetType().Equals(obj.GetType())) return false;
+            Contest that = (Contest) obj;
+            if (id.HasValue && that.id.HasValue) {
+                return id.Equals(that.id);
+            } else {
+                return false;
+            }
         }
     }
 }

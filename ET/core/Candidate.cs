@@ -2,7 +2,7 @@ using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class Candidate {
-        private long id;
+        private long? id;
         private string firstName;
         private string middleName;
         private string lastName;
@@ -12,7 +12,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
 
         public virtual long ID {
-            get { return id; }
+            get { return id.HasValue ? id.Value : 0; }
             set { id = value; }
         }
 
@@ -50,7 +50,19 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         public override string ToString() {
             string name = lastName + ", " + firstName + " " + middleName;
-            return name + (politicalParty != null ? " (" + politicalParty.Abbreviation + ")"  : "");
+            return name + (politicalParty != null ? " (" + politicalParty.Abbreviation + ")" : "");
+        }
+
+
+        public override bool Equals(object obj) {
+            if (this == obj) return true;
+            if (!GetType().Equals(obj.GetType())) return false;
+            Candidate that = (Candidate) obj;
+            if (id.HasValue && that.id.HasValue) {
+                return id.Equals(that.id);
+            } else {
+                return false;
+            }
         }
     }
 }

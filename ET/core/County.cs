@@ -3,7 +3,7 @@ using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class County {
-        private long id;
+        private long? id;
         private string name;
         private string notes;
         private int wardCount;
@@ -12,7 +12,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private IList<CountyWebsite> websites = new List<CountyWebsite>();
 
         public virtual long ID {
-            get { return id; }
+            get { return id.HasValue ? id.Value : 0; }
             set { id = value; }
         }
 
@@ -37,21 +37,29 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { phoneNumbers = value; }
         }
 
-        public virtual IList<CountyWebsite> Websites
-        {
+        public virtual IList<CountyWebsite> Websites {
             get { return websites; }
             set { websites = value; }
         }
 
-        public virtual IList<CountyAttribute> Attributes
-        {
+        public virtual IList<CountyAttribute> Attributes {
             get { return attributes; }
             set { attributes = value; }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return name;
+        }
+
+        public override bool Equals(object obj) {
+            if (this == obj) return true;
+            if (!GetType().Equals(obj.GetType())) return false;
+            County that = (County) obj;
+            if (id.HasValue && that.id.HasValue) {
+                return id.Equals(that.id);
+            } else {
+                return false;
+            }
         }
     }
 }

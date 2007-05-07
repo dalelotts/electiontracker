@@ -4,11 +4,11 @@
 		<id name="ID" column="ElectionContestID" type="Int64">
 			<generator class="identity"/>
 		</id>
-    <bag lazy="true" inverse="true" name="Responses" cascade="all" order-by="SortOrder">
+    <bag lazy="true" inverse="true" name="Responses" cascade="all-delete-orphan" order-by="SortOrder">
       <key column="ElectionContestID"/>
       <one-to-many class="edu.uwec.cs.cs355.group4.et.core.Response, edu.uwec.cs.cs355.group4.et"/>
     </bag>
-    <bag lazy="true" inverse="true" name="Counties" cascade="all" >
+    <bag lazy="true" inverse="true" name="Counties" cascade="all-delete-orphan" >
       <key column="ElectionContestID"/>
       <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ContestCounty, edu.uwec.cs.cs355.group4.et"/>
     </bag>    
