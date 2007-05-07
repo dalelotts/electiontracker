@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DesignByContract;
 using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
@@ -10,6 +11,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         internal static bool reportFaults(IList<Fault> faults) {
+            Check.Assert(faults != null, "Null: faults");
             bool result = faults.Count == 0;
             bool encounteredError = false;
             string message = "";
@@ -25,6 +27,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
 
             if (encounteredError) {
+                message += "Please correct the above errors and try again.";
                 MessageBox.Show(message, "Validation Failure", MessageBoxButtons.OK);
             } else {
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
