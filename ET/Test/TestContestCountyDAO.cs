@@ -18,9 +18,11 @@ namespace edu.uwec.cs.cs355.group4.et.Test
         public void SetUp()
         {
             Mockery mocks = new Mockery();
-            ISession session = (ISession)mocks.NewMock(typeof(ISession));
-            ISessionFactory factory = (ISessionFactory)mocks.NewMock(typeof(ISessionFactory));
-            ISQLQuery query = (ISQLQuery)mocks.NewMock(typeof(ISQLQuery));
+
+            ISession session = (ISession) mocks.NewMock(typeof (ISession));
+            ISessionFactory factory = (ISessionFactory) mocks.NewMock(typeof (ISessionFactory));
+            IQuery query = (ISQLQuery) mocks.NewMock(typeof (ISQLQuery));
+
             IList<ContestCounty> retlist = new List<ContestCounty>();
             ContestCounty forList = new ContestCounty();
             retlist.Add(forList);
@@ -28,7 +30,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test
 
             Expect.AtLeastOnce.On(factory).Method("OpenSession").Will(Return.Value(session));
             Expect.AtLeastOnce.On(session).Method("CreateSQLQuery").Will(Return.Value(query));
-            Expect.AtLeastOnce.On(query).Method("AddEntity");
+            Expect.AtLeastOnce.On(query).Method("AddEntity").Will(Return.Value(query));
             Expect.AtLeastOnce.On(query).Method("List").Will(Return.Value(retlist));
             _unitUnderTest = new ContestCountyDAO(factory);
         }
