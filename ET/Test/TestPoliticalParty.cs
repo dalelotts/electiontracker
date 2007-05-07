@@ -1,7 +1,6 @@
-using edu.uwec.cs.cs355.group4.et.core;
 using NUnit.Framework;
 
-namespace edu.uwec.cs.cs355.group4.et.Test {
+namespace edu.uwec.cs.cs355.group4.et.core {
     [TestFixture()]
     public class TestPoliticalParty {
         private PoliticalParty _unitUnderTest;
@@ -18,11 +17,11 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
 
         [Test()]
         public void TestToString() {
-            _unitUnderTest.Name = "THE_NAME";
-            _unitUnderTest.Abbreviation = "TST";
-            string expected = "THE_NAME (TST)";
-            string result = _unitUnderTest.ToString();
-            Assert.AreEqual(expected, result, "Political Party ToString method failed.");
+            string expectedString = null;
+            string resultString = null;
+            resultString = _unitUnderTest.ToString();
+            Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
+            Assert.Fail("Create or modify test(s).");
         }
     }
 }
