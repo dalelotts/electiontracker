@@ -29,24 +29,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         protected override IList<Fault> performValidation(Election entity) {
             IList<Fault> retVal = new List<Fault>();
 
-            if (entity == null)
-            {
-                retVal.Add(new Fault(true, "County is null."));
-            }
-            else
-            {
-                // This is apparently unreachable code
-                //if (entity.Date == null)
-                //{
-                //    retVal.Add(new Fault(true, "Election date is null."));
-                //}
-
-                if (entity.ElectionContests == null)
-                {
-                    retVal.Add(new Fault(false, "Election's ElectionContests value is null."));
-                }
-            }
-
             return retVal;
         }
 

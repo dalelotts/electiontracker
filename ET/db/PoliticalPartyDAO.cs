@@ -20,48 +20,20 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         protected override IList<Fault> performValidation(PoliticalParty entity) {
             List<Fault> retVal = new List<Fault>();
 
-            if (entity == null)
+            ISession currentSession = getCurrentSession();
+
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from politicalparty where Name = " + entity.Name + ";");
+            if (validQuery.List().Count > 0)
             {
-                retVal.Add(new Fault(true, "PoliticalParty is null."));
+                retVal.Add(new Fault(true, "Name entered for Political Party already exists"));
             }
-            else
+
+            validQuery = currentSession.CreateSQLQuery("select * from politicalparty where Abbreviation = " + entity.Abbreviation + ";");
+            if (validQuery.List().Count > 0)
             {
-
-                if (entity.Name == null)
-                {
-                    retVal.Add(new Fault(true, "PoliticalParty name is null."));
-                }
-                else if (entity.Name == "")
-                {
-                    retVal.Add(new Fault(true, "PoliticalParty name is empty."));
-                }
-
-                if (entity.Abbreviation == null)
-                {
-                    retVal.Add(new Fault(true, "PoliticalParty Abbreviation is null."));
-                }
-                else if (entity.Abbreviation == "")
-                {
-                    retVal.Add(new Fault(true, "PoliticalParty Abbreviation is empty."));
-                }
-
-                if (retVal.Count == 0)
-                {
-                    ISession currentSession = getCurrentSession();
-                    IQuery validQuery =
-                        currentSession.CreateSQLQuery("select * from politicalparty where Name = " + entity.Name + ";");
-                    if (validQuery.List().Count > 0)
-                    {
-                        retVal.Add(new Fault(true, "Name entered for Political Party already exists"));
-                    }
-                    validQuery =
-                        currentSession.CreateSQLQuery("select * from politicalparty where Abbreviation = " + entity.Abbreviation + ";");
-                    if (validQuery.List().Count > 0)
-                    {
-                        retVal.Add(new Fault(true, "Abbreviation entered for Political Party already exists"));
-                    }
-                }
+                retVal.Add(new Fault(true, "Abbreviation entered for Political Party already exists"));
             }
+                
 
             return retVal;
         }

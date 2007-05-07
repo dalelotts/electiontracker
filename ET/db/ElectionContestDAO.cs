@@ -58,34 +58,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         protected override IList<Fault> performValidation(ElectionContest entity) {
             IList<Fault> retVal = new List<Fault>();
 
-            if (entity == null)
-            {
-                retVal.Add(new Fault(true, "ElectionContest is null."));
-            }
-            else
-            {
-                if (entity.Election == null)
-                {
-                    retVal.Add(new Fault(true, "Election in ElectionContest is null."));
-                }
-
-                if (entity.Contest == null)
-                {
-                    retVal.Add(new Fault(true, "Contest in ElectionContest is null."));
-                }
-
-                if (entity.Counties == null)
-                {
-                    retVal.Add(new Fault(true, "Counties in ElectionContest is null."));
-                }
-
-                if (entity.Responses == null)
-                {
-                    retVal.Add(new Fault(true, "Responses in ElectionContest is null."));
-                }
-
-            }
-
 
             return retVal;
         }
