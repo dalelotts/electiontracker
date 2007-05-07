@@ -8,6 +8,10 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         [SetUp()]
         public void SetUp() {
             _unitUnderTest = new CandidateResponse();
+            Candidate candidate = new Candidate();
+            candidate.FirstName = "Test";
+            candidate.LastName = "Candidate";
+            _unitUnderTest.Candidate = candidate;
         }
 
         [TearDown()]
@@ -17,11 +21,9 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         [Test()]
         public void TestToString() {
-            string expectedString = null;
-            string resultString = null;
-            resultString = _unitUnderTest.ToString();
+            string expectedString = "Test Candidate";
+            string resultString = _unitUnderTest.ToString();
             Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
-            Assert.Fail("Create or modify test(s).");
         }
     }
 }
