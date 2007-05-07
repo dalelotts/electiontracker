@@ -23,7 +23,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
             ISession currentSession = getCurrentSession();
 
-            IQuery validQuery = currentSession.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = '" + entity.Name + "' and pp.id != " + entity.ID + ";").AddEntity(objectType);
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = '" + entity.Name + "' and pp.politicalpartyid != " + entity.ID + ";").AddEntity(objectType);
             if (validQuery.List().Count > 0)
             {
                 retVal.Add(new Fault(true, "Name entered for Political Party already exists"));
