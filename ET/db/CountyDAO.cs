@@ -5,29 +5,33 @@ using NHibernate.Expression;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class CountyDAO : HibernateDAO<County> {
+        
         private static readonly IList<Order> ORDER_BY_NAME = new List<Order>();
 
-        static CountyDAO() {
+        static CountyDAO()
+        {
             ORDER_BY_NAME.Add(new Order("Name", true));
         }
 
         public CountyDAO(ISessionFactory factory) : base(factory) {}
 
         public override IList<County> findAll() {
+
             /*IQuery iqQuery = getCurrentSession().CreateSQLQuery("select * from county;").AddEntity(typeof(County));
             return iqQuery.List<County>();
             //sdegen hack v44 - Wasn't working.
-            //*/
-            return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
+            //*/return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
         }
 
-        protected override IList<Fault> performValidation(County entity) {
+        protected override IList<Fault> performValidation(County entity)
+        {
             IList<Fault> retVal = new List<Fault>();
 
             return retVal;
         }
 
-        public IList<Contest> findContests(Election e, County cty) {
+        public IList<Contest> findContests(Election e, County cty)
+        {
             // TODO: Implement fully.
             IList<Contest> lstContests = new List<Contest>();
             // TEST CODE BEGIN
@@ -53,5 +57,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             // TEST CODE END
             return lstContests;
         }
+
+
     }
 }

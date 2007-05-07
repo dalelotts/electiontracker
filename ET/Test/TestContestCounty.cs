@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using NUnit.Framework;
-
+using System.Collections.Generic;
 namespace edu.uwec.cs.cs355.group4.et.core {
     [TestFixture()]
     public class TestContestCounty {
@@ -12,6 +11,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             County county = new County();
             county.Name = "TestContestCounty";
             _unitUnderTest.County = county;
+
         }
 
         [TearDown()]
@@ -27,7 +27,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         [Test()]
-        public void TestGetAllVotes() {
+        public void TestGetAllVotes(){
             _unitUnderTest.ResponseValues = new List<ResponseValue>();
             ResponseValue r = new ResponseValue();
             r.VoteCount = 7;

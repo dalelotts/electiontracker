@@ -25,7 +25,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
 
             if (encounteredError) {
-                MessageBox.Show(message, "Validation Failure", buttons);
+                MessageBox.Show(message, "Validation Failure", MessageBoxButtons.OK);
             } else {
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult messageResult =
@@ -68,7 +68,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             //EnableControls(Controls, false);
         }
 
-        public virtual void btnDelete_Click(object sender, EventArgs e) {}
+        public virtual void btnDelete_Click(object sender, EventArgs e) {
+            
+        }
 
         public virtual void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             //EnableControls(Controls, false);

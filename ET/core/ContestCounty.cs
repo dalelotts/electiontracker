@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.db;
-
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class ContestCounty {
         private long id;
@@ -18,7 +17,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         [RequiredProperty("Contest County Response Values")]
-        public virtual IList<ResponseValue> ResponseValues {
+        public virtual IList<ResponseValue> ResponseValues
+        {
             get { return responseValues; }
             set { responseValues = value; }
         }
@@ -52,9 +52,11 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             return county != null ? county.Name : "NULL COUNTY: UNKNOWN";
         }
 
-        public virtual int GetTotalVotes() {
+        public virtual int GetTotalVotes()
+        {
             int result = 0;
-            foreach (ResponseValue rv in ResponseValues) {
+            foreach (ResponseValue rv in ResponseValues)
+            {
                 result += rv.VoteCount;
             }
             return result;

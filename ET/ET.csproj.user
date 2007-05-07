@@ -17,9 +17,5 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <StartAction>Project</StartAction>
     <StartProgram>C:\Program Files\NUnit 2.4\bin\nunit.exe</StartProgram>
-    <StartWorkingDirectory>
-    </StartWorkingDirectory>
-    <StartArguments>
-    </StartArguments>
   </PropertyGroup>
 </Project>

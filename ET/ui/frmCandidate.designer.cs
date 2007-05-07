@@ -1,5 +1,4 @@
-using System.ComponentModel;
-using System.Windows.Forms;
+using System;
 
 namespace edu.uwec.cs.cs355.group4.et.ui
 {
@@ -8,7 +7,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private IContainer components = null;
+        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -166,6 +165,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtFirstName.Size = new System.Drawing.Size(270, 20);
             this.txtFirstName.TabIndex = 20;
             this.txtFirstName.Tag = "lock=true";
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // frmCandidate
             // 
@@ -185,18 +185,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private GroupBox gbCandidate;
-        private ComboBox cboPoliticalParty;
-        private CheckBox chkActive;
-        private TextBox txtNotes;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private TextBox txtLastName;
-        private Label label3;
-        private TextBox txtMiddleName;
-        private Label label2;
-        private TextBox txtFirstName;
+        private System.Windows.Forms.GroupBox gbCandidate;
+        private System.Windows.Forms.ComboBox cboPoliticalParty;
+        private System.Windows.Forms.CheckBox chkActive;
+        private System.Windows.Forms.TextBox txtNotes;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtMiddleName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtFirstName;
 
 
     }

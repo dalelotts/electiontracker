@@ -4,9 +4,11 @@ using edu.uwec.cs.cs355.group4.et.events;
 using log4net;
 using Spring.Context;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace edu.uwec.cs.cs355.group4.et.ui
+{
     internal class DefaultUIController : UIController, IApplicationContextAware {
-        private static readonly ILog LOG = LogManager.GetLogger(typeof (DefaultUIController));
+
+        private static readonly ILog LOG = LogManager.GetLogger(typeof(DefaultUIController));
 
         private Form mdiForm;
         private IApplicationContext context;
@@ -72,12 +74,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             politicalPartyForm.Show();
         }
 
-        public void HandleProofingSheet(object sender, ProofingSheetArgs args) {
+        public void HandleProofingSheet(object sender, ProofingSheetArgs args)
+        {
             frmProofingSheet proofingSheetForm = makeMDIChildForm<frmProofingSheet>();
             proofingSheetForm.Show();
         }
 
-        public void HandleElection(object sender, ElectionArgs args) {
+        public void HandleElection(object sender, ElectionArgs args)
+        {
             frmElection electionForm = makeMDIChildForm<frmElection>();
             electionForm.loadElection(args.ID);
             electionForm.Show();
@@ -88,17 +92,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             MessageBox.Show(args.Text, args.Caption);
         }
 
-        public void HandleElectionReport(object sender, ElectionReportArgs args) {
+        public void HandleElectionReport(object sender, ElectionReportArgs args)
+        {
             frmElectionReport electionReportForm = makeMDIChildForm<frmElectionReport>();
             electionReportForm.Show();
         }
-
-        public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args) {
+        public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args)
+        {
             frmContestVoteSumry contestVoteSumry = makeMDIChildForm<frmContestVoteSumry>();
             contestVoteSumry.Show();
         }
-
-        public void HandleCountyContactForm(object sender, CountyContactFormArgs args) {
+        public void HandleCountyContactForm(object sender, CountyContactFormArgs args)
+        {
             frmCountyContactForm countyContactForm = makeMDIChildForm<frmCountyContactForm>();
             countyContactForm.Show();
         }

@@ -14,10 +14,11 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             NOT_ACTIVE_CRITERION.Add(new EqExpression("IsActive", false));
             order_BY_NAME.Add(new Order("Name", true));
         }
-
+        
         public PoliticalPartyDAO(ISessionFactory factory) : base(factory) {}
 
-        protected override IList<Fault> performValidation(PoliticalParty entity) {
+        protected override IList<Fault> performValidation(PoliticalParty entity)
+        {
             List<Fault> retVal = new List<Fault>();
 
             ISession currentSession = getCurrentSession();

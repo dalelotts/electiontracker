@@ -36,7 +36,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { isActive = value; }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return Name;
         }
     }

@@ -1,22 +1,28 @@
+using System;
 using System.Collections.Generic;
+using System.Text;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using NHibernate;
 using NMock2;
 using NUnit.Framework;
 
-namespace edu.uwec.cs.cs355.group4.et.Test {
+
+namespace edu.uwec.cs.cs355.group4.et.Test
+{
     [TestFixture()]
-    public class TestContestDAO {
+    public class TestContestDAO
+    {
         private ContestDAO _unitUnderTest;
 
         [SetUp()]
-        public void SetUp() {
+        public void SetUp()
+        {
             Mockery mocks = new Mockery();
-            ISession session = (ISession) mocks.NewMock(typeof (ISession));
-            ISessionFactory factory = (ISessionFactory) mocks.NewMock(typeof (ISessionFactory));
-            ISQLQuery query = (ISQLQuery) mocks.NewMock(typeof (ISQLQuery));
-            ICriteria criteria = (ICriteria) mocks.NewMock(typeof (ICriteria));
+            ISession session = (ISession)mocks.NewMock(typeof(ISession));
+            ISessionFactory factory = (ISessionFactory)mocks.NewMock(typeof(ISessionFactory));
+            ISQLQuery query = (ISQLQuery)mocks.NewMock(typeof(ISQLQuery));
+            ICriteria criteria = (ICriteria)mocks.NewMock(typeof(ICriteria));
             IList<Contest> list = new List<Contest>();
             list.Add(new Contest());
 
@@ -32,33 +38,38 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
         }
 
         [TearDown()]
-        public void TearDown() {
+        public void TearDown()
+        {
             _unitUnderTest = null;
         }
 
         [Test()]
-        public void TestFindActive() {
+        public void TestFindActive()
+        {
             IList<Contest> testListOne;
             testListOne = _unitUnderTest.findActive();
             Assert.IsTrue(testListOne != null);
         }
 
         [Test()]
-        public void TestFindInactive() {
+        public void TestFindInactive()
+        {
             IList<Contest> testListTwo;
             testListTwo = _unitUnderTest.findInactive();
             Assert.IsTrue(testListTwo != null);
         }
 
         [Test()]
-        public void TestFindAll() {
+        public void TestFindAll()
+        {
             IList<Contest> testListThree;
             testListThree = _unitUnderTest.findAll();
             Assert.IsTrue(testListThree != null);
         }
 
         [Test()]
-        public void TestValidate() {
+        public void TestValidate()
+        {
             IList<Fault> retList;
             Contest entity = new Contest();
 
@@ -85,5 +96,6 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
             retList = _unitUnderTest.validate(entity);
             Assert.IsTrue(retList.Count == 1, "Expected count of one.");
         }
+
     }
 }

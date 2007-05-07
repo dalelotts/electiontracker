@@ -1,7 +1,8 @@
 using System;
 
-namespace edu.uwec.cs.cs355.group4.et.events {
-    internal class ShowErrorMessageArgs : ShowMessageArgs {
+namespace edu.uwec.cs.cs355.group4.et.events
+{
+    class ShowErrorMessageArgs : ShowMessageArgs {
         private readonly Exception exception;
 
         public ShowErrorMessageArgs(string text, Exception exception) : base(text, "Error") {

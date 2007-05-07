@@ -1,7 +1,7 @@
 using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
-    public class ContestType {
+    public  class ContestType {
         private long id;
         private string name;
 

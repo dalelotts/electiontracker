@@ -1,22 +1,27 @@
+using System;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
+using edu.uwec.cs.cs355.group4.et.core;
+using System.Text;
 using NHibernate;
 using NMock2;
 using NUnit.Framework;
 
-namespace edu.uwec.cs.cs355.group4.et.Test {
+namespace edu.uwec.cs.cs355.group4.et.Test
+{
     [TestFixture()]
-    public class TestCandidateDAO {
+    public class TestCandidateDAO
+    {
         private CandidateDAO _unitUnderTest;
 
         [SetUp()]
-        public void SetUp() {
+        public void SetUp()
+        {
             Mockery mocks = new Mockery();
-            ISession session = (ISession) mocks.NewMock(typeof (ISession));
-            ISessionFactory factory = (ISessionFactory) mocks.NewMock(typeof (ISessionFactory));
-            ISQLQuery query = (ISQLQuery) mocks.NewMock(typeof (ISQLQuery));
-            ICriteria criteria = (ICriteria) mocks.NewMock(typeof (ICriteria));
+            ISession session = (ISession)mocks.NewMock(typeof(ISession));
+            ISessionFactory factory = (ISessionFactory)mocks.NewMock(typeof(ISessionFactory));
+            ISQLQuery query = (ISQLQuery)mocks.NewMock(typeof(ISQLQuery));
+            ICriteria criteria = (ICriteria)mocks.NewMock(typeof(ICriteria));
             IList<Candidate> list = new List<Candidate>();
             IList<string> strlist = new List<string>();
             strlist.Add("a");
@@ -33,26 +38,30 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
         }
 
         [TearDown()]
-        public void TearDown() {
+        public void TearDown()
+        {
             _unitUnderTest = null;
         }
 
         [Test()]
-        public void TestFindActive() {
+        public void TestFindActive()
+        {
             IList<Candidate> testListOne;
             testListOne = _unitUnderTest.findActive();
             Assert.IsTrue(testListOne != null);
         }
 
         [Test()]
-        public void TestFindInactive() {
+        public void TestFindInactive()
+        {
             IList<Candidate> testListTwo;
             testListTwo = _unitUnderTest.findInactive();
             Assert.IsTrue(testListTwo != null);
         }
 
         [Test()]
-        public void TestFindAll() {
+        public void TestFindAll()
+        {
             IList<Candidate> testListThree;
             testListThree = _unitUnderTest.findAll();
             Assert.IsTrue(testListThree != null);
@@ -60,7 +69,8 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
 
 
         [Test()]
-        public void TestValidate() {
+        public void TestValidate()
+        {
             // Test performValidation with LastName empty string
             IList<Fault> retList;
             Candidate entity = new Candidate();

@@ -19,7 +19,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         [RequiredProperty("County Attribute County")]
-        public virtual County County {
+        public virtual County County
+        {
             get { return county; }
             set { county = value; }
         }
@@ -30,7 +31,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             set { this.value = value; }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return (type.Name + ": " + value);
         }
     }

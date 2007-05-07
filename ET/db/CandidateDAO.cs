@@ -33,7 +33,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         protected override IList<Fault> performValidation(Candidate entity) {
-            List<Fault> retVal = new List<Fault>();
+            List<Fault> result = new List<Fault>();
 
             ISession currentSession = getCurrentSession();
 

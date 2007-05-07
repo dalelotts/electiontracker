@@ -17,9 +17,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui.util {
         }
 
 
-        public ElectionFilter(ElectionDAO dao, bool isActive) : base(name + " - " + (isActive ? "Active" : "Inactive")) {
+        public ElectionFilter(ElectionDAO dao, bool isActive) : 
+            base(name + " - " + (isActive ? "Active" : "Inactive")) {
             this.dao = dao;
             this.isActive = isActive;
+            
         }
 
         public override void apply(TreeNodeCollection nodes) {

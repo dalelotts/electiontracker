@@ -17,6 +17,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         [Test()]
         public void TestToStringWithNoPoliticalParty() {
+
             _unitUnderTest = new Candidate();
             _unitUnderTest.FirstName = "First";
             _unitUnderTest.MiddleName = "Middle";
@@ -27,7 +28,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         [Test()]
-        public void TestToStringWithPoliticalParty() {
+        public void TestToStringWithPoliticalParty()
+        {
             _unitUnderTest.FirstName = "First";
             _unitUnderTest.MiddleName = "Middle";
             _unitUnderTest.LastName = "Last";

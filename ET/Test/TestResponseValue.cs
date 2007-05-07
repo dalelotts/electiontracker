@@ -1,28 +1,31 @@
+using System;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using System.Text;
 using NUnit.Framework;
+using edu.uwec.cs.cs355.group4.et.core;
 //using System.Collections.Generic;
 
-namespace edu.uwec.cs.cs355.group4.et.Test {
+namespace edu.uwec.cs.cs355.group4.et.Test
+{
     [TestFixture()]
-    public class TestResponseValue {
+    public class TestResponseValue
+    {
         private ResponseValue _unitUnderTest;
-
         [SetUp()]
-        public void SetUp() {
+        public void SetUp(){
             _unitUnderTest = new ResponseValue();
             ContestCounty cc = new ContestCounty();
             _unitUnderTest.ContestCounty = cc;
         }
 
         [TearDown()]
-        public void TearDown() {
+        public void TearDown(){
             _unitUnderTest.ContestCounty = null;
             _unitUnderTest = null;
         }
 
         [Test()]
-        public void TestGetVotePercentage() {
+        public void TestGetVotePercentage(){
             _unitUnderTest.ContestCounty.ResponseValues = new List<ResponseValue>();
             ResponseValue rv = new ResponseValue();
             rv.VoteCount = 20;

@@ -15,7 +15,7 @@ namespace edu.uwec.cs.cs355.group4.et.type {
         public static readonly DBEntity ELECTION_CONTEST = new DBEntity("election_contest", "Election Contest");
         public static readonly DBEntity POLITICAL_PARTY = new DBEntity("political_party", "Political Party");
         public static readonly DBEntity RESPONSE = new DBEntity("response", "Response");
-
+        
         private static readonly IList<DBEntity> members = new List<DBEntity>();
 
         static DBEntity() {

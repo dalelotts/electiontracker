@@ -29,13 +29,15 @@ namespace edu.uwec.cs.cs355.group4.et.Properties {
     [DebuggerNonUserCode()]
     [CompilerGenerated()]
     internal class Resources {
+        
         private static ResourceManager resourceMan;
-
+        
         private static CultureInfo resourceCulture;
-
+        
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {}
-
+        internal Resources() {
+        }
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -43,50 +45,52 @@ namespace edu.uwec.cs.cs355.group4.et.Properties {
         internal static ResourceManager ResourceManager {
             get {
                 if (ReferenceEquals(resourceMan, null)) {
-                    ResourceManager temp =
-                        new ResourceManager("edu.uwec.cs.cs355.group4.et.Properties.Resources",
-                                            typeof (Resources).Assembly);
+                    ResourceManager temp = new ResourceManager("edu.uwec.cs.cs355.group4.et.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         internal static CultureInfo Culture {
-            get { return resourceCulture; }
-            set { resourceCulture = value; }
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
         }
-
+        
         internal static Bitmap EditInformationHS {
             get {
                 object obj = ResourceManager.GetObject("EditInformationHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((Bitmap)(obj));
             }
         }
-
+        
         internal static Bitmap EditTableHS {
             get {
                 object obj = ResourceManager.GetObject("EditTableHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((Bitmap)(obj));
             }
         }
-
+        
         internal static Bitmap NewCardHS {
             get {
                 object obj = ResourceManager.GetObject("NewCardHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((Bitmap)(obj));
             }
         }
-
+        
         internal static Bitmap saveHS {
             get {
                 object obj = ResourceManager.GetObject("saveHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((Bitmap)(obj));
             }
         }
     }

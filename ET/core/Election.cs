@@ -10,7 +10,8 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private bool isActive = true;
         private IList<ElectionContest> electionContests;
 
-        public Election() {
+        public Election()
+        {
             electionContests = new List<ElectionContest>();
         }
 
@@ -36,12 +37,14 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         [RequiredProperty("Election Contests")]
-        public virtual IList<ElectionContest> ElectionContests {
+        public virtual IList<ElectionContest> ElectionContests
+        {
             get { return electionContests; }
             set { electionContests = value; }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return date.ToShortDateString();
         }
     }
