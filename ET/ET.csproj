@@ -151,14 +151,17 @@
     <Compile Include="Test\TestAttributeTypeDAO.cs" />
     <Compile Include="Test\TestBaseMDIChild.cs" />
     <Compile Include="Test\TestCandidate.cs" />
+    <Compile Include="Test\TestCandidateArgs.cs" />
     <Compile Include="Test\TestCandidateDAO.cs" />
     <Compile Include="Test\TestCandidateResponse.cs" />
     <Compile Include="Test\TestContest.cs" />
+    <Compile Include="Test\TestContestArgs.cs" />
     <Compile Include="Test\TestContestCounty.cs" />
     <Compile Include="Test\TestContestCountyDAO.cs" />
     <Compile Include="Test\TestContestDAO.cs" />
     <Compile Include="Test\TestContestTypeDAO.cs" />
     <Compile Include="Test\TestCountyDAO.cs" />
+    <Compile Include="Test\TestCountyFormArgs.cs" />
     <Compile Include="Test\TestCountyWebsite.cs" />
     <Compile Include="Test\TestElectionContest.cs" />
     <Compile Include="Test\TestElectionContestDAO.cs" />

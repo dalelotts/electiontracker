@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using NHibernate;
 using NMock2;
 using NUnit.Framework;
+using edu.uwec.cs.cs355.group4.et.db;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestHibernateDAO {
         private MockDAO _unitUnderTest;

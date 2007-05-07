@@ -3,8 +3,9 @@ using NUnit.Framework;
 using NMock2;
 using edu.uwec.cs.cs355.group4.et.core;
 using System.Collections.Generic;
+using edu.uwec.cs.cs355.group4.et.db;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestResponseDAO {
         private ResponseDAO _unitUnderTest;

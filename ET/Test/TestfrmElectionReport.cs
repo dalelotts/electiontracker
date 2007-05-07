@@ -1,7 +1,8 @@
 using edu.uwec.cs.cs355.group4.et.db;
 using NUnit.Framework;
+using edu.uwec.cs.cs355.group4.et.ui;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestfrmElectionReport {
         private frmElectionReport _unitUnderTest;

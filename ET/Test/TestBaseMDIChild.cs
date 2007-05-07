@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.db;
 using NUnit.Framework;
 using AssertionException=DesignByContract.AssertionException;
+using edu.uwec.cs.cs355.group4.et.ui;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestBaseMDIChild {
         private IList<Fault> errors;

@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using edu.uwec.cs.cs355.group4.et.core;
 
-namespace edu.uwec.cs.cs355.group4.et.core {
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestCandidate {
         private Candidate _unitUnderTest;

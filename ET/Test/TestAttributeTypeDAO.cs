@@ -5,7 +5,7 @@ using NHibernate;
 using NMock2;
 using NUnit.Framework;
 
-namespace edu.uwec.cs.cs355.group4.et.test.db {
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestAttributeTypeDAO {
         private AttributeTypeDAO _unitUnderTest;

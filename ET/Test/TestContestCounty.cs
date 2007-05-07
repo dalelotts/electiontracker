@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-namespace edu.uwec.cs.cs355.group4.et.core {
+using edu.uwec.cs.cs355.group4.et.core;
+
+namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
     public class TestContestCounty {
         private ContestCounty _unitUnderTest;
