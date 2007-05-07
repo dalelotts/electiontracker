@@ -158,6 +158,7 @@
     <Compile Include="Test\TestCountyDAO.cs" />
     <Compile Include="Test\TestElectionContest.cs" />
     <Compile Include="Test\TestElectionContestDAO.cs" />
+    <Compile Include="Test\TestElectionDAO.cs" />
     <Compile Include="Test\TestPoliticalParty.cs" />
     <Compile Include="Test\TestResponseValue.cs" />
     <Compile Include="type\DBEntity.cs" />
