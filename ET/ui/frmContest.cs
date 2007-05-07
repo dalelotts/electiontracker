@@ -138,7 +138,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             try {
                 currentContest = (Contest) cboGoTo.SelectedItem;
-                ;
+                refreshControls();
+                base.cboGoTo_SelectedIndexChanged(sender, e);
+                
             } catch (Exception ex) {
                 string message = "Operation failed";
                 MessageBox.Show(message + "\n\n" + ex);
