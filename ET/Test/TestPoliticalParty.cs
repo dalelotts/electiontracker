@@ -17,11 +17,13 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         [Test()]
         public void TestToString() {
-            string expectedString = null;
-            string resultString = null;
-            resultString = _unitUnderTest.ToString();
+            string name = "TestName";
+            string abbrev = "TN";
+            string expectedString = "TestName (TN)";
+            _unitUnderTest.Name = name;
+            _unitUnderTest.Abbreviation = abbrev;
+            string resultString = _unitUnderTest.ToString();
             Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
-            Assert.Fail("Create or modify test(s).");
         }
     }
 }
