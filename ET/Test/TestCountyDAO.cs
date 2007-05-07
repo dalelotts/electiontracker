@@ -23,6 +23,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test {
             Expect.AtLeastOnce.On(factory).Method("OpenSession").Will(Return.Value(session));
             Expect.AtLeastOnce.On(session).Method("CreateCriteria").Will(Return.Value(criteria));
             Expect.AtLeastOnce.On(session).Method("CreateSQLQuery").Will(Return.Value(query));
+            Expect.AtLeastOnce.On(query).Method("AddEntity").Will(Return.Value(query));
             Expect.AtLeastOnce.On(query).Method("List").Will(Return.Value(list));
             _unitUnderTest = new CountyDAO(factory);
         }

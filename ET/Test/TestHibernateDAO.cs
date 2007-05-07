@@ -12,7 +12,10 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         [SetUp()]
         public void SetUp() {
             Mockery mocks = new Mockery();
+            ISession session = (ISession)mocks.NewMock(typeof(ISession));
             ISessionFactory factory = (ISessionFactory) mocks.NewMock(typeof (ISessionFactory));
+            Expect.AtLeastOnce.On(factory).Method("OpenSession").Will(Return.Value(session));
+            
             _unitUnderTest = new MockDAO(factory);
         }
 
@@ -23,15 +26,12 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         [Test()]
         public void TestConstructorHibernateDAO() {
-            ISessionFactory factory = null;
+            Mockery mocks = new Mockery();
+            ISessionFactory factory = (ISessionFactory)mocks.NewMock(typeof(ISessionFactory));
+            ISession session = (ISession)mocks.NewMock(typeof(ISession));
+            Expect.AtLeastOnce.On(factory).Method("OpenSession").Will(Return.Value(session));
             MockDAO testHibernateDAO = new MockDAO(factory);
-            Assert.IsNotNull(testHibernateDAO, "Constructor of type, HibernateDAO failed to create instance.");
-            Assert.Fail("Create or modify test(s).");
-        }
-
-        [Test()]
-        public void TestfindById() {
-            Assert.Fail("Create or modify test(s).");
+            Assert.IsNotNull(testHibernateDAO, "Constructor of type (HibernateDAO) failed to create instance.");
         }
     }
 
