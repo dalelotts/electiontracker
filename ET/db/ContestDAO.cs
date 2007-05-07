@@ -44,17 +44,5 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return result;
         }
 
-        public IList<Candidate> findCandidates() {
-            IList<Candidate> lstCandidates = new List<Candidate>();
-            Candidate cd = new Candidate();
-            cd.FirstName = "George";
-            cd.LastName = "Bush";
-            lstCandidates.Add(cd);
-            cd = new Candidate();
-            cd.FirstName = "John";
-            cd.LastName = "Kerry";
-            lstCandidates.Add(cd);
-            return lstCandidates;
-        }
     }
 }
