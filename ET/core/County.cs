@@ -52,6 +52,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         public override bool Equals(object obj) {
+            if (obj == null) return false;
             if (this == obj) return true;
             if (!GetType().Equals(obj.GetType())) return false;
             County that = (County) obj;

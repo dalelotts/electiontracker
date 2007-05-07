@@ -147,6 +147,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="db\HibernateUtil.cs" />
+    <Compile Include="Test\TestAssertionException.cs" />
     <Compile Include="Test\TestAttributeTypeDAO.cs" />
     <Compile Include="Test\TestBaseMDIChild.cs" />
     <Compile Include="Test\TestCandidate.cs" />
@@ -160,8 +161,18 @@
     <Compile Include="Test\TestElectionContestDAO.cs" />
     <Compile Include="Test\TestElectionDAO.cs" />
     <Compile Include="Test\TestFault.cs" />
+    <Compile Include="Test\TestHibernateDAO.cs" />
+    <Compile Include="Test\TestInvariantException.cs" />
+    <Compile Include="Test\TestMap.cs" />
+    <Compile Include="Test\TestPhoneNumberTypeDAO.cs" />
     <Compile Include="Test\TestPoliticalParty.cs" />
+    <Compile Include="Test\TestPoliticalPartyDAO.cs" />
+    <Compile Include="Test\TestPostconditionException.cs" />
+    <Compile Include="Test\TestPreconditionException.cs" />
+    <Compile Include="Test\TestResponse.cs" />
+    <Compile Include="Test\TestResponseDAO.cs" />
     <Compile Include="Test\TestResponseValue.cs" />
+    <Compile Include="Test\TestResponseValueDAO.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
     <Compile Include="ui\BaseMDIChild.cs">

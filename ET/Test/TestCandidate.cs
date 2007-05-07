@@ -17,7 +17,6 @@ namespace edu.uwec.cs.cs355.group4.et.core {
 
         [Test()]
         public void TestToStringWithNoPoliticalParty() {
-
             _unitUnderTest = new Candidate();
             _unitUnderTest.FirstName = "First";
             _unitUnderTest.MiddleName = "Middle";
@@ -28,8 +27,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         [Test()]
-        public void TestToStringWithPoliticalParty()
-        {
+        public void TestToStringWithPoliticalParty() {
             _unitUnderTest.FirstName = "First";
             _unitUnderTest.MiddleName = "Middle";
             _unitUnderTest.LastName = "Last";
@@ -40,6 +38,13 @@ namespace edu.uwec.cs.cs355.group4.et.core {
             string expectedString = "Last, First Middle (Abbreviation)";
             string resultString = _unitUnderTest.ToString();
             Assert.AreEqual(expectedString, resultString, "ToString method returned unexpected result.");
+        }
+
+
+        [Test()]
+        public void TestEqualsNull() {
+            bool resultBoolean = _unitUnderTest.Equals(null);
+            Assert.IsFalse(resultBoolean, "Equals method returned unexpected result.");
         }
     }
 }
