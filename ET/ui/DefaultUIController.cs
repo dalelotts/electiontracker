@@ -9,7 +9,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
     internal class DefaultUIController : UIController, IApplicationContextAware {
 
         private static readonly ILog LOG = LogManager.GetLogger(typeof(DefaultUIController));
-
+        private frmEnterVotes voteForm;
         private Form mdiForm;
         private IApplicationContext context;
 
@@ -46,7 +46,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         }
 
         public void HandleEnterVotes(object sender, EnterVotesArgs args) {
-            frmEnterVotes voteForm = makeMDIChildForm<frmEnterVotes>();
+            if (voteForm == null || voteForm.Visible == false)
+                voteForm = makeMDIChildForm<frmEnterVotes>();
             voteForm.Show();
         }
 
