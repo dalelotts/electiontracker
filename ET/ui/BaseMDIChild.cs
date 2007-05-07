@@ -12,7 +12,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         internal static bool reportFaults(IList<Fault> faults) {
             Check.Assert(faults != null, "Null: faults");
-            bool result = faults.Count == 0;
+            if (faults.Count == 0) return true;
+            bool result = false;
             bool encounteredError = false;
             string message = "";
             //Go through the list of faults and build message for user.
