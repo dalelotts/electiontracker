@@ -40,7 +40,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             // TODO: This checks First name and Last name right now as the only identifiers
             // Might want to do a findall() and see if the 'entity' is listed in the return
             IQuery validQuery =
-                   currentSession.CreateSQLQuery("select * from candidate where FirstName = " + entity.FirstName + " and LastName = " + entity.LastName + ";");
+                   currentSession.CreateSQLQuery("select * from candidate where CandidateFirstName = '" + entity.FirstName + "' and CandidateLastName = '" + entity.LastName + "';").AddEntity(objectType);
             if (validQuery.List().Count > 0)
             {
                 result.Add(new Fault(true, "Candidate already exists"));
