@@ -28,7 +28,12 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         protected ISession getCurrentSession() {
-            return factory.OpenSession();
+            // sdegen - This change may cause performance issues.  If subsequent
+            //  revisions show performance issues, consider reverting.  This was done 
+            //  to resolve session conflicts in the vote entry form.
+            if (session == null)
+                return factory.OpenSession();
+            return session;
         }
 
         public T findById(Object id, bool lockRecord) {
