@@ -23,13 +23,13 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
             ISession currentSession = getCurrentSession();
 
-            IQuery validQuery = currentSession.CreateSQLQuery("select * from politicalparty where Name = " + entity.Name + ";");
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = '" + entity.Name + "';").AddEntity(objectType);
             if (validQuery.List().Count > 0)
             {
                 retVal.Add(new Fault(true, "Name entered for Political Party already exists"));
             }
 
-            validQuery = currentSession.CreateSQLQuery("select * from politicalparty where Abbreviation = " + entity.Abbreviation + ";");
+            validQuery = currentSession.CreateSQLQuery("select * from politicalparty where PoliticalPartyAbbrev = '" + entity.Abbreviation + "';").AddEntity(objectType);
             if (validQuery.List().Count > 0)
             {
                 retVal.Add(new Fault(true, "Abbreviation entered for Political Party already exists"));

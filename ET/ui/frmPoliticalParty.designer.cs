@@ -91,7 +91,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chkActive);
             this.Name = "frmPoliticalParty";
-            this.Text = "frmPoliticalParty";
+            this.Text = "Political Party";
             this.Controls.SetChildIndex(this.chkActive, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label1, 0);
