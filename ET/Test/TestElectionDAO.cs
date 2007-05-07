@@ -75,7 +75,7 @@ namespace edu.uwec.cs.cs355.group4.et.Test
             
 
             IList<Fault> lst = _unitUnderTest.validate(entity);
-            Assert.IsTrue(lst.Count == 0);
+            Assert.IsTrue(lst.Count > 0);
         }
 
         [Test()]
