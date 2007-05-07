@@ -16,11 +16,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         public CountyDAO(ISessionFactory factory) : base(factory) {}
 
         public override IList<County> findAll() {
-
-            /*IQuery iqQuery = getCurrentSession().CreateSQLQuery("select * from county;").AddEntity(typeof(County));
-            return iqQuery.List<County>();
-            //sdegen hack v44 - Wasn't working.
-            //*/return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
+            return findByCriteria(new List<ICriterion>(), ORDER_BY_NAME);
         }
 
         protected override IList<Fault> performValidation(County entity)
@@ -28,7 +24,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             IList<Fault> retVal = new List<Fault>();
 
             ISession currentSession = getCurrentSession();
-            IQuery validQuery = currentSession.CreateSQLQuery("select * from county where Name = " + entity.Name + ";");
+            IQuery validQuery = currentSession.CreateSQLQuery("select * from county where CountyName = '" + entity.Name + "';").AddEntity(objectType);
             if (validQuery.List().Count > 0)
             {
                 retVal.Add(new Fault(true, "Name entered for County already exists"));

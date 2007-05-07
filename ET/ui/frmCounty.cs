@@ -182,10 +182,24 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
+            int i = 0;
+            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers)
+            {
+                cpn.County = currentCounty;
+            }
+            foreach (CountyWebsite cw in currentCounty.Websites)
+            {
+                cw.County = currentCounty;
+            }
+            foreach (CountyAttribute ca in currentCounty.Attributes)
+            {
+                ca.County = currentCounty;
+            }
             try {
                 currentCounty.Name = txtCountyName.Text;
                 currentCounty.Notes = txtNotes.Text;
-                currentCounty.WardCount = int.Parse(txtCountyWardCount.Text);
+                Int32.TryParse(txtCountyWardCount.Text, out i);
+                currentCounty.WardCount = i;
 
                 IList<Fault> faults = countyDAO.validate(currentCounty);
                 bool persistData = reportFaults(faults);
