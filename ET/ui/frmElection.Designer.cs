@@ -70,6 +70,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabDetails = new System.Windows.Forms.TabPage();
+            this.dgvContestCounties = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCounties = new System.Windows.Forms.DataGridView();
             this.dgvCounty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvWardCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,7 +90,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveAllCandidates = new System.Windows.Forms.Button();
             this.btnAddCandidate = new System.Windows.Forms.Button();
             this.lstElectionContestsDetails = new System.Windows.Forms.ListBox();
-            this.lstContestCounties = new System.Windows.Forms.ListBox();
             this.lstAllCandidates = new System.Windows.Forms.ListBox();
             this.lstContestCandidates = new System.Windows.Forms.ListBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -103,6 +105,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabElection.SuspendLayout();
             this.tabContests.SuspendLayout();
             this.tabDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContestCounties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCounties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -369,7 +372,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabElection.Location = new System.Drawing.Point(4, 22);
             this.tabElection.Name = "tabElection";
             this.tabElection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabElection.Size = new System.Drawing.Size(677, 392);
+            this.tabElection.Size = new System.Drawing.Size(601, 392);
             this.tabElection.TabIndex = 0;
             this.tabElection.Text = "Election";
             this.tabElection.UseVisualStyleBackColor = true;
@@ -432,7 +435,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabContests.Location = new System.Drawing.Point(4, 22);
             this.tabContests.Name = "tabContests";
             this.tabContests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContests.Size = new System.Drawing.Size(677, 392);
+            this.tabContests.Size = new System.Drawing.Size(601, 392);
             this.tabContests.TabIndex = 1;
             this.tabContests.Text = "Contests";
             this.tabContests.UseVisualStyleBackColor = true;
@@ -515,6 +518,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // tabDetails
             // 
+            this.tabDetails.Controls.Add(this.dgvContestCounties);
             this.tabDetails.Controls.Add(this.dgvCounties);
             this.tabDetails.Controls.Add(this.btnResponseDown);
             this.tabDetails.Controls.Add(this.btnResponseUp);
@@ -530,7 +534,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabDetails.Controls.Add(this.btnRemoveAllCandidates);
             this.tabDetails.Controls.Add(this.btnAddCandidate);
             this.tabDetails.Controls.Add(this.lstElectionContestsDetails);
-            this.tabDetails.Controls.Add(this.lstContestCounties);
             this.tabDetails.Controls.Add(this.lstAllCandidates);
             this.tabDetails.Controls.Add(this.lstContestCandidates);
             this.tabDetails.Controls.Add(this.label13);
@@ -545,6 +548,34 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabDetails.TabIndex = 2;
             this.tabDetails.Text = "Contest Details";
             this.tabDetails.UseVisualStyleBackColor = true;
+            // 
+            // dgvContestCounties
+            // 
+            this.dgvContestCounties.AllowUserToAddRows = false;
+            this.dgvContestCounties.AllowUserToDeleteRows = false;
+            this.dgvContestCounties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContestCounties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgvContestCounties.Location = new System.Drawing.Point(203, 217);
+            this.dgvContestCounties.Name = "dgvContestCounties";
+            this.dgvContestCounties.RowHeadersVisible = false;
+            this.dgvContestCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvContestCounties.Size = new System.Drawing.Size(172, 160);
+            this.dgvContestCounties.TabIndex = 50;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "County";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Ward Count";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 90;
             // 
             // dgvCounties
             // 
@@ -572,6 +603,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             this.dgvWardCount.HeaderText = "Ward Count";
             this.dgvWardCount.Name = "dgvWardCount";
+            this.dgvWardCount.ReadOnly = true;
             this.dgvWardCount.Width = 90;
             // 
             // btnResponseDown
@@ -709,15 +741,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstElectionContestsDetails.TabIndex = 27;
             this.lstElectionContestsDetails.SelectedIndexChanged += new System.EventHandler(this.lstElectionContestsDetails_SelectedIndexChanged);
             // 
-            // lstContestCounties
-            // 
-            this.lstContestCounties.FormattingEnabled = true;
-            this.lstContestCounties.Location = new System.Drawing.Point(203, 218);
-            this.lstContestCounties.Name = "lstContestCounties";
-            this.lstContestCounties.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstContestCounties.Size = new System.Drawing.Size(161, 160);
-            this.lstContestCounties.TabIndex = 25;
-            // 
             // lstAllCandidates
             // 
             this.lstAllCandidates.FormattingEnabled = true;
@@ -803,6 +826,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.tabContests.PerformLayout();
             this.tabDetails.ResumeLayout(false);
             this.tabDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContestCounties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCounties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -858,7 +882,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ListBox lstElectionContestsDetails;
-        private System.Windows.Forms.ListBox lstContestCounties;
         private System.Windows.Forms.ListBox lstAllCandidates;
         private System.Windows.Forms.ListBox lstContestCandidates;
         private System.Windows.Forms.Button btnAddAllCounties;
@@ -877,6 +900,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         protected System.Windows.Forms.Button btnResponseDown;
         protected System.Windows.Forms.Button btnResponseUp;
         private System.Windows.Forms.DataGridView dgvCounties;
+        private System.Windows.Forms.DataGridView dgvContestCounties;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCounty;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvWardCount;
 

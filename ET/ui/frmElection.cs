@@ -105,6 +105,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void refreshCountyLists() {
             Dictionary<County, int> mapCounts = new Dictionary<County, int>();
+            
             object[] o = new object[2];
             int i;
             foreach (DataGridViewRow row in dgvCounties.Rows) {
@@ -123,11 +124,20 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
                 dgvCounties.Rows.Add(o);
             }
-            lstContestCounties.Items.Clear();
+            foreach (DataGridViewRow row in dgvContestCounties.Rows)
+            {
+                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)){
+                    ((ContestCounty)row.Cells[0].Value).WardCount = i;
+                }
+            }
+            dgvContestCounties.Rows.Clear();
 
             if (currentElectionContest != null) {
+                dgvContestCounties.Rows.Clear();
                 foreach (ContestCounty contestCounty in currentElectionContest.Counties) {
-                    lstContestCounties.Items.Add(contestCounty);
+                    o[0] = contestCounty;
+                    o[1] = contestCounty.WardCount;
+                    dgvContestCounties.Rows.Add(o);
                     foreach (DataGridViewRow row in dgvCounties.Rows) {
                         if (((County) row.Cells[0].Value).ID == contestCounty.County.ID) {
                             dgvCounties.Rows.Remove(row);
@@ -164,6 +174,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
+            refreshCountyLists();
             addedContests.Clear();
             foreach (ElectionContest ec in currentElection.ElectionContests) {
                 foreach (Response r in ec.Responses) {
@@ -430,7 +441,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
-            //MessageBox.Show("" + dgvCounties.SelectedRows.Count );
             try {
                 if (currentElectionContest != null) {
                     foreach (DataGridViewRow row in dgvCounties.SelectedRows) {
@@ -462,10 +472,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void btnRemoveCounty_Click(object sender, EventArgs e) {
             try {
                 if (currentElectionContest != null) {
-                    ListBox.SelectedObjectCollection selectedItems = lstContestCounties.SelectedItems;
-                    if (selectedItems.Count > 0) {
-                        foreach (ContestCounty contestCounty in selectedItems) {
-                            currentElectionContest.Counties.Remove(contestCounty);
+                    if (dgvContestCounties.SelectedRows.Count > 0)
+                    {
+                        foreach (DataGridViewRow row in dgvContestCounties.SelectedRows)
+                        {
+                            currentElectionContest.Counties.Remove((ContestCounty)row.Cells[0].Value);
                         }
                         refreshCountyLists();
                     }
