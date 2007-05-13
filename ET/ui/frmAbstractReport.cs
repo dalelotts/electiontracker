@@ -115,7 +115,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         protected void lstElections_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CreateReport(((ListItemWrapper<Election>)lstElections.SelectedItem).Value);
+            try
+            {
+                CreateReport(((ListItemWrapper<Election>)lstElections.SelectedItem).Value);
+            }
+            catch (Exception ex)
+            {
+                // Bad selection, just ignore.
+            }
         }
 
         protected void ResizeForm(object sender, EventArgs e){
