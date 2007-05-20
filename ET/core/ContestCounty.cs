@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.db;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class ContestCounty {
         private long id;

@@ -20,7 +20,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public event GenericEventHandler<object, ProofingSheetArgs> proofingSheet;
         public event GenericEventHandler<object, CountyContactFormArgs> countyContactForm;
         public event GenericEventHandler<object, ContestVoteSumryArgs> contestVoteSumry;
-        public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
 
         private static readonly ShowMessageArgs NOT_IMPLEMENTED_MESSAGE_ARGS =
             new ShowMessageArgs("This feature is not implemented yet.", "Not Implemented");
@@ -129,7 +128,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     mainTreeView.Nodes[0].EnsureVisible();
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -170,14 +169,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
-
-        private void electionReportToolStripMenuItem_Click(object sender, EventArgs e) {}
-
-        private void countyVotesReportToolStripMenuItem_Click(object sender, EventArgs e) {}
-
-        private void contestVoteSummaryToolStripMenuItem_Click(object sender, EventArgs e) {}
     }
 }

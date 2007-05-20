@@ -61,6 +61,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddWebsite = new System.Windows.Forms.Button();
             this.txtWebsite = new System.Windows.Forms.TextBox();
             this.lstWebsites = new System.Windows.Forms.ListBox();
+            this.lblRequired = new System.Windows.Forms.Label();
             this.gbCounty.SuspendLayout();
             this.gbCountyNotes.SuspendLayout();
             this.tbDisplay.SuspendLayout();
@@ -92,6 +93,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtCountyWardCount.Size = new System.Drawing.Size(66, 20);
             this.txtCountyWardCount.TabIndex = 6;
             this.txtCountyWardCount.Tag = "lock=true";
+            this.txtCountyWardCount.Text = "0";
             // 
             // txtCountyName
             // 
@@ -106,18 +108,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblCountyWardCount.AutoSize = true;
             this.lblCountyWardCount.Location = new System.Drawing.Point(7, 46);
             this.lblCountyWardCount.Name = "lblCountyWardCount";
-            this.lblCountyWardCount.Size = new System.Drawing.Size(67, 13);
+            this.lblCountyWardCount.Size = new System.Drawing.Size(71, 13);
             this.lblCountyWardCount.TabIndex = 1;
-            this.lblCountyWardCount.Text = "Ward Count:";
+            this.lblCountyWardCount.Text = "Ward Count *";
             // 
             // lblCountyName
             // 
             this.lblCountyName.AutoSize = true;
             this.lblCountyName.Location = new System.Drawing.Point(7, 20);
             this.lblCountyName.Name = "lblCountyName";
-            this.lblCountyName.Size = new System.Drawing.Size(38, 13);
+            this.lblCountyName.Size = new System.Drawing.Size(42, 13);
             this.lblCountyName.TabIndex = 0;
-            this.lblCountyName.Text = "Name:";
+            this.lblCountyName.Text = "Name *";
             // 
             // gbCountyNotes
             // 
@@ -142,7 +144,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             this.tbDisplay.Controls.Add(this.tabCounty);
             this.tbDisplay.Controls.Add(this.tabContact);
-            this.tbDisplay.Location = new System.Drawing.Point(12, 28);
+            this.tbDisplay.Location = new System.Drawing.Point(15, 53);
             this.tbDisplay.Name = "tbDisplay";
             this.tbDisplay.SelectedIndex = 0;
             this.tbDisplay.Size = new System.Drawing.Size(429, 550);
@@ -411,15 +413,28 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstWebsites.Size = new System.Drawing.Size(290, 95);
             this.lstWebsites.TabIndex = 0;
             // 
+            // lblRequired
+            // 
+            this.lblRequired.AutoSize = true;
+            this.lblRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequired.ForeColor = System.Drawing.Color.Blue;
+            this.lblRequired.Location = new System.Drawing.Point(12, 34);
+            this.lblRequired.Name = "lblRequired";
+            this.lblRequired.Size = new System.Drawing.Size(177, 16);
+            this.lblRequired.TabIndex = 33;
+            this.lblRequired.Text = "A * indicates a required field.";
+            // 
             // frmCounty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 590);
+            this.ClientSize = new System.Drawing.Size(454, 614);
+            this.Controls.Add(this.lblRequired);
             this.Controls.Add(this.tbDisplay);
             this.Name = "frmCounty";
             this.Text = "County";
             this.Controls.SetChildIndex(this.tbDisplay, 0);
+            this.Controls.SetChildIndex(this.lblRequired, 0);
             this.gbCounty.ResumeLayout(false);
             this.gbCounty.PerformLayout();
             this.gbCountyNotes.ResumeLayout(false);
@@ -473,5 +488,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.MaskedTextBox txtCountyWardCount;
         private System.Windows.Forms.MaskedTextBox txtPhoneNum;
         private System.Windows.Forms.MaskedTextBox txtAreaCode;
+        private System.Windows.Forms.Label lblRequired;
     }
 }

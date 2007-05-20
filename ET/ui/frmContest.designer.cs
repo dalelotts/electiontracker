@@ -35,21 +35,22 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtName = new System.Windows.Forms.TextBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.cbContestType = new System.Windows.Forms.ComboBox();
+            this.lblRequired = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 67);
+            this.label1.Location = new System.Drawing.Point(12, 93);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Type:";
+            this.label1.Text = "Type *";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 91);
+            this.label2.Location = new System.Drawing.Point(12, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 8;
@@ -58,23 +59,23 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 41);
+            this.label3.Location = new System.Drawing.Point(12, 67);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Name:";
+            this.label3.Text = "Name *";
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(53, 91);
+            this.txtNotes.Location = new System.Drawing.Point(12, 133);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(309, 116);
+            this.txtNotes.Size = new System.Drawing.Size(349, 116);
             this.txtNotes.TabIndex = 9;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(53, 38);
+            this.txtName.Location = new System.Drawing.Point(52, 64);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(309, 20);
             this.txtName.TabIndex = 7;
@@ -84,7 +85,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(53, 213);
+            this.chkActive.Location = new System.Drawing.Point(12, 255);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
             this.chkActive.TabIndex = 10;
@@ -94,17 +95,29 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // cbContestType
             // 
             this.cbContestType.FormattingEnabled = true;
-            this.cbContestType.Location = new System.Drawing.Point(53, 64);
+            this.cbContestType.Location = new System.Drawing.Point(52, 90);
             this.cbContestType.Name = "cbContestType";
             this.cbContestType.Size = new System.Drawing.Size(309, 21);
             this.cbContestType.TabIndex = 5;
             this.cbContestType.Leave += new System.EventHandler(this.cbContestType_Leave);
             // 
+            // lblRequired
+            // 
+            this.lblRequired.AutoSize = true;
+            this.lblRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequired.ForeColor = System.Drawing.Color.Blue;
+            this.lblRequired.Location = new System.Drawing.Point(12, 41);
+            this.lblRequired.Name = "lblRequired";
+            this.lblRequired.Size = new System.Drawing.Size(177, 16);
+            this.lblRequired.TabIndex = 32;
+            this.lblRequired.Text = "A * indicates a required field.";
+            // 
             // frmContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 234);
+            this.ClientSize = new System.Drawing.Size(381, 280);
+            this.Controls.Add(this.lblRequired);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.txtNotes);
@@ -122,6 +135,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.SetChildIndex(this.txtNotes, 0);
             this.Controls.SetChildIndex(this.chkActive, 0);
             this.Controls.SetChildIndex(this.txtName, 0);
+            this.Controls.SetChildIndex(this.lblRequired, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +150,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.ComboBox cbContestType;
+        private System.Windows.Forms.Label lblRequired;
     }
 }
 

@@ -62,5 +62,10 @@ namespace edu.uwec.cs.cs355.group4.et.core {
                 return false;
             }
         }
+
+
+        public override int GetHashCode() {
+            return id.HasValue ? (int) id.Value : base.GetHashCode();
+        }
     }
 }

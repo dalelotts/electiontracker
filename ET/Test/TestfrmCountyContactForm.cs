@@ -1,6 +1,6 @@
 using edu.uwec.cs.cs355.group4.et.db;
-using NUnit.Framework;
 using edu.uwec.cs.cs355.group4.et.ui;
+using NUnit.Framework;
 
 namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]

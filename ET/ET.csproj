@@ -41,13 +41,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\NHibernate\bin\net-2.0\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NMock2, Version=1.0.2313.18049, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="NMock2.AcceptanceTests, Version=1.0.2313.18049, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="NMock2.Test, Version=1.0.2313.18049, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="nunit.framework, Version=2.4.0.2, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\NUnit 2.4\bin\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="OutlookBar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\TestOutlookBar\OutlookBar\bin\Release\OutlookBar.dll</HintPath>
@@ -137,6 +130,7 @@
     </Compile>
     <None Include="app.config" />
     <EmbeddedResource Include="core\Election.hbm.xml" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,39 +141,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="db\HibernateUtil.cs" />
-    <Compile Include="Test\TestAssertionException.cs" />
-    <Compile Include="Test\TestAttributeTypeDAO.cs" />
-    <Compile Include="Test\TestBaseMDIChild.cs" />
-    <Compile Include="Test\TestCandidate.cs" />
-    <Compile Include="Test\TestCandidateArgs.cs" />
-    <Compile Include="Test\TestCandidateDAO.cs" />
-    <Compile Include="Test\TestCandidateResponse.cs" />
-    <Compile Include="Test\TestContest.cs" />
-    <Compile Include="Test\TestContestArgs.cs" />
-    <Compile Include="Test\TestContestCounty.cs" />
-    <Compile Include="Test\TestContestCountyDAO.cs" />
-    <Compile Include="Test\TestContestDAO.cs" />
-    <Compile Include="Test\TestContestTypeDAO.cs" />
-    <Compile Include="Test\TestCountyDAO.cs" />
-    <Compile Include="Test\TestCountyFormArgs.cs" />
-    <Compile Include="Test\TestCountyWebsite.cs" />
-    <Compile Include="Test\TestElectionContest.cs" />
-    <Compile Include="Test\TestElectionContestDAO.cs" />
-    <Compile Include="Test\TestElectionDAO.cs" />
-    <Compile Include="Test\TestFault.cs" />
-    <Compile Include="Test\TestfrmCountyContactForm.cs" />
-    <Compile Include="Test\TestfrmElectionReport.cs" />
-    <Compile Include="Test\TestHibernateDAO.cs" />
-    <Compile Include="Test\TestInvariantException.cs" />
-    <Compile Include="Test\TestPhoneNumberTypeDAO.cs" />
-    <Compile Include="Test\TestPoliticalParty.cs" />
-    <Compile Include="Test\TestPoliticalPartyDAO.cs" />
-    <Compile Include="Test\TestPostconditionException.cs" />
-    <Compile Include="Test\TestPreconditionException.cs" />
-    <Compile Include="Test\TestResponse.cs" />
-    <Compile Include="Test\TestResponseDAO.cs" />
-    <Compile Include="Test\TestResponseValue.cs" />
-    <Compile Include="Test\TestResponseValueDAO.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
     <Compile Include="ui\BaseMDIChild.cs">

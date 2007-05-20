@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using DesignByContract;
+using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
 using NHibernate.Expression;
 
@@ -126,7 +127,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
                                attribute.AllowEmptyList == false) {
                         ICollection collectionResult = (ICollection) propertyResult;
                         // Hack: sdegen - We are presenting in 10 minutes.
-                        if (entity.GetType() != typeof(edu.uwec.cs.cs355.group4.et.core.ContestCounty))
+                        if (entity.GetType() != typeof(ContestCounty))
                         {
                             if (collectionResult.Count == 0)
                             {

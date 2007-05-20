@@ -1,5 +1,5 @@
 using edu.uwec.cs.cs355.group4.et.db;
-using System.Collections.Generic;
+
 namespace edu.uwec.cs.cs355.group4.et.core {
     public class ResponseValue {
         private Response response;

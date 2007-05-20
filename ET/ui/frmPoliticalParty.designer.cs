@@ -33,32 +33,33 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtAbbrev = new System.Windows.Forms.TextBox();
+            this.lblRequired = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 40);
+            this.label1.Location = new System.Drawing.Point(12, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "&Name:";
+            this.label1.Text = "&Name *";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 66);
+            this.label2.Location = new System.Drawing.Point(12, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "A&bbreviation";
+            this.label2.Text = "A&bbreviation *";
             // 
             // chkActive
             // 
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(81, 89);
+            this.chkActive.Location = new System.Drawing.Point(91, 106);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
             this.chkActive.TabIndex = 11;
@@ -68,23 +69,35 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(81, 37);
+            this.txtName.Location = new System.Drawing.Point(91, 54);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(251, 20);
             this.txtName.TabIndex = 12;
             // 
             // txtAbbrev
             // 
-            this.txtAbbrev.Location = new System.Drawing.Point(81, 63);
+            this.txtAbbrev.Location = new System.Drawing.Point(91, 80);
             this.txtAbbrev.Name = "txtAbbrev";
             this.txtAbbrev.Size = new System.Drawing.Size(62, 20);
             this.txtAbbrev.TabIndex = 13;
+            // 
+            // lblRequired
+            // 
+            this.lblRequired.AutoSize = true;
+            this.lblRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequired.ForeColor = System.Drawing.Color.Blue;
+            this.lblRequired.Location = new System.Drawing.Point(12, 35);
+            this.lblRequired.Name = "lblRequired";
+            this.lblRequired.Size = new System.Drawing.Size(177, 16);
+            this.lblRequired.TabIndex = 35;
+            this.lblRequired.Text = "A * indicates a required field.";
             // 
             // frmPoliticalParty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 111);
+            this.ClientSize = new System.Drawing.Size(353, 131);
+            this.Controls.Add(this.lblRequired);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtAbbrev);
             this.Controls.Add(this.label1);
@@ -97,6 +110,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.txtAbbrev, 0);
             this.Controls.SetChildIndex(this.txtName, 0);
+            this.Controls.SetChildIndex(this.lblRequired, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,5 +123,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtAbbrev;
+        private System.Windows.Forms.Label lblRequired;
     }
 }

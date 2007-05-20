@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
 using NHibernate.Expression;
-using System;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ElectionDAO : HibernateDAO<Election> {

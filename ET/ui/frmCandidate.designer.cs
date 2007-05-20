@@ -30,7 +30,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         /// </summary>
         private void InitializeComponent()
         {
-            this.gbCandidate = new System.Windows.Forms.GroupBox();
             this.cboPoliticalParty = new System.Windows.Forms.ComboBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.txtNotes = new System.Windows.Forms.TextBox();
@@ -42,33 +41,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtMiddleName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
-            this.gbCandidate.SuspendLayout();
+            this.lblRequired = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // gbCandidate
-            // 
-            this.gbCandidate.Controls.Add(this.cboPoliticalParty);
-            this.gbCandidate.Controls.Add(this.chkActive);
-            this.gbCandidate.Controls.Add(this.txtNotes);
-            this.gbCandidate.Controls.Add(this.label6);
-            this.gbCandidate.Controls.Add(this.label5);
-            this.gbCandidate.Controls.Add(this.label4);
-            this.gbCandidate.Controls.Add(this.txtLastName);
-            this.gbCandidate.Controls.Add(this.label3);
-            this.gbCandidate.Controls.Add(this.txtMiddleName);
-            this.gbCandidate.Controls.Add(this.label2);
-            this.gbCandidate.Controls.Add(this.txtFirstName);
-            this.gbCandidate.Location = new System.Drawing.Point(12, 28);
-            this.gbCandidate.Name = "gbCandidate";
-            this.gbCandidate.Size = new System.Drawing.Size(369, 308);
-            this.gbCandidate.TabIndex = 11;
-            this.gbCandidate.TabStop = false;
-            this.gbCandidate.Text = "Candidate";
             // 
             // cboPoliticalParty
             // 
             this.cboPoliticalParty.FormattingEnabled = true;
-            this.cboPoliticalParty.Location = new System.Drawing.Point(88, 95);
+            this.cboPoliticalParty.Location = new System.Drawing.Point(93, 136);
             this.cboPoliticalParty.Name = "cboPoliticalParty";
             this.cboPoliticalParty.Size = new System.Drawing.Size(270, 21);
             this.cboPoliticalParty.TabIndex = 30;
@@ -80,7 +59,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(15, 287);
+            this.chkActive.Location = new System.Drawing.Point(12, 328);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
             this.chkActive.TabIndex = 29;
@@ -90,7 +69,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(15, 145);
+            this.txtNotes.Location = new System.Drawing.Point(12, 186);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(343, 136);
@@ -100,7 +79,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 129);
+            this.label6.Location = new System.Drawing.Point(12, 170);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 27;
@@ -109,7 +88,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 98);
+            this.label5.Location = new System.Drawing.Point(12, 139);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 26;
@@ -118,15 +97,15 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 72);
+            this.label4.Location = new System.Drawing.Point(12, 113);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 25;
-            this.label4.Text = "&Last Name";
+            this.label4.Text = "&Last Name*";
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(88, 69);
+            this.txtLastName.Location = new System.Drawing.Point(93, 110);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(270, 20);
             this.txtLastName.TabIndex = 24;
@@ -135,7 +114,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 46);
+            this.label3.Location = new System.Drawing.Point(12, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 23;
@@ -143,7 +122,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             // txtMiddleName
             // 
-            this.txtMiddleName.Location = new System.Drawing.Point(88, 43);
+            this.txtMiddleName.Location = new System.Drawing.Point(93, 84);
             this.txtMiddleName.Name = "txtMiddleName";
             this.txtMiddleName.Size = new System.Drawing.Size(270, 20);
             this.txtMiddleName.TabIndex = 22;
@@ -152,32 +131,63 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 20);
+            this.label2.Location = new System.Drawing.Point(12, 61);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 21;
-            this.label2.Text = "&First Name";
+            this.label2.Text = "&First Name*";
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(88, 17);
+            this.txtFirstName.Location = new System.Drawing.Point(93, 58);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(270, 20);
             this.txtFirstName.TabIndex = 20;
             this.txtFirstName.Tag = "lock=true";
             this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
+            // lblRequired
+            // 
+            this.lblRequired.AutoSize = true;
+            this.lblRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequired.ForeColor = System.Drawing.Color.Blue;
+            this.lblRequired.Location = new System.Drawing.Point(12, 39);
+            this.lblRequired.Name = "lblRequired";
+            this.lblRequired.Size = new System.Drawing.Size(177, 16);
+            this.lblRequired.TabIndex = 31;
+            this.lblRequired.Text = "A * indicates a required field.";
+            // 
             // frmCandidate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 345);
-            this.Controls.Add(this.gbCandidate);
+            this.ClientSize = new System.Drawing.Size(377, 354);
+            this.Controls.Add(this.lblRequired);
+            this.Controls.Add(this.cboPoliticalParty);
+            this.Controls.Add(this.chkActive);
+            this.Controls.Add(this.txtNotes);
+            this.Controls.Add(this.txtFirstName);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtMiddleName);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtLastName);
             this.Name = "frmCandidate";
             this.Text = "Candidate";
-            this.Controls.SetChildIndex(this.gbCandidate, 0);
-            this.gbCandidate.ResumeLayout(false);
-            this.gbCandidate.PerformLayout();
+            this.Controls.SetChildIndex(this.txtLastName, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.txtMiddleName, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.txtFirstName, 0);
+            this.Controls.SetChildIndex(this.txtNotes, 0);
+            this.Controls.SetChildIndex(this.chkActive, 0);
+            this.Controls.SetChildIndex(this.cboPoliticalParty, 0);
+            this.Controls.SetChildIndex(this.lblRequired, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,7 +195,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gbCandidate;
         private System.Windows.Forms.ComboBox cboPoliticalParty;
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.TextBox txtNotes;
@@ -197,6 +206,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
         private System.Windows.Forms.TextBox txtMiddleName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.Label lblRequired;
 
 
     }

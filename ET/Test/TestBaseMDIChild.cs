@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.db;
+using edu.uwec.cs.cs355.group4.et.ui;
 using NUnit.Framework;
 using AssertionException=DesignByContract.AssertionException;
-using edu.uwec.cs.cs355.group4.et.ui;
 
 namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]

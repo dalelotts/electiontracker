@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using NHibernate;
 using NMock2;
 using NUnit.Framework;
-
 
 namespace edu.uwec.cs.cs355.group4.et.Test
 {

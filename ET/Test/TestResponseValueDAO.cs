@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
-using NHibernate;
-using NUnit.Framework;
-using NMock2;
 using edu.uwec.cs.cs355.group4.et.db;
+using NHibernate;
+using NMock2;
+using NUnit.Framework;
 
 namespace edu.uwec.cs.cs355.group4.et.Test {
     [TestFixture()]
