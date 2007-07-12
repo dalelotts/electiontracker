@@ -1,14 +1,30 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
 using System;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.events;
 using log4net;
 using Spring.Context;
 
-namespace edu.uwec.cs.cs355.group4.et.ui
-{
+namespace edu.uwec.cs.cs355.group4.et.ui {
     internal class DefaultUIController : UIController, IApplicationContextAware {
-
-        private static readonly ILog LOG = LogManager.GetLogger(typeof(DefaultUIController));
+        private static readonly ILog LOG = LogManager.GetLogger(typeof (DefaultUIController));
         private frmEnterVotes voteForm;
         private Form mdiForm;
         private IApplicationContext context;
@@ -75,14 +91,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             politicalPartyForm.Show();
         }
 
-        public void HandleProofingSheet(object sender, ProofingSheetArgs args)
-        {
+        public void HandleProofingSheet(object sender, ProofingSheetArgs args) {
             frmProofingSheet proofingSheetForm = makeMDIChildForm<frmProofingSheet>();
             proofingSheetForm.Show();
         }
 
-        public void HandleElection(object sender, ElectionArgs args)
-        {
+        public void HandleElection(object sender, ElectionArgs args) {
             frmElection electionForm = makeMDIChildForm<frmElection>();
             electionForm.loadElection(args.ID);
             electionForm.Show();
@@ -93,18 +107,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             MessageBox.Show(args.Text, args.Caption);
         }
 
-        public void HandleElectionReport(object sender, ElectionReportArgs args)
-        {
+        public void HandleElectionReport(object sender, ElectionReportArgs args) {
             frmElectionReport electionReportForm = makeMDIChildForm<frmElectionReport>();
             electionReportForm.Show();
         }
-        public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args)
-        {
+
+        public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args) {
             frmContestVoteSumry contestVoteSumry = makeMDIChildForm<frmContestVoteSumry>();
             contestVoteSumry.Show();
         }
-        public void HandleCountyContactForm(object sender, CountyContactFormArgs args)
-        {
+
+        public void HandleCountyContactForm(object sender, CountyContactFormArgs args) {
             frmCountyContactForm countyContactForm = makeMDIChildForm<frmCountyContactForm>();
             countyContactForm.Show();
         }

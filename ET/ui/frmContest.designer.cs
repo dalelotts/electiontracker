@@ -1,3 +1,21 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
 namespace edu.uwec.cs.cs355.group4.et.ui
 {
     partial class frmContest
@@ -117,7 +135,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 280);
-            this.Controls.Add(this.lblRequired);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.txtNotes);
@@ -125,9 +142,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblRequired);
             this.Name = "frmContest";
             this.Text = "Contest";
             this.Load += new System.EventHandler(this.frmContest_Load);
+            this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
@@ -135,7 +154,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.SetChildIndex(this.txtNotes, 0);
             this.Controls.SetChildIndex(this.chkActive, 0);
             this.Controls.SetChildIndex(this.txtName, 0);
-            this.Controls.SetChildIndex(this.lblRequired, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

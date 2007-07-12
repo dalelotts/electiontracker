@@ -1,3 +1,21 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -70,16 +88,18 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
 
-        public IList<Fault> validate(T entity) {
+        public IList<Fault> canMakePersistent(T entity) {
             if (entity == null) throw new ArgumentNullException("Null: entity");
             IList<Fault> result = validateRequiredProperties(entity);
             if (result.Count == 0) {
-                return performValidation(entity);
+                return performCanMakePersistent(entity);
             }
             return result;
         }
 
-        protected abstract IList<Fault> performValidation(T entity);
+        public abstract IList<Fault> canMakeTransient(T entity);
+
+        protected abstract IList<Fault> performCanMakePersistent(T entity);
 
         protected IList<T> findByCriteria(IList<ICriterion> criterion, IList<Order> order) {
             ICriteria criteria = session.CreateCriteria(objectType);
@@ -127,10 +147,8 @@ namespace edu.uwec.cs.cs355.group4.et.db {
                                attribute.AllowEmptyList == false) {
                         ICollection collectionResult = (ICollection) propertyResult;
                         // Hack: sdegen - We are presenting in 10 minutes.
-                        if (entity.GetType() != typeof(ContestCounty))
-                        {
-                            if (collectionResult.Count == 0)
-                            {
+                        if (entity.GetType() != typeof (ContestCounty)) {
+                            if (collectionResult.Count == 0) {
                                 result.Add(
                                     new Fault(true,
                                               "The " + attribute.FriendlyName +

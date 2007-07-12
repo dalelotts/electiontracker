@@ -1,6 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+ Copyright (C) 2007 Knight Rider Consulting, Inc.
+ support@knightrider.com
+ http://www.knightrider.com
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see http://www.gnu.org/licenses/
+-->
+
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.Candidate, edu.uwec.cs.cs355.group4.et" table="candidate">
+  <class name="edu.uwec.cs.cs355.group4.et.core.Candidate, ElectionTracker" table="candidate">
     <id name="ID" column="CandidateID" type="Int64">
       <generator class="identity"/>
     </id>
@@ -8,7 +28,7 @@
     <property name="MiddleName" column="CandidateMiddleName" type="String" length="100" not-null="false"/>
     <property name="LastName" column="CandidateLastName" type="String" length="100" not-null="true"/>
     <property name="Notes" column="CandidateNotes" type="String" not-null="false" />
-    <many-to-one name="PoliticalParty" class="edu.uwec.cs.cs355.group4.et.core.PoliticalParty, edu.uwec.cs.cs355.group4.et" column="CandidatePoliticalPartyID"/>
+    <many-to-one name="PoliticalParty" class="edu.uwec.cs.cs355.group4.et.core.PoliticalParty, ElectionTracker" column="CandidatePoliticalPartyID"/>
     <property name="IsActive" column="CandidateIsActive" type="Boolean" not-null="true" />
   </class>
 </hibernate-mapping>

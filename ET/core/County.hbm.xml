@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (C) 2007 Knight Rider Consulting, Inc.
+ support@knightrider.com
+ http://www.knightrider.com
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see http://www.gnu.org/licenses/
+-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" table="county">
+	<class name="edu.uwec.cs.cs355.group4.et.core.County, ElectionTracker" table="county">
 		<id name="ID" column="CountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
@@ -9,15 +27,15 @@
 		<property name="WardCount" column="CountyWardCount" type="Int32" not-null="true"/>    
 		<bag lazy="true" inverse="true" name="PhoneNumbers" cascade="all-delete-orphan" >
       <key column="CountyID"/>
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber, edu.uwec.cs.cs355.group4.et"/>
+      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber, ElectionTracker"/>
     </bag>
     <bag lazy="true" inverse="true" name="Attributes" cascade="all-delete-orphan">
 			<key column="CountyID"/>
-			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, edu.uwec.cs.cs355.group4.et"/>
+			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, ElectionTracker"/>
 		</bag>
 		<bag lazy="true" name="Websites" inverse="true" cascade="all-delete-orphan">
 			<key column="CountyID"/>
-			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyWebsite,edu.uwec.cs.cs355.group4.et"/>
+			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyWebsite, ElectionTracker"/>
 		</bag>	
 	</class>
 </hibernate-mapping>

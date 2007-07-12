@@ -1,3 +1,21 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -105,7 +123,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void refreshCountyLists() {
             Dictionary<County, int> mapCounts = new Dictionary<County, int>();
-            
+
             object[] o = new object[2];
             int i;
             foreach (DataGridViewRow row in dgvCounties.Rows) {
@@ -124,10 +142,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
                 dgvCounties.Rows.Add(o);
             }
-            foreach (DataGridViewRow row in dgvContestCounties.Rows)
-            {
-                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)){
-                    ((ContestCounty)row.Cells[0].Value).WardCount = i;
+            foreach (DataGridViewRow row in dgvContestCounties.Rows) {
+                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)) {
+                    ((ContestCounty) row.Cells[0].Value).WardCount = i;
                 }
             }
             dgvContestCounties.Rows.Clear();
@@ -160,23 +177,20 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             if (currentElectionContest != null) {
                 foreach (Response response in currentElectionContest.Responses) {
                     lstContestCandidates.Items.Add(response);
-                    for (int i = 0; i < lstDeletedResponses.Count; i++)
-                    {
+                    for (int i = 0; i < lstDeletedResponses.Count; i++) {
                         // sdegen 5-10-07 - Inheritance messes up Hibernate's persistence of 
                         //  responses- mainly in deletions.  So we handle it manually now.
                         if (lstDeletedResponses[i].GetType().Equals(typeof (CandidateResponse)) &&
-                            response.GetType().Equals(typeof(CandidateResponse)))
-                        {
-                            cr = (CandidateResponse)lstDeletedResponses[i];
-                            if (cr.Candidate.ID == ((CandidateResponse)response).Candidate.ID)
-                            {
+                            response.GetType().Equals(typeof (CandidateResponse))) {
+                            cr = (CandidateResponse) lstDeletedResponses[i];
+                            if (cr.Candidate.ID == ((CandidateResponse) response).Candidate.ID) {
                                 lstDeletedResponses.RemoveAt(i);
                             }
                         }
                         if (lstDeletedResponses[i].GetType().Equals(typeof (CustomResponse)) &&
-                            response.GetType().Equals(typeof(CustomResponse))){
-                            if (((CustomResponse)response).Description == ((CustomResponse)lstDeletedResponses[i]).Description)
-                            {
+                            response.GetType().Equals(typeof (CustomResponse))) {
+                            if (((CustomResponse) response).Description ==
+                                ((CustomResponse) lstDeletedResponses[i]).Description) {
                                 lstDeletedResponses.RemoveAt(i);
                             }
                         }
@@ -196,9 +210,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
-            foreach (Response r in lstDeletedResponses)
-            {
-                this.responseDAO.Delete(r);
+            foreach (Response r in lstDeletedResponses) {
+                responseDAO.Delete(r);
             }
             refreshCountyLists();
             addedContests.Clear();
@@ -213,7 +226,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentElection.Date = dtpDate.Value;
                 currentElection.Notes = txtNotes.Text;
 
-                IList<Fault> faults = electionDAO.validate(currentElection);
+                IList<Fault> faults = electionDAO.canMakePersistent(currentElection);
                 bool persistData = reportFaults(faults);
 
                 //If there were no errors, persist data to the database
@@ -508,11 +521,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void btnRemoveCounty_Click(object sender, EventArgs e) {
             try {
                 if (currentElectionContest != null) {
-                    if (dgvContestCounties.SelectedRows.Count > 0)
-                    {
-                        foreach (DataGridViewRow row in dgvContestCounties.SelectedRows)
-                        {
-                            currentElectionContest.Counties.Remove((ContestCounty)row.Cells[0].Value);
+                    if (dgvContestCounties.SelectedRows.Count > 0) {
+                        foreach (DataGridViewRow row in dgvContestCounties.SelectedRows) {
+                            currentElectionContest.Counties.Remove((ContestCounty) row.Cells[0].Value);
                         }
                         refreshCountyLists();
                     }

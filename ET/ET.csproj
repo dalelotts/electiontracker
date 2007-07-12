@@ -8,8 +8,25 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>edu.uwec.cs.cs355.group4.et</RootNamespace>
-    <AssemblyName>edu.uwec.cs.cs355.group4.et</AssemblyName>
+    <AssemblyName>ElectionTracker</AssemblyName>
     <StartupObject>edu.uwec.cs.cs355.group4.et.core.Program</StartupObject>
+    <ApplicationIcon>vote.ico</ApplicationIcon>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://www.knightrider.com</SupportUrl>
+    <ProductName>Election Tracker</ProductName>
+    <PublisherName>Knight Rider Consulting, Inc.</PublisherName>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,7 +147,6 @@
     </Compile>
     <None Include="app.config" />
     <EmbeddedResource Include="core\Election.hbm.xml" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -303,6 +319,7 @@
     <Content Include="Resources\EditTableHS.png" />
     <Content Include="Resources\NewCardHS.png" />
     <Content Include="Resources\saveHS.png" />
+    <Content Include="vote.ico" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
     <EmbeddedResource Include="ui\BaseMDIChild.resx">
       <SubType>Designer</SubType>
@@ -320,6 +337,13 @@
       <DependentUpon>frmEnterVotes.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

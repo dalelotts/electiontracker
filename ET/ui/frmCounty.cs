@@ -1,3 +1,21 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -12,9 +30,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private readonly PhoneNumberTypeDAO phoneNumberTypeDAO;
         private readonly AttributeTypeDAO attributeTypeDAO;
 
-        IList<CountyPhoneNumber> resetPhoneNums;
-        IList<CountyWebsite> resetWebsites;
-        IList<CountyAttribute> resetAttributes;
+        private IList<CountyPhoneNumber> resetPhoneNums;
+        private IList<CountyWebsite> resetWebsites;
+        private IList<CountyAttribute> resetAttributes;
 
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmContest));
 
@@ -183,16 +201,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             int i = 0;
-            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers)
-            {
+            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
                 cpn.County = currentCounty;
             }
-            foreach (CountyWebsite cw in currentCounty.Websites)
-            {
+            foreach (CountyWebsite cw in currentCounty.Websites) {
                 cw.County = currentCounty;
             }
-            foreach (CountyAttribute ca in currentCounty.Attributes)
-            {
+            foreach (CountyAttribute ca in currentCounty.Attributes) {
                 ca.County = currentCounty;
             }
             try {
@@ -201,7 +216,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 Int32.TryParse(txtCountyWardCount.Text, out i);
                 currentCounty.WardCount = i;
 
-                IList<Fault> faults = countyDAO.validate(currentCounty);
+                IList<Fault> faults = countyDAO.canMakePersistent(currentCounty);
                 bool persistData = reportFaults(faults);
 
                 //If there were no errors, persist data to the database
@@ -214,7 +229,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 MessageBox.Show(message + "\n\n" + ex);
                 LOG.Error(message, ex);
             }
-        }        
+        }
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
@@ -227,72 +242,59 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void resetControls()
-        {
+        private void resetControls() {
             resetPhoneNumbers();
             resetSites();
             resetAttr();
         }
 
-        private void resetPhoneNumbers()
-        {
+        private void resetPhoneNumbers() {
             lstPhoneNums.Items.Clear();
-            foreach (CountyPhoneNumber cpn in resetPhoneNums)
-            {
+            foreach (CountyPhoneNumber cpn in resetPhoneNums) {
                 lstPhoneNums.Items.Add(cpn);
             }
 
             IList<CountyPhoneNumber> removeList = new List<CountyPhoneNumber>();
-            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers)
-            {
+            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
                 if (!resetPhoneNums.Contains(cpn))
                     removeList.Add(cpn);
             }
 
-            foreach (CountyPhoneNumber cpn in removeList)
-            {
+            foreach (CountyPhoneNumber cpn in removeList) {
                 currentCounty.PhoneNumbers.Remove(cpn);
             }
-
         }
-        private void resetSites()
-        {
+
+        private void resetSites() {
             lstWebsites.Items.Clear();
-            foreach (CountyWebsite cws in resetWebsites)
-            {
+            foreach (CountyWebsite cws in resetWebsites) {
                 lstWebsites.Items.Add(cws);
             }
 
             IList<CountyWebsite> removeList = new List<CountyWebsite>();
-            foreach (CountyWebsite cws in currentCounty.Websites)
-            {
+            foreach (CountyWebsite cws in currentCounty.Websites) {
                 if (!resetWebsites.Contains(cws))
                     removeList.Add(cws);
             }
 
-            foreach (CountyWebsite cws in removeList)
-            {
+            foreach (CountyWebsite cws in removeList) {
                 currentCounty.Websites.Remove(cws);
             }
         }
 
-        private void resetAttr()
-        {
+        private void resetAttr() {
             lstAttributes.Items.Clear();
-            foreach (CountyAttribute ca in resetAttributes)
-            {
+            foreach (CountyAttribute ca in resetAttributes) {
                 lstAttributes.Items.Add(ca);
             }
 
             IList<CountyAttribute> removeList = new List<CountyAttribute>();
-            foreach (CountyAttribute ca in currentCounty.Attributes)
-            {
+            foreach (CountyAttribute ca in currentCounty.Attributes) {
                 if (!resetAttributes.Contains(ca))
                     removeList.Add(ca);
             }
 
-            foreach (CountyAttribute ca in removeList)
-            {
+            foreach (CountyAttribute ca in removeList) {
                 currentCounty.Attributes.Remove(ca);
             }
         }
@@ -329,16 +331,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     County county = countyDAO.findById(id, false);
                     if (county != null) {
                         currentCounty = county;
-                        foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers)
-                        {
+                        foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
                             resetPhoneNums.Add(cpn);
                         }
-                        foreach (CountyWebsite cws in currentCounty.Websites)
-                        {
+                        foreach (CountyWebsite cws in currentCounty.Websites) {
                             resetWebsites.Add(cws);
                         }
-                        foreach (CountyAttribute ca in currentCounty.Attributes)
-                        {
+                        foreach (CountyAttribute ca in currentCounty.Attributes) {
                             resetAttributes.Add(ca);
                         }
                         refreshControls();
@@ -416,9 +415,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void lstPhoneNums_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           /* CountyPhoneNumber cpn = (CountyPhoneNumber)(lstPhoneNums.SelectedItem);
+        private void lstPhoneNums_SelectedIndexChanged(object sender, EventArgs e) {
+            /* CountyPhoneNumber cpn = (CountyPhoneNumber)(lstPhoneNums.SelectedItem);
             txtAreaCode.Text = cpn.AreaCode;
             txtPhoneNum.Text = cpn.PhoneNumber;
             Console.WriteLine(cpn.Type.Name);

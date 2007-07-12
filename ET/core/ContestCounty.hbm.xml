@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ Copyright (C) 2007 Knight Rider Consulting, Inc.
+ support@knightrider.com
+ http://www.knightrider.com
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see http://www.gnu.org/licenses/
+-->
+
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="edu.uwec.cs.cs355.group4.et.core.ContestCounty, edu.uwec.cs.cs355.group4.et" table="contestcounty">
+	<class name="edu.uwec.cs.cs355.group4.et.core.ContestCounty, ElectionTracker" table="contestcounty">
 		<id name="ID" column="ContestCountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
     <bag lazy="true" inverse="true" name="ResponseValues" cascade="all-delete-orphan" >
       <key column="ContestCountyID"/>
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ResponseValue, edu.uwec.cs.cs355.group4.et"/>
+      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ResponseValue, ElectionTracker"/>
     </bag>
 		<property name="WardsReporting" column="WardsReporting" type="Int32" length="100" not-null="true"/>
 		<property name="WardCount" column="WardCount" type="Int32" length="100" not-null="true"/>
-		<many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID" not-null="true" />
-		<many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, edu.uwec.cs.cs355.group4.et" column="ElectionContestID" not-null="true"/>
+		<many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, ElectionTracker" column="CountyID" not-null="true" />
+		<many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true"/>
 	</class>
 </hibernate-mapping>

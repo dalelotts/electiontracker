@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, edu.uwec.cs.cs355.group4.et" table="countyattribute">
+  <class name="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, ElectionTracker" table="countyattribute">
     <id name="ID" column="CountyAttributeID" type="Int64">
       <generator class="identity"/>
     </id>
     <property name="Value" column="CountyAttributeValue" type="String" length="5" not-null="false"/>
-    <many-to-one name="Type" class="edu.uwec.cs.cs355.group4.et.core.AttributeType, edu.uwec.cs.cs355.group4.et" column="AttributeTypeID" not-null="true" />    
-    <many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, edu.uwec.cs.cs355.group4.et" column="CountyID" not-null="true" />
+    <many-to-one name="Type" class="edu.uwec.cs.cs355.group4.et.core.AttributeType, ElectionTracker" column="AttributeTypeID" not-null="true" />    
+    <many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, ElectionTracker" column="CountyID" not-null="true" />
   </class>
 </hibernate-mapping>

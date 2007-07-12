@@ -1,3 +1,21 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
 using System.Collections.Generic;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
@@ -6,8 +24,7 @@ using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal sealed class VoteEnterer : Panel {
-
-        private static readonly ILog LOG = LogManager.GetLogger(typeof(VoteEnterer));
+        private static readonly ILog LOG = LogManager.GetLogger(typeof (VoteEnterer));
 
         private static readonly IList<string> excluded = new List<string>();
 
@@ -19,7 +36,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             excluded.Add("WardsReporting");
         }
 
-        public VoteEnterer(Election election, County county, ContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) {
+        public VoteEnterer(Election election, County county, ContestCountyDAO contestCountyDAO,
+                           ResponseValueDAO responseValueDAO) {
             int currentTop = 0;
 
             foreach (ElectionContest electionContest in election.ElectionContests) {
@@ -38,7 +56,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     Controls.Add(display);
                     displays.Add(display);
                 } else {
-                    LOG.Error("Unalbe to locate contest county where countyID =" + county.ID + " AND electionContestID =" + electionContest.ID);
+                    LOG.Error("Unalbe to locate contest county where countyID =" + county.ID +
+                              " AND electionContestID =" + electionContest.ID);
                 }
             }
             AutoScroll = true;

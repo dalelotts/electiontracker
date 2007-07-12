@@ -1,3 +1,22 @@
+/**
+ *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  support@knightrider.com
+ *  http://www.knightrider.com
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *  
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **/
+using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
@@ -25,16 +44,21 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
         }
 
-        protected override IList<Fault> performValidation(Election entity) {
+        protected override IList<Fault> performCanMakePersistent(Election entity) {
             IList<Fault> retVal = new List<Fault>();
-
             return retVal;
         }
 
-        public IList<County> findCounties(Election e)
-        {
-            IQuery iqQuery = getCurrentSession().CreateSQLQuery("select c.CountyID, c.CountyName, c.CountyNotes, c.CountyWardCount from election e left join ElectionContest ec on (ec.ElectionID = e.ElectionID) left join ContestCounty cc on (ec.ElectionContestID = cc.ElectionContestID) left join County c on (cc.CountyID = c.CountyID) where e.ElectionID = " + e.ID + ";").AddEntity(typeof(County));
+        public IList<County> findCounties(Election e) {
+            IQuery iqQuery =
+                getCurrentSession().CreateSQLQuery(
+                    "select c.CountyID, c.CountyName, c.CountyNotes, c.CountyWardCount from election e left join ElectionContest ec on (ec.ElectionID = e.ElectionID) left join ContestCounty cc on (ec.ElectionContestID = cc.ElectionContestID) left join County c on (cc.CountyID = c.CountyID) where e.ElectionID = " +
+                    e.ID + ";").AddEntity(typeof (County));
             return iqQuery.List<County>();
+        }
+
+        public override IList<Fault> canMakeTransient(Election entity) {
+            throw new NotImplementedException();
         }
     }
 }
