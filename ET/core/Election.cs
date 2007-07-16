@@ -60,7 +60,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         }
 
         public override string ToString() {
-            return date.ToShortDateString();
+            return date.ToString("MM/dd/yyyy");
         }
     }
 }

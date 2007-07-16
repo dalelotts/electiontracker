@@ -74,15 +74,12 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             }
         }
 
-        protected override IList<Fault> performCanMakePersistent(ElectionContest entity) {
-            IList<Fault> retVal = new List<Fault>();
-
-
-            return retVal;
+        public override IList<Fault> canMakeTransient(ElectionContest entity) {
+            return new List<Fault>();
         }
 
-        public override IList<Fault> canMakeTransient(ElectionContest entity) {
-            throw new NotImplementedException();
+        protected override IList<Fault> performCanMakePersistent(ElectionContest entity) {
+            return new List<Fault>();
         }
     }
 }

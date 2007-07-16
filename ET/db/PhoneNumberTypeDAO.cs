@@ -27,8 +27,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected override IList<Fault> performCanMakePersistent(PhoneNumberType entity) {
             IList<Fault> retVal = new List<Fault>();
-
-
             ISession currentSession = getCurrentSession();
             IQuery validQuery =
                 currentSession.CreateSQLQuery("select * from phonenumbertype where Name = " + entity.Name + ";");
@@ -40,7 +38,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         public override IList<Fault> canMakeTransient(PhoneNumberType entity) {
-            throw new NotImplementedException();
+            return new List<Fault>();
         }
     }
 }

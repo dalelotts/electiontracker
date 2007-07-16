@@ -42,61 +42,82 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return electionDAO.findActive();
         }
 
-        protected override void CreateReport(Election elc) {
+        protected override void CreateReport(Election election) {
             intCount = 0;
             intPages = 0;
             lstToPrint = new List<string>();
-
             // TODO: Set up the print.
 
             lstToPrint.Add("<HEADER>");
-            lstToPrint.Add(DateTime.Now.ToString() + "");
+            lstToPrint.Add(DateTime.Now + "");
             lstToPrint.Add("");
             lstToPrint.Add(CenterText("ELECTION PROOFING SHEET"));
-            lstToPrint.Add(CenterText("ELECTION DATE " + elc.Date.ToString()));
+            lstToPrint.Add(CenterText("ELECTION DATE " + election));
             lstToPrint.Add("");
             lstToPrint.Add("");
-            lstToPrint.Add(
-                "CONTEST                     WARDS   COUNTY                  RESPONSE                     SORT ORDER");
-            lstToPrint.Add(
-                "-------                     -----   ------                  --------                     ----------");
+            lstToPrint.Add("CONTEST                     WARDS   COUNTY                  CANDIDATE");
+            lstToPrint.Add("-------------------------   -----   ---------------------   ---------");
             lstToPrint.Add("</HEADER>");
             lstToPrint.Add("");
 
-            int intResponses;
-            int intCounties;
-            int i, j;
-            bool b;
-            string strCountyPart, strResponsePart, strContestPart;
-            IList<ElectionContest> electionContests = elc.ElectionContests;
-            foreach (ElectionContest contest in electionContests) {
-                b = true;
-                i = j = 0;
-                intResponses = contest.Responses.Count;
-                intCounties = contest.Counties.Count;
-                while (i < intResponses || j < intCounties) {
-                    if (b) {
-                        b = false;
-                        strContestPart = FormatTextLength(contest.Contest.Name, 30);
-                    } else {
-                        strContestPart = FormatTextLength(" ", 30);
-                    }
-                    if (i < intResponses) {
-                        strResponsePart = FormatTextLength(contest.Responses[i].ToString(), 30);
-                        strResponsePart += contest.Responses[i].SortOrder;
-                    } else {
-                        strResponsePart = FormatTextLength(" ", 30);
-                    }
-                    if (j < intCounties) {
-                        strCountyPart = FormatTextLength("" + contest.Counties[j].WardCount, 6) +
-                                        FormatTextLength(contest.Counties[j].County.Name, 24);
-                    } else {
-                        strCountyPart = FormatTextLength(" ", 30);
-                    }
-                    lstToPrint.Add(strContestPart + strCountyPart + strResponsePart);
-                    i++;
-                    j++;
+            List<ElectionContest> contests = new List<ElectionContest>(election.ElectionContests);
+
+            contests.Sort(new ElectionContestComparer());
+
+            foreach (ElectionContest contest in contests) {
+                int wardCount = 0;
+                int responseCount = 0;
+                int countyCount = 0;
+                int totalResponses = contest.Responses.Count;
+                int totalCounties = contest.Counties.Count;
+                bool printContestColumn = true;
+
+                string contestName = FormatTextLength(contest.Contest.Name, 28);
+
+                // If there are no responses or counties the while loop later
+                // in this method will fail to print the contest name, so print it now.
+
+                if (totalResponses == 0 && totalCounties == 0) {
+                    lstToPrint.Add(contestName);
+                    printContestColumn = false;
                 }
+
+                while (responseCount < totalResponses || countyCount < totalCounties) {
+                    string contestColumn;
+                    if (printContestColumn) {
+                        printContestColumn = false;
+                        contestColumn = FormatTextLength(contestName, 28);
+                    } else {
+                        contestColumn = FormatTextLength(" ", 28);
+                    }
+
+                    string countyColumn;
+                    string wardColumn;
+                    if (countyCount < totalCounties) {
+                        ContestCounty currentCounty = contest.Counties[countyCount];
+                        wardColumn = FormatTextLength(currentCounty.WardCount.ToString(), 5, false) + "   ";
+                        countyColumn = FormatTextLength(currentCounty.County.Name, 24);
+                        wardCount += currentCounty.WardCount;
+                    } else {
+                        wardColumn = FormatTextLength(" ", 8);
+                        countyColumn = FormatTextLength(" ", 24);
+                    }
+
+                    string responseColumn;
+                    if (responseCount < totalResponses) {
+                        Response currentResponse = contest.Responses[responseCount];
+                        responseColumn = FormatTextLength(currentResponse.ToString(), 30);
+                    } else {
+                        responseColumn = FormatTextLength(" ", 30);
+                    }
+
+                    lstToPrint.Add(contestColumn + wardColumn + countyColumn + responseColumn);
+                    responseCount++;
+                    countyCount++;
+                }
+                lstToPrint.Add(FormatTextLength(" ", 28) + "-----");
+                lstToPrint.Add(FormatTextLength(" ", 16) + "Total Wards:" +
+                               FormatTextLength(wardCount.ToString(), 5, false));
                 lstToPrint.Add("");
             }
 
@@ -120,9 +141,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
             try {
                 intPages++;
-                float linesPerPage = 0;
-                float yPos = 0;
-                //int intContestSize = 0;
+                float linesPerPage;
                 bool blnHeader = false;
                 int intPageCount = 0;
                 float leftMargin = ev.MarginBounds.Left;
@@ -142,6 +161,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         lstHeader.Add(lstToPrint[intCount]);
                         intCount++;
                     } else {
+                        float yPos;
                         if (intPageCount == 0) {
                             foreach (string s in lstHeader) {
                                 yPos = topMargin + (intPageCount*printFont.GetHeight(ev.Graphics));
@@ -167,8 +187,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     intCount = 0;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
+        }
+    }
+
+    internal class ElectionContestComparer : IComparer<ElectionContest> {
+        public int Compare(ElectionContest x, ElectionContest y) {
+            return x.Contest.Name.CompareTo(y.Contest.Name);
         }
     }
 }

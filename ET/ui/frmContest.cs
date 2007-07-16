@@ -22,15 +22,26 @@ using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
-using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmContest : BaseMDIChild {
         private readonly ContestDAO contestDAO;
         private readonly ContestTypeDAO contestTypeDAO;
-        private static readonly ILog LOG = LogManager.GetLogger(typeof (frmContest));
-
         private Contest currentContest;
+
+        public override void btnDelete_Click(object sender, EventArgs e) {
+            try {
+                IList<Fault> faults = contestDAO.canMakeTransient(currentContest);
+                if (reportFaults(faults)) {
+                    contestDAO.makeTransient(currentContest);
+                    currentContest = new Contest();
+                    refreshControls();
+                    raiseMakeTransientEvent();
+                }
+            } catch (Exception ex) {
+                reportException("btnDelete_Click", ex);
+            }
+        }
 
         public frmContest(ContestDAO contestDAO, ContestTypeDAO contestTypeDAO) {
             InitializeComponent();
@@ -39,17 +50,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
             currentContest = new Contest();
 
+            
             refreshGoToList();
-        }
-
-        private void frmContest_Load(object sender, EventArgs e) {
-            try {
-                refreshContestTypes();
-            } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
-            }
+            refreshControls();
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
@@ -58,9 +61,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnAdd_Click(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
+                reportException("btnAdd_Click", ex);
             }
         }
 
@@ -69,40 +70,23 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             try {
                 currentContest.IsActive = chkActive.Checked;
                 currentContest.Name = txtName.Text;
-                currentContest.ContestType = ((ListItemWrapper<ContestType>) cbContestType.SelectedItem).Value;
+                if (cbContestType.SelectedItem != null) {
+                    currentContest.ContestType = ((ListItemWrapper<ContestType>) cbContestType.SelectedItem).Value;
+                }
                 currentContest.Notes = txtNotes.Text;
 
                 //Validate the current data and get a list of faults.
-                IList<Fault> faultLst = contestDAO.canMakePersistent(currentContest);
-                bool persistData = true;
-
-                //Go through the list of faults and display warnings and errors.
-                foreach (Fault fault in faultLst) {
-                    if (persistData) {
-                        if (fault.IsError) {
-                            persistData = false;
-                            MessageBox.Show("Error: " + fault.Message);
-                        } else {
-                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result =
-                                MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?",
-                                                "Warning Message", buttons);
-                            if (result == DialogResult.No) {
-                                persistData = false;
-                            }
-                        }
-                    }
-                }
+                IList<Fault> faults = contestDAO.canMakePersistent(currentContest);
+                bool persistData = reportFaults(faults);
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     contestDAO.makePersistent(currentContest);
                     refreshGoToList();
+                    raiseMakePersistentEvent();
                 }
             } catch (Exception ex) {
-                string message = "Unable to save: Operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
+                reportException("btnSave_Click", ex);
             }
         }
 
@@ -115,9 +99,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         private void refreshControls() {
-            //clear the fields
+
             txtName.Text = currentContest.Name;
             txtNotes.Text = currentContest.Notes;
+
+            refreshGoToList();
+            refreshContestTypes();
 
             if (currentContest.ContestType == null && cbContestType.Items.Count > 0) {
                 cbContestType.SelectedIndex = 0;
@@ -145,9 +132,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
+                reportException("btnReset_Click", ex);
             }
         }
 
@@ -157,9 +142,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
+                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 
@@ -187,12 +170,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         ContestType newType = new ContestType();
                         newType.Name = newTypeName;
                         contestTypeDAO.makePersistent(newType);
-                        refreshContestTypes();
+                        refreshControls();
 
                         for (int i = 0; i < cbContestType.Items.Count; i++) {
                             if ((((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value).Name.Equals(newTypeName)) {
                                 cbContestType.SelectedIndex = i;
-                                //MessageBox.Show("TEST");
                             }
                         }
                     }
@@ -201,9 +183,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
+                reportException("cbContestType_Leave", ex);
             }
         }
     }

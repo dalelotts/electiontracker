@@ -17,9 +17,12 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Windows.Forms;
+using edu.uwec.cs.cs355.group4.et.events;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal interface UIController {
         Form getMDIForm();
+        void HandleMakePersistent(object sender, MakePersistentArgs args);
+        void HandleMakeTransient(object sender, MakeTransientArgs args);
     }
 }

@@ -56,16 +56,25 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return CenterText(text, ' ');
         }
 
-        protected static string FormatTextLength(string text, int length) {
-            int j = text.Length;
-            if (j < length) {
-                for (int i = 0; i < length - j; i++) {
-                    text = text + " ";
-                }
-                return text;
+        protected static string FormatTextLength(string text, int length, bool padRight) {
+            int textLength = text.Length;
+            string result = text;
+            if (textLength > length) {
+                result = text.Substring(0, length);
             } else {
-                return text.Substring(0, length);
+                while (result.Length < length) {
+                    if (padRight) {
+                        result = result + " ";
+                    } else {
+                        result = " " + result;
+                    }
+                }
             }
+            return result;
+        }
+
+        protected static string FormatTextLength(string text, int length) {
+            return FormatTextLength(text, length, true);
         }
 
         protected string CenterText(string text, char space) {
@@ -88,7 +97,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             IList<Election> e = GetElections();
             lstElections.Items.Clear();
             foreach (Election election in e) {
-                lstElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString(), election));
+                lstElections.Items.Add(new ListItemWrapper<Election>(election.ToString(), election));
             }
         }
 
@@ -140,7 +149,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         protected abstract string GetTitle();
         protected abstract IList<Election> GetElections();
-        protected abstract void CreateReport(Election elc);
+        protected abstract void CreateReport(Election election);
 
         #endregion
     }

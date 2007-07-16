@@ -61,9 +61,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnAdd_Click(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                reportException("btnAdd_Click", ex);
             }
         }
 
@@ -85,18 +83,20 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             }
             chkActive.Checked = currentCandidate.IsActive;
+
+            refreshGoToList();
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
-                candidateDAO.makeTransient(currentCandidate);
-                refreshControls();
-                refreshGoToList();
-                base.btnDelete_Click(sender, e);
+                IList<Fault> faults = candidateDAO.canMakeTransient(currentCandidate);
+                if (reportFaults(faults)) {
+                    candidateDAO.makeTransient(currentCandidate);
+                    refreshControls();
+                    raiseMakeTransientEvent();
+                }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                reportException("btnDelete_Click", ex);
             }
         }
 
@@ -113,36 +113,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 //Validate the current data and get a list of faults.
                 IList<Fault> faultLst = candidateDAO.canMakePersistent(currentCandidate);
-                bool persistData = true;
 
-                //Go through the list of faults and display warnings and errors.
-                foreach (Fault fault in faultLst) {
-                    if (persistData) {
-                        if (fault.IsError) {
-                            persistData = false;
-                            MessageBox.Show("Error: " + fault.Message);
-                        } else {
-                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result =
-                                MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?",
-                                                "Warning Message", buttons);
-                            if (result == DialogResult.No) {
-                                persistData = false;
-                            }
-                        }
-                    }
-                }
+                bool persistData = reportFaults(faultLst);
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     candidateDAO.makePersistent(currentCandidate);
                     refreshGoToList();
-                    base.btnSave_Click(sender, e);
+                    raiseMakePersistentEvent();
                 }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                reportException("btnSave_Click", ex);
             }
         }
 
@@ -151,9 +132,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                reportException("btnReset_Click", ex);
             }
         }
 
@@ -164,9 +143,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 
@@ -180,8 +157,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void txtFirstName_TextChanged(object sender, EventArgs e) {}
-
         private void cboPoliticalParty_Leave(object sender, EventArgs e) {
             try {
                 if (cboPoliticalParty.SelectedIndex == -1) {
@@ -190,9 +165,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     cboPoliticalParty.SelectedIndex = 0;
                 }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                reportException("cboPoliticalParty_Leave", ex);
             }
         }
     }

@@ -86,7 +86,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstElections.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.lstElections.Location = new System.Drawing.Point(13, 12);
             this.lstElections.Name = "lstElections";
-            this.lstElections.Size = new System.Drawing.Size(172, 563);
+            this.lstElections.Size = new System.Drawing.Size(172, 589);
             this.lstElections.TabIndex = 7;
             this.lstElections.SelectedIndexChanged += new System.EventHandler(this.lstElections_SelectedIndexChanged);
             // 

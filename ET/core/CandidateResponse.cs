@@ -17,20 +17,30 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 
+using System;
 using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.core {
     internal class CandidateResponse : Response {
         private Candidate candidate;
+        private string toStringResult = "NULL CANDIDATE: UNKNOWN";
 
         [RequiredProperty("Candidate")]
         public virtual Candidate Candidate {
             get { return candidate; }
-            set { candidate = value; }
+            set {
+                if (value == null) throw new ArgumentException("Null: candidate");
+                candidate = value;
+                string abbreviation = "";
+                if (candidate.PoliticalParty != null) {
+                    abbreviation = " (" + candidate.PoliticalParty.Abbreviation + ')';
+                }
+                toStringResult = candidate.FirstName + " " + candidate.LastName + abbreviation;
+            }
         }
 
         public override string ToString() {
-            return candidate != null ? candidate.FirstName + " " + candidate.LastName : "NULL CANDIDATE: UNKNOWN";
+            return toStringResult;
         }
     }
 }

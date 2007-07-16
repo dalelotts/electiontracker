@@ -25,7 +25,7 @@ using edu.uwec.cs.cs355.group4.et.ui.util;
 using edu.uwec.cs.cs355.group4.et.util;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
-    internal partial class frmEnterVotes : Form {
+    internal partial class frmEnterVotes : BaseMDIChild {
         private Map<String, VoteEnterer> countyToVoteEnterer;
         private readonly ElectionDAO electionDAO;
         private readonly ContestCountyDAO contestCountyDAO;
@@ -39,6 +39,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             this.responseValueDAO = responseValueDAO;
             countyToVoteEnterer = new Map<String, VoteEnterer>();
             InitializeComponent();
+            toolStrip1.Visible = false;
         }
 
         public void HideCurrentVoteEnterer() {
@@ -51,7 +52,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             try {
                 LoadElections();
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("frmEnterVotes_Load", ex);
             }
         }
 
@@ -68,7 +69,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             try {
                 LoadCounties(((ListItemWrapper<Election>) cmbElections.SelectedItem).Value);
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("cmbElections_SelectedIndexChanged", ex);
             }
         }
 
@@ -113,7 +114,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 enterer.Visible = true;
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("lstCounties_SelectedIndexChanged", ex);
             }
         }
 
@@ -133,18 +134,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     lstCounties.SelectedIndex = 0;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnNext_Click", ex);
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e) {
+        private void btnSaveVotes_Click(object sender, EventArgs e) {
             try {
                 // TODO: Save contest information.
                 foreach (VoteEnterer voteEnterer in countyToVoteEnterer.Values) {
                     voteEnterer.Persist();
                 } // foreach(VoteEnterer...
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnSaveVotes_Click", ex);
             }
         }
 
@@ -154,7 +155,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 contestCountyDAO.flush();
                 electionDAO.flush();
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("frmEnterVotes_FormClosing", ex);
             }
         }
 
@@ -163,9 +164,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 gbCounty.Height = Height - 117;
                 gbContest.Height = Height - 117;
                 btnNext.Top = gbCounty.Height - 30;
-                btnSave.Top = gbContest.Height - 30;
+                btnSaveVotes.Top = gbContest.Height - 30;
                 gbContest.Width = Width - 231;
-                btnSave.Left = gbContest.Width - 81;
+                btnSaveVotes.Left = gbContest.Width - 81;
                 lstCounties.Height = gbCounty.Height - 60;
 
                 // Resize vote enterer.
@@ -174,7 +175,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     countyToVoteEnterer.Get(k).Width = gbContest.Width - 10;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("frmEnterVotes_Resize", ex);
             }
         }
     }

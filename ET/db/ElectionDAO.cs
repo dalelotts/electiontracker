@@ -44,11 +44,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
         }
 
-        protected override IList<Fault> performCanMakePersistent(Election entity) {
-            IList<Fault> retVal = new List<Fault>();
-            return retVal;
-        }
-
         public IList<County> findCounties(Election e) {
             IQuery iqQuery =
                 getCurrentSession().CreateSQLQuery(
@@ -58,7 +53,11 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         public override IList<Fault> canMakeTransient(Election entity) {
-            throw new NotImplementedException();
+            return new List<Fault>();
+        }
+
+        protected override IList<Fault> performCanMakePersistent(Election entity) {
+            return new List<Fault>();
         }
     }
 }

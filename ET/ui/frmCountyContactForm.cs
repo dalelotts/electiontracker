@@ -26,8 +26,6 @@ using edu.uwec.cs.cs355.group4.et.db;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmCountyContactForm : Form {
-        //ContestDAO contestDAO;
-        private ElectionDAO electionDAO;
         private CountyDAO countyDAO;
         private Font printFont;
         private IList<string> lstToPrint;
@@ -36,10 +34,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private int intCount;
         private PrintDocument toPrint;
 
-        public frmCountyContactForm(ElectionDAO electionDAO, CountyDAO countyDAO) {
+        public frmCountyContactForm(CountyDAO countyDAO) {
             this.countyDAO = countyDAO;
-            this.electionDAO = electionDAO;
-            //this.contestDAO = contestDAO;
             InitializeComponent();
             printFont = new Font("Courier New", 10);
         }
@@ -51,7 +47,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 CreateReport();
                 ppcViewer.Document = toPrint;
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -83,8 +79,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
             try {
                 intPages++;
-                float linesPerPage = 0;
-                float yPos = 0;
+                float linesPerPage;
                 bool blnHeader = false;
                 int intPageCount = 0;
                 float leftMargin = ev.MarginBounds.Left;
@@ -105,6 +100,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         lstHeader.Add(lstToPrint[intCount]);
                         intCount++;
                     } else {
+                        float yPos;
                         if (intPageCount == 0) {
                             foreach (string s in lstHeader) {
                                 yPos = topMargin + (intPageCount*printFont.GetHeight(ev.Graphics));
@@ -128,7 +124,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     intCount = 0;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -138,7 +134,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     ppcViewer.StartPage--;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -148,7 +144,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     ppcViewer.StartPage++;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -157,7 +153,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 intPages = 0;
                 toPrint.Print();
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -170,7 +166,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 btnPrint.Top = Height - 63;
                 btnPrint.Left = Width - 116;
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
     }

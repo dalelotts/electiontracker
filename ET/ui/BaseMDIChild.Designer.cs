@@ -52,7 +52,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.cboGoTo = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,7 +66,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cboGoTo,
             this.toolStripSeparator3,
-            this.btnEdit,
             this.btnAdd,
             this.btnSave,
             this.toolStripSeparator4,
@@ -94,16 +92,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEdit.Image = global::edu.uwec.cs.cs355.group4.et.Properties.Resources.EditTableHS;
-            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(23, 22);
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -173,15 +161,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
         protected System.Windows.Forms.ToolStripComboBox cboGoTo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         protected System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        protected System.Windows.Forms.ToolStripButton btnEdit;
         protected System.Windows.Forms.ToolStripButton btnAdd;
         protected System.Windows.Forms.ToolStripButton btnReset;
         protected System.Windows.Forms.ToolStripButton btnDelete;
+        protected internal System.Windows.Forms.ToolStrip toolStrip1;
     }
 }

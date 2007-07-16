@@ -22,7 +22,6 @@ using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
-using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmCounty : BaseMDIChild {
@@ -33,8 +32,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private IList<CountyPhoneNumber> resetPhoneNums;
         private IList<CountyWebsite> resetWebsites;
         private IList<CountyAttribute> resetAttributes;
-
-        private static readonly ILog LOG = LogManager.GetLogger(typeof (frmContest));
 
         private County currentCounty;
 
@@ -74,6 +71,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             refreshPhoneNumbers();
             refreshWebsites();
             refreshAttributes();
+            refreshGoToList();
         }
 
         private void refreshPhoneNumbers() {
@@ -129,7 +127,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentCounty.PhoneNumbers.Add(tmpPhoneNumber);
                 refreshPhoneNumbers();
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnAddPhoneNum_Click", ex);
             }
         }
 
@@ -140,7 +138,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshPhoneNumbers();
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnRemovePhoneNum_Click", ex);
             }
         }
 
@@ -151,7 +149,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentCounty.Websites.Add(tmpWebsite);
                 refreshWebsites();
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnAddWebsite_Click", ex);
             }
         }
 
@@ -162,7 +160,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshWebsites();
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnRemoveWebsite_Click", ex);
             }
         }
 
@@ -174,7 +172,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentCounty.Attributes.Add(tmpAttribute);
                 refreshAttributes();
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnAddAttribute_Click", ex);
             }
         }
 
@@ -185,7 +183,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshAttributes();
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnRemoveAttribute_Click", ex);
             }
         }
 
@@ -195,12 +193,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnAdd_Click(sender, e);
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnAdd_Click", ex);
             }
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
-            int i = 0;
             foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
                 cpn.County = currentCounty;
             }
@@ -213,6 +210,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             try {
                 currentCounty.Name = txtCountyName.Text;
                 currentCounty.Notes = txtNotes.Text;
+                int i;
                 Int32.TryParse(txtCountyWardCount.Text, out i);
                 currentCounty.WardCount = i;
 
@@ -223,11 +221,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 if (persistData) {
                     countyDAO.makePersistent(currentCounty);
                     refreshGoToList();
+                    raiseMakePersistentEvent();
                 }
             } catch (Exception ex) {
-                string message = "unable to save: operation failed";
-                MessageBox.Show(message + "\n\n" + ex);
-                LOG.Error(message, ex);
+                reportException("btnSave_Click", ex);
             }
         }
 
@@ -236,13 +233,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 resetControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                LOG.Error(message, ex);
+                reportException("btnReset_Click", ex);
             }
         }
 
         private void resetControls() {
+            txtCountyName.Text = currentCounty.Name;
+            txtCountyWardCount.Text = currentCounty.WardCount.ToString();
             resetPhoneNumbers();
             resetSites();
             resetAttr();
@@ -305,23 +302,21 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                LOG.Error(message, ex);
+                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
-                countyDAO.makeTransient(currentCounty);
-                currentCounty = new County();
-                refreshControls();
-                refreshGoToList();
-                base.btnDelete_Click(sender, e);
+                IList<Fault> faults = countyDAO.canMakeTransient(currentCounty);
+                if (reportFaults(faults)) {
+                    countyDAO.makeTransient(currentCounty);
+                    currentCounty = new County();
+                    refreshControls();
+                    raiseMakeTransientEvent();
+                }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                LOG.Error(message, ex);
+                reportException("btnDelete_Click", ex);
             }
         }
 
@@ -344,9 +339,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                LOG.Error(message, ex);
+                reportException("loadCounty", ex);
             }
         }
 
@@ -378,9 +371,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                LOG.Error(message, ex);
+                reportException("cbPhoneNumberType_Leave", ex);
             }
         }
 
@@ -409,18 +400,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                LOG.Error(message, ex);
+                reportException("cbKey_Leave", ex);
             }
-        }
-
-        private void lstPhoneNums_SelectedIndexChanged(object sender, EventArgs e) {
-            /* CountyPhoneNumber cpn = (CountyPhoneNumber)(lstPhoneNums.SelectedItem);
-            txtAreaCode.Text = cpn.AreaCode;
-            txtPhoneNum.Text = cpn.PhoneNumber;
-            Console.WriteLine(cpn.Type.Name);
-            cbPhoneNumberType.SelectedItem = cpn.Type;*/
         }
     }
 }

@@ -34,7 +34,5 @@
       <key column="ResponseID"/>
       <property name="Description" column="ResponseName" type="String"/>
     </joined-subclass>
-
-
   </class>
 </hibernate-mapping>

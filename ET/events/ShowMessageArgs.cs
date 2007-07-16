@@ -19,7 +19,7 @@
 using System;
 
 namespace edu.uwec.cs.cs355.group4.et.events {
-    internal class ShowMessageArgs : EventArgs {
+    public class ShowMessageArgs : EventArgs {
         private readonly string text;
         private readonly string caption;
 

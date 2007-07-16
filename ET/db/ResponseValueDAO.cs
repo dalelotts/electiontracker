@@ -40,7 +40,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         public override IList<Fault> canMakeTransient(ResponseValue entity) {
-            throw new NotImplementedException();
+            return new List<Fault>();
         }
     }
 }

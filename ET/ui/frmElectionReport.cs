@@ -30,11 +30,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private List<string> lstToPrint;
         private List<string> lstHeader;
         private int intCount;
-        private ContestCountyDAO contestCountyDAO;
 
-        public frmElectionReport(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO) : base(electionDAO) {
+        public frmElectionReport(ElectionDAO electionDAO) : base(electionDAO) {
             lstHeader = new List<string>();
-            this.contestCountyDAO = contestCountyDAO;
         }
 
         protected override IList<Election> GetElections() {
@@ -45,14 +43,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return "Tally Form";
         }
 
-        protected override void CreateReport(Election elc) {
+        protected override void CreateReport(Election election) {
             intCount = 0;
             intPages = 0;
             lstToPrint = new List<string>();
 
             List<County> lstCounties = new List<County>();
             // Establish what counties to print for.
-            IList<ElectionContest> electionContests = elc.ElectionContests;
+            IList<ElectionContest> electionContests = election.ElectionContests;
             foreach (ElectionContest contest in electionContests) {
                 IList<ContestCounty> contestCounties = contest.Counties;
                 foreach (ContestCounty county in contestCounties) {
@@ -63,14 +61,20 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
             foreach (County county in lstCounties) {
                 lstToPrint.Add("<HEADER>");
-                lstToPrint.Add(DateTime.Now.ToString() + "      VOTE COUNTY TALLY SHEET");
+                lstToPrint.Add(DateTime.Now + "      VOTE COUNTY TALLY SHEET");
                 lstToPrint.Add("");
                 lstToPrint.Add("");
-                lstToPrint.Add(CenterText("ELECTION DATE " + elc.Date.ToString()));
+                lstToPrint.Add(CenterText("ELECTION DATE " + election.Date.ToShortDateString()));
                 lstToPrint.Add(CenterText(county.Name));
-                foreach (CountyPhoneNumber cpn in county.PhoneNumbers) {
-                    lstToPrint.Add(AlignRight("Phone: " + cpn.PhoneNumber));
+                foreach (CountyPhoneNumber phoneNumber in county.PhoneNumbers) {
+                    lstToPrint.Add(AlignRight(phoneNumber.Type.Name + ": " + phoneNumber.AreaCode + "-" + phoneNumber.PhoneNumber));
                 }
+                foreach (CountyWebsite website in county.Websites) {
+                    lstToPrint.Add(AlignRight("Website: " + website.URL));
+                }
+                foreach (CountyAttribute attribute in county.Attributes) {
+                    lstToPrint.Add(AlignRight(attribute.Type.Name + ": " + attribute.Value));
+                }             
                 lstToPrint.Add("");
                 lstToPrint.Add("");
                 lstToPrint.Add(AlignRight("Time Called: _________________"));
@@ -79,7 +83,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 // TODO: This could probably be better-done with some sort of
                 // SQL or Hibernate query.
-                foreach (ElectionContest ec in elc.ElectionContests) {
+                foreach (ElectionContest ec in election.ElectionContests) {
                     foreach (ContestCounty cc in ec.Counties) {
                         if (cc.County.ID == county.ID) {
                             lstToPrint.Add("<CONTEST>");
@@ -87,7 +91,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                             lstToPrint.Add(CenterText(" " + ec.Contest.Name + " ", '='));
                             lstToPrint.Add("");
                             foreach (Response r in ec.Responses) {
-                                lstToPrint.Add("" + r.ToString());
+                                lstToPrint.Add("" + r);
                                 lstToPrint.Add("Current Vote Count: _________________________");
                                 lstToPrint.Add("");
                                 lstToPrint.Add("");
@@ -123,9 +127,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
             try {
                 intPages++;
-                float linesPerPage = 0;
-                float yPos = 0;
-                int intContestSize = 0;
+                float linesPerPage;
                 bool blnHeader = false;
                 int intPageCount = 0;
                 float leftMargin = ev.MarginBounds.Left;
@@ -138,6 +140,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     // Check to see if we're putting a contest in.  If we are, make sure it fits
                     //  on one page.  If not, break page.
                     if (lstToPrint[intCount] == "<CONTEST>") {
+                        int intContestSize;
                         intContestSize = 0;
                         for (int i = intCount; i < lstToPrint.Count; i++) {
                             if (lstToPrint[i] == "</CONTEST>") {
@@ -171,6 +174,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         lstHeader.Add(lstToPrint[intCount]);
                         intCount++;
                     } else {
+                        float yPos;
                         if (intPageCount == 0) {
                             foreach (string s in lstHeader) {
                                 yPos = topMargin + (intPageCount*printFont.GetHeight(ev.Graphics));
@@ -194,7 +198,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     intCount = 0;
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Error: " + ex);
             }
         }
     }

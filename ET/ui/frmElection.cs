@@ -21,15 +21,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.events;
-using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
-        public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
-
-        private static readonly ILog LOG = LogManager.GetLogger(typeof (frmElection));
-
         private readonly ElectionDAO electionDAO;
         private IList<Response> lstDeletedResponses;
         private readonly IList<Contest> allContests;
@@ -61,10 +55,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshGoToList();
                 refreshControls();
             } catch (Exception ex) {
-                string message = "Encountered exception in frmElection constructor";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("frmElection constructor", ex);
             }
         }
 
@@ -75,6 +66,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             refreshContestLists();
             refreshCountyLists();
             refreshCandidateLists();
+            refreshGoToList();
         }
 
         private void refreshGoToList() {
@@ -101,7 +93,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void refreshContestLists() {
             lstElectionContests.Items.Clear();
-            lstElectionContestsDetails.Items.Clear();
+            lstContestCandidate.Items.Clear();
+            lstContestCounty.Items.Clear();
             lstAllContests.Items.Clear();
 
             foreach (Contest contest in allContests) {
@@ -110,14 +103,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
             foreach (ElectionContest electionContest in currentElection.ElectionContests) {
                 lstElectionContests.Items.Add(electionContest);
-                lstElectionContestsDetails.Items.Add(electionContest);
+                lstContestCandidate.Items.Add(electionContest);
+                lstContestCounty.Items.Add(electionContest);
                 lstAllContests.Items.Remove(electionContest.Contest);
-//                int removeAt = 0;
-//                foreach (Contest c in lstAllContests.Items) {
-//                    if (c.Name == electionContest.Contest.Name)
-//                        removeAt = lstAllContests.Items.IndexOf(c);
-//                }
-//                lstAllContests.Items.RemoveAt(removeAt);
             }
         }
 
@@ -151,7 +139,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
             if (currentElectionContest != null) {
                 dgvContestCounties.Rows.Clear();
-                foreach (ContestCounty contestCounty in currentElectionContest.Counties) {
+                List<ContestCounty> selectedCounties = new List<ContestCounty>(currentElectionContest.Counties);
+                selectedCounties.Sort(new ContestCountyComparer());
+
+                foreach (ContestCounty contestCounty in selectedCounties) {
                     o[0] = contestCounty;
                     o[1] = contestCounty.WardCount;
                     dgvContestCounties.Rows.Add(o);
@@ -165,9 +156,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
+        private class ContestCountyComparer : IComparer<ContestCounty> {
+            public int Compare(ContestCounty x, ContestCounty y) {
+                return x.County.Name.CompareTo(y.County.Name);
+            }
+        }
+
         private void refreshCandidateLists() {
             lstAllCandidates.Items.Clear();
-            CandidateResponse cr;
             foreach (Candidate candidate in allCandidates) {
                 lstAllCandidates.Items.Add(candidate);
             }
@@ -182,6 +178,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         //  responses- mainly in deletions.  So we handle it manually now.
                         if (lstDeletedResponses[i].GetType().Equals(typeof (CandidateResponse)) &&
                             response.GetType().Equals(typeof (CandidateResponse))) {
+                            CandidateResponse cr;
                             cr = (CandidateResponse) lstDeletedResponses[i];
                             if (cr.Candidate.ID == ((CandidateResponse) response).Candidate.ID) {
                                 lstDeletedResponses.RemoveAt(i);
@@ -204,9 +201,13 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
-            currentElection = new Election();
-            refreshControls();
-            base.btnAdd_Click(sender, e);
+            try {
+                currentElection = new Election();
+                refreshControls();
+                base.btnAdd_Click(sender, e);
+            } catch (Exception ex) {
+                reportException("btnAdd_Click", ex);
+            }
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
@@ -217,7 +218,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             addedContests.Clear();
             foreach (ElectionContest ec in currentElection.ElectionContests) {
                 foreach (Response r in ec.Responses) {
-                    //MessageBox.Show(r.ToString());
                     r.SortOrder = ec.Responses.IndexOf(r);
                 }
             }
@@ -233,21 +233,22 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 if (persistData) {
                     electionDAO.makePersistent(currentElection);
                     refreshControls();
-                    refreshGoToList();
+                    raiseMakePersistentEvent();
                 }
                 lstDeletedResponses.Clear();
             } catch (Exception ex) {
-                string message = "Encountered exception in btnElectionSave_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnSave_Click", ex);
             }
         }
 
 
         public override void btnReset_Click(object sender, EventArgs e) {
-            resetControls();
-            base.btnReset_Click(sender, e);
+            try {
+                resetControls();
+                base.btnReset_Click(sender, e);
+            } catch (Exception ex) {
+                reportException("btnReset_Click", ex);
+            }
         }
 
         private void resetControls() {
@@ -262,7 +263,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         private void resetContestLists() {
             lstElectionContests.Items.Clear();
-            lstElectionContestsDetails.Items.Clear();
+            lstContestCandidate.Items.Clear();
+            lstContestCandidate.Items.Clear();
             lstAllContests.Items.Clear();
 
             foreach (Contest contest in allContests) {
@@ -273,7 +275,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             foreach (ElectionContest electionContest in currentElection.ElectionContests) {
                 if (!addedContests.Contains(electionContest)) {
                     lstElectionContests.Items.Add(electionContest);
-                    lstElectionContestsDetails.Items.Add(electionContest);
+                    lstContestCandidate.Items.Add(electionContest);
+                    lstContestCounty.Items.Add(electionContest);
                     lstAllContests.Items.Remove(electionContest.Contest);
 
                     int removeAt = 0;
@@ -293,17 +296,27 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
-            electionDAO.makeTransient(currentElection);
-            currentElection = new Election();
-            refreshControls();
-            refreshGoToList();
-            base.btnDelete_Click(sender, e);
+            try {
+                IList<Fault> faults = electionDAO.canMakeTransient(currentElection);
+                if (reportFaults(faults)) {
+                    electionDAO.makeTransient(currentElection);
+                    currentElection = new Election();
+                    refreshControls();
+                    raiseMakeTransientEvent();
+                }
+            } catch (Exception ex) {
+                reportException("btnDelete_Click", ex);
+            }
         }
 
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            currentElection = (Election) cboGoTo.SelectedItem;
-            refreshControls();
-            base.cboGoTo_SelectedIndexChanged(sender, e);
+            try {
+                currentElection = (Election) cboGoTo.SelectedItem;
+                refreshControls();
+                base.cboGoTo_SelectedIndexChanged(sender, e);
+            } catch (Exception ex) {
+                reportException("cboGoTo_SelectedIndexChanged", ex);
+            }
         }
 
         private void btnAddAllContests_Click(object sender, EventArgs e) {
@@ -317,10 +330,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 refreshContestLists();
             } catch (Exception ex) {
-                string message = "Encountered exception in btnAddAllContests_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnAddAllContests_Click", ex);
             }
         }
 
@@ -347,10 +357,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshContestLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnAddContest_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnAddContest_Click", ex);
             }
         }
 
@@ -365,10 +372,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshContestLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnRemoveContest_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnRemoveContest_Click", ex);
             }
         }
 
@@ -379,10 +383,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshContestLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnRemoveAllContests_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnRemoveAllContests_Click", ex);
             }
         }
 
@@ -398,10 +399,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshCandidateLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnAddAllCandidates_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnAddAllCandidates_Click", ex);
             }
         }
 
@@ -415,22 +413,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                             candidateResponse.Candidate = candidate;
                             candidateResponse.ElectionContest = currentElectionContest;
                             currentElectionContest.Responses.Add(candidateResponse);
-                            /*for (int i = 0; i < lstDeletedResponses.Count; i++)
-                            {
-                                if (lstDeletedResponses[i].ID == candidateResponse.ID)
-                                {
-                                    lstDeletedResponses.Remove(lstDeletedResponses[i]);
-                                }
-                            }*/
                         }
                         refreshCandidateLists();
                     }
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnAddCandidate_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnAddCandidate_Click", ex);
             }
         }
 
@@ -447,10 +435,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnRemoveCandidate_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnRemoveCandidate_Click", ex);
             }
         }
 
@@ -461,10 +446,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshCandidateLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnRemoveAllCandidates_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnRemoveAllCandidates_Click", ex);
             }
         }
 
@@ -482,10 +464,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshCountyLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnAddAllCounties_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnAddAllCounties_Click", ex);
             }
         }
 
@@ -511,10 +490,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshCountyLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnAddCounty_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnAddCounty_Click", ex);
             }
         }
 
@@ -528,12 +504,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         refreshCountyLists();
                     }
                 }
-            } catch (Exception
-                ex) {
-                string message = "Encountered exception in btnRemoveCounty_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+            } catch (Exception ex) {
+                reportException("btnRemoveCounty_Click", ex);
             }
         }
 
@@ -544,66 +516,84 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     refreshCountyLists();
                 }
             } catch (Exception ex) {
-                string message = "Encountered exception in btnRemoveAllCounties_Click";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("btnRemoveAllCounties_Click", ex);
             }
         }
 
-        private void lstElectionContestsDetails_SelectedIndexChanged(object sender, EventArgs e) {
+        private void llstContestCandidate_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                currentElectionContest = (ElectionContest) lstElectionContestsDetails.SelectedItem;
+                currentElectionContest = (ElectionContest) lstContestCandidate.SelectedItem;
                 refreshCandidateLists();
-                refreshCountyLists();
             } catch (Exception ex) {
-                string message = "Encountered exception in lstElectionContestsDetails_SelectedIndexChanged";
-                LOG.Error(message, ex);
-                ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
-                EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+                reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }
         }
 
         private void btnAddCustomResponse_Click(object sender, EventArgs e) {
-            string text = txtCustomResponse.Text;
-            if (text != null && text.Length > 0) {
-                // To Do: Validate response text does not alread exist.
-                CustomResponse response = new CustomResponse();
-                response.Description = text;
-                response.ElectionContest = currentElectionContest;
-                currentElectionContest.Responses.Add(response);
-                txtCustomResponse.Text = null;
-                refreshCandidateLists();
+            try {
+                string text = txtCustomResponse.Text;
+                if (text != null && text.Length > 0) {
+                    // To Do: Validate response text does not already exist.
+                    CustomResponse response = new CustomResponse();
+                    response.Description = text;
+                    response.ElectionContest = currentElectionContest;
+                    currentElectionContest.Responses.Add(response);
+                    txtCustomResponse.Text = null;
+                    refreshCandidateLists();
+                }
+            } catch (Exception ex) {
+                reportException("btnAddCustomResponse_Click", ex);
             }
         }
 
         private void frmElection_Resize(object sender, EventArgs e) {
-            tbDisplay.Height = Height - 76;
+            try {
+                tbDisplay.Height = Height - 76;
+            } catch (Exception ex) {
+                reportException("frmElection_Resize", ex);
+            }
         }
 
         private void btnResponseUp_Click(object sender, EventArgs e) {
-            Object o = lstContestCandidates.SelectedItem;
-            int ind = lstContestCandidates.SelectedIndex;
-            if (ind > 0) {
-                lstContestCandidates.Items.RemoveAt(ind);
-                lstContestCandidates.Items.Insert(ind - 1, o);
-                lstContestCandidates.SelectedIndex = ind - 1;
-                int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
-                currentElectionContest.Responses.RemoveAt(ind2);
-                currentElectionContest.Responses.Insert(ind2 - 1, (Response) o);
+            try {
+                Object o = lstContestCandidates.SelectedItem;
+                int ind = lstContestCandidates.SelectedIndex;
+                if (ind > 0) {
+                    lstContestCandidates.Items.RemoveAt(ind);
+                    lstContestCandidates.Items.Insert(ind - 1, o);
+                    lstContestCandidates.SelectedIndex = ind - 1;
+                    int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
+                    currentElectionContest.Responses.RemoveAt(ind2);
+                    currentElectionContest.Responses.Insert(ind2 - 1, (Response) o);
+                }
+            } catch (Exception ex) {
+                reportException("btnResponseUp_Click", ex);
             }
         }
 
         private void btnResponseDown_Click(object sender, EventArgs e) {
-            Object o = lstContestCandidates.SelectedItem;
-            int ind = lstContestCandidates.SelectedIndex;
-            if (ind < lstContestCandidates.Items.Count - 1) {
-                lstContestCandidates.Items.RemoveAt(ind);
-                lstContestCandidates.Items.Insert(ind + 1, o);
-                lstContestCandidates.SelectedIndex = ind + 1;
-                int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
-                currentElectionContest.Responses.RemoveAt(ind2);
-                currentElectionContest.Responses.Insert(ind2 + 1, (Response) o);
+            try {
+                Object o = lstContestCandidates.SelectedItem;
+                int ind = lstContestCandidates.SelectedIndex;
+                if (ind < lstContestCandidates.Items.Count - 1) {
+                    lstContestCandidates.Items.RemoveAt(ind);
+                    lstContestCandidates.Items.Insert(ind + 1, o);
+                    lstContestCandidates.SelectedIndex = ind + 1;
+                    int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
+                    currentElectionContest.Responses.RemoveAt(ind2);
+                    currentElectionContest.Responses.Insert(ind2 + 1, (Response) o);
+                }
+            } catch (Exception ex) {
+                reportException("btnResponseDown_Click", ex);
+            }
+        }
+
+        private void lstContestCounty_SelectedIndexChanged(object sender, EventArgs e) {
+            try {
+                currentElectionContest = (ElectionContest) lstContestCounty.SelectedItem;
+                refreshCountyLists();
+            } catch (Exception ex) {
+                reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }
         }
     }

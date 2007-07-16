@@ -38,6 +38,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public event GenericEventHandler<object, ProofingSheetArgs> proofingSheet;
         public event GenericEventHandler<object, CountyContactFormArgs> countyContactForm;
         public event GenericEventHandler<object, ContestVoteSumryArgs> contestVoteSumry;
+        public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
 
         private static readonly ShowMessageArgs NOT_IMPLEMENTED_MESSAGE_ARGS =
             new ShowMessageArgs("This feature is not implemented yet.", "Not Implemented");
@@ -146,12 +147,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     mainTreeView.Nodes[0].EnsureVisible();
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex);
+                reportException("filterBar_ButtonClicked", ex);
             }
         }
 
         private void resizeHandler(object sender, EventArgs e) {
-            mainTreeView.Height = filterBar.Top - mainTreeView.Top;
+            try {
+                mainTreeView.Height = filterBar.Top - mainTreeView.Top;
+            } catch (Exception ex) {
+                reportException("resizeHandler", ex);
+            }
         }
 
         private void mainTreeView_DoubleClick(object sender, EventArgs e) {
@@ -187,8 +192,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex);
+                reportException("mainTreeView_DoubleClick", ex);
             }
+        }
+
+        private void reportException(string methodName, Exception ex) {
+            string message = "Unable to complete the requested action.\n\nEncountered '" + ex.GetType() +
+                             "' exception in the '" + methodName + "' method.";
+            ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
+            EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
+        }
+
+        public void refreshCurrentFilter() {
+            filterBar_ButtonClicked(null, null);
         }
     }
 }

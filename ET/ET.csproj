@@ -50,7 +50,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\dev\log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -117,9 +116,10 @@
     <Compile Include="events\DefaultShowMessageSender.cs" />
     <Compile Include="events\ElectionReportArgs.cs" />
     <Compile Include="events\EnterVotesArgs.cs" />
-    <Compile Include="events\EventRegistry.cs" />
     <Compile Include="events\EventUtil.cs" />
     <Compile Include="events\IShowMessageSender.cs" />
+    <Compile Include="events\MakePersistentArgs.cs" />
+    <Compile Include="events\MakeTransientArgs.cs" />
     <Compile Include="events\PoliticalPartyArgs.cs" />
     <Compile Include="events\ProofingSheetArgs.cs" />
     <Compile Include="events\ShowAboutBoxArgs.cs" />
@@ -257,6 +257,7 @@
     </Compile>
     <Compile Include="util\DesignByContract.cs" />
     <Compile Include="util\Map.cs" />
+    <Compile Include="util\ValueSortedList.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="core\PoliticalParty.hbm.xml" />

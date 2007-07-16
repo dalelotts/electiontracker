@@ -145,7 +145,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.lblRequired);
             this.Name = "frmContest";
             this.Text = "Contest";
-            this.Load += new System.EventHandler(this.frmContest_Load);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);

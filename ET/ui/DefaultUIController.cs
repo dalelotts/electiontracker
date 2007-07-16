@@ -17,10 +17,12 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.events;
 using log4net;
 using Spring.Context;
+using Spring.Objects.Events.Support;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal class DefaultUIController : UIController, IApplicationContextAware {
@@ -33,6 +35,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             set {
                 if (mdiForm != null) throw new InvalidOperationException("MDIForm already set.");
                 mdiForm = value;
+                wireSubscriberToPublisher(mdiForm, typeof(DefaultUIController), this);
             }
         }
 
@@ -45,10 +48,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return mdiForm;
         }
 
+        public void HandleMakePersistent(object sender, MakePersistentArgs args) {
+            ((MDIForm)mdiForm).refreshCurrentFilter();
+        }
+
+        public void HandleMakeTransient(object sender, MakeTransientArgs args) {
+            ((MDIForm)mdiForm).refreshCurrentFilter();
+        }
+
         private T makeMDIChildForm<T>() where T : Form {
             T form = (T) context.GetObject(typeof (T).ToString());
             form.MdiParent = mdiForm;
-            context.PublishEvents(form);
+
+            wireSubscriberToPublisher(form, typeof(DefaultUIController), this);
             return form;
         }
 
@@ -103,8 +115,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public void HandleErrorMessage(object sender, ShowErrorMessageArgs args) {
-            LOG.Info(args.Text, args.Exception);
-            MessageBox.Show(args.Text, args.Caption);
+            string message = args.Text;
+            LOG.Info(message, args.Exception);
+            message += "\n\nPlease restart the application and try again.\n\nDetailed information about this error was logged to " + Application.StartupPath + "\\logs\\";
+            MessageBox.Show(message, args.Caption);
         }
 
         public void HandleElectionReport(object sender, ElectionReportArgs args) {
@@ -120,6 +134,19 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public void HandleCountyContactForm(object sender, CountyContactFormArgs args) {
             frmCountyContactForm countyContactForm = makeMDIChildForm<frmCountyContactForm>();
             countyContactForm.Show();
+        }
+
+        private static void wireSubscriberToPublisher(object currentPublisher, Type currentSubscriberType, object subscriber) {
+            Type currentPublisherType = currentPublisher.GetType();
+            EventInfo[] events = currentPublisherType.GetEvents();
+            foreach (EventInfo currentEvent in events) {
+                Type eventHandlerType = currentEvent.EventHandlerType;
+                MethodInfo invoke = eventHandlerType.GetMethod("Invoke");
+                MethodInfo eventHandler = EventManipulationUtils.GetMethodInfoMatchingSignature(invoke, currentSubscriberType);
+                if (eventHandler != null) {
+                    currentEvent.AddEventHandler(currentPublisher, EventManipulationUtils.GetHandlerDelegate(eventHandlerType, subscriber, eventHandler));
+                }
+            }
         }
     }
 }

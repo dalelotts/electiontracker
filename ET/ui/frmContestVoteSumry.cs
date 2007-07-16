@@ -17,12 +17,14 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
+using edu.uwec.cs.cs355.group4.et.util;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal class frmContestVoteSumry : frmAbstractReport {
@@ -31,7 +33,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private IList<string> lstToPrint;
         private ComboBox cmbElectionType;
 
-        public frmContestVoteSumry(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO) : base(electionDAO) {
+        public frmContestVoteSumry(ElectionDAO electionDAO) : base(electionDAO) {
             blnLandscape = true;
             InitializeElectionType();
         }
@@ -47,7 +49,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return "Vote Counts";
         }
 
-        private int GetVoteTotals(ElectionContest ec, Response r) {
+        private static int GetVoteTotals(ElectionContest ec, Response r) {
             int total = 0;
             foreach (ContestCounty cc in ec.Counties) {
                 foreach (ResponseValue rv in cc.ResponseValues) {
@@ -59,7 +61,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             return total;
         }
 
-        private string GetVoteNumbers(Response r, ContestCounty cc) {
+        private static string GetVoteNumbers(Response r, ContestCounty cc, string noResponseValue) {
             ResponseValue res = null;
             foreach (ResponseValue rv in cc.ResponseValues) {
                 if (rv.Response.ID == r.ID) {
@@ -68,7 +70,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             }
             if (res == null) {
-                return "                     ";
+                return noResponseValue;
             } else {
                 return
                     FormatTextLength(res.VoteCount.ToString(), 6) + "(" +
@@ -76,118 +78,120 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        protected override void CreateReport(Election elc) {
-            Response a, b, c;
-            IList<Response> lstResponses;
+        private class IntComparer : IComparer {
+            public int Compare(object x, object y) {
+                ValueSortedListEntry entryX = (ValueSortedListEntry) x;
+                ValueSortedListEntry entryY = (ValueSortedListEntry) y;
+                return -1*((int) entryX.Value).CompareTo(((int) entryY.Value));
+            }
+        }
+
+        string noResponseValue = FormatTextLength(" ", 21);
+
+        protected override void CreateReport(Election election) {
             intCount = 0;
             intPages = 0;
             lstToPrint = new List<string>();
-            string strHeaderNames;
-            string strVoteCounts;
-            string strTotals;
 
-            IList<ElectionContest> lstContests = elc.ElectionContests;
-            foreach (ElectionContest ec in lstContests) {
-                a = b = c = null;
+
+            IList<ElectionContest> lstContests = election.ElectionContests;
+            foreach (ElectionContest electionContest in lstContests) {
                 // First, determine the responses.  If there's more than three, we can only
                 //  fit three, so pick the three most important.
-                lstResponses = ec.Responses;
-                if (lstResponses.Count > 3) {
-                    foreach (Response r in lstResponses) {
-                        if (a == null)
-                            a = r;
-                        else if (GetVoteTotals(ec, c) <= GetVoteTotals(ec, r)) {
-                            if (GetVoteTotals(ec, b) <= GetVoteTotals(ec, r)) {
-                                if (GetVoteTotals(ec, a) <= GetVoteTotals(ec, r)) {
-                                    c = b;
-                                    b = a;
-                                    a = r;
-                                } else {
-                                    c = b;
-                                    b = r;
-                                }
-                            } else {
-                                c = r;
-                            }
-                        }
-                    }
-                    lstResponses = new List<Response>();
-                    lstResponses.Add(a);
-                    lstResponses.Add(b);
-                    lstResponses.Add(c);
+
+                ValueSortedList responses = new ValueSortedList(new IntComparer());
+                foreach (Response response in electionContest.Responses) {
+                    int totalVotes = GetVoteTotals(electionContest, response);
+                    responses.Add(response, totalVotes);
                 }
-                if (lstResponses.Count > 0)
-                    strHeaderNames = FormatTextLength(lstResponses[0].ToString(), 20) + " ";
-                else
-                    strHeaderNames = FormatTextLength(" ", 20) + " ";
-                if (lstResponses.Count > 1)
-                    strHeaderNames += FormatTextLength(lstResponses[1].ToString(), 20) + " ";
-                else
-                    strHeaderNames += FormatTextLength(" ", 20) + " ";
-                if (lstResponses.Count > 2)
-                    strHeaderNames += FormatTextLength(lstResponses[2].ToString(), 20) + " ";
-                else
-                    strHeaderNames += FormatTextLength(" ", 20) + " ";
+
+                string candidateNames = "";
+                int responseCount = responses.Count > 3 ? 3 : responses.Count;
+
+                switch (responseCount) {
+                    case 3:
+                        candidateNames = FormatTextLength(responses[0].Key.ToString(), 20) + " " +
+                                         FormatTextLength(responses[1].Key.ToString(), 20) + " " +
+                                         FormatTextLength(responses[2].Key.ToString(), 20);
+                        break;
+                    case 2:
+                        candidateNames = FormatTextLength(responses[0].Key.ToString(), 20) + " " +
+                                         FormatTextLength(responses[1].Key.ToString(), 41);
+                        break;
+                    case 1:
+                        candidateNames = FormatTextLength(responses[0].Key.ToString(), 62);
+                        break;
+
+                    case 0:
+                        candidateNames = FormatTextLength("----------NO CANDIDATES----------", 62);
+                        break;
+                }
 
                 lstToPrint.Add("<HEADER>");
-                lstToPrint.Add(DateTime.Now.ToString() + "");
+                lstToPrint.Add(DateTime.Now.ToString());
                 lstToPrint.Add("");
-                lstToPrint.Add(CenterText(ec.Contest.Name));
-                lstToPrint.Add(CenterText(elc.ToString()));
+                lstToPrint.Add(CenterText(electionContest.Contest.Name));
+                lstToPrint.Add(CenterText(election.ToString()));
                 lstToPrint.Add("");
-                lstToPrint.Add("County           " + strHeaderNames + "Wards               Votes");
+                lstToPrint.Add("County           " + candidateNames + "   Wards             Votes");
 
                 lstToPrint.Add("</HEADER>");
-                foreach (ContestCounty cc in ec.Counties) {
-                    strVoteCounts = FormatTextLength(cc.County.Name, 17);
+
+                foreach (ContestCounty cc in electionContest.Counties) {
+                    
+                    string strVoteCounts = FormatTextLength(cc.County.Name, 17);
+    
                     for (int i = 0; i <= 2; i++) {
-                        if (lstResponses.Count > i)
-                            strVoteCounts += GetVoteNumbers(lstResponses[i], cc);
-                        else {
-                            strVoteCounts += "                     ";
+                        if (responseCount > i) {
+                            strVoteCounts += GetVoteNumbers((Response) responses[i].Key, cc, noResponseValue);
+                        } else {
+                            strVoteCounts += noResponseValue;
                         }
                     }
-                    strVoteCounts += FormatTextLength("" + cc.WardsReporting, 3) + "/" +
-                                     FormatTextLength("" + cc.WardCount, 3);
+
+                    strVoteCounts += FormatTextLength(cc.WardsReporting + "/" + cc.WardCount, 7, false);
+
                     if (cc.WardCount > 0)
                         strVoteCounts +=
-                            FormatTextLength(
-                                "(" + (((double) cc.WardsReporting/(double) cc.WardCount)*100).ToString("0.0") + "%)",
-                                13);
+                            FormatTextLength("(" + (((double) cc.WardsReporting/(double) cc.WardCount)*100).ToString("0.0") + "%)", 12, false);
                     else {
                         if (cc.WardsReporting > 0) {
-                            strVoteCounts += FormatTextLength("(100.0%)", 13);
+                            strVoteCounts += FormatTextLength("(100.0%)", 12, false);
                         } else {
-                            strVoteCounts += FormatTextLength("(00.0%)", 13);
+                            strVoteCounts += FormatTextLength("(00.0%)", 12, false);
                         }
                     }
-                    strVoteCounts += "" + cc.GetTotalVotes();
+                    strVoteCounts += FormatTextLength(" " + cc.GetTotalVotes(), 6, false);
                     lstToPrint.Add(strVoteCounts);
                 }
                 lstToPrint.Add("");
                 lstToPrint.Add("");
-                strTotals = "Totals           ";
+
+                string strTotals = "Totals           ";
+
                 for (int i = 0; i <= 2; i++) {
-                    if (lstResponses.Count > i)
-                        if (ec.GetTotalVotes() > 0) {
-                            strTotals +=
-                                FormatTextLength(
-                                    FormatTextLength("" + GetVoteTotals(ec, lstResponses[i]), 5) + " (" +
-                                    ((double) GetVoteTotals(ec, lstResponses[i])/(double) ec.GetTotalVotes()).ToString(
-                                        "0.0" + "%)"), 21);
+                    if (responseCount > i)
+                        if (electionContest.GetTotalVotes() > 0) {
+                            strTotals += 
+                                FormatTextLength( 
+                                FormatTextLength(GetVoteTotals(electionContest, (Response)responses[i].Key).ToString(), 5, true) +
+                                    FormatTextLength(" (" + ((double)GetVoteTotals(electionContest, (Response)responses[i].Key) / (double) electionContest.GetTotalVotes()).ToString("0.0" + "%)"), 12, true), 
+                                    21);
                         } else {
                             strTotals +=
                                 FormatTextLength(
-                                    FormatTextLength("" + GetVoteTotals(ec, lstResponses[i]), 5) + " (" + "00.0%)", 21);
+                                    FormatTextLength(GetVoteTotals(electionContest, (Response) responses[i].Key).ToString(), 5, true) + FormatTextLength("(" + "00.0%)", 12, true), 21);
                         }
                     else {
-                        strTotals += "                     ";
+                        strTotals += noResponseValue;
                     }
                 }
-                strTotals += FormatTextLength("" + ec.GetWardsReporting(), 3) + "/" +
-                             FormatTextLength("" + ec.GetWardCount(), 3) + "(" +
-                             FormatTextLength((ec.GetWardsReportingPercentage()*100).ToString("0.0") + "%)", 12) +
-                             ec.GetTotalVotes();
+                strTotals +=
+                    FormatTextLength(electionContest.GetWardsReporting() + "/" + electionContest.GetWardCount(), 7,
+                                     false) +
+                    FormatTextLength("(" + (electionContest.GetWardsReportingPercentage()*100).ToString("0.0") + "%)",
+                                     12, false) + 
+                    FormatTextLength(electionContest.GetTotalVotes().ToString(), 6, false);
                 lstToPrint.Add(strTotals);
                 lstToPrint.Add("<BREAK>");
             }
@@ -211,8 +215,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
             try {
                 intPages++;
-                float linesPerPage = 0;
-                float yPos = 0;
+                float linesPerPage;
                 bool blnHeader = false;
                 int intPageCount = 0;
                 float leftMargin = ev.MarginBounds.Left;
@@ -222,8 +225,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 linesPerPage = ev.MarginBounds.Height/printFont.GetHeight(ev.Graphics);
 
                 while (intPageCount < linesPerPage && intCount < lstToPrint.Count) {
-                    // We'll store the current header here in case we have to go to multiple
-                    //  pages.
+                    // We'll store the current header here in case we have to go to multiple pages.
                     if (lstToPrint[intCount] == "<HEADER>") {
                         blnHeader = true;
                         lstHeader = new List<string>();
@@ -238,6 +240,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                         lstHeader.Add(lstToPrint[intCount]);
                         intCount++;
                     } else {
+                        float yPos;
                         if (intPageCount == 0) {
                             foreach (string s in lstHeader) {
                                 yPos = topMargin + (intPageCount*printFont.GetHeight(ev.Graphics));
@@ -261,8 +264,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 }
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                MessageBox.Show(message + "\n\n" + ex);
             }
         }
 
@@ -287,8 +289,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 cmbElectionType.Top = lstElections.Height + 18;
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                MessageBox.Show(message + "\n\n" + ex);
             }
         }
 
@@ -297,8 +298,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 LoadElections();
             } catch (Exception ex) {
                 string message = "Operation failed";
-                MessageBox.Show(message + "\n\n" + ex.ToString());
-                //LOG.Error(message, ex);
+                MessageBox.Show(message + "\n\n" + ex);
             }
         }
     }

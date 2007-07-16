@@ -18,7 +18,6 @@
  **/
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 
@@ -40,6 +39,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             txtName.Text = currentPoliticalParty.Name;
             txtAbbrev.Text = currentPoliticalParty.Abbreviation;
             chkActive.Checked = currentPoliticalParty.IsActive;
+            refreshGoToList();
         }
 
         private void refreshGoToList() {
@@ -55,7 +55,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnAdd_Click(sender, e);
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnAdd_Click", ex);
             }
         }
 
@@ -66,35 +66,16 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 currentPoliticalParty.Abbreviation = txtAbbrev.Text;
                 currentPoliticalParty.IsActive = chkActive.Checked;
 
-                IList<Fault> faultLst = politicalPartyDAO.canMakePersistent(currentPoliticalParty);
-                bool persistData = true;
-
-                //Go through the list of faults and display warnings and errors.
-                foreach (Fault fault in faultLst) {
-                    if (persistData) {
-                        if (fault.IsError) {
-                            persistData = false;
-                            MessageBox.Show("Error: " + fault.Message);
-                        } else {
-                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result =
-                                MessageBox.Show("Warning: " + fault.Message + "\n\nWould you like to save anyway?",
-                                                "Warning Message", buttons);
-                            if (result == DialogResult.No) {
-                                persistData = false;
-                            }
-                        }
-                    }
-                }
-
+                IList<Fault> faults = politicalPartyDAO.canMakePersistent(currentPoliticalParty);
+               
                 //If there were no errors, persist data to the database
-                if (persistData) {
+                if (reportFaults(faults)) {
                     politicalPartyDAO.makePersistent(currentPoliticalParty);
                     refreshGoToList();
-                    base.btnSave_Click(sender, e);
+                    raiseMakePersistentEvent();
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnSave_Click", ex);
             }
         }
 
@@ -103,19 +84,21 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnReset_Click", ex);
             }
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
-                politicalPartyDAO.makeTransient(currentPoliticalParty);
-                currentPoliticalParty = new PoliticalParty();
-                refreshControls();
-                refreshGoToList();
-                base.btnDelete_Click(sender, e);
+                IList<Fault> faults = politicalPartyDAO.canMakePersistent(currentPoliticalParty);
+                if (reportFaults(faults)) {
+                    politicalPartyDAO.makeTransient(currentPoliticalParty);
+                    currentPoliticalParty = new PoliticalParty();
+                    refreshControls();
+                    raiseMakeTransientEvent();
+                }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("btnDelete_Click", ex);
             }
         }
 
@@ -125,7 +108,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 
@@ -139,7 +122,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex.ToString());
+                reportException("loadPoliticalParty", ex);
             }
         }
     }
