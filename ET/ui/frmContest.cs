@@ -81,7 +81,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
-                    contestDAO.makePersistent(currentContest);
+                    currentContest = contestDAO.makePersistent(currentContest);
                     refreshGoToList();
                     raiseMakePersistentEvent();
                 }
@@ -148,7 +148,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public void loadContest(long? id) {
             if (id.HasValue) {
-                Contest contest = contestDAO.findById(id, false);
+                Contest contest = contestDAO.findById(id.Value, false);
                 if (contest != null) {
                     currentContest = contest;
                     refreshControls();

@@ -18,9 +18,9 @@
  **/
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Common.Logging;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
-using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal sealed class VoteEnterer : Panel {

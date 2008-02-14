@@ -16,14 +16,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ResponseValueDAO : HibernateDAO<ResponseValue> {
-        public ResponseValueDAO(ISessionFactory factory) : base(factory) {}
+        public ResponseValueDAO(HibernateTemplate factory) : base(factory) {}
 
         protected override IList<Fault> performCanMakePersistent(ResponseValue entity) {
             IList<Fault> retVal = new List<Fault>();
@@ -32,11 +32,18 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
 
         public IList<ResponseValue> find(long responseID, long contestCountyID) {
-            IQuery query =
-                getCurrentSession().CreateSQLQuery("select * from responsevalue where ResponseID = " + responseID +
-                                                   " and ContestCountyID = " + contestCountyID + ";").AddEntity(
-                    objectType);
-            return query.List<ResponseValue>();
+            FindHibernateDelegate<ResponseValue> findDelegate = delegate(ISession session)
+                                                                    {
+                                                                        IQuery query =
+                                                                            session.CreateSQLQuery(
+                                                                                "select * from responsevalue where ResponseID = " +
+                                                                                responseID + " and ContestCountyID = " +
+                                                                                contestCountyID + ";").AddEntity(
+                                                                                objectType);
+                                                                        return query.List<ResponseValue>();
+                                                                    };
+
+            return ExecuteFind(findDelegate);
         }
 
         public override IList<Fault> canMakeTransient(ResponseValue entity) {

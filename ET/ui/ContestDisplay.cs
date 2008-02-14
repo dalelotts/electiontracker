@@ -20,16 +20,17 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Common.Logging;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.util;
-using log4net;
+
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal sealed class ContestDisplay : Panel {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (ContestDisplay));
 
-        private readonly ContestCounty contestCounty;
+        private ContestCounty contestCounty;
         private readonly ContestCountyDAO contestCountyDAO;
         private ResponseValueDAO responseValueDAO;
 
@@ -107,7 +108,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
-                    contestCountyDAO.makePersistent(contestCounty);
+                    contestCounty = contestCountyDAO.makePersistent(contestCounty);
                     //contestCountyDAO.flush();
 
                     foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
@@ -127,7 +128,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                         //If there were no errors, persist data to the database
                         if (persistResponseValue) {
-                            responseValueDAO.makePersistent(responseValue);
+                            responseValue = responseValueDAO.makePersistent(responseValue);
                         }
                     }
                 }

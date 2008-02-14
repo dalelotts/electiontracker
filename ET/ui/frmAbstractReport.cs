@@ -21,10 +21,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using Common.Logging;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
 using edu.uwec.cs.cs355.group4.et.ui.util;
-using log4net;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal abstract partial class frmAbstractReport : Form {

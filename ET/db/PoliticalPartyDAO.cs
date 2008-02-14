@@ -16,11 +16,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
 using NHibernate.Expression;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal sealed class PoliticalPartyDAO : HibernateDAO<PoliticalParty> {
@@ -34,31 +34,55 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             order_BY_NAME.Add(new Order("Name", true));
         }
 
-        public PoliticalPartyDAO(ISessionFactory factory) : base(factory) {}
+        public PoliticalPartyDAO(HibernateTemplate factory) : base(factory) {}
 
         protected override IList<Fault> performCanMakePersistent(PoliticalParty entity) {
-            List<Fault> retVal = new List<Fault>();
+            FindHibernateDelegate<PoliticalParty> findDuplicateNames = delegate(ISession session)
+                                                                           {
+                                                                               IQuery query =
+                                                                                   session.CreateSQLQuery(
+                                                                                       "select * from politicalparty pp where pp.politicalpartyname = '" +
+                                                                                       entity.Name +
+                                                                                       "' and pp.politicalpartyid != " +
+                                                                                       entity.ID + ";").AddEntity(
+                                                                                       objectType);
+                                                                               return query.List<PoliticalParty>();
+                                                                           };
+            IList<PoliticalParty> duplicateNames = ExecuteFind(findDuplicateNames);
 
-            ISession currentSession = getCurrentSession();
+            FindHibernateDelegate<PoliticalParty> findDuplicateAbb = delegate(ISession session)
+                                                                         {
+                                                                             IQuery query =
+                                                                                 session.CreateSQLQuery(
+                                                                                     "select * from politicalparty where PoliticalPartyAbbrev = '" +
+                                                                                     entity.Abbreviation +
+                                                                                     "' and PoliticalPartyID != " +
+                                                                                     entity.ID + ";").AddEntity(
+                                                                                     objectType);
+                                                                             return query.List<PoliticalParty>();
+                                                                         };
 
-            IQuery validQuery =
-                currentSession.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = '" +
-                                              entity.Name + "' and pp.politicalpartyid != " + entity.ID + ";").AddEntity
-                    (objectType);
-            if (validQuery.List().Count > 0) {
-                retVal.Add(new Fault(true, "Name entered for Political Party already exists"));
+
+            IList<PoliticalParty> duplicateAbb = ExecuteFind(findDuplicateAbb);
+
+
+            IList<Fault> result = new List<Fault>();
+
+            if (duplicateNames.Count > 0) {
+                result.Add(
+                    new Fault(true,
+                              "Duplicate Political Party: a Political Party named '" + entity.Name + "' already exists."));
             }
 
-            validQuery =
-                currentSession.CreateSQLQuery("select * from politicalparty where PoliticalPartyAbbrev = '" +
-                                              entity.Abbreviation + "' and PoliticalPartyID != " + entity.ID + ";").
-                    AddEntity(objectType);
-            if (validQuery.List().Count > 0) {
-                retVal.Add(new Fault(true, "Abbreviation entered for Political Party already exists"));
+
+            if (duplicateAbb.Count > 0) {
+                result.Add(
+                    new Fault(true,
+                              "Duplicate Political Party Abbreviation: a Political Party with the Abbreviation '" +
+                              entity.Name + "' already exists."));
             }
 
-
-            return retVal;
+            return result;
         }
 
         public IList<PoliticalParty> findActive() {

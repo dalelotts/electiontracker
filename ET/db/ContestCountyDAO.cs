@@ -16,14 +16,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ContestCountyDAO : HibernateDAO<ContestCounty> {
-        public ContestCountyDAO(ISessionFactory factory) : base(factory) {}
+        public ContestCountyDAO(HibernateTemplate factory) : base(factory) {}
 
         protected override IList<Fault> performCanMakePersistent(ContestCounty entity) {
             IList<Fault> retVal = new List<Fault>();
@@ -32,11 +32,18 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         public IList<ContestCounty> find(long countyID, long electionContestID) {
-            IQuery query =
-                getCurrentSession().CreateSQLQuery("select * from contestcounty where CountyID = " + countyID +
-                                                   " and ElectionContestID = " + electionContestID + ";").AddEntity(
-                    objectType);
-            return query.List<ContestCounty>();
+            FindHibernateDelegate<ContestCounty> findDelegate = delegate(ISession session)
+                                                                    {
+                                                                        IQuery query =
+                                                                            session.CreateSQLQuery(
+                                                                                "select * from contestcounty where CountyID = " +
+                                                                                countyID + " and ElectionContestID = " +
+                                                                                electionContestID + ";").AddEntity(
+                                                                                objectType);
+                                                                        return query.List<ContestCounty>();
+                                                                    };
+
+            return ExecuteFind(findDelegate);
         }
 
         public override IList<Fault> canMakeTransient(ContestCounty entity) {

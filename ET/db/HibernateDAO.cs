@@ -25,19 +25,19 @@ using DesignByContract;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
 using NHibernate.Expression;
+using Spring.Data.NHibernate.Generic;
+using Spring.Transaction.Interceptor;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal abstract class HibernateDAO<T> : GenericDAO<T> {
+        private readonly HibernateTemplate template;
         protected static readonly IList<ICriterion> EMPTY_CRITERION = new List<ICriterion>();
-        private readonly ISessionFactory factory;
-        private readonly ISession session;
         protected readonly Type objectType = typeof (T);
         private readonly IList<PropertyInfo> properties;
 
-        public HibernateDAO(ISessionFactory factory) {
-            Check.Assert(factory != null, "Null:factory");
-            this.factory = factory;
-            session = this.factory.OpenSession();
+        public HibernateDAO(HibernateTemplate template) {
+            Check.Assert(template != null, "Null:template");
+            this.template = template;
             properties = getRequiredProperties(objectType);
         }
 
@@ -47,47 +47,27 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return result;
         }
 
-        protected ISession getCurrentSession() {
-            // sdegen - This change may cause performance issues.  If subsequent
-            //  revisions show performance issues, consider reverting.  This was done 
-            //  to resolve session conflicts in the vote entry form.
-            if (session == null)
-                return factory.OpenSession();
-            return session;
-        }
-
+        [Transaction(ReadOnly = false)]
         public T findById(Object id, bool lockRecord) {
-            return (T) session.Load(objectType, id, lockRecord ? LockMode.Upgrade : LockMode.None);
+            return template.Get<T>(id, lockRecord ? LockMode.Upgrade : LockMode.None);
         }
 
+        [Transaction(ReadOnly = false)]
         public virtual IList<T> findAll() {
             return findByCriteria(EMPTY_CRITERION);
         }
 
-        public IList<T> findByExample(T exampleInstance, IList<String> excludedProperties) {
-            Example example = Example.Create(exampleInstance);
-            foreach (string property in excludedProperties) {
-                example.ExcludeProperty(property);
-            }
-            ICriteria criteria = session.CreateCriteria(objectType);
-            criteria.Add(example);
-            return criteria.List<T>();
-        }
-
+        [Transaction(ReadOnly = false)]
         public T makePersistent(T entity) {
-            ITransaction transaction = session.BeginTransaction();
-            session.SaveOrUpdate(entity);
-            transaction.Commit();
-            return entity;
+            return (T) template.SaveOrUpdateCopy(entity);
         }
 
+        [Transaction(ReadOnly = false)]
         public void makeTransient(T entity) {
-            ITransaction transaction = session.BeginTransaction();
-            session.Delete(entity);
-            transaction.Commit();
+            template.Delete(entity);
         }
 
-
+        [Transaction(ReadOnly = true)]
         public IList<Fault> canMakePersistent(T entity) {
             if (entity == null) throw new ArgumentNullException("Null: entity");
             IList<Fault> result = validateRequiredProperties(entity);
@@ -101,29 +81,38 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected abstract IList<Fault> performCanMakePersistent(T entity);
 
+        [Transaction(ReadOnly = false)]
         protected IList<T> findByCriteria(IList<ICriterion> criterion, IList<Order> order) {
-            ICriteria criteria = session.CreateCriteria(objectType);
-            foreach (ICriterion expression in criterion) {
-                criteria.Add(expression);
-            }
-            foreach (Order orderBy in order) {
-                criteria.AddOrder(orderBy);
-            }
-            return criteria.List<T>();
+            FindHibernateDelegate<T> findDelegate = delegate(ISession session)
+                                                        {
+                                                            ICriteria criteria = session.CreateCriteria(objectType);
+                                                            foreach (ICriterion expression in criterion) {
+                                                                criteria.Add(expression);
+                                                            }
+                                                            foreach (Order orderBy in order) {
+                                                                criteria.AddOrder(orderBy);
+                                                            }
+                                                            return criteria.List<T>();
+                                                        };
+            return ExecuteFind(findDelegate);
         }
 
+        [Transaction(ReadOnly = false)]
+        protected IList<T> ExecuteFind(FindHibernateDelegate<T> findDelegate) {
+            return template.ExecuteFind(findDelegate);
+        }
+
+        [Transaction(ReadOnly = false)]
+        protected U Execute<U>(HibernateDelegate<U> findDelegate) {
+            return template.Execute(findDelegate);
+        }
+
+        [Transaction(ReadOnly = false)]
         protected IList<T> findByCriteria(IList<ICriterion> criterion) {
             return findByCriteria(criterion, new List<Order>());
         }
 
-        public void flush() {
-            session.Flush();
-        }
-
-        public void clear() {
-            session.Clear();
-        }
-
+        [Transaction(ReadOnly = false)]
         private IList<Fault> validateRequiredProperties(T entity) {
             IList<Fault> result = new List<Fault>();
             foreach (PropertyInfo property in properties) {
@@ -175,7 +164,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         private readonly CustomBinder binder = new CustomBinder();
-
 
         private class CustomBinder : Binder {
             public override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args,

@@ -25,11 +25,10 @@ using edu.uwec.cs.cs355.group4.et.db;
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
         private readonly ElectionDAO electionDAO;
-        private IList<Response> lstDeletedResponses;
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
         private readonly IList<County> allCounties;
-        private readonly ResponseDAO responseDAO;
+        //private readonly ResponseDAO responseDAO;
         private readonly IList<ElectionContest> addedContests;
 
         private Election currentElection;
@@ -39,17 +38,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         //To Do: Add support for double clicking to add or remove contests, candidates, counties, etc.
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
-        public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO,
-                           CountyDAO countyDAO, ResponseDAO responseDAO) {
+        public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
             try {
                 InitializeComponent();
-                this.responseDAO = responseDAO;
                 this.electionDAO = electionDAO;
                 currentElection = new Election();
                 allContests = contestDAO.findAll();
                 allCandidates = candidateDAO.findAll();
                 allCounties = countyDAO.findAll();
-                lstDeletedResponses = new List<Response>();
                 addedContests = new List<ElectionContest>();
 
                 refreshGoToList();
@@ -80,7 +76,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public void loadElection(long? id) {
             if (id != null) {
-                Election newElection = electionDAO.findById(id, false);
+                Election newElection = electionDAO.findById(id.Value, false);
                 if (newElection != null) {
                     currentElection = newElection;
                     refreshCandidateLists();
@@ -173,26 +169,26 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             if (currentElectionContest != null) {
                 foreach (Response response in currentElectionContest.Responses) {
                     lstContestCandidates.Items.Add(response);
-                    for (int i = 0; i < lstDeletedResponses.Count; i++) {
-                        // sdegen 5-10-07 - Inheritance messes up Hibernate's persistence of 
-                        //  responses- mainly in deletions.  So we handle it manually now.
-                        if (lstDeletedResponses[i].GetType().Equals(typeof (CandidateResponse)) &&
-                            response.GetType().Equals(typeof (CandidateResponse))) {
-                            CandidateResponse cr;
-                            cr = (CandidateResponse) lstDeletedResponses[i];
-                            if (cr.Candidate.ID == ((CandidateResponse) response).Candidate.ID) {
-                                lstDeletedResponses.RemoveAt(i);
-                            }
-                        }
-                        if (lstDeletedResponses[i].GetType().Equals(typeof (CustomResponse)) &&
-                            response.GetType().Equals(typeof (CustomResponse))) {
-                            if (((CustomResponse) response).Description ==
-                                ((CustomResponse) lstDeletedResponses[i]).Description) {
-                                lstDeletedResponses.RemoveAt(i);
-                            }
-                        }
-                    }
-
+//                    for (int i = 0; i < lstDeletedResponses.Count; i++) {
+//                        // sdegen 5-10-07 - Inheritance messes up Hibernate's persistence of 
+//                        //  responses- mainly in deletions.  So we handle it manually now.
+//                        if (lstDeletedResponses[i].GetType().Equals(typeof (CandidateResponse)) &&
+//                            response.GetType().Equals(typeof (CandidateResponse))) {
+//                            CandidateResponse cr;
+//                            cr = (CandidateResponse) lstDeletedResponses[i];
+//                            if (cr.Candidate.ID == ((CandidateResponse) response).Candidate.ID) {
+//                                lstDeletedResponses.RemoveAt(i);
+//                            }
+//                        }
+//                        if (lstDeletedResponses[i].GetType().Equals(typeof (CustomResponse)) &&
+//                            response.GetType().Equals(typeof (CustomResponse))) {
+//                            if (((CustomResponse) response).Description ==
+//                                ((CustomResponse) lstDeletedResponses[i]).Description) {
+//                                lstDeletedResponses.RemoveAt(i);
+//                            }
+//                        }
+//                    }
+//
                     if (response.GetType().Equals(typeof (CandidateResponse))) {
                         lstAllCandidates.Items.Remove(((CandidateResponse) response).Candidate);
                     }
@@ -211,9 +207,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
-            foreach (Response r in lstDeletedResponses) {
-                responseDAO.Delete(r);
-            }
+//            foreach (Response r in lstDeletedResponses) {
+//                responseDAO.Delete(r);
+//            }
             refreshCountyLists();
             addedContests.Clear();
             foreach (ElectionContest ec in currentElection.ElectionContests) {
@@ -231,11 +227,11 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
-                    electionDAO.makePersistent(currentElection);
+                    currentElection = electionDAO.makePersistent(currentElection);
                     refreshControls();
                     raiseMakePersistentEvent();
                 }
-                lstDeletedResponses.Clear();
+                //lstDeletedResponses.Clear();
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
             }
@@ -429,7 +425,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     if (selectedItems.Count > 0) {
                         foreach (Response response in selectedItems) {
                             currentElectionContest.Responses.Remove(response);
-                            lstDeletedResponses.Add(response);
+                            //lstDeletedResponses.Add(response);
                         }
                         refreshCandidateLists();
                     }

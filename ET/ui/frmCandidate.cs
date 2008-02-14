@@ -118,7 +118,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
-                    candidateDAO.makePersistent(currentCandidate);
+                    currentCandidate = candidateDAO.makePersistent(currentCandidate);
                     refreshGoToList();
                     raiseMakePersistentEvent();
                 }
@@ -149,7 +149,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public void loadCandidate(long? id) {
             if (id.HasValue) {
-                Candidate candidate = candidateDAO.findById(id, false);
+                Candidate candidate = candidateDAO.findById(id.Value, false);
                 if (candidate != null) {
                     currentCandidate = candidate;
                     refreshControls();

@@ -18,9 +18,8 @@
  **/
 using System;
 using System.Windows.Forms;
+using Common.Logging;
 using edu.uwec.cs.cs355.group4.et.ui;
-using log4net;
-using log4net.Config;
 using Spring.Context;
 using Spring.Context.Support;
 
@@ -32,8 +31,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         public static void Main(string[] args) {
             try {
                 Application.EnableVisualStyles();
-                XmlConfigurator.Configure();
-                IApplicationContext ctx = ContextRegistry.GetContext();
+                IApplicationContext ctx = ContextRegistry.GetContext("spring.root");
                 UIController controller = (UIController) ctx.GetObject("UIController");
                 Application.Run(controller.getMDIForm());
             } catch (Exception ex) {

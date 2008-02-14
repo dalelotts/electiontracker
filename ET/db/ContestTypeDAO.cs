@@ -16,27 +16,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ContestTypeDAO : HibernateDAO<ContestType> {
-        public ContestTypeDAO(ISessionFactory factory) : base(factory) {}
+        public ContestTypeDAO(HibernateTemplate factory) : base(factory) {}
 
         protected override IList<Fault> performCanMakePersistent(ContestType entity) {
-            List<Fault> result = new List<Fault>();
+            FindHibernateDelegate<ContestType> findDelegate = delegate(ISession session)
+                                                                  {
+                                                                      IQuery query =
+                                                                          session.CreateSQLQuery(
+                                                                              "select * from contesttype where contesttypename = " +
+                                                                              entity.Name + " and ContestTypeID != " +
+                                                                              entity.ID + ";").AddEntity(objectType);
+                                                                      return query.List<ContestType>();
+                                                                  };
 
-            ISession currentSession = getCurrentSession();
-            IQuery validQuery =
-                currentSession.CreateSQLQuery("select * from contesttype where contesttypename = " + entity.Name +
-                                              " and ContestTypeID != " + entity.ID + ";");
+            IList<ContestType> duplicates = ExecuteFind(findDelegate);
 
-            if (validQuery.List().Count > 0) {
-                result.Add(new Fault(true, "ContestType already exists"));
+            IList<Fault> result = new List<Fault>();
+
+            if (duplicates.Count > 0) {
+                result.Add(
+                    new Fault(true, "Duplicate Content Type: a contest type named '" + entity.Name + "' already exists."));
             }
-
             return result;
         }
 

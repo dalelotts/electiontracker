@@ -20,21 +20,30 @@ using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class PhoneNumberTypeDAO : HibernateDAO<PhoneNumberType> {
-        public PhoneNumberTypeDAO(ISessionFactory factory) : base(factory) {}
+        public PhoneNumberTypeDAO(HibernateTemplate factory) : base(factory) {}
 
         protected override IList<Fault> performCanMakePersistent(PhoneNumberType entity) {
-            IList<Fault> retVal = new List<Fault>();
-            ISession currentSession = getCurrentSession();
-            IQuery validQuery =
-                currentSession.CreateSQLQuery("select * from phonenumbertype where Name = " + entity.Name + ";");
-            if (validQuery.List().Count > 0) {
-                retVal.Add(new Fault(true, "Name entered for Phone Number Type already exists"));
-            }
+            FindHibernateDelegate<PhoneNumberType> findDelegate = delegate(ISession session)
+                                                             {
+                                                                 IQuery query =
+                                                                     session.CreateSQLQuery("select * from phonenumbertype where Name = " + entity.Name + ";");
+                                                                 return query.List<PhoneNumberType>();
+                                                             };
 
-            return retVal;
+            IList<PhoneNumberType> duplicates = ExecuteFind(findDelegate);
+
+            IList<Fault> result = new List<Fault>();
+
+            if (duplicates.Count > 0)
+            {
+                result.Add(
+                    new Fault(true, "Duplicate Phone Number Type: a phone number type named '" + entity.Name + "' already exists."));
+            }
+            return result;
         }
 
         public override IList<Fault> canMakeTransient(PhoneNumberType entity) {

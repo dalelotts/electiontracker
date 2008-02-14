@@ -219,7 +219,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
-                    countyDAO.makePersistent(currentCounty);
+                    currentCounty = countyDAO.makePersistent(currentCounty);
                     refreshGoToList();
                     raiseMakePersistentEvent();
                 }
@@ -323,7 +323,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public void loadCounty(long? id) {
             try {
                 if (id.HasValue) {
-                    County county = countyDAO.findById(id, false);
+                    County county = countyDAO.findById(id.Value, false);
                     if (county != null) {
                         currentCounty = county;
                         foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {

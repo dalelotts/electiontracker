@@ -16,11 +16,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
 using NHibernate.Expression;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class CandidateDAO : HibernateDAO<Candidate> {
@@ -35,7 +35,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             ORDER_BY_LAST_FIRST_NAME.Add(new Order("FirstName", true));
         }
 
-        public CandidateDAO(ISessionFactory factory) : base(factory) {}
+        public CandidateDAO(HibernateTemplate factory) : base(factory) {}
 
 
         public IList<Candidate> findActive() {
@@ -52,20 +52,25 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         protected override IList<Fault> performCanMakePersistent(Candidate entity) {
-            List<Fault> result = new List<Fault>();
+            FindHibernateDelegate<Candidate> findDelegate = delegate(ISession session)
+                                                                {
+                                                                    IQuery query =
+                                                                        session.CreateSQLQuery(
+                                                                            "select * from candidate where CandidateFirstName = '" +
+                                                                            entity.FirstName +
+                                                                            "' and CandidateLastName = '" +
+                                                                            entity.LastName + "' and CandidateID != " +
+                                                                            entity.ID + ";").AddEntity(objectType);
+                                                                    return query.List<Candidate>();
+                                                                };
 
-            ISession currentSession = getCurrentSession();
+            IList<Candidate> duplicates = ExecuteFind(findDelegate);
 
-            // TODO: This checks First name and Last name right now as the only identifiers
-            // Might want to do a findall() and see if the 'entity' is listed in the return
-            IQuery validQuery =
-                currentSession.CreateSQLQuery("select * from candidate where CandidateFirstName = '" + entity.FirstName +
-                                              "' and CandidateLastName = '" + entity.LastName + "' and CandidateID != " +
-                                              entity.ID + ";").AddEntity(objectType);
-            if (validQuery.List().Count > 0) {
-                result.Add(new Fault(true, "Candidate already exists"));
+            IList<Fault> result = new List<Fault>();
+
+            if (duplicates.Count > 0) {
+                result.Add(new Fault(true, "Duplicate Candidate: a candidate named '" + entity + "' already exists."));
             }
-
             return result;
         }
 

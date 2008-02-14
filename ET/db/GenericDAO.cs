@@ -25,7 +25,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         IList<T> findAll();
 
-        IList<T> findByExample(T exampleInstance, IList<String> excludedProperties);
+        //IList<T> findByExample(T exampleInstance, IList<String> excludedProperties);
 
         T makePersistent(T entity);
 

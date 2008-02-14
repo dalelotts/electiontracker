@@ -149,16 +149,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        private void frmEnterVotes_FormClosing(object sender, FormClosingEventArgs e) {
-            try {
-                responseValueDAO.flush();
-                contestCountyDAO.flush();
-                electionDAO.flush();
-            } catch (Exception ex) {
-                reportException("frmEnterVotes_FormClosing", ex);
-            }
-        }
-
         private void frmEnterVotes_Resize(object sender, EventArgs e) {
             try {
                 gbCounty.Height = Height - 117;

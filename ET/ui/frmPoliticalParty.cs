@@ -70,7 +70,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                
                 //If there were no errors, persist data to the database
                 if (reportFaults(faults)) {
-                    politicalPartyDAO.makePersistent(currentPoliticalParty);
+                    currentPoliticalParty = politicalPartyDAO.makePersistent(currentPoliticalParty);
                     refreshGoToList();
                     raiseMakePersistentEvent();
                 }
@@ -115,7 +115,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         public void loadPoliticalParty(long? id) {
             try {
                 if (id.HasValue) {
-                    PoliticalParty party = politicalPartyDAO.findById(id, false);
+                    PoliticalParty party = politicalPartyDAO.findById(id.Value, false);
                     if (party != null) {
                         currentPoliticalParty = party;
                         refreshControls();

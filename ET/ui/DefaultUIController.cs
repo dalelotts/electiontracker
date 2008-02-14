@@ -19,8 +19,8 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using Common.Logging;
 using edu.uwec.cs.cs355.group4.et.events;
-using log4net;
 using Spring.Context;
 using Spring.Objects.Events.Support;
 

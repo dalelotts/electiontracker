@@ -16,11 +16,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
-using NHibernate;
 using NHibernate.Expression;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ElectionDAO : HibernateDAO<Election> {
@@ -34,7 +33,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             ORDER_BY_ELECTION_DATE.Add(new Order("Date", false));
         }
 
-        public ElectionDAO(ISessionFactory factory) : base(factory) {}
+        public ElectionDAO(HibernateTemplate factory) : base(factory) {}
 
         public IList<Election> findActive() {
             return findByCriteria(ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
@@ -42,14 +41,6 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         public IList<Election> findInactive() {
             return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
-        }
-
-        public IList<County> findCounties(Election e) {
-            IQuery iqQuery =
-                getCurrentSession().CreateSQLQuery(
-                    "select c.CountyID, c.CountyName, c.CountyNotes, c.CountyWardCount from election e left join ElectionContest ec on (ec.ElectionID = e.ElectionID) left join ContestCounty cc on (ec.ElectionContestID = cc.ElectionContestID) left join County c on (cc.CountyID = c.CountyID) where e.ElectionID = " +
-                    e.ID + ";").AddEntity(typeof (County));
-            return iqQuery.List<County>();
         }
 
         public override IList<Fault> canMakeTransient(Election entity) {

@@ -46,9 +46,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging, Version=1.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\dev\log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\lib\Net\2.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net, Version=1.1.0.2, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\debug\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -63,7 +67,15 @@
     </Reference>
     <Reference Include="Spring.Core, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET-1.1.0 Preview 3\bin\net\2.0\release\Spring.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\release\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\release\Spring.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data.NHibernate12, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\release\Spring.Data.NHibernate12.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -145,7 +157,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <EmbeddedResource Include="core\Election.hbm.xml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -310,6 +324,9 @@
   <ItemGroup>
     <Content Include="core\CustomResponse.hbm.xml" />
     <EmbeddedResource Include="core\ResponseValue.hbm.xml" />
+    <Content Include="Log4Net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\btnAdd.Image.png" />
     <Content Include="Resources\btnDelete.Image.png" />
     <Content Include="Resources\btnEdit.Image.png" />
@@ -320,6 +337,9 @@
     <Content Include="Resources\EditTableHS.png" />
     <Content Include="Resources\NewCardHS.png" />
     <Content Include="Resources\saveHS.png" />
+    <Content Include="spring.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="vote.ico" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
     <EmbeddedResource Include="ui\BaseMDIChild.resx">

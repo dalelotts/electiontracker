@@ -16,11 +16,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
 using NHibernate.Expression;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class ContestDAO : HibernateDAO<Contest> {
@@ -34,7 +34,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             ORDER_BY_NAME.Add(new Order("Name", true));
         }
 
-        public ContestDAO(ISessionFactory factory) : base(factory) {}
+        public ContestDAO(HibernateTemplate factory) : base(factory) {}
 
         public IList<Contest> findActive() {
             return findByCriteria(ACTIVE_CRITERION, ORDER_BY_NAME);
@@ -50,16 +50,25 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         protected override IList<Fault> performCanMakePersistent(Contest entity) {
-            List<Fault> result = new List<Fault>();
+            FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
+                                                              {
+                                                                  IQuery query =
+                                                                      session.CreateSQLQuery(
+                                                                          "select * from contest where contestname = '" +
+                                                                          entity.Name + "' and contestid != " +
+                                                                          entity.ID + ";").AddEntity(objectType);
+                                                                  return query.List<Contest>();
+                                                              };
 
-            ISession currentSession = getCurrentSession();
+            IList<Contest> duplicates = ExecuteFind(findDelegate);
 
-            IQuery validQuery =
-                currentSession.CreateSQLQuery("select * from contest where contestname = '" + entity.Name +
-                                              "' and contestid != " + entity.ID + ";").AddEntity(objectType);
+            IList<Fault> result = new List<Fault>();
 
-            if (validQuery.List().Count > 0) {
-                result.Add(new Fault(true, "Contest already exists"));
+            if (duplicates.Count > 0) {
+                result.Add(
+                    new Fault(true,
+                              "Duplicate Phone Number Type: a phone number type named '" + entity.Name +
+                              "' already exists."));
             }
 
             return result;

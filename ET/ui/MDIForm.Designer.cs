@@ -96,8 +96,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.mainTreeView = new System.Windows.Forms.TreeView();
             this.filterBar = new Altea.OutlookBar();
+            this.mainTreeView = new System.Windows.Forms.TreeView();
             this.mainStatusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             this.mainPanel.SuspendLayout();
@@ -417,18 +417,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainPanel.Size = new System.Drawing.Size(232, 652);
             this.mainPanel.TabIndex = 7;
             // 
-            // mainTreeView
-            // 
-            this.mainTreeView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.mainTreeView.HideSelection = false;
-            this.mainTreeView.HotTracking = true;
-            this.mainTreeView.Location = new System.Drawing.Point(0, 0);
-            this.mainTreeView.Name = "mainTreeView";
-            this.mainTreeView.ShowNodeToolTips = true;
-            this.mainTreeView.Size = new System.Drawing.Size(232, 243);
-            this.mainTreeView.TabIndex = 5;
-            this.mainTreeView.DoubleClick += new System.EventHandler(this.mainTreeView_DoubleClick);
-            // 
             // filterBar
             // 
             outlookBarButton1.Image = ((System.Drawing.Icon)(resources.GetObject("outlookBarButton1.Image")));
@@ -463,6 +451,18 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.filterBar.Move += new System.EventHandler(this.resizeHandler);
             this.filterBar.ButtonClicked += new Altea.OutlookBar.ButtonClickedEventHandler(this.filterBar_ButtonClicked);
             // 
+            // mainTreeView
+            // 
+            this.mainTreeView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainTreeView.HideSelection = false;
+            this.mainTreeView.HotTracking = true;
+            this.mainTreeView.Location = new System.Drawing.Point(0, 0);
+            this.mainTreeView.Name = "mainTreeView";
+            this.mainTreeView.ShowNodeToolTips = true;
+            this.mainTreeView.Size = new System.Drawing.Size(232, 243);
+            this.mainTreeView.TabIndex = 5;
+            this.mainTreeView.DoubleClick += new System.EventHandler(this.mainTreeView_DoubleClick);
+            // 
             // MDIForm
             // 
             this.ClientSize = new System.Drawing.Size(1104, 698);
@@ -476,6 +476,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Text = "Election Tracker";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Resize += new System.EventHandler(this.resizeHandler);
+            this.Shown += new System.EventHandler(this.MDIForm_Shown);
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);

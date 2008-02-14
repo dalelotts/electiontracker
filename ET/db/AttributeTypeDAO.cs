@@ -16,26 +16,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using edu.uwec.cs.cs355.group4.et.core;
 using NHibernate;
+using Spring.Data.NHibernate.Generic;
 
 namespace edu.uwec.cs.cs355.group4.et.db {
     internal class AttributeTypeDAO : HibernateDAO<AttributeType> {
-        public AttributeTypeDAO(ISessionFactory factory) : base(factory) {}
+        public AttributeTypeDAO(HibernateTemplate factory) : base(factory) {}
 
         protected override IList<Fault> performCanMakePersistent(AttributeType entity) {
-            List<Fault> retVal = new List<Fault>();
+            FindHibernateDelegate<AttributeType> findDelegate = delegate(ISession session)
+                                                                    {
+                                                                        IQuery query =
+                                                                            session.CreateSQLQuery(
+                                                                                "select * from attributetype where Name = " +
+                                                                                entity.Name + ";").AddEntity(objectType);
+                                                                        return query.List<AttributeType>();
+                                                                    };
 
-            ISession currentSession = getCurrentSession();
-            IQuery validQuery =
-                currentSession.CreateSQLQuery("select * from attributetype where Name = " + entity.Name + ";");
-            if (validQuery.List().Count > 0) {
-                retVal.Add(new Fault(true, "Name entered for Attribute Type already exists"));
+            IList<AttributeType> duplicates = ExecuteFind(findDelegate);
+
+            IList<Fault> result = new List<Fault>();
+
+            if (duplicates.Count > 0) {
+                result.Add(
+                    new Fault(true,
+                              "Duplicate Attribute Type: an attribute type named '" + entity.Name + "' already exists."));
             }
-
-            return retVal;
+            return result;
         }
 
         public override IList<Fault> canMakeTransient(AttributeType entity) {

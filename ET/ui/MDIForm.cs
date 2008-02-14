@@ -124,7 +124,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                     OutlookBarButton button = new FilterButton(filter.ToString(), null, filter);
                     filterBar.Buttons.Add(button);
                 }
-                if (value.Count > 0) filterBar.Buttons[0].Selected = true;
             }
         }
 
@@ -205,6 +204,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
 
         public void refreshCurrentFilter() {
             filterBar_ButtonClicked(null, null);
+        }
+
+        private void MDIForm_Shown(object sender, EventArgs e) {
+            if (filterBar.Buttons.Count > 0) filterBar.Buttons[0].Selected = true;
         }
     }
 }
