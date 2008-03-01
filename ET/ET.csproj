@@ -48,11 +48,11 @@
   <ItemGroup>
     <Reference Include="Common.Logging, Version=1.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\lib\Net\2.0\Common.Logging.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Log4Net, Version=1.1.0.2, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\debug\Common.Logging.Log4Net.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -67,15 +67,15 @@
     </Reference>
     <Reference Include="Spring.Core, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\release\Spring.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Core.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Data, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\release\Spring.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Data.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Data.NHibernate12, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1 RC1\bin\net\2.0\release\Spring.Data.NHibernate12.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Data.NHibernate12.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -367,7 +367,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

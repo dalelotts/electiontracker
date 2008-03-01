@@ -48,7 +48,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 allCounties = countyDAO.findAll();
                 addedContests = new List<ElectionContest>();
 
-                refreshGoToList();
                 refreshControls();
             } catch (Exception ex) {
                 reportException("frmElection constructor", ex);
@@ -79,9 +78,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 Election newElection = electionDAO.findById(id.Value, false);
                 if (newElection != null) {
                     currentElection = newElection;
-                    refreshCandidateLists();
-                    refreshContestLists();
-                    refreshCountyLists();
+//                    refreshCandidateLists();
+//                    refreshContestLists();
+//                    refreshCountyLists();
                 }
             }
             refreshControls();
