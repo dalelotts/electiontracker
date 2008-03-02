@@ -23,6 +23,7 @@ using System.Globalization;
 using System.Reflection;
 using DesignByContract;
 using edu.uwec.cs.cs355.group4.et.core;
+using edu.uwec.cs.cs355.group4.et.db.task;
 using NHibernate;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
@@ -47,9 +48,19 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return result;
         }
 
-        [Transaction(ReadOnly = false)]
-        public T findById(Object id, bool lockRecord) {
-            return template.Get<T>(id, lockRecord ? LockMode.Upgrade : LockMode.None);
+        [Transaction(ReadOnly = true)]
+        public T findById(Object id, bool lockRecord, params IDAOTask<T>[] tasks) {
+            T result = template.Get<T>(id, lockRecord ? LockMode.Upgrade : LockMode.None);
+            performTasks(tasks, result);
+            return result;
+        }
+
+        
+        private static void performTasks(IDAOTask<T>[] tasks, T result) {
+            for (int i = 0; i < tasks.Length; i++) {
+                IDAOTask<T> task = tasks[i];
+                task.perform(result);
+            }
         }
 
         [Transaction(ReadOnly = false)]

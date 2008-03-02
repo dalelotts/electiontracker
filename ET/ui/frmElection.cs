@@ -21,10 +21,14 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
+using edu.uwec.cs.cs355.group4.et.db.task;
 using Spring.Transaction.Interceptor;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
+
+        private readonly static IDAOTask<Election> lec = new LoadElectionContests();
+
         private readonly ElectionDAO electionDAO;
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
@@ -77,7 +81,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         [Transaction(ReadOnly = true)]
         public void loadElection(long? id) {
             if (id != null) {
-                Election newElection = electionDAO.findById(id.Value, false);
+                Election newElection = electionDAO.findById(id.Value, false, lec);
                 if (newElection != null) {
                     currentElection = newElection;
 //                    refreshCandidateLists();

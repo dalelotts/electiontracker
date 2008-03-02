@@ -25,7 +25,7 @@
     <property name="Date" column="ElectionDate" type="DateTime" not-null="true" />
     <property name="Notes" column="ElectionNotes" type="String" length="40" not-null="false"/>
     <property name="IsActive" column="ElectionIsActive" type="Boolean" not-null="true" />
-    <bag name="ElectionContests" lazy="false" inverse="true" cascade="all-delete-orphan">
+    <bag name="ElectionContests" lazy="true" inverse="true" cascade="all-delete-orphan">
       <key column="ElectionID" />
       <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, ElectionTracker" />
     </bag>

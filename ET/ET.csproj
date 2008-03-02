@@ -65,6 +65,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\TestOutlookBar\OutlookBar\bin\Release\OutlookBar.dll</HintPath>
     </Reference>
+    <Reference Include="Spring.Aop, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Aop.dll</HintPath>
+    </Reference>
     <Reference Include="Spring.Core, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Core.dll</HintPath>
@@ -119,6 +123,8 @@
     <Compile Include="db\RequiredProperty.cs" />
     <Compile Include="db\ResponseDAO.cs" />
     <Compile Include="db\ResponseValueDAO.cs" />
+    <Compile Include="db\task\IDAOTask.cs" />
+    <Compile Include="db\task\LoadElectionContests.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
     <Compile Include="events\ContestVoteSumryArgs.cs" />
