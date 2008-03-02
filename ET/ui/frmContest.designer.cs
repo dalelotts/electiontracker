@@ -62,7 +62,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label1.Location = new System.Drawing.Point(12, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 3;
             this.label1.Text = "Type *";
             // 
             // label2
@@ -71,7 +71,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label2.Location = new System.Drawing.Point(12, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 5;
             this.label2.Text = "Notes:";
             // 
             // label3
@@ -80,7 +80,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label3.Location = new System.Drawing.Point(12, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 6;
+            this.label3.TabIndex = 1;
             this.label3.Text = "Name *";
             // 
             // txtNotes
@@ -89,14 +89,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(349, 116);
-            this.txtNotes.TabIndex = 9;
+            this.txtNotes.TabIndex = 6;
             // 
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(52, 64);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(309, 20);
-            this.txtName.TabIndex = 7;
+            this.txtName.TabIndex = 2;
             // 
             // chkActive
             // 
@@ -106,7 +106,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.Location = new System.Drawing.Point(12, 255);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
-            this.chkActive.TabIndex = 10;
+            this.chkActive.TabIndex = 7;
             this.chkActive.Text = "Active?";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
@@ -116,7 +116,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cbContestType.Location = new System.Drawing.Point(52, 90);
             this.cbContestType.Name = "cbContestType";
             this.cbContestType.Size = new System.Drawing.Size(309, 21);
-            this.cbContestType.TabIndex = 5;
+            this.cbContestType.TabIndex = 4;
             this.cbContestType.Leave += new System.EventHandler(this.cbContestType_Leave);
             // 
             // lblRequired
@@ -127,7 +127,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblRequired.Location = new System.Drawing.Point(12, 41);
             this.lblRequired.Name = "lblRequired";
             this.lblRequired.Size = new System.Drawing.Size(177, 16);
-            this.lblRequired.TabIndex = 32;
+            this.lblRequired.TabIndex = 0;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
             // frmContest

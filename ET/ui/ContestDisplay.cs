@@ -94,41 +94,24 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             try {
                 contestCounty.WardsReporting = int.Parse(txtReporting.Text);
 
-                // START HACK - For some reason this fixed the following exception
-                // NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
-                County county = contestCounty.County;
-                string s = county.Name;
-                ElectionContest electionContest = contestCounty.ElectionContest;
-                Contest contest = electionContest.Contest;
-                // END HACK
-
                 IList<Fault> contestCountyFaults = contestCountyDAO.canMakePersistent(contestCounty);
                 bool persistData = BaseMDIChild.reportFaults(contestCountyFaults);
-
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     contestCounty = contestCountyDAO.makePersistent(contestCounty);
-                    //contestCountyDAO.flush();
 
                     foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
                         ResponseValue responseValue = entry.Key;
                         TextBox textBox = entry.Value;
                         responseValue.VoteCount = int.Parse(textBox.Text);
 
-                        // START HACK - For some reason this fixed the following exception
-                        // NHibernate.LazyInitializationException: Illegally attempted to associate a proxy with two open Sessions
-                        Response response = responseValue.Response;
-                        ElectionContest hack2 = response.ElectionContest;
-                        string hack3 = responseValue.ContestCounty.County.Name;
-                        // END HACK
-
                         IList<Fault> responseValueFaults = responseValueDAO.canMakePersistent(responseValue);
                         bool persistResponseValue = BaseMDIChild.reportFaults(responseValueFaults);
 
                         //If there were no errors, persist data to the database
                         if (persistResponseValue) {
-                            responseValue = responseValueDAO.makePersistent(responseValue);
+                            responseValueDAO.makePersistent(responseValue);
                         }
                     }
                 }

@@ -108,10 +108,10 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar1,
             this.toolStripStatusLabel1});
-            this.mainStatusStrip.Location = new System.Drawing.Point(0, 676);
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 744);
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.Size = new System.Drawing.Size(1104, 22);
-            this.mainStatusStrip.TabIndex = 3;
+            this.mainStatusStrip.Size = new System.Drawing.Size(1190, 22);
+            this.mainStatusStrip.TabIndex = 1;
             this.mainStatusStrip.Text = "statusStrip1";
             // 
             // toolStripProgressBar1
@@ -138,8 +138,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainMenuStrip.MdiWindowListItem = this.windowToolStripMenuItem;
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.mainMenuStrip.Size = new System.Drawing.Size(1104, 24);
-            this.mainMenuStrip.TabIndex = 1;
+            this.mainMenuStrip.Size = new System.Drawing.Size(1190, 24);
+            this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "mainMenu";
             // 
             // fileToolStripMenuItem
@@ -414,8 +414,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.mainPanel.Location = new System.Drawing.Point(0, 24);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(232, 652);
-            this.mainPanel.TabIndex = 7;
+            this.mainPanel.Size = new System.Drawing.Size(232, 720);
+            this.mainPanel.TabIndex = 0;
             // 
             // filterBar
             // 
@@ -441,12 +441,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.filterBar.Buttons.Add(outlookBarButton6);
             this.filterBar.Buttons.Add(outlookBarButton7);
             this.filterBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.filterBar.Location = new System.Drawing.Point(0, 484);
+            this.filterBar.Location = new System.Drawing.Point(0, 552);
             this.filterBar.MinimumSize = new System.Drawing.Size(16, 40);
             this.filterBar.Name = "filterBar";
             this.filterBar.Renderer = Altea.Renderer.Outlook2007;
             this.filterBar.Size = new System.Drawing.Size(232, 168);
-            this.filterBar.TabIndex = 10;
+            this.filterBar.TabIndex = 1;
             this.filterBar.Text = "outlookBar1";
             this.filterBar.Move += new System.EventHandler(this.resizeHandler);
             this.filterBar.ButtonClicked += new Altea.OutlookBar.ButtonClickedEventHandler(this.filterBar_ButtonClicked);
@@ -460,12 +460,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.mainTreeView.Name = "mainTreeView";
             this.mainTreeView.ShowNodeToolTips = true;
             this.mainTreeView.Size = new System.Drawing.Size(232, 243);
-            this.mainTreeView.TabIndex = 5;
+            this.mainTreeView.TabIndex = 0;
             this.mainTreeView.DoubleClick += new System.EventHandler(this.mainTreeView_DoubleClick);
             // 
             // MDIForm
             // 
-            this.ClientSize = new System.Drawing.Size(1104, 698);
+            this.ClientSize = new System.Drawing.Size(1190, 766);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.mainMenuStrip);
@@ -475,8 +475,8 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Election Tracker";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Resize += new System.EventHandler(this.resizeHandler);
             this.Shown += new System.EventHandler(this.MDIForm_Shown);
+            this.Resize += new System.EventHandler(this.resizeHandler);
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);

@@ -406,7 +406,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.dtpDate.Location = new System.Drawing.Point(64, 15);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpDate.TabIndex = 24;
+            this.dtpDate.TabIndex = 1;
             // 
             // label9
             // 
@@ -414,7 +414,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label9.Location = new System.Drawing.Point(20, 15);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 23;
+            this.label9.TabIndex = 0;
             this.label9.Text = "Date *";
             // 
             // chkActive
@@ -425,7 +425,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.Location = new System.Drawing.Point(478, 18);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
-            this.chkActive.TabIndex = 22;
+            this.chkActive.TabIndex = 4;
             this.chkActive.Text = "Active?";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
@@ -435,7 +435,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(502, 212);
-            this.txtNotes.TabIndex = 20;
+            this.txtNotes.TabIndex = 3;
             // 
             // label7
             // 
@@ -443,7 +443,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label7.Location = new System.Drawing.Point(20, 50);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
-            this.label7.TabIndex = 18;
+            this.label7.TabIndex = 2;
             this.label7.Text = "Notes:";
             // 
             // tabContests
@@ -469,7 +469,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddAllContests.Location = new System.Drawing.Point(258, 114);
             this.btnAddAllContests.Name = "btnAddAllContests";
             this.btnAddAllContests.Size = new System.Drawing.Size(30, 29);
-            this.btnAddAllContests.TabIndex = 20;
+            this.btnAddAllContests.TabIndex = 4;
             this.btnAddAllContests.Text = "<<";
             this.btnAddAllContests.UseVisualStyleBackColor = true;
             this.btnAddAllContests.Click += new System.EventHandler(this.btnAddAllContests_Click);
@@ -479,7 +479,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveContest.Location = new System.Drawing.Point(258, 187);
             this.btnRemoveContest.Name = "btnRemoveContest";
             this.btnRemoveContest.Size = new System.Drawing.Size(30, 29);
-            this.btnRemoveContest.TabIndex = 19;
+            this.btnRemoveContest.TabIndex = 6;
             this.btnRemoveContest.Text = ">";
             this.btnRemoveContest.UseVisualStyleBackColor = true;
             this.btnRemoveContest.Click += new System.EventHandler(this.btnRemoveContest_Click);
@@ -489,7 +489,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveAllContests.Location = new System.Drawing.Point(258, 222);
             this.btnRemoveAllContests.Name = "btnRemoveAllContests";
             this.btnRemoveAllContests.Size = new System.Drawing.Size(30, 29);
-            this.btnRemoveAllContests.TabIndex = 18;
+            this.btnRemoveAllContests.TabIndex = 7;
             this.btnRemoveAllContests.Text = ">>";
             this.btnRemoveAllContests.UseVisualStyleBackColor = true;
             this.btnRemoveAllContests.Click += new System.EventHandler(this.btnRemoveAllContests_Click);
@@ -499,7 +499,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddContest.Location = new System.Drawing.Point(258, 149);
             this.btnAddContest.Name = "btnAddContest";
             this.btnAddContest.Size = new System.Drawing.Size(30, 29);
-            this.btnAddContest.TabIndex = 17;
+            this.btnAddContest.TabIndex = 5;
             this.btnAddContest.Text = "<";
             this.btnAddContest.UseVisualStyleBackColor = true;
             this.btnAddContest.Click += new System.EventHandler(this.btnAddContest_Click);
@@ -512,7 +512,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstAllContests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstAllContests.Size = new System.Drawing.Size(272, 238);
             this.lstAllContests.Sorted = true;
-            this.lstAllContests.TabIndex = 1;
+            this.lstAllContests.TabIndex = 3;
             // 
             // lstElectionContests
             // 
@@ -522,7 +522,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstElectionContests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstElectionContests.Size = new System.Drawing.Size(246, 238);
             this.lstElectionContests.Sorted = true;
-            this.lstElectionContests.TabIndex = 0;
+            this.lstElectionContests.TabIndex = 1;
             // 
             // label10
             // 
@@ -530,7 +530,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label10.Location = new System.Drawing.Point(6, 15);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(57, 13);
-            this.label10.TabIndex = 21;
+            this.label10.TabIndex = 0;
             this.label10.Text = "Members *";
             // 
             // label11
@@ -539,7 +539,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label11.Location = new System.Drawing.Point(332, 15);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(18, 13);
-            this.label11.TabIndex = 22;
+            this.label11.TabIndex = 2;
             this.label11.Text = "All";
             // 
             // tabDetails
@@ -572,7 +572,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnResponseDown.Location = new System.Drawing.Point(358, 244);
             this.btnResponseDown.Name = "btnResponseDown";
             this.btnResponseDown.Size = new System.Drawing.Size(27, 22);
-            this.btnResponseDown.TabIndex = 48;
+            this.btnResponseDown.TabIndex = 14;
             this.btnResponseDown.Text = "v";
             this.btnResponseDown.UseVisualStyleBackColor = true;
             this.btnResponseDown.Click += new System.EventHandler(this.btnResponseDown_Click);
@@ -582,7 +582,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnResponseUp.Location = new System.Drawing.Point(358, 216);
             this.btnResponseUp.Name = "btnResponseUp";
             this.btnResponseUp.Size = new System.Drawing.Size(27, 22);
-            this.btnResponseUp.TabIndex = 47;
+            this.btnResponseUp.TabIndex = 13;
             this.btnResponseUp.Text = "^";
             this.btnResponseUp.UseVisualStyleBackColor = true;
             this.btnResponseUp.Click += new System.EventHandler(this.btnResponseUp_Click);
@@ -592,7 +592,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddCustomResponse.Location = new System.Drawing.Point(358, 36);
             this.btnAddCustomResponse.Name = "btnAddCustomResponse";
             this.btnAddCustomResponse.Size = new System.Drawing.Size(27, 22);
-            this.btnAddCustomResponse.TabIndex = 41;
+            this.btnAddCustomResponse.TabIndex = 6;
             this.btnAddCustomResponse.Text = "<";
             this.btnAddCustomResponse.UseVisualStyleBackColor = true;
             this.btnAddCustomResponse.Click += new System.EventHandler(this.btnAddCustomResponse_Click);
@@ -602,14 +602,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtCustomResponse.Location = new System.Drawing.Point(391, 36);
             this.txtCustomResponse.Name = "txtCustomResponse";
             this.txtCustomResponse.Size = new System.Drawing.Size(174, 20);
-            this.txtCustomResponse.TabIndex = 40;
+            this.txtCustomResponse.TabIndex = 5;
             // 
             // btnAddAllCandidates
             // 
             this.btnAddAllCandidates.Location = new System.Drawing.Point(358, 94);
             this.btnAddAllCandidates.Name = "btnAddAllCandidates";
             this.btnAddAllCandidates.Size = new System.Drawing.Size(27, 22);
-            this.btnAddAllCandidates.TabIndex = 34;
+            this.btnAddAllCandidates.TabIndex = 9;
             this.btnAddAllCandidates.Text = "<<";
             this.btnAddAllCandidates.UseVisualStyleBackColor = true;
             this.btnAddAllCandidates.Click += new System.EventHandler(this.btnAddAllCandidates_Click);
@@ -619,7 +619,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveCandidate.Location = new System.Drawing.Point(358, 150);
             this.btnRemoveCandidate.Name = "btnRemoveCandidate";
             this.btnRemoveCandidate.Size = new System.Drawing.Size(27, 22);
-            this.btnRemoveCandidate.TabIndex = 33;
+            this.btnRemoveCandidate.TabIndex = 11;
             this.btnRemoveCandidate.Text = ">";
             this.btnRemoveCandidate.UseVisualStyleBackColor = true;
             this.btnRemoveCandidate.Click += new System.EventHandler(this.btnRemoveCandidate_Click);
@@ -629,7 +629,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveAllCandidates.Location = new System.Drawing.Point(358, 178);
             this.btnRemoveAllCandidates.Name = "btnRemoveAllCandidates";
             this.btnRemoveAllCandidates.Size = new System.Drawing.Size(27, 22);
-            this.btnRemoveAllCandidates.TabIndex = 32;
+            this.btnRemoveAllCandidates.TabIndex = 12;
             this.btnRemoveAllCandidates.Text = ">>";
             this.btnRemoveAllCandidates.UseVisualStyleBackColor = true;
             this.btnRemoveAllCandidates.Click += new System.EventHandler(this.btnRemoveAllCandidates_Click);
@@ -639,7 +639,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddCandidate.Location = new System.Drawing.Point(358, 122);
             this.btnAddCandidate.Name = "btnAddCandidate";
             this.btnAddCandidate.Size = new System.Drawing.Size(27, 22);
-            this.btnAddCandidate.TabIndex = 31;
+            this.btnAddCandidate.TabIndex = 10;
             this.btnAddCandidate.Text = "<";
             this.btnAddCandidate.UseVisualStyleBackColor = true;
             this.btnAddCandidate.Click += new System.EventHandler(this.btnAddCandidate_Click);
@@ -651,7 +651,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstContestCandidate.Name = "lstContestCandidate";
             this.lstContestCandidate.Size = new System.Drawing.Size(163, 238);
             this.lstContestCandidate.Sorted = true;
-            this.lstContestCandidate.TabIndex = 27;
+            this.lstContestCandidate.TabIndex = 1;
             this.lstContestCandidate.SelectedIndexChanged += new System.EventHandler(this.llstContestCandidate_SelectedIndexChanged);
             // 
             // lstAllCandidates
@@ -662,7 +662,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstAllCandidates.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstAllCandidates.Size = new System.Drawing.Size(174, 173);
             this.lstAllCandidates.Sorted = true;
-            this.lstAllCandidates.TabIndex = 24;
+            this.lstAllCandidates.TabIndex = 8;
             // 
             // lstContestCandidates
             // 
@@ -671,7 +671,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstContestCandidates.Name = "lstContestCandidates";
             this.lstContestCandidates.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstContestCandidates.Size = new System.Drawing.Size(161, 238);
-            this.lstContestCandidates.TabIndex = 23;
+            this.lstContestCandidates.TabIndex = 3;
             // 
             // label13
             // 
@@ -679,7 +679,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label13.Location = new System.Drawing.Point(187, 22);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(64, 13);
-            this.label13.TabIndex = 29;
+            this.label13.TabIndex = 2;
             this.label13.Text = "Candidates*";
             // 
             // label12
@@ -688,7 +688,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label12.Location = new System.Drawing.Point(6, 20);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(55, 13);
-            this.label12.TabIndex = 28;
+            this.label12.TabIndex = 0;
             this.label12.Text = "Contests *";
             // 
             // label8
@@ -697,7 +697,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label8.Location = new System.Drawing.Point(388, 84);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
-            this.label8.TabIndex = 43;
+            this.label8.TabIndex = 7;
             this.label8.Text = "Available Candidates";
             // 
             // label6
@@ -706,7 +706,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label6.Location = new System.Drawing.Point(388, 20);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(160, 13);
-            this.label6.TabIndex = 42;
+            this.label6.TabIndex = 4;
             this.label6.Text = "Custom Response (Referendum)";
             // 
             // pgCounties
@@ -742,7 +742,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.dgvContestCounties.RowHeadersVisible = false;
             this.dgvContestCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContestCounties.Size = new System.Drawing.Size(172, 238);
-            this.dgvContestCounties.TabIndex = 58;
+            this.dgvContestCounties.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -770,7 +770,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.dgvCounties.RowHeadersVisible = false;
             this.dgvCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCounties.Size = new System.Drawing.Size(172, 238);
-            this.dgvCounties.TabIndex = 57;
+            this.dgvCounties.TabIndex = 5;
             // 
             // dgvCounty
             // 
@@ -792,7 +792,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label15.Location = new System.Drawing.Point(397, 17);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(94, 13);
-            this.label15.TabIndex = 56;
+            this.label15.TabIndex = 4;
             this.label15.Text = "Available Counties";
             // 
             // btnAddAllCounties
@@ -800,7 +800,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddAllCounties.Location = new System.Drawing.Point(367, 62);
             this.btnAddAllCounties.Name = "btnAddAllCounties";
             this.btnAddAllCounties.Size = new System.Drawing.Size(27, 22);
-            this.btnAddAllCounties.TabIndex = 55;
+            this.btnAddAllCounties.TabIndex = 6;
             this.btnAddAllCounties.Text = "<<";
             this.btnAddAllCounties.UseVisualStyleBackColor = true;
             this.btnAddAllCounties.Click += new System.EventHandler(this.btnAddAllCounties_Click);
@@ -810,7 +810,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveCounty.Location = new System.Drawing.Point(367, 118);
             this.btnRemoveCounty.Name = "btnRemoveCounty";
             this.btnRemoveCounty.Size = new System.Drawing.Size(27, 22);
-            this.btnRemoveCounty.TabIndex = 54;
+            this.btnRemoveCounty.TabIndex = 8;
             this.btnRemoveCounty.Text = ">";
             this.btnRemoveCounty.UseVisualStyleBackColor = true;
             this.btnRemoveCounty.Click += new System.EventHandler(this.btnRemoveCounty_Click);
@@ -820,7 +820,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnRemoveAllCounties.Location = new System.Drawing.Point(367, 146);
             this.btnRemoveAllCounties.Name = "btnRemoveAllCounties";
             this.btnRemoveAllCounties.Size = new System.Drawing.Size(27, 22);
-            this.btnRemoveAllCounties.TabIndex = 53;
+            this.btnRemoveAllCounties.TabIndex = 9;
             this.btnRemoveAllCounties.Text = ">>";
             this.btnRemoveAllCounties.UseVisualStyleBackColor = true;
             this.btnRemoveAllCounties.Click += new System.EventHandler(this.btnRemoveAllCounties_Click);
@@ -830,7 +830,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.btnAddCounty.Location = new System.Drawing.Point(367, 90);
             this.btnAddCounty.Name = "btnAddCounty";
             this.btnAddCounty.Size = new System.Drawing.Size(27, 22);
-            this.btnAddCounty.TabIndex = 52;
+            this.btnAddCounty.TabIndex = 7;
             this.btnAddCounty.Text = "<";
             this.btnAddCounty.UseVisualStyleBackColor = true;
             this.btnAddCounty.Click += new System.EventHandler(this.btnAddCounty_Click);
@@ -841,7 +841,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label14.Location = new System.Drawing.Point(186, 18);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(55, 13);
-            this.label14.TabIndex = 51;
+            this.label14.TabIndex = 2;
             this.label14.Text = "Counties *";
             // 
             // lstContestCounty
@@ -851,7 +851,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstContestCounty.Name = "lstContestCounty";
             this.lstContestCounty.Size = new System.Drawing.Size(163, 238);
             this.lstContestCounty.Sorted = true;
-            this.lstContestCounty.TabIndex = 29;
+            this.lstContestCounty.TabIndex = 1;
             this.lstContestCounty.SelectedIndexChanged += new System.EventHandler(this.lstContestCounty_SelectedIndexChanged);
             // 
             // label16
@@ -860,7 +860,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label16.Location = new System.Drawing.Point(7, 18);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(55, 13);
-            this.label16.TabIndex = 30;
+            this.label16.TabIndex = 0;
             this.label16.Text = "Contests *";
             // 
             // lblRequired
@@ -871,7 +871,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblRequired.Location = new System.Drawing.Point(12, 36);
             this.lblRequired.Name = "lblRequired";
             this.lblRequired.Size = new System.Drawing.Size(177, 16);
-            this.lblRequired.TabIndex = 34;
+            this.lblRequired.TabIndex = 1;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
             // frmElection

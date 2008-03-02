@@ -60,7 +60,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label1.Location = new System.Drawing.Point(12, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 8;
+            this.label1.TabIndex = 1;
             this.label1.Text = "&Name *";
             // 
             // label2
@@ -69,7 +69,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label2.Location = new System.Drawing.Point(12, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 9;
+            this.label2.TabIndex = 3;
             this.label2.Text = "A&bbreviation *";
             // 
             // chkActive
@@ -80,7 +80,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.Location = new System.Drawing.Point(91, 106);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
-            this.chkActive.TabIndex = 11;
+            this.chkActive.TabIndex = 5;
             this.chkActive.Text = "&Active?";
             this.chkActive.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.chkActive.UseVisualStyleBackColor = true;
@@ -90,14 +90,14 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtName.Location = new System.Drawing.Point(91, 54);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(251, 20);
-            this.txtName.TabIndex = 12;
+            this.txtName.TabIndex = 2;
             // 
             // txtAbbrev
             // 
             this.txtAbbrev.Location = new System.Drawing.Point(91, 80);
             this.txtAbbrev.Name = "txtAbbrev";
             this.txtAbbrev.Size = new System.Drawing.Size(62, 20);
-            this.txtAbbrev.TabIndex = 13;
+            this.txtAbbrev.TabIndex = 4;
             // 
             // lblRequired
             // 
@@ -107,7 +107,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblRequired.Location = new System.Drawing.Point(12, 35);
             this.lblRequired.Name = "lblRequired";
             this.lblRequired.Size = new System.Drawing.Size(177, 16);
-            this.lblRequired.TabIndex = 35;
+            this.lblRequired.TabIndex = 0;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
             // frmPoliticalParty

@@ -39,11 +39,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 cboPoliticalParty.Items.Add(new ListItemWrapper<PoliticalParty>(politicalParty.Name, politicalParty));
             }
 
-            if (politicalParties.Count > 0) cboPoliticalParty.SelectedIndex = 0;
-
             currentCandidate = new Candidate();
-
-            refreshGoToList();
         }
 
         private void refreshGoToList() {
@@ -152,9 +148,9 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 Candidate candidate = candidateDAO.findById(id.Value, false);
                 if (candidate != null) {
                     currentCandidate = candidate;
-                    refreshControls();
                 }
             }
+            refreshControls();
         }
 
         private void cboPoliticalParty_Leave(object sender, EventArgs e) {

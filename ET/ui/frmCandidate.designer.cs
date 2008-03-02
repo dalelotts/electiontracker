@@ -68,7 +68,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.cboPoliticalParty.Location = new System.Drawing.Point(93, 136);
             this.cboPoliticalParty.Name = "cboPoliticalParty";
             this.cboPoliticalParty.Size = new System.Drawing.Size(270, 21);
-            this.cboPoliticalParty.TabIndex = 30;
+            this.cboPoliticalParty.TabIndex = 8;
             this.cboPoliticalParty.Tag = "lock=true";
             this.cboPoliticalParty.Leave += new System.EventHandler(this.cboPoliticalParty_Leave);
             // 
@@ -80,7 +80,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.chkActive.Location = new System.Drawing.Point(12, 328);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
-            this.chkActive.TabIndex = 29;
+            this.chkActive.TabIndex = 11;
             this.chkActive.Tag = "lock=true";
             this.chkActive.Text = "Active?";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -91,7 +91,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(343, 136);
-            this.txtNotes.TabIndex = 28;
+            this.txtNotes.TabIndex = 10;
             this.txtNotes.Tag = "lock=true";
             // 
             // label6
@@ -100,7 +100,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label6.Location = new System.Drawing.Point(12, 170);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
-            this.label6.TabIndex = 27;
+            this.label6.TabIndex = 9;
             this.label6.Text = "N&otes:";
             // 
             // label5
@@ -109,7 +109,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label5.Location = new System.Drawing.Point(12, 139);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 26;
+            this.label5.TabIndex = 7;
             this.label5.Text = "&Political Party";
             // 
             // label4
@@ -118,7 +118,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label4.Location = new System.Drawing.Point(12, 113);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 25;
+            this.label4.TabIndex = 5;
             this.label4.Text = "&Last Name*";
             // 
             // txtLastName
@@ -126,7 +126,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtLastName.Location = new System.Drawing.Point(93, 110);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(270, 20);
-            this.txtLastName.TabIndex = 24;
+            this.txtLastName.TabIndex = 6;
             this.txtLastName.Tag = "lock=true";
             // 
             // label3
@@ -135,7 +135,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label3.Location = new System.Drawing.Point(12, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 23;
+            this.label3.TabIndex = 3;
             this.label3.Text = "&Middle Name";
             // 
             // txtMiddleName
@@ -143,7 +143,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtMiddleName.Location = new System.Drawing.Point(93, 84);
             this.txtMiddleName.Name = "txtMiddleName";
             this.txtMiddleName.Size = new System.Drawing.Size(270, 20);
-            this.txtMiddleName.TabIndex = 22;
+            this.txtMiddleName.TabIndex = 4;
             this.txtMiddleName.Tag = "lock=true";
             // 
             // label2
@@ -152,7 +152,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.label2.Location = new System.Drawing.Point(12, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
-            this.label2.TabIndex = 21;
+            this.label2.TabIndex = 1;
             this.label2.Text = "&First Name*";
             // 
             // txtFirstName
@@ -160,7 +160,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.txtFirstName.Location = new System.Drawing.Point(93, 58);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(270, 20);
-            this.txtFirstName.TabIndex = 20;
+            this.txtFirstName.TabIndex = 2;
             this.txtFirstName.Tag = "lock=true";
             // 
             // lblRequired
@@ -171,7 +171,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lblRequired.Location = new System.Drawing.Point(12, 39);
             this.lblRequired.Name = "lblRequired";
             this.lblRequired.Size = new System.Drawing.Size(177, 16);
-            this.lblRequired.TabIndex = 31;
+            this.lblRequired.TabIndex = 0;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
             // frmCandidate

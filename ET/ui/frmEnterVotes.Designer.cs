@@ -116,6 +116,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.lstCounties.Location = new System.Drawing.Point(9, 19);
             this.lstCounties.Name = "lstCounties";
             this.lstCounties.Size = new System.Drawing.Size(172, 290);
+            this.lstCounties.Sorted = true;
             this.lstCounties.TabIndex = 1;
             this.lstCounties.SelectedIndexChanged += new System.EventHandler(this.lstCounties_SelectedIndexChanged);
             // 
@@ -132,7 +133,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // btnSaveVotes
             // 
             this.btnSaveVotes.Location = new System.Drawing.Point(399, 321);
-            this.btnSaveVotes.Name = "btnSave";
+            this.btnSaveVotes.Name = "btnSaveVotes";
             this.btnSaveVotes.Size = new System.Drawing.Size(75, 23);
             this.btnSaveVotes.TabIndex = 0;
             this.btnSaveVotes.Text = "&Save";
@@ -149,13 +150,17 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             this.Controls.Add(this.gbElection);
             this.Name = "frmEnterVotes";
             this.Text = "Enter Votes";
-            this.Resize += new System.EventHandler(this.frmEnterVotes_Resize);
             this.Load += new System.EventHandler(this.frmEnterVotes_Load);
+            this.Resize += new System.EventHandler(this.frmEnterVotes_Resize);
+            this.Controls.SetChildIndex(this.gbElection, 0);
+            this.Controls.SetChildIndex(this.gbCounty, 0);
+            this.Controls.SetChildIndex(this.gbContest, 0);
             this.gbElection.ResumeLayout(false);
             this.gbElection.PerformLayout();
             this.gbCounty.ResumeLayout(false);
             this.gbContest.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

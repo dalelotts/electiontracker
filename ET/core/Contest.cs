@@ -25,7 +25,7 @@ namespace edu.uwec.cs.cs355.group4.et.core {
         private string name;
         private ContestType contestType;
         private string notes;
-        private bool isActive;
+        private bool isActive = true;
 
 
         public virtual long ID {

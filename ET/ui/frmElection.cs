@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using edu.uwec.cs.cs355.group4.et.core;
 using edu.uwec.cs.cs355.group4.et.db;
+using Spring.Transaction.Interceptor;
 
 namespace edu.uwec.cs.cs355.group4.et.ui {
     internal partial class frmElection : BaseMDIChild {
@@ -38,6 +39,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         //To Do: Add support for double clicking to add or remove contests, candidates, counties, etc.
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
+        
         public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
             try {
                 InitializeComponent();
@@ -48,7 +50,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 allCounties = countyDAO.findAll();
                 addedContests = new List<ElectionContest>();
 
-                refreshControls();
+                // refreshControls();
             } catch (Exception ex) {
                 reportException("frmElection constructor", ex);
             }
@@ -72,7 +74,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-
+        [Transaction(ReadOnly = true)]
         public void loadElection(long? id) {
             if (id != null) {
                 Election newElection = electionDAO.findById(id.Value, false);

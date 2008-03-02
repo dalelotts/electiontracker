@@ -49,10 +49,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             this.contestTypeDAO = contestTypeDAO;
 
             currentContest = new Contest();
-
-            
-            refreshGoToList();
-            refreshControls();
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
@@ -82,7 +78,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     currentContest = contestDAO.makePersistent(currentContest);
-                    refreshGoToList();
+                    refreshControls();
                     raiseMakePersistentEvent();
                 }
             } catch (Exception ex) {
@@ -109,7 +105,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             if (currentContest.ContestType == null && cbContestType.Items.Count > 0) {
                 cbContestType.SelectedIndex = 0;
             } else {
-                for (int i = 1, limit = cbContestType.Items.Count; i < limit; i++) {
+                for (int i = 0, limit = cbContestType.Items.Count; i < limit; i++) {
                     if (((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value.ID ==
                         currentContest.ContestType.ID) {
                         cbContestType.SelectedIndex = i;
@@ -151,7 +147,6 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
                 Contest contest = contestDAO.findById(id.Value, false);
                 if (contest != null) {
                     currentContest = contest;
-                    refreshControls();
                 }
             }
             refreshControls();
