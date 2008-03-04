@@ -19,11 +19,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
 using NHibernate;
 using Spring.Data.NHibernate.Generic;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace KnightRider.ElectionTracker.db {
     internal class ResponseDAO : HibernateDAO<Response> {
         public ResponseDAO(HibernateTemplate factory) : base(factory) {}
 

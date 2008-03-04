@@ -19,7 +19,7 @@
 using System.Drawing;
 using Altea;
 
-namespace edu.uwec.cs.cs355.group4.et.ui.util {
+namespace KnightRider.ElectionTracker.ui.util {
     internal class FilterButton : OutlookBarButton {
         private readonly TreeViewFilter filter;
 

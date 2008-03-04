@@ -16,8 +16,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-namespace edu.uwec.cs.cs355.group4.et.db {
-    internal class Fault {
+namespace KnightRider.ElectionTracker.db {
+    public class Fault
+    {
         private readonly bool isError;
         private readonly string message;
 

@@ -20,13 +20,13 @@
 -->
 
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.Contest, ElectionTracker" table="contest">
+  <class name="KnightRider.ElectionTracker.core.Contest, ElectionTracker" table="contest">
     <id name="ID" column="ContestID" type="Int64">
       <generator class="identity"/>
     </id>
     <property name="Name" column="ContestName" unique="true"  type="String" length="100" not-null="true"/>
     <property name="Notes" column="ContestNotes" type="String" length="40" not-null="false"/>
-    <many-to-one name="ContestType" class="edu.uwec.cs.cs355.group4.et.core.ContestType, ElectionTracker" column="ContestTypeID"  not-null="true" />
+    <many-to-one name="ContestType" class="KnightRider.ElectionTracker.core.ContestType, ElectionTracker" column="ContestTypeID"  not-null="true" />
     <property name="IsActive" column="ContestIsActive" type="Boolean" not-null="true" />
   </class>
 </hibernate-mapping>

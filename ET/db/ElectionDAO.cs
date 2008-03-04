@@ -17,15 +17,18 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db.task;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
+using Spring.Transaction.Interceptor;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
-    internal class ElectionDAO : HibernateDAO<Election> {
+namespace KnightRider.ElectionTracker.db {
+    internal class ElectionDAO : IElectionDAO {
         private static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
         private static readonly IList<Order> ORDER_BY_ELECTION_DATE = new List<Order>();
         private static readonly IList<ICriterion> NOT_ACTIVE_CRITERION = new List<ICriterion>();
+        private readonly DelegateDAO<Election> delegateDAO;
 
         static ElectionDAO() {
             ACTIVE_CRITERION.Add(new EqExpression("IsActive", true));
@@ -33,22 +36,48 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             ORDER_BY_ELECTION_DATE.Add(new Order("Date", false));
         }
 
-        public ElectionDAO(HibernateTemplate factory) : base(factory) {}
+        public ElectionDAO(HibernateTemplate factory) {
+            this.delegateDAO = new DelegateDAO<Election>(factory);
+        }
 
+        [Transaction(ReadOnly = true)]
         public IList<Election> findActive() {
-            return findByCriteria(ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
+            return delegateDAO.findByCriteria(ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
         }
 
+        [Transaction(ReadOnly = true)]
         public IList<Election> findInactive() {
-            return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
+            return delegateDAO.findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
         }
 
-        public override IList<Fault> canMakeTransient(Election entity) {
-            return new List<Fault>();
+        [Transaction(ReadOnly = true)]
+        public Election findById(object id, bool lockRecord, params IDAOTask<Election>[] tasks) {
+            return delegateDAO.findById(id, lockRecord, tasks);
         }
 
-        protected override IList<Fault> performCanMakePersistent(Election entity) {
-            return new List<Fault>();
+        [Transaction(ReadOnly = true)]
+        public IList<Election> findAll() {
+            return delegateDAO.findAll();
+        }
+
+        [Transaction(ReadOnly = false)]
+        public Election makePersistent(Election entity) {
+            return delegateDAO.makePersistent(entity);
+        }
+
+        [Transaction(ReadOnly = false)]
+        public void makeTransient(Election entity) {
+            delegateDAO.makeTransient(entity);
+        }
+
+        [Transaction(ReadOnly = true)]
+        public IList<Fault> canMakePersistent(Election entity) {
+            return delegateDAO.canMakePersistent(entity);
+        }
+
+        [Transaction(ReadOnly = true)]
+        public IList<Fault> canMakeTransient(Election entity) {
+            return delegateDAO.canMakeTransient(entity);
         }
     }
 }

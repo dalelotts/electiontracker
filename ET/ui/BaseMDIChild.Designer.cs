@@ -18,7 +18,7 @@
  **/
 using System;
 
-namespace edu.uwec.cs.cs355.group4.et.ui
+namespace KnightRider.ElectionTracker.ui
 {
     public partial class BaseMDIChild
     {
@@ -106,7 +106,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui
             // btnSave
             // 
             this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Image = global::edu.uwec.cs.cs355.group4.et.Properties.Resources.saveHS;
+            this.btnSave.Image = global::KnightRider.ElectionTracker.Properties.Resources.saveHS;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(23, 22);

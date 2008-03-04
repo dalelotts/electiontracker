@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using DesignByContract;
 
-namespace edu.uwec.cs.cs355.group4.et.type {
+namespace KnightRider.ElectionTracker.type {
     internal sealed class DBEntity {
         private readonly string name;
         private readonly string label;

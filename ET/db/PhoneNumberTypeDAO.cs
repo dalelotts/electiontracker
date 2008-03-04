@@ -18,11 +18,11 @@
  **/
 using System;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
 using NHibernate;
 using Spring.Data.NHibernate.Generic;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace KnightRider.ElectionTracker.db {
     internal class PhoneNumberTypeDAO : HibernateDAO<PhoneNumberType> {
         public PhoneNumberTypeDAO(HibernateTemplate factory) : base(factory) {}
 

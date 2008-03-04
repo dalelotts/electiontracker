@@ -19,20 +19,20 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.ui.util;
-using edu.uwec.cs.cs355.group4.et.util;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.ui.util;
+using KnightRider.ElectionTracker.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal partial class frmEnterVotes : BaseMDIChild {
         private Map<String, VoteEnterer> countyToVoteEnterer;
-        private readonly ElectionDAO electionDAO;
+        private readonly IElectionDAO electionDAO;
         private readonly ContestCountyDAO contestCountyDAO;
         private readonly ResponseValueDAO responseValueDAO;
 
 
-        public frmEnterVotes(ElectionDAO electionDAO, ContestCountyDAO contestCountyDAO,
+        public frmEnterVotes(IElectionDAO electionDAO, ContestCountyDAO contestCountyDAO,
                              ResponseValueDAO responseValueDAO) {
             this.electionDAO = electionDAO;
             this.contestCountyDAO = contestCountyDAO;

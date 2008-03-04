@@ -19,11 +19,11 @@
 using System;
 using System.Windows.Forms;
 using Common.Logging;
-using edu.uwec.cs.cs355.group4.et.ui;
+using KnightRider.ElectionTracker.ui;
 using Spring.Context;
 using Spring.Context.Support;
 
-namespace edu.uwec.cs.cs355.group4.et.core {
+namespace KnightRider.ElectionTracker.core {
     internal static class Program {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (Program));
 

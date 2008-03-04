@@ -22,18 +22,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.util;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal class frmContestVoteSumry : frmAbstractReport {
         private int intCount;
         private IList<string> lstHeader;
         private IList<string> lstToPrint;
         private ComboBox cmbElectionType;
 
-        public frmContestVoteSumry(ElectionDAO electionDAO) : base(electionDAO) {
+        public frmContestVoteSumry(IElectionDAO electionDAO) : base(electionDAO) {
             blnLandscape = true;
             InitializeElectionType();
         }

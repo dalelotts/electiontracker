@@ -3,14 +3,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly : AssemblyTitle("UWEC Election Tracker")]
+[assembly: AssemblyTitle("KRC Election Tracker")]
 [assembly :
     AssemblyDescription(
-        "Implemented by CS 355 Spring 2007 Group 4.\r\nInstructor: Dr. Paul J. Wagner\r\nGroup 4 Members:\r\nScott Thomas Degen\r\nEric Scott Doescher\r\nDale Dennis Lotts\r\nBenjamin Scott Rogers\r\nDaniel John Spencer"
+       "Initially implemented by CS 355 Spring 2007 Group 4.\r\nInstructor: Dr. Paul J. Wagner\r\nGroup 4 Members:\r\nScott Thomas Degen\r\nEric Scott Doescher\r\nDale Dennis Lotts\r\nBenjamin Scott Rogers\r\nDaniel John Spencer.\r\nCurrently owned and maintained by Knight Rider Consulting, Inc."
         )]
 [assembly : AssemblyConfiguration("")]
-[assembly : AssemblyCompany("University of Wisconsin Eau Claire and Knight Rider Consulting, Inc")]
-[assembly : AssemblyProduct("UWEC Election Tracker")]
+[assembly: AssemblyCompany("Knight Rider Consulting, Inc")]
+[assembly: AssemblyProduct("KRC Election Tracker")]
 [assembly : AssemblyCopyright("Copyright ©  2007")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]

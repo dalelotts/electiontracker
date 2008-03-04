@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
 
-namespace edu.uwec.cs.cs355.group4.et.db.task
+namespace KnightRider.ElectionTracker.db.task
 {
     /// <summary>
     /// Causes the ElectionContests to be loaded within the context of a transaction.

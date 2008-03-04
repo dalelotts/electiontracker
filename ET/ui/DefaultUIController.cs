@@ -20,11 +20,11 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 using Common.Logging;
-using edu.uwec.cs.cs355.group4.et.events;
+using KnightRider.ElectionTracker.events;
 using Spring.Context;
 using Spring.Objects.Events.Support;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal class DefaultUIController : UIController, IApplicationContextAware {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (DefaultUIController));
         private frmEnterVotes voteForm;

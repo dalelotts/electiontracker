@@ -18,7 +18,7 @@
  along with this program.  If not, see http://www.gnu.org/licenses/
 -->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.PoliticalParty, ElectionTracker" table="politicalparty">
+  <class name="KnightRider.ElectionTracker.core.PoliticalParty, ElectionTracker" table="politicalparty">
     <id name="ID" column="PoliticalPartyID" type="Int64">
       <generator class="identity"/>
     </id>

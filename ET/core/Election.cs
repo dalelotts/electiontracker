@@ -18,9 +18,9 @@
  **/
 using System;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.core {
+namespace KnightRider.ElectionTracker.core {
     public class Election {
         private long id;
         private DateTime date = DateTime.Today;

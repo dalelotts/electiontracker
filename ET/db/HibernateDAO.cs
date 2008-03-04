@@ -22,19 +22,28 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using DesignByContract;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db.task;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db.task;
 using NHibernate;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
 using Spring.Transaction.Interceptor;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
-    internal abstract class HibernateDAO<T> : GenericDAO<T> {
+namespace KnightRider.ElectionTracker.db {
+    internal abstract class HibernateDAO<T> : IGenericDAO<T> {
+
+
         private readonly HibernateTemplate template;
         protected static readonly IList<ICriterion> EMPTY_CRITERION = new List<ICriterion>();
         protected readonly Type objectType = typeof (T);
         private readonly IList<PropertyInfo> properties;
+        private static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
+        private static readonly IList<ICriterion> NOT_ACTIVE_CRITERION = new List<ICriterion>();
+
+        static HibernateDAO() {
+            ACTIVE_CRITERION.Add(new EqExpression("IsActive", true));
+            NOT_ACTIVE_CRITERION.Add(new EqExpression("IsActive", false));
+        }
 
         public HibernateDAO(HibernateTemplate template) {
             Check.Assert(template != null, "Null:template");
@@ -48,7 +57,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return result;
         }
 
-        [Transaction(ReadOnly = true)]
+        // [Transaction(ReadOnly = true)]
         public T findById(Object id, bool lockRecord, params IDAOTask<T>[] tasks) {
             T result = template.Get<T>(id, lockRecord ? LockMode.Upgrade : LockMode.None);
             performTasks(tasks, result);
@@ -56,29 +65,32 @@ namespace edu.uwec.cs.cs355.group4.et.db {
         }
 
         
-        private static void performTasks(IDAOTask<T>[] tasks, T result) {
-            for (int i = 0; i < tasks.Length; i++) {
-                IDAOTask<T> task = tasks[i];
-                task.perform(result);
+        private static void performTasks(IDAOTask<T>[] tasks, T entity) {
+            if (tasks.Length > 0) {
+                //template.Lock(entity, LockMode.None);
+                for (int i = 0; i < tasks.Length; i++) {
+                    IDAOTask<T> task = tasks[i];
+                    task.perform(entity);
+                }
             }
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         public virtual IList<T> findAll() {
             return findByCriteria(EMPTY_CRITERION);
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         public T makePersistent(T entity) {
             return (T) template.SaveOrUpdateCopy(entity);
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         public void makeTransient(T entity) {
             template.Delete(entity);
         }
 
-        [Transaction(ReadOnly = true)]
+        // [Transaction(ReadOnly = true)]
         public IList<Fault> canMakePersistent(T entity) {
             if (entity == null) throw new ArgumentNullException("Null: entity");
             IList<Fault> result = validateRequiredProperties(entity);
@@ -92,7 +104,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         protected abstract IList<Fault> performCanMakePersistent(T entity);
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         protected IList<T> findByCriteria(IList<ICriterion> criterion, IList<Order> order) {
             FindHibernateDelegate<T> findDelegate = delegate(ISession session)
                                                         {
@@ -108,22 +120,22 @@ namespace edu.uwec.cs.cs355.group4.et.db {
             return ExecuteFind(findDelegate);
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         protected IList<T> ExecuteFind(FindHibernateDelegate<T> findDelegate) {
             return template.ExecuteFind(findDelegate);
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         protected U Execute<U>(HibernateDelegate<U> findDelegate) {
             return template.Execute(findDelegate);
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         protected IList<T> findByCriteria(IList<ICriterion> criterion) {
             return findByCriteria(criterion, new List<Order>());
         }
 
-        [Transaction(ReadOnly = false)]
+        // [Transaction(ReadOnly = false)]
         private IList<Fault> validateRequiredProperties(T entity) {
             IList<Fault> result = new List<Fault>();
             foreach (PropertyInfo property in properties) {

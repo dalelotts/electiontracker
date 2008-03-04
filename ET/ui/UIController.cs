@@ -17,9 +17,9 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.events;
+using KnightRider.ElectionTracker.events;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal interface UIController {
         Form getMDIForm();
         void HandleMakePersistent(object sender, MakePersistentArgs args);

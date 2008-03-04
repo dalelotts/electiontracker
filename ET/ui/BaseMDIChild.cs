@@ -20,10 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DesignByContract;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.events;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.events;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     public partial class BaseMDIChild : Form {
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
         public event GenericEventHandler<Object, MakePersistentArgs> makePersistent;

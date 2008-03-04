@@ -20,7 +20,7 @@ using System.Reflection;
 using NHibernate;
 using NHibernate.Cfg;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace KnightRider.ElectionTracker.db {
     internal class HibernateUtil {
         public static ISessionFactory makeSessionFactory() {
             Configuration cfg = new Configuration();

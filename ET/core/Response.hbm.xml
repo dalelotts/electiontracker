@@ -18,19 +18,19 @@
  along with this program.  If not, see http://www.gnu.org/licenses/
 -->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.Response, ElectionTracker" table="response">
+  <class name="KnightRider.ElectionTracker.core.Response, ElectionTracker" table="response">
     <id name="ID" column="ResponseID" type="Int64">
       <generator class="identity" />
     </id>
     <property name="SortOrder" column="SortOrder" type="Int32" length="100" not-null="true"/>
-    <many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true"/>
+    <many-to-one name="ElectionContest" class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true"/>
     
-    <joined-subclass name="edu.uwec.cs.cs355.group4.et.core.CandidateResponse, ElectionTracker" table="CandidateResponse">
+    <joined-subclass name="KnightRider.ElectionTracker.core.CandidateResponse, ElectionTracker" table="CandidateResponse">
       <key column="ResponseID"/>
-      <many-to-one name="Candidate" class="edu.uwec.cs.cs355.group4.et.core.Candidate, ElectionTracker" column="CandidateID"/>
+      <many-to-one name="Candidate" class="KnightRider.ElectionTracker.core.Candidate, ElectionTracker" column="CandidateID"/>
     </joined-subclass>
     
-    <joined-subclass name="edu.uwec.cs.cs355.group4.et.core.CustomResponse, ElectionTracker"  table="customresponse">
+    <joined-subclass name="KnightRider.ElectionTracker.core.CustomResponse, ElectionTracker"  table="customresponse">
       <key column="ResponseID"/>
       <property name="Description" column="ResponseName" type="String"/>
     </joined-subclass>

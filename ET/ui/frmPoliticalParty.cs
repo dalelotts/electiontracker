@@ -18,10 +18,10 @@
  **/
 using System;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal partial class frmPoliticalParty : BaseMDIChild {
         private readonly PoliticalPartyDAO politicalPartyDAO;
 

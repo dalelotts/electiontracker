@@ -19,7 +19,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace edu.uwec.cs.cs355.group4.et.ui.util {
+namespace KnightRider.ElectionTracker.ui.util {
     internal class CompositeFilter : BaseTreeViewFilter {
         private readonly IList<TreeViewFilter> members;
 

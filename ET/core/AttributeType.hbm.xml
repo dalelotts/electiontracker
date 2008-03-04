@@ -20,7 +20,7 @@
 -->
 
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.AttributeType, ElectionTracker" table="attributetype">
+  <class name="KnightRider.ElectionTracker.core.AttributeType, ElectionTracker" table="attributetype">
     <id name="ID" column="AttributeTypeID" type="Int64">
       <generator class="identity"/>
     </id>

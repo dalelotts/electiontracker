@@ -17,12 +17,12 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
 using NHibernate;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace KnightRider.ElectionTracker.db {
     internal sealed class PoliticalPartyDAO : HibernateDAO<PoliticalParty> {
         private static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
         private static readonly IList<Order> order_BY_NAME = new List<Order>();

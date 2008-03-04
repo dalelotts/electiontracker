@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace edu.uwec.cs.cs355.group4.et.util {
+namespace KnightRider.ElectionTracker.util {
     public class ValueSortedList : ICollection, IDictionary, IEnumerable {
         private readonly IComparer comparer;
 

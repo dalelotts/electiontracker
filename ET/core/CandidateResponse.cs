@@ -18,9 +18,9 @@
  **/
 
 using System;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.core {
+namespace KnightRider.ElectionTracker.core {
     internal class CandidateResponse : Response {
         private Candidate candidate;
         private string toStringResult = "NULL CANDIDATE: UNKNOWN";

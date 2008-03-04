@@ -19,10 +19,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Common.Logging;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal sealed class VoteEnterer : Panel {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (VoteEnterer));
 

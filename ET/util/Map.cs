@@ -19,7 +19,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace edu.uwec.cs.cs355.group4.et.util {
+namespace KnightRider.ElectionTracker.util {
     /// <summary>
     ///     Wrapper class for a Dictionary to the API is a little more reasonable.
     /// </summary>

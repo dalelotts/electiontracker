@@ -21,16 +21,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal class frmProofingSheet : frmAbstractReport {
         private int intCount;
         private List<string> lstToPrint;
         private List<string> lstHeader;
 
-        public frmProofingSheet(ElectionDAO electionDAO) : base(electionDAO) {
+        public frmProofingSheet(IElectionDAO electionDAO) : base(electionDAO) {
             blnLandscape = true;
         }
 

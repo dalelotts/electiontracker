@@ -18,7 +18,7 @@
  along with this program.  If not, see http://www.gnu.org/licenses/
 -->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="edu.uwec.cs.cs355.group4.et.core.County, ElectionTracker" table="county">
+	<class name="KnightRider.ElectionTracker.core.County, ElectionTracker" table="county">
 		<id name="ID" column="CountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
@@ -27,15 +27,15 @@
 		<property name="WardCount" column="CountyWardCount" type="Int32" not-null="true"/>    
 		<bag inverse="true" name="PhoneNumbers" cascade="all-delete-orphan" lazy="false">
       <key column="CountyID"/>
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber, ElectionTracker"/>
+      <one-to-many class="KnightRider.ElectionTracker.core.CountyPhoneNumber, ElectionTracker"/>
     </bag>
     <bag inverse="true" name="Attributes" cascade="all-delete-orphan" lazy="false">
 			<key column="CountyID"/>
-			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyAttribute, ElectionTracker"/>
+			<one-to-many class="KnightRider.ElectionTracker.core.CountyAttribute, ElectionTracker"/>
 		</bag>
 		<bag inverse="true" name="Websites" cascade="all-delete-orphan" lazy="false">
 			<key column="CountyID"/>
-			<one-to-many class="edu.uwec.cs.cs355.group4.et.core.CountyWebsite, ElectionTracker"/>
+			<one-to-many class="KnightRider.ElectionTracker.core.CountyWebsite, ElectionTracker"/>
 		</bag>	
 	</class>
 </hibernate-mapping>

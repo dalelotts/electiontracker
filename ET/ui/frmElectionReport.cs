@@ -21,17 +21,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal class frmElectionReport : frmAbstractReport {
         //private Font printFont;
         private List<string> lstToPrint;
         private List<string> lstHeader;
         private int intCount;
 
-        public frmElectionReport(ElectionDAO electionDAO) : base(electionDAO) {
+        public frmElectionReport(IElectionDAO electionDAO) : base(electionDAO) {
             lstHeader = new List<string>();
         }
 

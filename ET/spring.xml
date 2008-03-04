@@ -8,86 +8,91 @@
 	<object type="Spring.Objects.Factory.Config.PropertyPlaceholderConfigurer, Spring.Core">
 		<property name="ConfigSections" value="databaseSettings"/>
 	</object>
-  <object id="transactionManager" type="Spring.Data.Core.TxScopeTransactionManager, Spring.Data" />
-	<object id="HibernateTransactionManager" type="Spring.Data.NHibernate.HibernateTransactionManager, Spring.Data.NHibernate12">
-		<property name="DbProvider" ref="DbProvider"/>
-		<property name="SessionFactory" ref="SessionFactory"/>
-	</object>
-	<object id="HibernateTemplate" type="Spring.Data.NHibernate.Generic.HibernateTemplate, Spring.Data.NHibernate12">
-		<property name="SessionFactory" ref="SessionFactory"/>
-		<property name="TemplateFlushMode" value="Auto"/>
-		<property name="CacheQueries" value="true"/>
-	</object>
-	<!-- Database and NHibernate Configuration -->
-	<db:provider id="DbProvider" provider="MySql" connectionString="Server=localhost;database=degenst;uid=root;pwd=password;"/>
-	<object id="SessionFactory" type="Spring.Data.NHibernate.LocalSessionFactoryObject, Spring.Data.NHibernate12">
-		<property name="DbProvider" ref="DbProvider"/>
-		<!--<property name="ExposeTransactionAwareSessionFactory" value="true"/> -->
-		<property name="MappingAssemblies">
-			<list>
-				<value>ElectionTracker</value>
-			</list>
-		</property>
-		<property name="HibernateProperties">
-			<dictionary>
-				<entry key="hibernate.connection.provider" value="NHibernate.Connection.DriverConnectionProvider"/>
-				<entry key="hibernate.dialect" value="NHibernate.Dialect.MySQLDialect"/>
-				<entry key="hibernate.connection.driver_class" value="NHibernate.Driver.MySqlDataDriver"/>
-				<entry key="hibernate.current_session_context_class" value="Spring.Data.NHibernate.SpringSessionContext, Spring.Data.NHibernate12"/>
-			</dictionary>
-		</property>
-	</object>
-	<object name="ElectionDAO" type="edu.uwec.cs.cs355.group4.et.db.ElectionDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="PoliticalPartyDAO" type="edu.uwec.cs.cs355.group4.et.db.PoliticalPartyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="CandidateDAO" type="edu.uwec.cs.cs355.group4.et.db.CandidateDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="ContestTypeDAO" type="edu.uwec.cs.cs355.group4.et.db.ContestTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="ContestDAO" type="edu.uwec.cs.cs355.group4.et.db.ContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="CountyDAO" type="edu.uwec.cs.cs355.group4.et.db.CountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="ResponseValueDAO" type="edu.uwec.cs.cs355.group4.et.db.ResponseValueDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="AttributeTypeDAO" type="edu.uwec.cs.cs355.group4.et.db.AttributeTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="PhoneNumberTypeDAO" type="edu.uwec.cs.cs355.group4.et.db.PhoneNumberTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="ElectionContestDAO" type="edu.uwec.cs.cs355.group4.et.db.ElectionContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="ResponseDAO" type="edu.uwec.cs.cs355.group4.et.db.ResponseDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="ContestCountyDAO" type="edu.uwec.cs.cs355.group4.et.db.ContestCountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-	<object name="UIController" type="edu.uwec.cs.cs355.group4.et.ui.DefaultUIController, ElectionTracker" singleton="true">
-		<property name="MDIForm" ref="MDIForm"/>
-	</object>
-	<object name="MDIForm" type="edu.uwec.cs.cs355.group4.et.UI.MDIForm, ElectionTracker" singleton="true" autowire="autodetect">
-		<property name="Filters">
-			<list element-type="edu.uwec.cs.cs355.group4.et.ui.util.TreeViewFilter, ElectionTracker">
-				<ref object="ActiveElectionFilter"/>
-				<ref object="InactiveElectionFilter"/>
-				<ref object="CountyFilter"/>
-				<ref object="ActiveCandidateFilter"/>
-				<ref object="InactiveCandidateFilter"/>
-				<ref object="ActiveContestFilter"/>
-				<ref object="InactiveContestFilter"/>
-				<ref object="ActivePoliticalPartyFilter"/>
-				<ref object="InactivePoliticalPartyFilter"/>
-				<!-- <ref object="EverythingActive"/> -->
-			</list>
-		</property>
-	</object>
-	<object name="ActiveElectionFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.ElectionFilter, ElectionTracker" singleton="true" autowire="no">
-		<constructor-arg name="dao" ref="ElectionDAO"/>
-		<constructor-arg name="isActive" value="true"/>
-	</object>
-	<object name="InactiveElectionFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.ElectionFilter, ElectionTracker" singleton="true" autowire="autodetect">
-		<constructor-arg name="dao" ref="ElectionDAO"/>
-		<constructor-arg name="isActive" value="false"/>
-	</object>
-	<object name="ActivePoliticalPartyFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.ActivePoliticalPartyFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<object name="InactivePoliticalPartyFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.InactivePoliticalPartyFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<object name="CountyFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.CountyFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<object name="ActiveCandidateFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.ActiveCandidateFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<object name="InactiveContestFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.InactiveContestFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<object name="ActiveContestFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.ActiveContestFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<object name="InactiveCandidateFilter" type="edu.uwec.cs.cs355.group4.et.ui.util.InactiveCandidateFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
-	<!--
-  <object name="EverythingActive" type="edu.uwec.cs.cs355.group4.et.ui.util.CompositeFilter, ElectionTracker" singleton="true" autowire="autodetect">
+
+  <object id="HibernateTransactionManager" type="Spring.Data.NHibernate.HibernateTransactionManager, Spring.Data.NHibernate12">
+    <property name="DbProvider" ref="DbProvider"/>
+    <property name="SessionFactory" ref="SessionFactory"/>
+  </object>
+  <object id="HibernateTemplate" type="Spring.Data.NHibernate.Generic.HibernateTemplate, Spring.Data.NHibernate12">
+    <property name="SessionFactory" ref="SessionFactory"/>
+    <property name="TemplateFlushMode" value="Auto"/>
+    <property name="CacheQueries" value="true"/>
+  </object>
+  <!-- Database and NHibernate Configuration -->
+  <db:provider id="DbProvider" provider="MySql" connectionString="Server=localhost;database=degenst;uid=root;pwd=password;"/>
+  <object id="SessionFactory" type="Spring.Data.NHibernate.LocalSessionFactoryObject, Spring.Data.NHibernate12">
+    <property name="DbProvider" ref="DbProvider"/>
+    <!--<property name="ExposeTransactionAwareSessionFactory" value="true"/> -->
+    <property name="MappingAssemblies">
+      <list>
+        <value>ElectionTracker</value>
+      </list>
+    </property>
+    <property name="HibernateProperties">
+      <dictionary>
+        <entry key="hibernate.connection.provider" value="NHibernate.Connection.DriverConnectionProvider"/>
+        <entry key="hibernate.dialect" value="NHibernate.Dialect.MySQLDialect"/>
+        <entry key="hibernate.connection.driver_class" value="NHibernate.Driver.MySqlDataDriver"/>
+        <entry key="hibernate.current_session_context_class" value="Spring.Data.NHibernate.SpringSessionContext, Spring.Data.NHibernate12"/>
+      </dictionary>
+    </property>
+  </object>
+
+  <tx:attribute-driven transaction-manager="HibernateTransactionManager" proxy-target-type="false"/> 
+    
+  <object name="ElectionDAO" type="KnightRider.ElectionTracker.db.ElectionDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="PoliticalPartyDAO" type="KnightRider.ElectionTracker.db.PoliticalPartyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="CandidateDAO" type="KnightRider.ElectionTracker.db.CandidateDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="ContestTypeDAO" type="KnightRider.ElectionTracker.db.ContestTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="ContestDAO" type="KnightRider.ElectionTracker.db.ContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="CountyDAO" type="KnightRider.ElectionTracker.db.CountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="ResponseValueDAO" type="KnightRider.ElectionTracker.db.ResponseValueDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="AttributeTypeDAO" type="KnightRider.ElectionTracker.db.AttributeTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="PhoneNumberTypeDAO" type="KnightRider.ElectionTracker.db.PhoneNumberTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="ElectionContestDAO" type="KnightRider.ElectionTracker.db.ElectionContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="ResponseDAO" type="KnightRider.ElectionTracker.db.ResponseDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="ContestCountyDAO" type="KnightRider.ElectionTracker.db.ContestCountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="UIController" type="KnightRider.ElectionTracker.ui.DefaultUIController, ElectionTracker" singleton="true">
+    <property name="MDIForm" ref="MDIForm"/>
+  </object>
+  <object name="MDIForm" type="KnightRider.ElectionTracker.UI.MDIForm, ElectionTracker" singleton="true" autowire="autodetect">
+    <property name="Filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionFilter"/> 
+        <ref object="InactiveElectionFilter"/>
+        <ref object="CountyFilter"/>
+        <ref object="ActiveCandidateFilter"/>
+        <ref object="InactiveCandidateFilter"/>
+        <ref object="ActiveContestFilter"/>
+        <ref object="InactiveContestFilter"/>
+        <ref object="ActivePoliticalPartyFilter"/>
+        <ref object="InactivePoliticalPartyFilter"/>
+        <!-- <ref object="EverythingActive"/> -->
+      </list>
+    </property>
+  </object>
+  <object name="ActiveElectionFilter" type="KnightRider.ElectionTracker.ui.util.ElectionFilter, ElectionTracker" singleton="true" autowire="no">
+    <constructor-arg name="dao" ref="ElectionDAO"/>
+    <constructor-arg name="isActive" value="true"/>
+  </object>
+  <object name="InactiveElectionFilter" type="KnightRider.ElectionTracker.ui.util.ElectionFilter, ElectionTracker" singleton="true" autowire="autodetect">
+    <constructor-arg name="dao" ref="ElectionDAO"/>
+    <constructor-arg name="isActive" value="false"/>
+  </object>
+  <object name="ActivePoliticalPartyFilter" type="KnightRider.ElectionTracker.ui.util.ActivePoliticalPartyFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
+  <object name="InactivePoliticalPartyFilter" type="KnightRider.ElectionTracker.ui.util.InactivePoliticalPartyFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
+  <object name="CountyFilter" type="KnightRider.ElectionTracker.ui.util.CountyFilter, ElectionTracker" singleton="true" autowire="no">
+    <constructor-arg name="dao" ref="CountyDAO"/>
+  </object>
+  <object name="ActiveCandidateFilter" type="KnightRider.ElectionTracker.ui.util.ActiveCandidateFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
+  <object name="InactiveContestFilter" type="KnightRider.ElectionTracker.ui.util.InactiveContestFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
+  <object name="ActiveContestFilter" type="KnightRider.ElectionTracker.ui.util.ActiveContestFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
+  <object name="InactiveCandidateFilter" type="KnightRider.ElectionTracker.ui.util.InactiveCandidateFilter, ElectionTracker" singleton="true" autowire="autodetect"/>
+  <!--
+  <object name="EverythingActive" type="KnightRider.ElectionTracker.ui.util.CompositeFilter, ElectionTracker" singleton="true" autowire="autodetect">
     <constructor-arg name="name" value="Everything - Active"/>
     <constructor-arg name="members">
-      <list element-type="edu.uwec.cs.cs355.group4.et.ui.util.TreeViewFilter, ElectionTracker">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
         <ref object="ActiveElectionFilter"/>
         <ref object="CountyFilter"/>
         <ref object="ActiveCandidateFilter"/>
@@ -97,15 +102,19 @@
     </constructor-arg>
   </object>
   -->
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes" type="edu.uwec.cs.cs355.group4.et.ui.frmEnterVotes, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmElection" type="edu.uwec.cs.cs355.group4.et.ui.frmElection, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmCounty" type="edu.uwec.cs.cs355.group4.et.ui.frmCounty, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmCandidate" type="edu.uwec.cs.cs355.group4.et.ui.frmCandidate, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmContest" type="edu.uwec.cs.cs355.group4.et.ui.frmContest, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmPoliticalParty" type="edu.uwec.cs.cs355.group4.et.ui.frmPoliticalParty, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmElectionReport" type="edu.uwec.cs.cs355.group4.et.ui.frmElectionReport, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmProofingSheet" type="edu.uwec.cs.cs355.group4.et.ui.frmProofingSheet, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmCountyContactForm" type="edu.uwec.cs.cs355.group4.et.ui.frmCountyContactForm, ElectionTracker" autowire="constructor" singleton="false"/>
-	<object name="edu.uwec.cs.cs355.group4.et.ui.frmContestVoteSumry" type="edu.uwec.cs.cs355.group4.et.ui.frmContestVoteSumry, ElectionTracker" autowire="constructor" singleton="false"/>
-	<tx:attribute-driven transaction-manager="transactionManager"/>
+  <object name="KnightRider.ElectionTracker.ui.frmEnterVotes" type="KnightRider.ElectionTracker.ui.frmEnterVotes, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmElection" type="KnightRider.ElectionTracker.ui.frmElection, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="electionDAO" ref="ElectionDAO"/>
+    <constructor-arg name="contestDAO" ref="ContestDAO"/>
+    <constructor-arg name="candidateDAO" ref="CandidateDAO"/>
+    <constructor-arg name="countyDAO" ref="CountyDAO"/>
+  </object>
+  <object name="KnightRider.ElectionTracker.ui.frmCounty" type="KnightRider.ElectionTracker.ui.frmCounty, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmCandidate" type="KnightRider.ElectionTracker.ui.frmCandidate, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmContest" type="KnightRider.ElectionTracker.ui.frmContest, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmPoliticalParty" type="KnightRider.ElectionTracker.ui.frmPoliticalParty, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmElectionReport" type="KnightRider.ElectionTracker.ui.frmElectionReport, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmProofingSheet" type="KnightRider.ElectionTracker.ui.frmProofingSheet, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmCountyContactForm" type="KnightRider.ElectionTracker.ui.frmCountyContactForm, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmContestVoteSumry" type="KnightRider.ElectionTracker.ui.frmContestVoteSumry, ElectionTracker" autowire="constructor" singleton="false"/>  
 </objects>

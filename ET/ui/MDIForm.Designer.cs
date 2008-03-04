@@ -18,7 +18,7 @@
  **/
 using System;
 
-namespace edu.uwec.cs.cs355.group4.et.ui
+namespace KnightRider.ElectionTracker.ui
 {
     sealed internal partial class MDIForm
     {

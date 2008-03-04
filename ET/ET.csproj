@@ -7,9 +7,9 @@
     <ProjectGuid>{01ACB36B-53D5-443B-9CC3-47EC018250E6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>edu.uwec.cs.cs355.group4.et</RootNamespace>
+    <RootNamespace>KnightRider.ElectionTracker</RootNamespace>
     <AssemblyName>ElectionTracker</AssemblyName>
-    <StartupObject>edu.uwec.cs.cs355.group4.et.core.Program</StartupObject>
+    <StartupObject>KnightRider.ElectionTracker.core.Program</StartupObject>
     <ApplicationIcon>vote.ico</ApplicationIcon>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -113,11 +113,13 @@
     <Compile Include="db\ContestDAO.cs" />
     <Compile Include="db\ContestTypeDAO.cs" />
     <Compile Include="db\CountyDAO.cs" />
+    <Compile Include="db\DelegateDAO.cs" />
     <Compile Include="db\ElectionContestDAO.cs" />
     <Compile Include="db\ElectionDAO.cs" />
     <Compile Include="db\Fault.cs" />
-    <Compile Include="db\GenericDAO.cs" />
+    <Compile Include="db\IGenericDAO.cs" />
     <Compile Include="db\HibernateDAO.cs" />
+    <Compile Include="db\IElectionDAO.cs" />
     <Compile Include="db\PhoneNumberTypeDAO.cs" />
     <Compile Include="db\PoliticalPartyDAO.cs" />
     <Compile Include="db\RequiredProperty.cs" />
@@ -374,6 +376,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="db\dao\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,7 +18,7 @@
  along with this program.  If not, see http://www.gnu.org/licenses/
 -->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.Election, ElectionTracker" table="election">
+  <class name="KnightRider.ElectionTracker.core.Election, ElectionTracker" table="election">
     <id name="ID" column="ElectionID" type="Int64">
       <generator class="identity"/>
     </id>
@@ -27,7 +27,7 @@
     <property name="IsActive" column="ElectionIsActive" type="Boolean" not-null="true" />
     <bag name="ElectionContests" lazy="true" inverse="true" cascade="all-delete-orphan">
       <key column="ElectionID" />
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, ElectionTracker" />
+      <one-to-many class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" />
     </bag>
   </class>
 </hibernate-mapping>

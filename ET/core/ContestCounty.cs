@@ -18,9 +18,9 @@
  **/
 
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.core {
+namespace KnightRider.ElectionTracker.core {
     public class ContestCounty {
         private long id;
         private County county;

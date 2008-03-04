@@ -18,7 +18,7 @@
  **/
 using System;
 
-namespace edu.uwec.cs.cs355.group4.et.events {
+namespace KnightRider.ElectionTracker.events {
     internal abstract class DBEntityArgs : EventArgs {
         private readonly long? id;
 

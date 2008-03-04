@@ -18,11 +18,11 @@
  **/
 using System.Collections.Generic;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.type;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.type;
 
-namespace edu.uwec.cs.cs355.group4.et.ui.util {
+namespace KnightRider.ElectionTracker.ui.util {
     internal class ActivePoliticalPartyFilter : BaseTreeViewFilter {
         private const string name = "Political Parties - Active";
 

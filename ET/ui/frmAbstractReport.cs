@@ -22,21 +22,21 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using Common.Logging;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.ui.util;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.ui.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal abstract partial class frmAbstractReport : Form {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmAbstractReport));
 
-        protected ElectionDAO electionDAO;
+        protected IElectionDAO electionDAO;
         protected PrintDocument docToPrint;
         protected int intPages;
         protected Font printFont;
         protected bool blnLandscape;
 
-        public frmAbstractReport(ElectionDAO electionDAO) {
+        public frmAbstractReport(IElectionDAO electionDAO) {
             blnLandscape = false;
             this.electionDAO = electionDAO;
             InitializeComponent();

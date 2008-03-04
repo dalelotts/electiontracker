@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-namespace edu.uwec.cs.cs355.group4.et.events {
+namespace KnightRider.ElectionTracker.events {
     internal class ElectionArgs : DBEntityArgs {
         public ElectionArgs() {}
         public ElectionArgs(long id) : base(id) {}

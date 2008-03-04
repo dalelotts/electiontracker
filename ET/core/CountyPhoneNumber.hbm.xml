@@ -18,12 +18,12 @@
  along with this program.  If not, see http://www.gnu.org/licenses/
 -->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="edu.uwec.cs.cs355.group4.et.core.CountyPhoneNumber, ElectionTracker" table="countyphonenumber">
+  <class name="KnightRider.ElectionTracker.core.CountyPhoneNumber, ElectionTracker" table="countyphonenumber">
     <id name="ID" column="CountyPhoneNumberID" type="Int64">
       <generator class="identity"/>
     </id>
-    <many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, ElectionTracker" column="CountyID" not-null="true" lazy="false" />
-    <many-to-one name="Type" class="edu.uwec.cs.cs355.group4.et.core.PhoneNumberType, ElectionTracker" column="PhoneNumberTypeID"  not-null="true" lazy="false" />
+    <many-to-one name="County" class="KnightRider.ElectionTracker.core.County, ElectionTracker" column="CountyID" not-null="true" lazy="false" />
+    <many-to-one name="Type" class="KnightRider.ElectionTracker.core.PhoneNumberType, ElectionTracker" column="PhoneNumberTypeID"  not-null="true" lazy="false" />
     <property name="AreaCode" column="PhoneNumberAreaCode" type="String" length="5" not-null="true"/>
     <property name="PhoneNumber" column="PhoneNumberNumber" type="String" length="10" not-null="true"/>
     <property name="Extension" column="PhoneNumberExtension" type="String" length="10" not-null="false"/>

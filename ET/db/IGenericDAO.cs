@@ -18,10 +18,10 @@
  **/
 using System;
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.db.task;
+using KnightRider.ElectionTracker.db.task;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
-    internal interface GenericDAO<T> {
+namespace KnightRider.ElectionTracker.db {
+    public interface IGenericDAO<T> {
 
         T findById(Object id, bool lockRecord, params IDAOTask<T>[] tasks);
 

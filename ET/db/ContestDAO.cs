@@ -17,12 +17,13 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
 using NHibernate;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
+using Spring.Transaction.Interceptor;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace KnightRider.ElectionTracker.db {
     internal class ContestDAO : HibernateDAO<Contest> {
         private static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
         private static readonly IList<Order> ORDER_BY_NAME = new List<Order>();
@@ -36,6 +37,7 @@ namespace edu.uwec.cs.cs355.group4.et.db {
 
         public ContestDAO(HibernateTemplate factory) : base(factory) {}
 
+        // [Transaction(ReadOnly = true)]
         public IList<Contest> findActive() {
             return findByCriteria(ACTIVE_CRITERION, ORDER_BY_NAME);
         }

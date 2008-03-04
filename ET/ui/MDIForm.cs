@@ -20,11 +20,11 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Altea;
-using edu.uwec.cs.cs355.group4.et.events;
-using edu.uwec.cs.cs355.group4.et.type;
-using edu.uwec.cs.cs355.group4.et.ui.util;
+using KnightRider.ElectionTracker.events;
+using KnightRider.ElectionTracker.type;
+using KnightRider.ElectionTracker.ui.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal partial class MDIForm : Form {
         public event GenericEventHandler<object, ShowAboutBoxArgs> showAboutBox;
         public event GenericEventHandler<IShowMessageSender, ShowMessageArgs> showMessage;

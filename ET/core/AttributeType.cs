@@ -17,9 +17,9 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 
-using edu.uwec.cs.cs355.group4.et.db;
+using KnightRider.ElectionTracker.db;
 
-namespace edu.uwec.cs.cs355.group4.et.core {
+namespace KnightRider.ElectionTracker.core {
     public class AttributeType {
         private long id;
         private string name;

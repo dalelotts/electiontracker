@@ -20,17 +20,17 @@
 -->
 
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="edu.uwec.cs.cs355.group4.et.core.ContestCounty, ElectionTracker" table="contestcounty">
+	<class name="KnightRider.ElectionTracker.core.ContestCounty, ElectionTracker" table="contestcounty">
 		<id name="ID" column="ContestCountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
     <bag lazy="false" inverse="true" name="ResponseValues" cascade="all-delete-orphan" >
       <key column="ContestCountyID"/>
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ResponseValue, ElectionTracker"/>
+      <one-to-many class="KnightRider.ElectionTracker.core.ResponseValue, ElectionTracker"/>
     </bag>
 		<property name="WardsReporting" column="WardsReporting" type="Int32" length="100" not-null="true"/>
 		<property name="WardCount" column="WardCount" type="Int32" length="100" not-null="true"/>
-		<many-to-one name="County" class="edu.uwec.cs.cs355.group4.et.core.County, ElectionTracker" column="CountyID" not-null="true" lazy="false" />
-		<many-to-one name="ElectionContest" class="edu.uwec.cs.cs355.group4.et.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true" lazy="false"/>
+		<many-to-one name="County" class="KnightRider.ElectionTracker.core.County, ElectionTracker" column="CountyID" not-null="true" lazy="false" />
+		<many-to-one name="ElectionContest" class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

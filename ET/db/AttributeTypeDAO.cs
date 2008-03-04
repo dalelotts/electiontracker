@@ -17,11 +17,11 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Collections.Generic;
-using edu.uwec.cs.cs355.group4.et.core;
+using KnightRider.ElectionTracker.core;
 using NHibernate;
 using Spring.Data.NHibernate.Generic;
 
-namespace edu.uwec.cs.cs355.group4.et.db {
+namespace KnightRider.ElectionTracker.db {
     internal class AttributeTypeDAO : HibernateDAO<AttributeType> {
         public AttributeTypeDAO(HibernateTemplate factory) : base(factory) {}
 

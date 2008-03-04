@@ -21,12 +21,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Common.Logging;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.util;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.util;
 
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal sealed class ContestDisplay : Panel {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (ContestDisplay));
 

@@ -19,11 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.ui.util;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.ui.util;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal partial class frmContest : BaseMDIChild {
         private readonly ContestDAO contestDAO;
         private readonly ContestTypeDAO contestTypeDAO;

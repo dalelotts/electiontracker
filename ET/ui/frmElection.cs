@@ -19,17 +19,16 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.db.task;
-using Spring.Transaction.Interceptor;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 
-namespace edu.uwec.cs.cs355.group4.et.ui {
+namespace KnightRider.ElectionTracker.ui {
     internal partial class frmElection : BaseMDIChild {
 
         private readonly static IDAOTask<Election> lec = new LoadElectionContests();
 
-        private readonly ElectionDAO electionDAO;
+        private readonly IElectionDAO electionDAO;
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
         private readonly IList<County> allCounties;
@@ -44,7 +43,7 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
         
-        public frmElection(ElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
+        public frmElection(IElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
             try {
                 InitializeComponent();
                 this.electionDAO = electionDAO;
@@ -78,15 +77,12 @@ namespace edu.uwec.cs.cs355.group4.et.ui {
             }
         }
 
-        [Transaction(ReadOnly = true)]
+        // [Transaction(ReadOnly = true)]
         public void loadElection(long? id) {
             if (id != null) {
                 Election newElection = electionDAO.findById(id.Value, false, lec);
                 if (newElection != null) {
                     currentElection = newElection;
-//                    refreshCandidateLists();
-//                    refreshContestLists();
-//                    refreshCountyLists();
                 }
             }
             refreshControls();

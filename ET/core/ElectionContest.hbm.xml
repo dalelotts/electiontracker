@@ -18,19 +18,19 @@
  along with this program.  If not, see http://www.gnu.org/licenses/
 -->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="edu.uwec.cs.cs355.group4.et.core.ElectionContest, ElectionTracker" table="electioncontest">
+	<class name="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" table="electioncontest">
 		<id name="ID" column="ElectionContestID" type="Int64">
 			<generator class="identity"/>
 		</id>
     <bag  inverse="true" name="Responses" cascade="all-delete-orphan" order-by="SortOrder" lazy="false">
       <key column="ElectionContestID"/>
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.Response, ElectionTracker"/>
+      <one-to-many class="KnightRider.ElectionTracker.core.Response, ElectionTracker"/>
     </bag>
     <bag inverse="true" name="Counties" cascade="all-delete-orphan" lazy="false">
       <key column="ElectionContestID"/>
-      <one-to-many class="edu.uwec.cs.cs355.group4.et.core.ContestCounty, ElectionTracker"/>
+      <one-to-many class="KnightRider.ElectionTracker.core.ContestCounty, ElectionTracker"/>
     </bag>    
-		<many-to-one name="Election" class="edu.uwec.cs.cs355.group4.et.core.Election, ElectionTracker" column="ElectionID" not-null="true"/>
-    <many-to-one name="Contest" class="edu.uwec.cs.cs355.group4.et.core.Contest, ElectionTracker" column="ContestID" not-null="true" lazy="false"/>
+		<many-to-one name="Election" class="KnightRider.ElectionTracker.core.Election, ElectionTracker" column="ElectionID" not-null="true"/>
+    <many-to-one name="Contest" class="KnightRider.ElectionTracker.core.Contest, ElectionTracker" column="ContestID" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

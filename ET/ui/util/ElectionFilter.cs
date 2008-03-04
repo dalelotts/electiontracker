@@ -18,24 +18,19 @@
  **/
 using System.Collections.Generic;
 using System.Windows.Forms;
-using edu.uwec.cs.cs355.group4.et.core;
-using edu.uwec.cs.cs355.group4.et.db;
-using edu.uwec.cs.cs355.group4.et.type;
+using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.type;
 
-namespace edu.uwec.cs.cs355.group4.et.ui.util {
+namespace KnightRider.ElectionTracker.ui.util {
     internal class ElectionFilter : BaseTreeViewFilter {
-        private readonly ElectionDAO dao;
+        private readonly IElectionDAO dao;
 
         private const string name = "Elections";
         private readonly bool? isActive;
 
-        public ElectionFilter(ElectionDAO dao) : base(name) {
-            this.dao = dao;
-            isActive = null;
-        }
 
-
-        public ElectionFilter(ElectionDAO dao, bool isActive) : base(name + " - " + (isActive ? "Active" : "Inactive")) {
+        public ElectionFilter(IElectionDAO dao, bool isActive) : base(name + " - " + (isActive ? "Active" : "Inactive")) {
             this.dao = dao;
             this.isActive = isActive;
         }
