@@ -27,12 +27,9 @@ using KnightRider.ElectionTracker.db.task;
 using NHibernate;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
-using Spring.Transaction.Interceptor;
 
 namespace KnightRider.ElectionTracker.db {
     internal abstract class HibernateDAO<T> : IGenericDAO<T> {
-
-
         private readonly HibernateTemplate template;
         protected static readonly IList<ICriterion> EMPTY_CRITERION = new List<ICriterion>();
         protected readonly Type objectType = typeof (T);
@@ -64,7 +61,7 @@ namespace KnightRider.ElectionTracker.db {
             return result;
         }
 
-        
+
         private static void performTasks(IDAOTask<T>[] tasks, T entity) {
             if (tasks.Length > 0) {
                 //template.Lock(entity, LockMode.None);

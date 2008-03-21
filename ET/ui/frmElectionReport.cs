@@ -23,20 +23,21 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal class frmElectionReport : frmAbstractReport {
-        //private Font printFont;
         private List<string> lstToPrint;
         private List<string> lstHeader;
         private int intCount;
 
-        public frmElectionReport(IElectionDAO electionDAO) : base(electionDAO) {
+        public frmElectionReport(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport)
+            : base(electionDAO, loadElectionForReport) {
             lstHeader = new List<string>();
         }
 
         protected override IList<Election> GetElections() {
-            return electionDAO.findActive();
+            return electionDAO.findActive(loadTask);
         }
 
         protected override string GetTitle() {
@@ -67,14 +68,15 @@ namespace KnightRider.ElectionTracker.ui {
                 lstToPrint.Add(CenterText("ELECTION DATE " + election.Date.ToShortDateString()));
                 lstToPrint.Add(CenterText(county.Name));
                 foreach (CountyPhoneNumber phoneNumber in county.PhoneNumbers) {
-                    lstToPrint.Add(AlignRight(phoneNumber.Type.Name + ": " + phoneNumber.AreaCode + "-" + phoneNumber.PhoneNumber));
+                    lstToPrint.Add(
+                        AlignRight(phoneNumber.Type.Name + ": " + phoneNumber.AreaCode + "-" + phoneNumber.PhoneNumber));
                 }
                 foreach (CountyWebsite website in county.Websites) {
                     lstToPrint.Add(AlignRight("Website: " + website.URL));
                 }
                 foreach (CountyAttribute attribute in county.Attributes) {
                     lstToPrint.Add(AlignRight(attribute.Type.Name + ": " + attribute.Value));
-                }             
+                }
                 lstToPrint.Add("");
                 lstToPrint.Add("");
                 lstToPrint.Add(AlignRight("Time Called: _________________"));
@@ -108,7 +110,6 @@ namespace KnightRider.ElectionTracker.ui {
 
             Controls.Remove(ppcElection);
             docToPrint = new PrintDocument();
-            //docToPrint.DefaultPageSettings.Landscape = true;
             docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
             ppcElection = new PrintPreviewControl();
             ppcElection.Document = null;
@@ -120,7 +121,6 @@ namespace KnightRider.ElectionTracker.ui {
             ppcElection.Width = Width - 237;
             ppcElection.Height = Height - 58;
             ppcElection.TabIndex = 3;
-            //this.ppcElection.Click += new System.EventHandler(this.ppcElection_Click);
             Controls.Add(ppcElection);
         }
 
@@ -158,8 +158,7 @@ namespace KnightRider.ElectionTracker.ui {
                     } else if (lstToPrint[intCount] == "</CONTEST>") {
                         intCount++;
                     }
-                        // We'll store the current header here in case we have to go to multiple
-                        //  pages.
+                        // We'll store the current header here in case we have to go to multiple pages.
                     else if (lstToPrint[intCount] == "<HEADER>") {
                         blnHeader = true;
                         lstHeader = new List<string>();

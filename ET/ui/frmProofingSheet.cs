@@ -23,6 +23,7 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal class frmProofingSheet : frmAbstractReport {
@@ -30,7 +31,8 @@ namespace KnightRider.ElectionTracker.ui {
         private List<string> lstToPrint;
         private List<string> lstHeader;
 
-        public frmProofingSheet(IElectionDAO electionDAO) : base(electionDAO) {
+        public frmProofingSheet(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport)
+            : base(electionDAO, loadElectionForReport) {
             blnLandscape = true;
         }
 
@@ -39,7 +41,7 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         protected override IList<Election> GetElections() {
-            return electionDAO.findActive();
+            return electionDAO.findActive(loadTask);
         }
 
         protected override void CreateReport(Election election) {

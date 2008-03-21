@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
 using System.Collections.Generic;
 using KnightRider.ElectionTracker.core;
 using NHibernate;
@@ -28,20 +27,23 @@ namespace KnightRider.ElectionTracker.db {
 
         protected override IList<Fault> performCanMakePersistent(PhoneNumberType entity) {
             FindHibernateDelegate<PhoneNumberType> findDelegate = delegate(ISession session)
-                                                             {
-                                                                 IQuery query =
-                                                                     session.CreateSQLQuery("select * from phonenumbertype where Name = " + entity.Name + ";");
-                                                                 return query.List<PhoneNumberType>();
-                                                             };
+                                                                      {
+                                                                          IQuery query =
+                                                                              session.CreateSQLQuery(
+                                                                                  "select * from phonenumbertype where Name = " +
+                                                                                  entity.Name + ";");
+                                                                          return query.List<PhoneNumberType>();
+                                                                      };
 
             IList<PhoneNumberType> duplicates = ExecuteFind(findDelegate);
 
             IList<Fault> result = new List<Fault>();
 
-            if (duplicates.Count > 0)
-            {
+            if (duplicates.Count > 0) {
                 result.Add(
-                    new Fault(true, "Duplicate Phone Number Type: a phone number type named '" + entity.Name + "' already exists."));
+                    new Fault(true,
+                              "Duplicate Phone Number Type: a phone number type named '" + entity.Name +
+                              "' already exists."));
             }
             return result;
         }

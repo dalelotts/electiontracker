@@ -25,14 +25,12 @@ using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmElection : BaseMDIChild {
-
-        private readonly static IDAOTask<Election> lec = new LoadElectionContests();
+        private readonly LoadElectionForUI loadElectionForUI;
 
         private readonly IElectionDAO electionDAO;
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
         private readonly IList<County> allCounties;
-        //private readonly ResponseDAO responseDAO;
         private readonly IList<ElectionContest> addedContests;
 
         private Election currentElection;
@@ -42,11 +40,13 @@ namespace KnightRider.ElectionTracker.ui {
         //To Do: Add support for double clicking to add or remove contests, candidates, counties, etc.
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
-        
-        public frmElection(IElectionDAO electionDAO, ContestDAO contestDAO, CandidateDAO candidateDAO, CountyDAO countyDAO) {
+
+        public frmElection(IElectionDAO electionDAO, IContestDAO contestDAO, ICandidateDAO candidateDAO,
+                           ICountyDAO countyDAO, LoadElectionForUI loadElectionForUI) {
             try {
                 InitializeComponent();
                 this.electionDAO = electionDAO;
+                this.loadElectionForUI = loadElectionForUI;
                 currentElection = new Election();
                 allContests = contestDAO.findAll();
                 allCandidates = candidateDAO.findAll();
@@ -80,7 +80,7 @@ namespace KnightRider.ElectionTracker.ui {
         // [Transaction(ReadOnly = true)]
         public void loadElection(long? id) {
             if (id != null) {
-                Election newElection = electionDAO.findById(id.Value, false, lec);
+                Election newElection = electionDAO.findById(id.Value, false, loadElectionForUI);
                 if (newElection != null) {
                     currentElection = newElection;
                 }
@@ -208,11 +208,9 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
-//            foreach (Response r in lstDeletedResponses) {
-//                responseDAO.Delete(r);
-//            }
             refreshCountyLists();
             addedContests.Clear();
+
             foreach (ElectionContest ec in currentElection.ElectionContests) {
                 foreach (Response r in ec.Responses) {
                     r.SortOrder = ec.Responses.IndexOf(r);
@@ -221,7 +219,7 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
-                currentElection.Notes = txtNotes.Text;
+                currentElection.Notes = txtNotes.Text.Trim();
 
                 IList<Fault> faults = electionDAO.canMakePersistent(currentElection);
                 bool persistData = reportFaults(faults);
@@ -241,6 +239,9 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
+                currentElection = currentElection.ID == 0
+                                      ? new Election()
+                                      : electionDAO.findById(currentElection.ID, false, loadElectionForUI);
                 resetControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
@@ -517,7 +518,7 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void llstContestCandidate_SelectedIndexChanged(object sender, EventArgs e) {
+        private void lstContestCandidate_SelectedIndexChanged(object sender, EventArgs e) {
             try {
                 currentElectionContest = (ElectionContest) lstContestCandidate.SelectedItem;
                 refreshCandidateLists();
@@ -540,14 +541,6 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("btnAddCustomResponse_Click", ex);
-            }
-        }
-
-        private void frmElection_Resize(object sender, EventArgs e) {
-            try {
-                tbDisplay.Height = Height - 76;
-            } catch (Exception ex) {
-                reportException("frmElection_Resize", ex);
             }
         }
 

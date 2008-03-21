@@ -16,19 +16,45 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
+using System;
 using System.Collections.Generic;
 using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db.task;
 using NHibernate;
 using Spring.Data.NHibernate.Generic;
 
 namespace KnightRider.ElectionTracker.db {
-    internal class ContestCountyDAO : HibernateDAO<ContestCounty> {
-        public ContestCountyDAO(HibernateTemplate factory) : base(factory) {}
+    internal class ContestCountyDAO : IContestCountyDAO {
+        private readonly DelegateDAO<ContestCounty> delegateDAO;
+        private static readonly Type objectType = typeof (ContestCounty);
 
-        protected override IList<Fault> performCanMakePersistent(ContestCounty entity) {
-            IList<Fault> retVal = new List<Fault>();
+        public ContestCountyDAO(HibernateTemplate factory) {
+            delegateDAO = new DelegateDAO<ContestCounty>(factory);
+        }
 
-            return retVal;
+
+        public ContestCounty findById(object id, bool lockRecord, params IDAOTask<ContestCounty>[] tasks) {
+            return delegateDAO.findById(id, lockRecord, tasks);
+        }
+
+        public IList<ContestCounty> findAll() {
+            return delegateDAO.findAll();
+        }
+
+        public ContestCounty makePersistent(ContestCounty entity) {
+            return delegateDAO.makePersistent(entity);
+        }
+
+        public void makeTransient(ContestCounty entity) {
+            delegateDAO.makeTransient(entity);
+        }
+
+        public IList<Fault> canMakePersistent(ContestCounty entity) {
+            return delegateDAO.canMakePersistent(entity);
+        }
+
+        public IList<Fault> canMakeTransient(ContestCounty entity) {
+            return delegateDAO.canMakeTransient(entity);
         }
 
         public IList<ContestCounty> find(long countyID, long electionContestID) {
@@ -43,11 +69,7 @@ namespace KnightRider.ElectionTracker.db {
                                                                         return query.List<ContestCounty>();
                                                                     };
 
-            return ExecuteFind(findDelegate);
-        }
-
-        public override IList<Fault> canMakeTransient(ContestCounty entity) {
-            return new List<Fault>();
+            return delegateDAO.ExecuteFind(findDelegate);
         }
     }
 }

@@ -25,10 +25,10 @@ using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmCandidate : BaseMDIChild {
-        private readonly CandidateDAO candidateDAO;
+        private readonly ICandidateDAO candidateDAO;
         private Candidate currentCandidate;
 
-        public frmCandidate(CandidateDAO candidateDAO, PoliticalPartyDAO politicalPartyDAO) {
+        public frmCandidate(ICandidateDAO candidateDAO, PoliticalPartyDAO politicalPartyDAO) {
             InitializeComponent();
             this.candidateDAO = candidateDAO;
 
@@ -98,19 +98,17 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                // To Do: Validate Candidate
-                currentCandidate.FirstName = txtFirstName.Text;
-                currentCandidate.MiddleName = txtMiddleName.Text;
-                currentCandidate.LastName = txtLastName.Text;
+                currentCandidate.FirstName = txtFirstName.Text.Trim();
+                currentCandidate.MiddleName = txtMiddleName.Text.Trim();
+                currentCandidate.LastName = txtLastName.Text.Trim();
                 currentCandidate.PoliticalParty =
                     ((ListItemWrapper<PoliticalParty>) cboPoliticalParty.SelectedItem).Value;
-                currentCandidate.Notes = txtNotes.Text;
+                currentCandidate.Notes = txtNotes.Text.Trim();
                 currentCandidate.IsActive = chkActive.Checked;
 
-                //Validate the current data and get a list of faults.
-                IList<Fault> faultLst = candidateDAO.canMakePersistent(currentCandidate);
+                IList<Fault> faults = candidateDAO.canMakePersistent(currentCandidate);
 
-                bool persistData = reportFaults(faultLst);
+                bool persistData = reportFaults(faults);
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
@@ -125,6 +123,9 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
+                currentCandidate = currentCandidate.ID == 0
+                                       ? new Candidate()
+                                       : candidateDAO.findById(currentCandidate.ID, false);
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {

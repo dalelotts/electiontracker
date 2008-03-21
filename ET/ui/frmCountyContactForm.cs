@@ -23,10 +23,12 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmCountyContactForm : Form {
-        private CountyDAO countyDAO;
+        private ICountyDAO countyDAO;
+        private readonly LoadCountyForUI loadTask;
         private Font printFont;
         private IList<string> lstToPrint;
         private IList<string> lstHeader;
@@ -34,8 +36,9 @@ namespace KnightRider.ElectionTracker.ui {
         private int intCount;
         private PrintDocument toPrint;
 
-        public frmCountyContactForm(CountyDAO countyDAO) {
+        public frmCountyContactForm(ICountyDAO countyDAO, LoadCountyForUI loadTask) {
             this.countyDAO = countyDAO;
+            this.loadTask = loadTask;
             InitializeComponent();
             printFont = new Font("Courier New", 10);
         }
@@ -61,7 +64,7 @@ namespace KnightRider.ElectionTracker.ui {
             lstToPrint.Add("");
             lstToPrint.Add("</HEADER>");
 
-            foreach (County c in countyDAO.findAll()) {
+            foreach (County c in countyDAO.findAll(loadTask)) {
                 lstToPrint.Add(c.Name);
                 foreach (CountyPhoneNumber cpn in c.PhoneNumbers) {
                     lstToPrint.Add("   " + cpn.Type.Name + ": (" + cpn.AreaCode + ")" + cpn.PhoneNumber +
@@ -152,19 +155,6 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 intPages = 0;
                 toPrint.Print();
-            } catch (Exception ex) {
-                MessageBox.Show("Error: " + ex);
-            }
-        }
-
-        private void frmCountyContactForm_Resize(object sender, EventArgs e) {
-            try {
-                btnUp.Left = Width - 40;
-                btnDown.Left = Width - 40;
-                ppcViewer.Width = Width - 53;
-                ppcViewer.Height = Height - 81;
-                btnPrint.Top = Height - 63;
-                btnPrint.Left = Width - 116;
             } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex);
             }

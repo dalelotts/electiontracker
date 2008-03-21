@@ -16,53 +16,90 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
+using System;
 using System.Collections.Generic;
 using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.db.task;
 using NHibernate;
 using NHibernate.Expression;
 using Spring.Data.NHibernate.Generic;
-using Spring.Transaction.Interceptor;
 
 namespace KnightRider.ElectionTracker.db {
-    internal class ContestDAO : HibernateDAO<Contest> {
-        private static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
+    internal class ContestDAO : IContestDAO {
+        private static readonly Type contestObjectType = typeof (Contest);
         private static readonly IList<Order> ORDER_BY_NAME = new List<Order>();
-        private static readonly IList<ICriterion> NOT_ACTIVE_CRITERION = new List<ICriterion>();
+        private readonly DelegateDAO<Contest> delegateDAO;
 
         static ContestDAO() {
-            ACTIVE_CRITERION.Add(new EqExpression("IsActive", true));
-            NOT_ACTIVE_CRITERION.Add(new EqExpression("IsActive", false));
             ORDER_BY_NAME.Add(new Order("Name", true));
         }
 
-        public ContestDAO(HibernateTemplate factory) : base(factory) {}
+        public ContestDAO(HibernateTemplate factory) {
+            delegateDAO = new DelegateDAO<Contest>(factory);
+        }
 
-        // [Transaction(ReadOnly = true)]
         public IList<Contest> findActive() {
-            return findByCriteria(ACTIVE_CRITERION, ORDER_BY_NAME);
+            return delegateDAO.findByCriteria(DelegateDAO<Contest>.ACTIVE_CRITERION, ORDER_BY_NAME);
         }
 
         public IList<Contest> findInactive() {
-            return findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_NAME);
+            return delegateDAO.findByCriteria(DelegateDAO<Contest>.NOT_ACTIVE_CRITERION, ORDER_BY_NAME);
         }
 
-
-        public override IList<Contest> findAll() {
-            return findByCriteria(EMPTY_CRITERION, ORDER_BY_NAME);
+        public Contest findById(object id, bool lockRecord, params IDAOTask<Contest>[] tasks) {
+            return delegateDAO.findById(id, lockRecord, tasks);
         }
 
-        protected override IList<Fault> performCanMakePersistent(Contest entity) {
+        public IList<Contest> findAll() {
+            return delegateDAO.findByCriteria(DelegateDAO<Contest>.EMPTY_CRITERION, ORDER_BY_NAME);
+        }
+
+        public Contest makePersistent(Contest entity) {
+            return delegateDAO.makePersistent(entity);
+        }
+
+        public void makeTransient(Contest entity) {
+            delegateDAO.makeTransient(entity);
+        }
+
+        public IList<Fault> canMakePersistent(Contest entity) {
+            IList<Fault> result = delegateDAO.canMakePersistent(entity);
             FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
                                                               {
                                                                   IQuery query =
                                                                       session.CreateSQLQuery(
                                                                           "select * from contest where contestname = '" +
                                                                           entity.Name + "' and contestid != " +
-                                                                          entity.ID + ";").AddEntity(objectType);
+                                                                          entity.ID + ";").AddEntity(contestObjectType);
                                                                   return query.List<Contest>();
                                                               };
 
-            IList<Contest> duplicates = ExecuteFind(findDelegate);
+            IList<Contest> duplicates = delegateDAO.ExecuteFind(findDelegate);
+
+            if (duplicates.Count > 0) {
+                result.Add(
+                    new Fault(true, "Duplicate Contest Name: a contest named '" + entity.Name + "' already exists."));
+            }
+
+            return result;
+        }
+
+        public IList<Fault> canMakeTransient(Contest entity) {
+            return delegateDAO.canMakeTransient(entity);
+        }
+
+        protected IList<Fault> performCanMakePersistent(Contest entity) {
+            FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
+                                                              {
+                                                                  IQuery query =
+                                                                      session.CreateSQLQuery(
+                                                                          "select * from contest where contestname = '" +
+                                                                          entity.Name + "' and contestid != " +
+                                                                          entity.ID + ";").AddEntity(contestObjectType);
+                                                                  return query.List<Contest>();
+                                                              };
+
+            IList<Contest> duplicates = delegateDAO.ExecuteFind(findDelegate);
 
             IList<Fault> result = new List<Fault>();
 
@@ -74,10 +111,6 @@ namespace KnightRider.ElectionTracker.db {
             }
 
             return result;
-        }
-
-        public override IList<Fault> canMakeTransient(Contest entity) {
-            return new List<Fault>();
         }
     }
 }

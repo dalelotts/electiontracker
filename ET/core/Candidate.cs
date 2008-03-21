@@ -38,23 +38,35 @@ namespace KnightRider.ElectionTracker.core {
         [RequiredProperty("Candidate First Name")]
         public virtual string FirstName {
             get { return firstName; }
-            set { firstName = value; }
+            set {
+                firstName = value == null || value.Length == 0 ? null : value;
+                ;
+            }
         }
 
         public virtual string MiddleName {
             get { return middleName; }
-            set { middleName = value; }
+            set {
+                middleName = value == null || value.Length == 0 ? null : value;
+                ;
+            }
         }
 
         [RequiredProperty("Candidate Last Name")]
         public virtual string LastName {
             get { return lastName; }
-            set { lastName = value; }
+            set {
+                lastName = value == null || value.Length == 0 ? null : value;
+                ;
+            }
         }
 
         public virtual string Notes {
             get { return notes; }
-            set { notes = value; }
+            set {
+                notes = value == null || value.Length == 0 ? null : value;
+                ;
+            }
         }
 
         public virtual PoliticalParty PoliticalParty {

@@ -24,13 +24,13 @@
 		<id name="ID" column="ContestCountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
-    <bag lazy="false" inverse="true" name="ResponseValues" cascade="all-delete-orphan" >
+    <bag lazy="true" inverse="true" name="ResponseValues" cascade="all-delete-orphan" >
       <key column="ContestCountyID"/>
       <one-to-many class="KnightRider.ElectionTracker.core.ResponseValue, ElectionTracker"/>
     </bag>
 		<property name="WardsReporting" column="WardsReporting" type="Int32" length="100" not-null="true"/>
 		<property name="WardCount" column="WardCount" type="Int32" length="100" not-null="true"/>
-		<many-to-one name="County" class="KnightRider.ElectionTracker.core.County, ElectionTracker" column="CountyID" not-null="true" lazy="false" />
-		<many-to-one name="ElectionContest" class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true" lazy="false"/>
+		<many-to-one name="County" class="KnightRider.ElectionTracker.core.County, ElectionTracker" column="CountyID" not-null="true" lazy="false"/>
+		<many-to-one name="ElectionContest" class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true"/>
 	</class>
 </hibernate-mapping>

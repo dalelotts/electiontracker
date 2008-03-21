@@ -22,11 +22,11 @@
 		<id name="ID" column="ElectionContestID" type="Int64">
 			<generator class="identity"/>
 		</id>
-    <bag  inverse="true" name="Responses" cascade="all-delete-orphan" order-by="SortOrder" lazy="false">
+    <bag  inverse="true" name="Responses" cascade="all-delete-orphan" order-by="SortOrder" lazy="true">
       <key column="ElectionContestID"/>
       <one-to-many class="KnightRider.ElectionTracker.core.Response, ElectionTracker"/>
     </bag>
-    <bag inverse="true" name="Counties" cascade="all-delete-orphan" lazy="false">
+    <bag inverse="true" name="Counties" cascade="all-delete-orphan" lazy="true">
       <key column="ElectionContestID"/>
       <one-to-many class="KnightRider.ElectionTracker.core.ContestCounty, ElectionTracker"/>
     </bag>    

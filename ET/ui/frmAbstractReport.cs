@@ -24,21 +24,24 @@ using System.Windows.Forms;
 using Common.Logging;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal abstract partial class frmAbstractReport : Form {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmAbstractReport));
 
-        protected IElectionDAO electionDAO;
+        protected readonly IElectionDAO electionDAO;
+        protected readonly LoadElectionForReport loadTask;
         protected PrintDocument docToPrint;
         protected int intPages;
         protected Font printFont;
         protected bool blnLandscape;
 
-        public frmAbstractReport(IElectionDAO electionDAO) {
+        public frmAbstractReport(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport) {
             blnLandscape = false;
             this.electionDAO = electionDAO;
+            loadTask = loadElectionForReport;
             InitializeComponent();
             printFont = new Font("Courier New", 10);
         }
@@ -127,15 +130,6 @@ namespace KnightRider.ElectionTracker.ui {
                 // Bad selection, just ignore.
                 LOG.Error(ex);
             }
-        }
-
-        protected void ResizeForm(object sender, EventArgs e) {
-            lstElections.Height = Height - 115;
-            btnPrint.Top = Height - 69;
-            ppcElection.Width = Width - 237;
-            ppcElection.Height = Height - 58;
-            btnUp.Left = Width - 40;
-            btnDown.Left = Width - 40;
         }
 
         protected void frmAbstractReport_Load(object sender, EventArgs e) {

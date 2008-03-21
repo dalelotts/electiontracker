@@ -25,29 +25,25 @@ using Spring.Transaction.Interceptor;
 
 namespace KnightRider.ElectionTracker.db {
     internal class ElectionDAO : IElectionDAO {
-        private static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
         private static readonly IList<Order> ORDER_BY_ELECTION_DATE = new List<Order>();
-        private static readonly IList<ICriterion> NOT_ACTIVE_CRITERION = new List<ICriterion>();
         private readonly DelegateDAO<Election> delegateDAO;
 
         static ElectionDAO() {
-            ACTIVE_CRITERION.Add(new EqExpression("IsActive", true));
-            NOT_ACTIVE_CRITERION.Add(new EqExpression("IsActive", false));
             ORDER_BY_ELECTION_DATE.Add(new Order("Date", false));
         }
 
         public ElectionDAO(HibernateTemplate factory) {
-            this.delegateDAO = new DelegateDAO<Election>(factory);
+            delegateDAO = new DelegateDAO<Election>(factory);
         }
 
         [Transaction(ReadOnly = true)]
-        public IList<Election> findActive() {
-            return delegateDAO.findByCriteria(ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
+        public IList<Election> findActive(params IDAOTask<Election>[] tasks) {
+            return delegateDAO.findByCriteria(DelegateDAO<Election>.ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE, tasks);
         }
 
         [Transaction(ReadOnly = true)]
-        public IList<Election> findInactive() {
-            return delegateDAO.findByCriteria(NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE);
+        public IList<Election> findInactive(params IDAOTask<Election>[] tasks) {
+            return delegateDAO.findByCriteria(DelegateDAO<Election>.NOT_ACTIVE_CRITERION, ORDER_BY_ELECTION_DATE, tasks);
         }
 
         [Transaction(ReadOnly = true)]
@@ -57,7 +53,7 @@ namespace KnightRider.ElectionTracker.db {
 
         [Transaction(ReadOnly = true)]
         public IList<Election> findAll() {
-            return delegateDAO.findAll();
+            return delegateDAO.findByCriteria(DelegateDAO<Election>.EMPTY_CRITERION, ORDER_BY_ELECTION_DATE);
         }
 
         [Transaction(ReadOnly = false)]

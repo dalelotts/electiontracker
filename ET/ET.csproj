@@ -94,7 +94,6 @@
     <Compile Include="core\CandidateResponse.cs" />
     <Compile Include="core\Contest.cs" />
     <Compile Include="core\ContestCounty.cs" />
-    <Compile Include="core\ContestType.cs" />
     <Compile Include="core\County.cs" />
     <Compile Include="core\CountyAttribute.cs" />
     <Compile Include="core\CountyPhoneNumber.cs" />
@@ -111,12 +110,15 @@
     <Compile Include="db\CandidateDAO.cs" />
     <Compile Include="db\ContestCountyDAO.cs" />
     <Compile Include="db\ContestDAO.cs" />
-    <Compile Include="db\ContestTypeDAO.cs" />
     <Compile Include="db\CountyDAO.cs" />
     <Compile Include="db\DelegateDAO.cs" />
     <Compile Include="db\ElectionContestDAO.cs" />
     <Compile Include="db\ElectionDAO.cs" />
     <Compile Include="db\Fault.cs" />
+    <Compile Include="db\ICandidateDAO.cs" />
+    <Compile Include="db\IContestCountyDAO.cs" />
+    <Compile Include="db\IContestDAO.cs" />
+    <Compile Include="db\ICountyDAO.cs" />
     <Compile Include="db\IGenericDAO.cs" />
     <Compile Include="db\HibernateDAO.cs" />
     <Compile Include="db\IElectionDAO.cs" />
@@ -126,7 +128,9 @@
     <Compile Include="db\ResponseDAO.cs" />
     <Compile Include="db\ResponseValueDAO.cs" />
     <Compile Include="db\task\IDAOTask.cs" />
-    <Compile Include="db\task\LoadElectionContests.cs" />
+    <Compile Include="db\task\LoadCountyForUI.cs" />
+    <Compile Include="db\task\LoadElectionForReport.cs" />
+    <Compile Include="db\task\LoadElectionForUI.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
     <Compile Include="events\ContestVoteSumryArgs.cs" />
@@ -279,6 +283,8 @@
     </Compile>
     <Compile Include="util\DesignByContract.cs" />
     <Compile Include="util\Map.cs" />
+    <Compile Include="util\ValidationFailedException.cs" />
+    <Compile Include="util\Validator.cs" />
     <Compile Include="util\ValueSortedList.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="core\Candidate.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="core\ContestType.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="core\Contest.hbm.xml" />

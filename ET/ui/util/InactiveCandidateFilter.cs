@@ -24,11 +24,11 @@ using KnightRider.ElectionTracker.type;
 
 namespace KnightRider.ElectionTracker.ui.util {
     internal sealed class InactiveCandidateFilter : BaseTreeViewFilter {
-        private readonly CandidateDAO dao;
+        private readonly ICandidateDAO dao;
 
         private const string name = "Candidates - Inactive";
 
-        public InactiveCandidateFilter(CandidateDAO dao) : base(name) {
+        public InactiveCandidateFilter(ICandidateDAO dao) : base(name) {
             this.dao = dao;
         }
 

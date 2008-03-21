@@ -56,7 +56,7 @@ namespace KnightRider.ElectionTracker.ui {
             } else {
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult messageResult =
-                    MessageBox.Show(message + "Would you like to save anyway?", "Validation Failure", buttons);
+                    MessageBox.Show(message + "Would you like to contunue anyway?", "Validation Failure", buttons);
                 if (messageResult == DialogResult.Yes) {
                     result = true;
                 }

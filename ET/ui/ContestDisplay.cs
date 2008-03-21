@@ -25,21 +25,20 @@ using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.util;
 
-
 namespace KnightRider.ElectionTracker.ui {
     internal sealed class ContestDisplay : Panel {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (ContestDisplay));
 
         private ContestCounty contestCounty;
-        private readonly ContestCountyDAO contestCountyDAO;
+        private readonly IContestCountyDAO contestCountyDAO;
         private ResponseValueDAO responseValueDAO;
 
         private TextBox txtReporting;
         private Boolean _bDirty;
         private readonly Map<ResponseValue, TextBox> responseToTextBox;
 
-        public ContestDisplay(ContestCounty contestCounty, ContestCountyDAO contestCountyDAO,
-                              ResponseValueDAO responseValueDAO) {
+        public ContestDisplay(ElectionContest electionContest, ContestCounty contestCounty,
+                              IContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) {
             this.contestCounty = contestCounty;
             this.responseValueDAO = responseValueDAO;
             this.contestCountyDAO = contestCountyDAO;
@@ -52,7 +51,7 @@ namespace KnightRider.ElectionTracker.ui {
             Label lblContest = new Label();
             lblContest.Left = 5;
             lblContest.Width = 300;
-            lblContest.Text = contestCounty.ElectionContest.Contest.Name;
+            lblContest.Text = electionContest.Contest.Name;
             Controls.Add(lblContest);
 
             Label lblWardCount = new Label();
@@ -75,7 +74,7 @@ namespace KnightRider.ElectionTracker.ui {
             lblReporting.Left = txtReporting.Left - lblReporting.Width - 10;
             Controls.Add(lblReporting);
 
-            IList<Response> responses = contestCounty.ElectionContest.Responses;
+            IList<Response> responses = electionContest.Responses;
             responseToTextBox = new Map<ResponseValue, TextBox>();
             InitializeResponses(responses);
 

@@ -87,9 +87,11 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // txtName
             // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(91, 54);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(251, 20);
+            this.txtName.Size = new System.Drawing.Size(250, 20);
             this.txtName.TabIndex = 2;
             // 
             // txtAbbrev
@@ -114,13 +116,14 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 131);
+            this.ClientSize = new System.Drawing.Size(352, 131);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtAbbrev);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.lblRequired);
+            this.MinimumSize = new System.Drawing.Size(360, 165);
             this.Name = "frmPoliticalParty";
             this.Text = "Political Party";
             this.Controls.SetChildIndex(this.lblRequired, 0);

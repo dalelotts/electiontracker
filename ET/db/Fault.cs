@@ -17,8 +17,7 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 namespace KnightRider.ElectionTracker.db {
-    public class Fault
-    {
+    public class Fault {
         private readonly bool isError;
         private readonly string message;
 

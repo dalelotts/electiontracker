@@ -18,15 +18,12 @@
  **/
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
-using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmContest : BaseMDIChild {
-        private readonly ContestDAO contestDAO;
-        private readonly ContestTypeDAO contestTypeDAO;
+        private readonly IContestDAO contestDAO;
         private Contest currentContest;
 
         public override void btnDelete_Click(object sender, EventArgs e) {
@@ -43,10 +40,9 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        public frmContest(ContestDAO contestDAO, ContestTypeDAO contestTypeDAO) {
+        public frmContest(IContestDAO contestDAO) {
             InitializeComponent();
             this.contestDAO = contestDAO;
-            this.contestTypeDAO = contestTypeDAO;
 
             currentContest = new Contest();
         }
@@ -62,14 +58,10 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
-            cbContestType_Leave(null, null);
             try {
                 currentContest.IsActive = chkActive.Checked;
-                currentContest.Name = txtName.Text;
-                if (cbContestType.SelectedItem != null) {
-                    currentContest.ContestType = ((ListItemWrapper<ContestType>) cbContestType.SelectedItem).Value;
-                }
-                currentContest.Notes = txtNotes.Text;
+                currentContest.Name = txtName.Text.Trim();
+                currentContest.Notes = txtNotes.Text.Trim();
 
                 //Validate the current data and get a list of faults.
                 IList<Fault> faults = contestDAO.canMakePersistent(currentContest);
@@ -95,36 +87,16 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void refreshControls() {
-
             txtName.Text = currentContest.Name;
             txtNotes.Text = currentContest.Notes;
 
             refreshGoToList();
-            refreshContestTypes();
-
-            if (currentContest.ContestType == null && cbContestType.Items.Count > 0) {
-                cbContestType.SelectedIndex = 0;
-            } else {
-                for (int i = 0, limit = cbContestType.Items.Count; i < limit; i++) {
-                    if (((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value.ID ==
-                        currentContest.ContestType.ID) {
-                        cbContestType.SelectedIndex = i;
-                    }
-                }
-            }
             chkActive.Checked = currentContest.IsActive;
-        }
-
-        private void refreshContestTypes() {
-            cbContestType.Items.Clear();
-            IList<ContestType> contestTypes = contestTypeDAO.findAll();
-            foreach (ContestType contestType in contestTypes) {
-                cbContestType.Items.Add(new ListItemWrapper<ContestType>(contestType.Name, contestType));
-            }
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
+                currentContest = currentContest.ID == 0 ? new Contest() : contestDAO.findById(currentContest.ID, false);
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
@@ -150,36 +122,6 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             }
             refreshControls();
-        }
-
-        private void cbContestType_Leave(object sender, EventArgs e) {
-            try {
-                if ((cbContestType.SelectedIndex == -1) && (!cbContestType.Text.Equals(""))) {
-                    String newTypeName = cbContestType.Text;
-                    String message = "Contest Type \"" + newTypeName +
-                                     "\" does not exist.\nWould you like to create it?";
-                    String caption = "Unidentified Type";
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                    DialogResult result = MessageBox.Show(message, caption, buttons);
-                    if (result == DialogResult.Yes) {
-                        ContestType newType = new ContestType();
-                        newType.Name = newTypeName;
-                        contestTypeDAO.makePersistent(newType);
-                        refreshControls();
-
-                        for (int i = 0; i < cbContestType.Items.Count; i++) {
-                            if ((((ListItemWrapper<ContestType>) cbContestType.Items[i]).Value).Name.Equals(newTypeName)) {
-                                cbContestType.SelectedIndex = i;
-                            }
-                        }
-                    }
-                    if (result == DialogResult.No) {
-                        cbContestType.SelectedIndex = 0;
-                    }
-                }
-            } catch (Exception ex) {
-                reportException("cbContestType_Leave", ex);
-            }
         }
     }
 }

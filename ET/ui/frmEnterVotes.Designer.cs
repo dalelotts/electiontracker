@@ -66,7 +66,7 @@ namespace KnightRider.ElectionTracker.ui
             this.gbElection.Location = new System.Drawing.Point(12, 12);
             this.gbElection.Name = "gbElection";
             this.gbElection.Size = new System.Drawing.Size(338, 53);
-            this.gbElection.TabIndex = 1;
+            this.gbElection.TabIndex = 0;
             this.gbElection.TabStop = false;
             this.gbElection.Text = "Election";
             // 
@@ -77,7 +77,7 @@ namespace KnightRider.ElectionTracker.ui
             this.cmbElections.Location = new System.Drawing.Point(60, 19);
             this.cmbElections.Name = "cmbElections";
             this.cmbElections.Size = new System.Drawing.Size(272, 21);
-            this.cmbElections.TabIndex = 4;
+            this.cmbElections.TabIndex = 1;
             this.cmbElections.SelectedIndexChanged += new System.EventHandler(this.cmbElections_SelectedIndexChanged);
             // 
             // label1
@@ -86,7 +86,7 @@ namespace KnightRider.ElectionTracker.ui
             this.label1.Location = new System.Drawing.Point(6, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Election:";
             // 
             // gbCounty
@@ -96,7 +96,7 @@ namespace KnightRider.ElectionTracker.ui
             this.gbCounty.Location = new System.Drawing.Point(12, 71);
             this.gbCounty.Name = "gbCounty";
             this.gbCounty.Size = new System.Drawing.Size(194, 350);
-            this.gbCounty.TabIndex = 2;
+            this.gbCounty.TabIndex = 1;
             this.gbCounty.TabStop = false;
             this.gbCounty.Text = "Counties";
             // 
@@ -105,7 +105,7 @@ namespace KnightRider.ElectionTracker.ui
             this.btnNext.Location = new System.Drawing.Point(106, 321);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 2;
+            this.btnNext.TabIndex = 1;
             this.btnNext.Text = "&Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -117,7 +117,7 @@ namespace KnightRider.ElectionTracker.ui
             this.lstCounties.Name = "lstCounties";
             this.lstCounties.Size = new System.Drawing.Size(172, 290);
             this.lstCounties.Sorted = true;
-            this.lstCounties.TabIndex = 1;
+            this.lstCounties.TabIndex = 0;
             this.lstCounties.SelectedIndexChanged += new System.EventHandler(this.lstCounties_SelectedIndexChanged);
             // 
             // gbContest
@@ -126,7 +126,7 @@ namespace KnightRider.ElectionTracker.ui
             this.gbContest.Location = new System.Drawing.Point(212, 71);
             this.gbContest.Name = "gbContest";
             this.gbContest.Size = new System.Drawing.Size(480, 350);
-            this.gbContest.TabIndex = 3;
+            this.gbContest.TabIndex = 2;
             this.gbContest.TabStop = false;
             this.gbContest.Text = "Contests";
             // 

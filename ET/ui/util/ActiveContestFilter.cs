@@ -26,9 +26,9 @@ namespace KnightRider.ElectionTracker.ui.util {
     internal class ActiveContestFilter : BaseTreeViewFilter {
         private static readonly string name = "Contest - Active";
 
-        private readonly ContestDAO dao;
+        private readonly IContestDAO dao;
 
-        public ActiveContestFilter(ContestDAO dao) : base(name) {
+        public ActiveContestFilter(IContestDAO dao) : base(name) {
             this.dao = dao;
         }
 

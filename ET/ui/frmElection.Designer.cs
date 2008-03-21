@@ -376,6 +376,9 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // tbDisplay
             // 
+            this.tbDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDisplay.Controls.Add(this.tabElection);
             this.tbDisplay.Controls.Add(this.tabContests);
             this.tbDisplay.Controls.Add(this.tabDetails);
@@ -383,7 +386,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tbDisplay.Location = new System.Drawing.Point(12, 55);
             this.tbDisplay.Name = "tbDisplay";
             this.tbDisplay.SelectedIndex = 0;
-            this.tbDisplay.Size = new System.Drawing.Size(588, 309);
+            this.tbDisplay.Size = new System.Drawing.Size(587, 303);
             this.tbDisplay.TabIndex = 0;
             // 
             // tabElection
@@ -396,7 +399,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabElection.Location = new System.Drawing.Point(4, 22);
             this.tabElection.Name = "tabElection";
             this.tabElection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabElection.Size = new System.Drawing.Size(580, 283);
+            this.tabElection.Size = new System.Drawing.Size(579, 277);
             this.tabElection.TabIndex = 0;
             this.tabElection.Text = "Election";
             this.tabElection.UseVisualStyleBackColor = true;
@@ -419,10 +422,11 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // chkActive
             // 
+            this.chkActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(478, 18);
+            this.chkActive.Location = new System.Drawing.Point(503, 15);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
             this.chkActive.TabIndex = 4;
@@ -431,10 +435,13 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // txtNotes
             // 
+            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNotes.Location = new System.Drawing.Point(64, 50);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(502, 212);
+            this.txtNotes.Size = new System.Drawing.Size(501, 221);
             this.txtNotes.TabIndex = 3;
             // 
             // label7
@@ -459,14 +466,14 @@ namespace KnightRider.ElectionTracker.ui
             this.tabContests.Location = new System.Drawing.Point(4, 22);
             this.tabContests.Name = "tabContests";
             this.tabContests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContests.Size = new System.Drawing.Size(580, 283);
+            this.tabContests.Size = new System.Drawing.Size(579, 277);
             this.tabContests.TabIndex = 1;
             this.tabContests.Text = "Contests";
             this.tabContests.UseVisualStyleBackColor = true;
             // 
             // btnAddAllContests
             // 
-            this.btnAddAllContests.Location = new System.Drawing.Point(258, 114);
+            this.btnAddAllContests.Location = new System.Drawing.Point(258, 33);
             this.btnAddAllContests.Name = "btnAddAllContests";
             this.btnAddAllContests.Size = new System.Drawing.Size(30, 29);
             this.btnAddAllContests.TabIndex = 4;
@@ -476,7 +483,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnRemoveContest
             // 
-            this.btnRemoveContest.Location = new System.Drawing.Point(258, 187);
+            this.btnRemoveContest.Location = new System.Drawing.Point(258, 106);
             this.btnRemoveContest.Name = "btnRemoveContest";
             this.btnRemoveContest.Size = new System.Drawing.Size(30, 29);
             this.btnRemoveContest.TabIndex = 6;
@@ -486,7 +493,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnRemoveAllContests
             // 
-            this.btnRemoveAllContests.Location = new System.Drawing.Point(258, 222);
+            this.btnRemoveAllContests.Location = new System.Drawing.Point(258, 141);
             this.btnRemoveAllContests.Name = "btnRemoveAllContests";
             this.btnRemoveAllContests.Size = new System.Drawing.Size(30, 29);
             this.btnRemoveAllContests.TabIndex = 7;
@@ -496,7 +503,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnAddContest
             // 
-            this.btnAddContest.Location = new System.Drawing.Point(258, 149);
+            this.btnAddContest.Location = new System.Drawing.Point(258, 68);
             this.btnAddContest.Name = "btnAddContest";
             this.btnAddContest.Size = new System.Drawing.Size(30, 29);
             this.btnAddContest.TabIndex = 5;
@@ -506,16 +513,21 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // lstAllContests
             // 
+            this.lstAllContests.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstAllContests.FormattingEnabled = true;
             this.lstAllContests.Location = new System.Drawing.Point(294, 31);
             this.lstAllContests.Name = "lstAllContests";
             this.lstAllContests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAllContests.Size = new System.Drawing.Size(272, 238);
+            this.lstAllContests.Size = new System.Drawing.Size(271, 238);
             this.lstAllContests.Sorted = true;
             this.lstAllContests.TabIndex = 3;
             // 
             // lstElectionContests
             // 
+            this.lstElectionContests.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstElectionContests.FormattingEnabled = true;
             this.lstElectionContests.Location = new System.Drawing.Point(6, 31);
             this.lstElectionContests.Name = "lstElectionContests";
@@ -562,14 +574,14 @@ namespace KnightRider.ElectionTracker.ui
             this.tabDetails.Location = new System.Drawing.Point(4, 22);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetails.Size = new System.Drawing.Size(580, 283);
+            this.tabDetails.Size = new System.Drawing.Size(579, 277);
             this.tabDetails.TabIndex = 2;
             this.tabDetails.Text = "Candidates";
             this.tabDetails.UseVisualStyleBackColor = true;
             // 
             // btnResponseDown
             // 
-            this.btnResponseDown.Location = new System.Drawing.Point(358, 244);
+            this.btnResponseDown.Location = new System.Drawing.Point(358, 237);
             this.btnResponseDown.Name = "btnResponseDown";
             this.btnResponseDown.Size = new System.Drawing.Size(27, 22);
             this.btnResponseDown.TabIndex = 14;
@@ -579,7 +591,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnResponseUp
             // 
-            this.btnResponseUp.Location = new System.Drawing.Point(358, 216);
+            this.btnResponseUp.Location = new System.Drawing.Point(358, 209);
             this.btnResponseUp.Name = "btnResponseUp";
             this.btnResponseUp.Size = new System.Drawing.Size(27, 22);
             this.btnResponseUp.TabIndex = 13;
@@ -599,14 +611,16 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // txtCustomResponse
             // 
+            this.txtCustomResponse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCustomResponse.Location = new System.Drawing.Point(391, 36);
             this.txtCustomResponse.Name = "txtCustomResponse";
-            this.txtCustomResponse.Size = new System.Drawing.Size(174, 20);
+            this.txtCustomResponse.Size = new System.Drawing.Size(173, 20);
             this.txtCustomResponse.TabIndex = 5;
             // 
             // btnAddAllCandidates
             // 
-            this.btnAddAllCandidates.Location = new System.Drawing.Point(358, 94);
+            this.btnAddAllCandidates.Location = new System.Drawing.Point(358, 85);
             this.btnAddAllCandidates.Name = "btnAddAllCandidates";
             this.btnAddAllCandidates.Size = new System.Drawing.Size(27, 22);
             this.btnAddAllCandidates.TabIndex = 9;
@@ -616,7 +630,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnRemoveCandidate
             // 
-            this.btnRemoveCandidate.Location = new System.Drawing.Point(358, 150);
+            this.btnRemoveCandidate.Location = new System.Drawing.Point(358, 141);
             this.btnRemoveCandidate.Name = "btnRemoveCandidate";
             this.btnRemoveCandidate.Size = new System.Drawing.Size(27, 22);
             this.btnRemoveCandidate.TabIndex = 11;
@@ -626,7 +640,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnRemoveAllCandidates
             // 
-            this.btnRemoveAllCandidates.Location = new System.Drawing.Point(358, 178);
+            this.btnRemoveAllCandidates.Location = new System.Drawing.Point(358, 169);
             this.btnRemoveAllCandidates.Name = "btnRemoveAllCandidates";
             this.btnRemoveAllCandidates.Size = new System.Drawing.Size(27, 22);
             this.btnRemoveAllCandidates.TabIndex = 12;
@@ -636,7 +650,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnAddCandidate
             // 
-            this.btnAddCandidate.Location = new System.Drawing.Point(358, 122);
+            this.btnAddCandidate.Location = new System.Drawing.Point(357, 113);
             this.btnAddCandidate.Name = "btnAddCandidate";
             this.btnAddCandidate.Size = new System.Drawing.Size(27, 22);
             this.btnAddCandidate.TabIndex = 10;
@@ -646,31 +660,38 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // lstContestCandidate
             // 
+            this.lstContestCandidate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstContestCandidate.FormattingEnabled = true;
             this.lstContestCandidate.Location = new System.Drawing.Point(9, 35);
             this.lstContestCandidate.Name = "lstContestCandidate";
-            this.lstContestCandidate.Size = new System.Drawing.Size(163, 238);
+            this.lstContestCandidate.Size = new System.Drawing.Size(163, 225);
             this.lstContestCandidate.Sorted = true;
             this.lstContestCandidate.TabIndex = 1;
-            this.lstContestCandidate.SelectedIndexChanged += new System.EventHandler(this.llstContestCandidate_SelectedIndexChanged);
+            this.lstContestCandidate.SelectedIndexChanged += new System.EventHandler(this.lstContestCandidate_SelectedIndexChanged);
             // 
             // lstAllCandidates
             // 
+            this.lstAllCandidates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstAllCandidates.FormattingEnabled = true;
-            this.lstAllCandidates.Location = new System.Drawing.Point(391, 100);
+            this.lstAllCandidates.Location = new System.Drawing.Point(391, 85);
             this.lstAllCandidates.Name = "lstAllCandidates";
             this.lstAllCandidates.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAllCandidates.Size = new System.Drawing.Size(174, 173);
+            this.lstAllCandidates.Size = new System.Drawing.Size(173, 173);
             this.lstAllCandidates.Sorted = true;
             this.lstAllCandidates.TabIndex = 8;
             // 
             // lstContestCandidates
             // 
+            this.lstContestCandidates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstContestCandidates.FormattingEnabled = true;
             this.lstContestCandidates.Location = new System.Drawing.Point(190, 36);
             this.lstContestCandidates.Name = "lstContestCandidates";
             this.lstContestCandidates.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstContestCandidates.Size = new System.Drawing.Size(161, 238);
+            this.lstContestCandidates.Size = new System.Drawing.Size(161, 225);
             this.lstContestCandidates.TabIndex = 3;
             // 
             // label13
@@ -694,7 +715,7 @@ namespace KnightRider.ElectionTracker.ui
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(388, 84);
+            this.label8.Location = new System.Drawing.Point(388, 69);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 7;
@@ -724,7 +745,7 @@ namespace KnightRider.ElectionTracker.ui
             this.pgCounties.Location = new System.Drawing.Point(4, 22);
             this.pgCounties.Name = "pgCounties";
             this.pgCounties.Padding = new System.Windows.Forms.Padding(3);
-            this.pgCounties.Size = new System.Drawing.Size(580, 283);
+            this.pgCounties.Size = new System.Drawing.Size(579, 277);
             this.pgCounties.TabIndex = 3;
             this.pgCounties.Text = "Counties";
             this.pgCounties.UseVisualStyleBackColor = true;
@@ -733,6 +754,8 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.dgvContestCounties.AllowUserToAddRows = false;
             this.dgvContestCounties.AllowUserToDeleteRows = false;
+            this.dgvContestCounties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvContestCounties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContestCounties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -741,7 +764,7 @@ namespace KnightRider.ElectionTracker.ui
             this.dgvContestCounties.Name = "dgvContestCounties";
             this.dgvContestCounties.RowHeadersVisible = false;
             this.dgvContestCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContestCounties.Size = new System.Drawing.Size(172, 238);
+            this.dgvContestCounties.Size = new System.Drawing.Size(172, 225);
             this.dgvContestCounties.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -761,6 +784,9 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.dgvCounties.AllowUserToAddRows = false;
             this.dgvCounties.AllowUserToDeleteRows = false;
+            this.dgvCounties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCounties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCounties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvCounty,
@@ -769,7 +795,7 @@ namespace KnightRider.ElectionTracker.ui
             this.dgvCounties.Name = "dgvCounties";
             this.dgvCounties.RowHeadersVisible = false;
             this.dgvCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCounties.Size = new System.Drawing.Size(172, 238);
+            this.dgvCounties.Size = new System.Drawing.Size(171, 225);
             this.dgvCounties.TabIndex = 5;
             // 
             // dgvCounty
@@ -846,10 +872,12 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // lstContestCounty
             // 
+            this.lstContestCounty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstContestCounty.FormattingEnabled = true;
             this.lstContestCounty.Location = new System.Drawing.Point(10, 33);
             this.lstContestCounty.Name = "lstContestCounty";
-            this.lstContestCounty.Size = new System.Drawing.Size(163, 238);
+            this.lstContestCounty.Size = new System.Drawing.Size(163, 225);
             this.lstContestCounty.Sorted = true;
             this.lstContestCounty.TabIndex = 1;
             this.lstContestCounty.SelectedIndexChanged += new System.EventHandler(this.lstContestCounty_SelectedIndexChanged);
@@ -877,12 +905,12 @@ namespace KnightRider.ElectionTracker.ui
             // frmElection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(608, 372);
+            this.ClientSize = new System.Drawing.Size(607, 366);
             this.Controls.Add(this.tbDisplay);
             this.Controls.Add(this.lblRequired);
+            this.MinimumSize = new System.Drawing.Size(615, 400);
             this.Name = "frmElection";
             this.Text = "Election";
-            this.Resize += new System.EventHandler(this.frmElection_Resize);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.tabControl1.ResumeLayout(false);

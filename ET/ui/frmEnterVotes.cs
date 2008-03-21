@@ -18,9 +18,9 @@
  **/
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.ui.util;
 using KnightRider.ElectionTracker.util;
 
@@ -28,15 +28,16 @@ namespace KnightRider.ElectionTracker.ui {
     internal partial class frmEnterVotes : BaseMDIChild {
         private Map<String, VoteEnterer> countyToVoteEnterer;
         private readonly IElectionDAO electionDAO;
-        private readonly ContestCountyDAO contestCountyDAO;
+        private readonly IContestCountyDAO contestCountyDAO;
         private readonly ResponseValueDAO responseValueDAO;
+        private readonly LoadElectionForUI loadElectionForUI;
 
-
-        public frmEnterVotes(IElectionDAO electionDAO, ContestCountyDAO contestCountyDAO,
-                             ResponseValueDAO responseValueDAO) {
+        public frmEnterVotes(IElectionDAO electionDAO, IContestCountyDAO contestCountyDAO,
+                             ResponseValueDAO responseValueDAO, LoadElectionForUI loadElectionForUI) {
             this.electionDAO = electionDAO;
             this.contestCountyDAO = contestCountyDAO;
             this.responseValueDAO = responseValueDAO;
+            this.loadElectionForUI = loadElectionForUI;
             countyToVoteEnterer = new Map<String, VoteEnterer>();
             InitializeComponent();
             toolStrip1.Visible = false;
@@ -58,7 +59,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         // Loads the elections into the listbox.
         private void LoadElections() {
-            IList<Election> elections = electionDAO.findActive();
+            IList<Election> elections = electionDAO.findActive(loadElectionForUI);
             foreach (Election election in elections) {
                 cmbElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString("d"), election));
             }

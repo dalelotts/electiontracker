@@ -21,12 +21,19 @@ using System;
 namespace KnightRider.ElectionTracker.db {
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     internal class RequiredProperty : Attribute {
+        public int minLength = 0;
+        public int maxLength = Int32.MaxValue;
+        public string example = null;
         private string friendlyName;
         private bool allowEmptyList = false;
 
         public bool AllowEmptyList {
             get { return allowEmptyList; }
             set { allowEmptyList = value; }
+        }
+
+        public int MinLength {
+            get { return minLength; }
         }
 
         public RequiredProperty(string friendlyName) {

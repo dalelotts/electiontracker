@@ -21,30 +21,28 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmCounty : BaseMDIChild {
-        private readonly CountyDAO countyDAO;
+        private readonly ICountyDAO countyDAO;
         private readonly PhoneNumberTypeDAO phoneNumberTypeDAO;
+        private readonly LoadCountyForUI loadCountyForUI;
         private readonly AttributeTypeDAO attributeTypeDAO;
-
-        private IList<CountyPhoneNumber> resetPhoneNums;
-        private IList<CountyWebsite> resetWebsites;
-        private IList<CountyAttribute> resetAttributes;
 
         private County currentCounty;
 
-        public frmCounty(CountyDAO countyDAO, AttributeTypeDAO attributeTypeDAO, PhoneNumberTypeDAO phoneNumberTypeDAO) {
+        public frmCounty(ICountyDAO countyDAO, AttributeTypeDAO attributeTypeDAO, PhoneNumberTypeDAO phoneNumberTypeDAO,
+                         LoadCountyForUI loadCountyForUI) {
             InitializeComponent();
+
 
             this.countyDAO = countyDAO;
             this.attributeTypeDAO = attributeTypeDAO;
             this.phoneNumberTypeDAO = phoneNumberTypeDAO;
+            this.loadCountyForUI = loadCountyForUI;
 
-            resetPhoneNums = new List<CountyPhoneNumber>();
-            resetWebsites = new List<CountyWebsite>();
-            resetAttributes = new List<CountyAttribute>();
 
             refreshPhoneNumberTypes();
             refreshAttributeTypes();
@@ -121,11 +119,21 @@ namespace KnightRider.ElectionTracker.ui {
         private void btnAddPhoneNum_Click(object sender, EventArgs e) {
             try {
                 CountyPhoneNumber tmpPhoneNumber = new CountyPhoneNumber();
-                tmpPhoneNumber.AreaCode = txtAreaCode.Text;
-                tmpPhoneNumber.PhoneNumber = txtPhoneNum.Text;
+                tmpPhoneNumber.AreaCode = txtAreaCode.Text.Trim();
+                tmpPhoneNumber.PhoneNumber = txtPhoneNumber.Text.Trim();
                 tmpPhoneNumber.Type = ((ListItemWrapper<PhoneNumberType>) cbPhoneNumberType.SelectedItem).Value;
-                currentCounty.PhoneNumbers.Add(tmpPhoneNumber);
-                refreshPhoneNumbers();
+                tmpPhoneNumber.County = currentCounty;
+
+                IList<Fault> faults = countyDAO.canMakePersistent(tmpPhoneNumber);
+                bool persistData = reportFaults(faults);
+
+                //If there were no errors, add the phone number to the current county.
+                if (persistData) {
+                    currentCounty.PhoneNumbers.Add(tmpPhoneNumber);
+                    refreshPhoneNumbers();
+                    txtAreaCode.Text = null;
+                    txtPhoneNumber.Text = null;
+                }
             } catch (Exception ex) {
                 reportException("btnAddPhoneNum_Click", ex);
             }
@@ -145,9 +153,18 @@ namespace KnightRider.ElectionTracker.ui {
         private void btnAddWebsite_Click(object sender, EventArgs e) {
             try {
                 CountyWebsite tmpWebsite = new CountyWebsite();
-                tmpWebsite.URL = txtWebsite.Text;
-                currentCounty.Websites.Add(tmpWebsite);
-                refreshWebsites();
+                tmpWebsite.URL = txtWebsite.Text.Trim();
+                tmpWebsite.County = currentCounty;
+
+                IList<Fault> faults = countyDAO.canMakePersistent(tmpWebsite);
+                bool persistData = reportFaults(faults);
+
+                //If there were no errors, add the website to the current county.
+                if (persistData) {
+                    currentCounty.Websites.Add(tmpWebsite);
+                    refreshWebsites();
+                    txtWebsite.Text = "http://";
+                }
             } catch (Exception ex) {
                 reportException("btnAddWebsite_Click", ex);
             }
@@ -168,9 +185,18 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 CountyAttribute tmpAttribute = new CountyAttribute();
                 if (cbKey != null) tmpAttribute.Type = ((ListItemWrapper<AttributeType>) cbKey.SelectedItem).Value;
-                tmpAttribute.Value = txtValue.Text;
-                currentCounty.Attributes.Add(tmpAttribute);
-                refreshAttributes();
+                tmpAttribute.Value = txtValue.Text.Trim();
+                tmpAttribute.County = currentCounty;
+
+                IList<Fault> faults = countyDAO.canMakePersistent(tmpAttribute);
+                bool persistData = reportFaults(faults);
+
+                //If there were no errors, add the attribute to the current county.
+                if (persistData) {
+                    currentCounty.Attributes.Add(tmpAttribute);
+                    refreshAttributes();
+                    txtValue.Text = null;
+                }
             } catch (Exception ex) {
                 reportException("btnAddAttribute_Click", ex);
             }
@@ -198,20 +224,11 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public override void btnSave_Click(object sender, EventArgs e) {
-            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
-                cpn.County = currentCounty;
-            }
-            foreach (CountyWebsite cw in currentCounty.Websites) {
-                cw.County = currentCounty;
-            }
-            foreach (CountyAttribute ca in currentCounty.Attributes) {
-                ca.County = currentCounty;
-            }
             try {
-                currentCounty.Name = txtCountyName.Text;
-                currentCounty.Notes = txtNotes.Text;
+                currentCounty.Name = txtCountyName.Text.Trim();
+                currentCounty.Notes = txtNotes.Text.Trim();
                 int i;
-                Int32.TryParse(txtCountyWardCount.Text, out i);
+                Int32.TryParse(txtCountyWardCount.Text.Trim(), out i);
                 currentCounty.WardCount = i;
 
                 IList<Fault> faults = countyDAO.canMakePersistent(currentCounty);
@@ -230,6 +247,9 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
+                currentCounty = currentCounty.ID == 0
+                                    ? new County()
+                                    : countyDAO.findById(currentCounty.ID, false, loadCountyForUI);
                 resetControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
@@ -238,67 +258,17 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void resetControls() {
-            txtCountyName.Text = currentCounty.Name;
-            txtCountyWardCount.Text = currentCounty.WardCount.ToString();
-            resetPhoneNumbers();
-            resetSites();
-            resetAttr();
+            currentCounty = currentCounty.ID == 0
+                                ? new County()
+                                : countyDAO.findById(currentCounty.ID, false, loadCountyForUI);
+            refreshControls();
         }
 
-        private void resetPhoneNumbers() {
-            lstPhoneNums.Items.Clear();
-            foreach (CountyPhoneNumber cpn in resetPhoneNums) {
-                lstPhoneNums.Items.Add(cpn);
-            }
-
-            IList<CountyPhoneNumber> removeList = new List<CountyPhoneNumber>();
-            foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
-                if (!resetPhoneNums.Contains(cpn))
-                    removeList.Add(cpn);
-            }
-
-            foreach (CountyPhoneNumber cpn in removeList) {
-                currentCounty.PhoneNumbers.Remove(cpn);
-            }
-        }
-
-        private void resetSites() {
-            lstWebsites.Items.Clear();
-            foreach (CountyWebsite cws in resetWebsites) {
-                lstWebsites.Items.Add(cws);
-            }
-
-            IList<CountyWebsite> removeList = new List<CountyWebsite>();
-            foreach (CountyWebsite cws in currentCounty.Websites) {
-                if (!resetWebsites.Contains(cws))
-                    removeList.Add(cws);
-            }
-
-            foreach (CountyWebsite cws in removeList) {
-                currentCounty.Websites.Remove(cws);
-            }
-        }
-
-        private void resetAttr() {
-            lstAttributes.Items.Clear();
-            foreach (CountyAttribute ca in resetAttributes) {
-                lstAttributes.Items.Add(ca);
-            }
-
-            IList<CountyAttribute> removeList = new List<CountyAttribute>();
-            foreach (CountyAttribute ca in currentCounty.Attributes) {
-                if (!resetAttributes.Contains(ca))
-                    removeList.Add(ca);
-            }
-
-            foreach (CountyAttribute ca in removeList) {
-                currentCounty.Attributes.Remove(ca);
-            }
-        }
 
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                currentCounty = (County) cboGoTo.SelectedItem;
+                County selectedCounty = (County) cboGoTo.SelectedItem;
+                currentCounty = countyDAO.findById(selectedCounty.ID, false, loadCountyForUI);
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
             } catch (Exception ex) {
@@ -323,21 +293,12 @@ namespace KnightRider.ElectionTracker.ui {
         public void loadCounty(long? id) {
             try {
                 if (id.HasValue) {
-                    County county = countyDAO.findById(id.Value, false);
+                    County county = countyDAO.findById(id.Value, false, loadCountyForUI);
                     if (county != null) {
                         currentCounty = county;
-                        foreach (CountyPhoneNumber cpn in currentCounty.PhoneNumbers) {
-                            resetPhoneNums.Add(cpn);
-                        }
-                        foreach (CountyWebsite cws in currentCounty.Websites) {
-                            resetWebsites.Add(cws);
-                        }
-                        foreach (CountyAttribute ca in currentCounty.Attributes) {
-                            resetAttributes.Add(ca);
-                        }
-                        refreshControls();
                     }
                 }
+                refreshControls();
             } catch (Exception ex) {
                 reportException("loadCounty", ex);
             }

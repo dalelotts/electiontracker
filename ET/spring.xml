@@ -19,7 +19,7 @@
     <property name="CacheQueries" value="true"/>
   </object>
   <!-- Database and NHibernate Configuration -->
-  <db:provider id="DbProvider" provider="MySql" connectionString="Server=localhost;database=degenst;uid=root;pwd=password;"/>
+  <db:provider id="DbProvider" provider="MySql" connectionString="Server=localhost;database=electiontracker;uid=root;pwd=password;"/>
   <object id="SessionFactory" type="Spring.Data.NHibernate.LocalSessionFactoryObject, Spring.Data.NHibernate12">
     <property name="DbProvider" ref="DbProvider"/>
     <!--<property name="ExposeTransactionAwareSessionFactory" value="true"/> -->
@@ -38,12 +38,15 @@
     </property>
   </object>
 
-  <tx:attribute-driven transaction-manager="HibernateTransactionManager" proxy-target-type="false"/> 
-    
+  <tx:attribute-driven transaction-manager="HibernateTransactionManager" proxy-target-type="false"/>
+
+  <object name="LoadElectionForUI" type="KnightRider.ElectionTracker.db.task.LoadElectionForUI, ElectionTracker" autowire="no" singleton="true"/>
+  <object name="LoadCountyForUI" type="KnightRider.ElectionTracker.db.task.LoadCountyForUI, ElectionTracker" autowire="no" singleton="true"/>
+  <object name="LoadElectionForReport" type="KnightRider.ElectionTracker.db.task.LoadElectionForReport, ElectionTracker" autowire="no" singleton="true"/>
+
   <object name="ElectionDAO" type="KnightRider.ElectionTracker.db.ElectionDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="PoliticalPartyDAO" type="KnightRider.ElectionTracker.db.PoliticalPartyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="CandidateDAO" type="KnightRider.ElectionTracker.db.CandidateDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-  <object name="ContestTypeDAO" type="KnightRider.ElectionTracker.db.ContestTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ContestDAO" type="KnightRider.ElectionTracker.db.ContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="CountyDAO" type="KnightRider.ElectionTracker.db.CountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ResponseValueDAO" type="KnightRider.ElectionTracker.db.ResponseValueDAO, ElectionTracker" autowire="autodetect" singleton="true"/>

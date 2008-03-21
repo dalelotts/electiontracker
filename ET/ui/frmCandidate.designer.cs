@@ -52,32 +52,35 @@ namespace KnightRider.ElectionTracker.ui
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPoliticalParty = new System.Windows.Forms.Label();
+            this.lblLastName = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblMiddleName = new System.Windows.Forms.Label();
             this.txtMiddleName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblFirstName = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.lblRequired = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cboPoliticalParty
             // 
+            this.cboPoliticalParty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cboPoliticalParty.FormattingEnabled = true;
             this.cboPoliticalParty.Location = new System.Drawing.Point(93, 136);
             this.cboPoliticalParty.Name = "cboPoliticalParty";
-            this.cboPoliticalParty.Size = new System.Drawing.Size(270, 21);
+            this.cboPoliticalParty.Size = new System.Drawing.Size(335, 21);
             this.cboPoliticalParty.TabIndex = 8;
             this.cboPoliticalParty.Tag = "lock=true";
             this.cboPoliticalParty.Leave += new System.EventHandler(this.cboPoliticalParty_Leave);
             // 
             // chkActive
             // 
+            this.chkActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(12, 328);
+            this.chkActive.Location = new System.Drawing.Point(12, 390);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(62, 17);
             this.chkActive.TabIndex = 11;
@@ -87,12 +90,16 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // txtNotes
             // 
+            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNotes.Location = new System.Drawing.Point(12, 186);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(343, 136);
+            this.txtNotes.Size = new System.Drawing.Size(416, 198);
             this.txtNotes.TabIndex = 10;
             this.txtNotes.Tag = "lock=true";
+
             // 
             // label6
             // 
@@ -103,65 +110,74 @@ namespace KnightRider.ElectionTracker.ui
             this.label6.TabIndex = 9;
             this.label6.Text = "N&otes:";
             // 
-            // label5
+            // lblPoliticalParty
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 139);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "&Political Party";
+            this.lblPoliticalParty.AutoSize = true;
+            this.lblPoliticalParty.Location = new System.Drawing.Point(12, 139);
+            this.lblPoliticalParty.Name = "lblPoliticalParty";
+            this.lblPoliticalParty.Size = new System.Drawing.Size(70, 13);
+            this.lblPoliticalParty.TabIndex = 7;
+            this.lblPoliticalParty.Text = "&Political Party";
             // 
-            // label4
+            // lblLastName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 113);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "&Last Name*";
+            this.lblLastName.AutoSize = true;
+            this.lblLastName.Location = new System.Drawing.Point(12, 113);
+            this.lblLastName.Name = "lblLastName";
+            this.lblLastName.Size = new System.Drawing.Size(62, 13);
+            this.lblLastName.TabIndex = 5;
+            this.lblLastName.Text = "&Last Name*";
             // 
             // txtLastName
             // 
+            this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLastName.Location = new System.Drawing.Point(93, 110);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(270, 20);
+            this.txtLastName.Size = new System.Drawing.Size(335, 20);
             this.txtLastName.TabIndex = 6;
             this.txtLastName.Tag = "lock=true";
+
             // 
-            // label3
+            // lblMiddleName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 87);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "&Middle Name";
+            this.lblMiddleName.AutoSize = true;
+            this.lblMiddleName.Location = new System.Drawing.Point(12, 87);
+            this.lblMiddleName.Name = "lblMiddleName";
+            this.lblMiddleName.Size = new System.Drawing.Size(69, 13);
+            this.lblMiddleName.TabIndex = 3;
+            this.lblMiddleName.Text = "&Middle Name";
             // 
             // txtMiddleName
             // 
+            this.txtMiddleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMiddleName.Location = new System.Drawing.Point(93, 84);
             this.txtMiddleName.Name = "txtMiddleName";
-            this.txtMiddleName.Size = new System.Drawing.Size(270, 20);
+            this.txtMiddleName.Size = new System.Drawing.Size(335, 20);
             this.txtMiddleName.TabIndex = 4;
             this.txtMiddleName.Tag = "lock=true";
+
             // 
-            // label2
+            // lblFirstName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "&First Name*";
+            this.lblFirstName.AutoSize = true;
+            this.lblFirstName.Location = new System.Drawing.Point(12, 61);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(61, 13);
+            this.lblFirstName.TabIndex = 1;
+            this.lblFirstName.Text = "&First Name*";
             // 
             // txtFirstName
             // 
+            this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFirstName.Location = new System.Drawing.Point(93, 58);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(270, 20);
+            this.txtFirstName.Size = new System.Drawing.Size(335, 20);
             this.txtFirstName.TabIndex = 2;
             this.txtFirstName.Tag = "lock=true";
+
             // 
             // lblRequired
             // 
@@ -178,28 +194,29 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 354);
+            this.ClientSize = new System.Drawing.Size(442, 416);
             this.Controls.Add(this.cboPoliticalParty);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblFirstName);
+            this.Controls.Add(this.lblPoliticalParty);
             this.Controls.Add(this.txtMiddleName);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblLastName);
+            this.Controls.Add(this.lblMiddleName);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.lblRequired);
+            this.MinimumSize = new System.Drawing.Size(350, 350);
             this.Name = "frmCandidate";
             this.Text = "Candidate";
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.txtLastName, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.lblMiddleName, 0);
+            this.Controls.SetChildIndex(this.lblLastName, 0);
             this.Controls.SetChildIndex(this.txtMiddleName, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.lblPoliticalParty, 0);
+            this.Controls.SetChildIndex(this.lblFirstName, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.txtFirstName, 0);
             this.Controls.SetChildIndex(this.txtNotes, 0);
@@ -216,12 +233,12 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPoliticalParty;
+        private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.TextBox txtLastName;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblMiddleName;
         private System.Windows.Forms.TextBox txtMiddleName;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label lblRequired;
 

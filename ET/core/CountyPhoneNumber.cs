@@ -33,19 +33,19 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("County Phone Number Type")]
+        [RequiredProperty("Phone Number Type")]
         public virtual PhoneNumberType Type {
             get { return type; }
             set { type = value; }
         }
 
-        [RequiredProperty("County Phone Number Area Code")]
+        [RequiredProperty("Area Code", minLength = 3, maxLength = 3, example = "715")]
         public virtual string AreaCode {
             get { return areaCode; }
             set { areaCode = value; }
         }
 
-        [RequiredProperty("County Phone Number")]
+        [RequiredProperty("Phone Number", minLength = 8, maxLength = 8, example = "123-4567")]
         public virtual string PhoneNumber {
             get { return phoneNumber; }
             set { phoneNumber = value; }
@@ -56,7 +56,7 @@ namespace KnightRider.ElectionTracker.core {
             set { extension = value; }
         }
 
-        [RequiredProperty("County Phone Number County")]
+        [RequiredProperty("Phone Number County")]
         public virtual County County {
             get { return county; }
             set { county = value; }

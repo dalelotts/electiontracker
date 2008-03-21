@@ -29,7 +29,7 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("County Website URL")]
+        [RequiredProperty("County Website URL", minLength = 12, example = "http://www.example.com")]
         public virtual string URL {
             get { return url; }
             set { url = value; }

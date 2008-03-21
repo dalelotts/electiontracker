@@ -19,7 +19,6 @@
 using System.Collections.Generic;
 using Common.Logging;
 using KnightRider.ElectionTracker.core;
-using NHibernate;
 using Spring.Data.NHibernate.Generic;
 
 namespace KnightRider.ElectionTracker.db {

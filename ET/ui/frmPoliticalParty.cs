@@ -67,7 +67,7 @@ namespace KnightRider.ElectionTracker.ui {
                 currentPoliticalParty.IsActive = chkActive.Checked;
 
                 IList<Fault> faults = politicalPartyDAO.canMakePersistent(currentPoliticalParty);
-               
+
                 //If there were no errors, persist data to the database
                 if (reportFaults(faults)) {
                     currentPoliticalParty = politicalPartyDAO.makePersistent(currentPoliticalParty);
@@ -81,6 +81,9 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
+                currentPoliticalParty = currentPoliticalParty.ID == 0
+                                            ? new PoliticalParty()
+                                            : politicalPartyDAO.findById(currentPoliticalParty.ID, false);
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
@@ -90,7 +93,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
-                IList<Fault> faults = politicalPartyDAO.canMakePersistent(currentPoliticalParty);
+                IList<Fault> faults = politicalPartyDAO.canMakeTransient(currentPoliticalParty);
                 if (reportFaults(faults)) {
                     politicalPartyDAO.makeTransient(currentPoliticalParty);
                     currentPoliticalParty = new PoliticalParty();

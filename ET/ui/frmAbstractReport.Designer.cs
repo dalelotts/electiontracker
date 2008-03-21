@@ -55,46 +55,54 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnDown
             // 
-            this.btnDown.Location = new System.Drawing.Point(731, 320);
+            this.btnDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDown.Location = new System.Drawing.Point(723, 634);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(20, 23);
+            this.btnDown.Size = new System.Drawing.Size(111, 23);
             this.btnDown.TabIndex = 10;
-            this.btnDown.Text = "v";
+            this.btnDown.Text = "Next Page >>";
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnUp
             // 
-            this.btnUp.Location = new System.Drawing.Point(731, 291);
+            this.btnUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUp.Location = new System.Drawing.Point(606, 634);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(21, 23);
+            this.btnUp.Size = new System.Drawing.Size(111, 23);
             this.btnUp.TabIndex = 9;
-            this.btnUp.Text = "^";
+            this.btnUp.Text = "<< Previous Page";
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // ppcElection
             // 
-            this.ppcElection.Location = new System.Drawing.Point(191, 12);
+            this.ppcElection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ppcElection.Location = new System.Drawing.Point(190, 12);
             this.ppcElection.Name = "ppcElection";
-            this.ppcElection.Size = new System.Drawing.Size(533, 620);
+            this.ppcElection.Size = new System.Drawing.Size(648, 616);
             this.ppcElection.TabIndex = 8;
             // 
             // lstElections
             // 
+            this.lstElections.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstElections.FormattingEnabled = true;
             this.lstElections.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.lstElections.Location = new System.Drawing.Point(13, 12);
+            this.lstElections.Location = new System.Drawing.Point(12, 12);
             this.lstElections.Name = "lstElections";
-            this.lstElections.Size = new System.Drawing.Size(172, 589);
+            this.lstElections.Size = new System.Drawing.Size(172, 615);
             this.lstElections.TabIndex = 7;
             this.lstElections.SelectedIndexChanged += new System.EventHandler(this.lstElections_SelectedIndexChanged);
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(94, 609);
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPrint.Location = new System.Drawing.Point(12, 632);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(91, 23);
+            this.btnPrint.Size = new System.Drawing.Size(88, 23);
             this.btnPrint.TabIndex = 6;
             this.btnPrint.Text = "&Print Report";
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -104,15 +112,15 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 644);
+            this.ClientSize = new System.Drawing.Size(846, 660);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.ppcElection);
             this.Controls.Add(this.lstElections);
             this.Controls.Add(this.btnPrint);
+            this.MinimumSize = new System.Drawing.Size(450, 450);
             this.Name = "frmAbstractReport";
             this.Text = "frmAbstractReport";
-            this.Resize += new System.EventHandler(this.ResizeForm);
             this.Load += new System.EventHandler(this.frmAbstractReport_Load);
             this.ResumeLayout(false);
 

@@ -22,7 +22,6 @@ using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.db {
     public interface IGenericDAO<T> {
-
         T findById(Object id, bool lockRecord, params IDAOTask<T>[] tasks);
 
         IList<T> findAll();

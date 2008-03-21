@@ -22,9 +22,8 @@ using KnightRider.ElectionTracker.db;
 namespace KnightRider.ElectionTracker.core {
     public class Contest {
         private long? id;
-        private string name;
-        private ContestType contestType;
-        private string notes;
+        private string name = null;
+        private string notes = null;
         private bool isActive = true;
 
 
@@ -33,21 +32,15 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("Contest Name")]
+        [RequiredProperty("Contest Name", minLength = 3)]
         public virtual string Name {
             get { return name; }
-            set { name = value; }
-        }
-
-        [RequiredProperty("Contest Type")]
-        public virtual ContestType ContestType {
-            get { return contestType; }
-            set { contestType = value; }
+            set { name = value == null || value.Length == 0 ? null : value; }
         }
 
         public virtual string Notes {
             get { return notes; }
-            set { notes = value; }
+            set { notes = value == null || value.Length == 0 ? null : value; }
         }
 
         public virtual bool IsActive {

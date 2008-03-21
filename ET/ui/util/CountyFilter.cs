@@ -24,11 +24,11 @@ using KnightRider.ElectionTracker.type;
 
 namespace KnightRider.ElectionTracker.ui.util {
     internal class CountyFilter : BaseTreeViewFilter {
-        private readonly CountyDAO dao;
+        private readonly ICountyDAO dao;
 
         private const string name = "Counties";
 
-        public CountyFilter(CountyDAO dao) : base(name) {
+        public CountyFilter(ICountyDAO dao) : base(name) {
             this.dao = dao;
         }
 

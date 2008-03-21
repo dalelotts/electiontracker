@@ -57,31 +57,31 @@ namespace KnightRider.ElectionTracker.ui
             this.tabCounty = new System.Windows.Forms.TabPage();
             this.tabPhoneNumbers = new System.Windows.Forms.TabPage();
             this.gbPhone = new System.Windows.Forms.GroupBox();
-            this.txtPhoneNum = new System.Windows.Forms.MaskedTextBox();
+            this.txtPhoneNumber = new System.Windows.Forms.MaskedTextBox();
             this.txtAreaCode = new System.Windows.Forms.MaskedTextBox();
             this.cbPhoneNumberType = new System.Windows.Forms.ComboBox();
             this.btnRemovePhoneNum = new System.Windows.Forms.Button();
             this.btnAddPhoneNum = new System.Windows.Forms.Button();
             this.lstPhoneNums = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblPhoneNum = new System.Windows.Forms.Label();
+            this.lblPhoneNumberType = new System.Windows.Forms.Label();
+            this.lblPhoneNumber = new System.Windows.Forms.Label();
             this.lblAreaCode = new System.Windows.Forms.Label();
-            this.lblRequired = new System.Windows.Forms.Label();
             this.tabWebSites = new System.Windows.Forms.TabPage();
-            this.tabAttributes = new System.Windows.Forms.TabPage();
             this.gbWebsite = new System.Windows.Forms.GroupBox();
             this.btnRemoveWebsite = new System.Windows.Forms.Button();
             this.btnAddWebsite = new System.Windows.Forms.Button();
             this.txtWebsite = new System.Windows.Forms.TextBox();
             this.lstWebsites = new System.Windows.Forms.ListBox();
+            this.tabAttributes = new System.Windows.Forms.TabPage();
             this.gbAttributes = new System.Windows.Forms.GroupBox();
             this.btnRemoveAttribute = new System.Windows.Forms.Button();
             this.btnAddAttribute = new System.Windows.Forms.Button();
             this.lstAttributes = new System.Windows.Forms.ListBox();
             this.txtValue = new System.Windows.Forms.TextBox();
             this.cbKey = new System.Windows.Forms.ComboBox();
-            this.lblValue = new System.Windows.Forms.Label();
-            this.lblKey = new System.Windows.Forms.Label();
+            this.lblAttributeValue = new System.Windows.Forms.Label();
+            this.lblAttributeKey = new System.Windows.Forms.Label();
+            this.lblRequired = new System.Windows.Forms.Label();
             this.gbCounty.SuspendLayout();
             this.gbCountyNotes.SuspendLayout();
             this.tbDisplay.SuspendLayout();
@@ -89,20 +89,22 @@ namespace KnightRider.ElectionTracker.ui
             this.tabPhoneNumbers.SuspendLayout();
             this.gbPhone.SuspendLayout();
             this.tabWebSites.SuspendLayout();
-            this.tabAttributes.SuspendLayout();
             this.gbWebsite.SuspendLayout();
+            this.tabAttributes.SuspendLayout();
             this.gbAttributes.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbCounty
             // 
+            this.gbCounty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbCounty.Controls.Add(this.txtCountyWardCount);
             this.gbCounty.Controls.Add(this.txtCountyName);
             this.gbCounty.Controls.Add(this.lblCountyWardCount);
             this.gbCounty.Controls.Add(this.lblCountyName);
             this.gbCounty.Location = new System.Drawing.Point(6, 6);
             this.gbCounty.Name = "gbCounty";
-            this.gbCounty.Size = new System.Drawing.Size(387, 74);
+            this.gbCounty.Size = new System.Drawing.Size(395, 74);
             this.gbCounty.TabIndex = 0;
             this.gbCounty.TabStop = false;
             this.gbCounty.Text = "County";
@@ -119,9 +121,11 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // txtCountyName
             // 
+            this.txtCountyName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCountyName.Location = new System.Drawing.Point(79, 17);
             this.txtCountyName.Name = "txtCountyName";
-            this.txtCountyName.Size = new System.Drawing.Size(299, 20);
+            this.txtCountyName.Size = new System.Drawing.Size(307, 20);
             this.txtCountyName.TabIndex = 1;
             this.txtCountyName.Tag = "lock=true";
             // 
@@ -145,25 +149,34 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // gbCountyNotes
             // 
+            this.gbCountyNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbCountyNotes.Controls.Add(this.txtNotes);
             this.gbCountyNotes.Location = new System.Drawing.Point(6, 86);
             this.gbCountyNotes.Name = "gbCountyNotes";
-            this.gbCountyNotes.Size = new System.Drawing.Size(387, 100);
+            this.gbCountyNotes.Size = new System.Drawing.Size(395, 104);
             this.gbCountyNotes.TabIndex = 1;
             this.gbCountyNotes.TabStop = false;
             this.gbCountyNotes.Text = "Notes";
             // 
             // txtNotes
             // 
+            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNotes.Location = new System.Drawing.Point(6, 19);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(375, 75);
+            this.txtNotes.Size = new System.Drawing.Size(383, 79);
             this.txtNotes.TabIndex = 0;
             this.txtNotes.Tag = "lock=true";
             // 
             // tbDisplay
             // 
+            this.tbDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDisplay.Controls.Add(this.tabCounty);
             this.tbDisplay.Controls.Add(this.tabPhoneNumbers);
             this.tbDisplay.Controls.Add(this.tabWebSites);
@@ -171,8 +184,8 @@ namespace KnightRider.ElectionTracker.ui
             this.tbDisplay.Location = new System.Drawing.Point(15, 53);
             this.tbDisplay.Name = "tbDisplay";
             this.tbDisplay.SelectedIndex = 0;
-            this.tbDisplay.Size = new System.Drawing.Size(407, 218);
-            this.tbDisplay.TabIndex = 1;
+            this.tbDisplay.Size = new System.Drawing.Size(415, 221);
+            this.tbDisplay.TabIndex = 0;
             // 
             // tabCounty
             // 
@@ -181,7 +194,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabCounty.Location = new System.Drawing.Point(4, 22);
             this.tabCounty.Name = "tabCounty";
             this.tabCounty.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCounty.Size = new System.Drawing.Size(399, 192);
+            this.tabCounty.Size = new System.Drawing.Size(407, 195);
             this.tabCounty.TabIndex = 0;
             this.tabCounty.Text = "County";
             this.tabCounty.UseVisualStyleBackColor = true;
@@ -192,63 +205,71 @@ namespace KnightRider.ElectionTracker.ui
             this.tabPhoneNumbers.Location = new System.Drawing.Point(4, 22);
             this.tabPhoneNumbers.Name = "tabPhoneNumbers";
             this.tabPhoneNumbers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPhoneNumbers.Size = new System.Drawing.Size(399, 192);
+            this.tabPhoneNumbers.Size = new System.Drawing.Size(407, 195);
             this.tabPhoneNumbers.TabIndex = 1;
             this.tabPhoneNumbers.Text = "Phone Numbers";
             this.tabPhoneNumbers.UseVisualStyleBackColor = true;
             // 
             // gbPhone
             // 
-            this.gbPhone.Controls.Add(this.txtPhoneNum);
+            this.gbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPhone.Controls.Add(this.txtPhoneNumber);
             this.gbPhone.Controls.Add(this.txtAreaCode);
             this.gbPhone.Controls.Add(this.cbPhoneNumberType);
             this.gbPhone.Controls.Add(this.btnRemovePhoneNum);
             this.gbPhone.Controls.Add(this.btnAddPhoneNum);
             this.gbPhone.Controls.Add(this.lstPhoneNums);
-            this.gbPhone.Controls.Add(this.label1);
-            this.gbPhone.Controls.Add(this.lblPhoneNum);
+            this.gbPhone.Controls.Add(this.lblPhoneNumberType);
+            this.gbPhone.Controls.Add(this.lblPhoneNumber);
             this.gbPhone.Controls.Add(this.lblAreaCode);
             this.gbPhone.Location = new System.Drawing.Point(6, 6);
             this.gbPhone.Name = "gbPhone";
-            this.gbPhone.Size = new System.Drawing.Size(387, 180);
-            this.gbPhone.TabIndex = 3;
+            this.gbPhone.Size = new System.Drawing.Size(395, 180);
+            this.gbPhone.TabIndex = 0;
             this.gbPhone.TabStop = false;
             this.gbPhone.Text = "Phone Numbers";
             // 
-            // txtPhoneNum
+            // txtPhoneNumber
             // 
-            this.txtPhoneNum.Location = new System.Drawing.Point(219, 33);
-            this.txtPhoneNum.Mask = "000-0000";
-            this.txtPhoneNum.Name = "txtPhoneNum";
-            this.txtPhoneNum.Size = new System.Drawing.Size(76, 20);
-            this.txtPhoneNum.TabIndex = 9;
-            this.txtPhoneNum.Tag = "lock=true";
+            this.txtPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneNumber.Location = new System.Drawing.Point(232, 32);
+            this.txtPhoneNumber.Mask = "000-0000";
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(76, 20);
+            this.txtPhoneNumber.TabIndex = 5;
+            this.txtPhoneNumber.Tag = "Requred=AddPhoneNumber";
             // 
             // txtAreaCode
             // 
-            this.txtAreaCode.Location = new System.Drawing.Point(155, 33);
+            this.txtAreaCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAreaCode.Location = new System.Drawing.Point(168, 32);
             this.txtAreaCode.Mask = "000";
             this.txtAreaCode.Name = "txtAreaCode";
             this.txtAreaCode.Size = new System.Drawing.Size(56, 20);
-            this.txtAreaCode.TabIndex = 8;
-            this.txtAreaCode.Tag = "lock=true";
+            this.txtAreaCode.TabIndex = 3;
+            this.txtAreaCode.Tag = "Requred=AddPhoneNumber";
             // 
             // cbPhoneNumberType
             // 
+            this.cbPhoneNumberType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPhoneNumberType.FormattingEnabled = true;
             this.cbPhoneNumberType.Location = new System.Drawing.Point(6, 31);
             this.cbPhoneNumberType.Name = "cbPhoneNumberType";
-            this.cbPhoneNumberType.Size = new System.Drawing.Size(146, 21);
+            this.cbPhoneNumberType.Size = new System.Drawing.Size(156, 21);
             this.cbPhoneNumberType.TabIndex = 1;
-            this.cbPhoneNumberType.Tag = "lock=true";
+            this.cbPhoneNumberType.Tag = "Requred=AddPhoneNumber";
             this.cbPhoneNumberType.Leave += new System.EventHandler(this.cbPhoneNumberType_Leave);
             // 
             // btnRemovePhoneNum
             // 
-            this.btnRemovePhoneNum.Location = new System.Drawing.Point(303, 61);
+            this.btnRemovePhoneNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemovePhoneNum.Location = new System.Drawing.Point(314, 61);
             this.btnRemovePhoneNum.Name = "btnRemovePhoneNum";
             this.btnRemovePhoneNum.Size = new System.Drawing.Size(75, 23);
-            this.btnRemovePhoneNum.TabIndex = 6;
+            this.btnRemovePhoneNum.TabIndex = 8;
             this.btnRemovePhoneNum.Tag = "lock=true";
             this.btnRemovePhoneNum.Text = "Remove";
             this.btnRemovePhoneNum.UseVisualStyleBackColor = true;
@@ -256,10 +277,11 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnAddPhoneNum
             // 
-            this.btnAddPhoneNum.Location = new System.Drawing.Point(303, 33);
+            this.btnAddPhoneNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddPhoneNum.Location = new System.Drawing.Point(314, 30);
             this.btnAddPhoneNum.Name = "btnAddPhoneNum";
             this.btnAddPhoneNum.Size = new System.Drawing.Size(75, 23);
-            this.btnAddPhoneNum.TabIndex = 1;
+            this.btnAddPhoneNum.TabIndex = 6;
             this.btnAddPhoneNum.Tag = "lock=true";
             this.btnAddPhoneNum.Text = "Add";
             this.btnAddPhoneNum.UseVisualStyleBackColor = true;
@@ -267,38 +289,218 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // lstPhoneNums
             // 
+            this.lstPhoneNums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstPhoneNums.FormattingEnabled = true;
             this.lstPhoneNums.Location = new System.Drawing.Point(6, 61);
             this.lstPhoneNums.Name = "lstPhoneNums";
-            this.lstPhoneNums.Size = new System.Drawing.Size(290, 108);
-            this.lstPhoneNums.TabIndex = 4;
+            this.lstPhoneNums.Size = new System.Drawing.Size(302, 108);
+            this.lstPhoneNums.TabIndex = 7;
             // 
-            // label1
+            // lblPhoneNumberType
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Type";
+            this.lblPhoneNumberType.AutoSize = true;
+            this.lblPhoneNumberType.Location = new System.Drawing.Point(3, 16);
+            this.lblPhoneNumberType.Name = "lblPhoneNumberType";
+            this.lblPhoneNumberType.Size = new System.Drawing.Size(31, 13);
+            this.lblPhoneNumberType.TabIndex = 0;
+            this.lblPhoneNumberType.Text = "Type";
             // 
-            // lblPhoneNum
+            // lblPhoneNumber
             // 
-            this.lblPhoneNum.AutoSize = true;
-            this.lblPhoneNum.Location = new System.Drawing.Point(218, 16);
-            this.lblPhoneNum.Name = "lblPhoneNum";
-            this.lblPhoneNum.Size = new System.Drawing.Size(78, 13);
-            this.lblPhoneNum.TabIndex = 5;
-            this.lblPhoneNum.Text = "Phone Number";
+            this.lblPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPhoneNumber.AutoSize = true;
+            this.lblPhoneNumber.Location = new System.Drawing.Point(230, 16);
+            this.lblPhoneNumber.Name = "lblPhoneNumber";
+            this.lblPhoneNumber.Size = new System.Drawing.Size(78, 13);
+            this.lblPhoneNumber.TabIndex = 4;
+            this.lblPhoneNumber.Text = "Phone Number";
             // 
             // lblAreaCode
             // 
+            this.lblAreaCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAreaCode.AutoSize = true;
-            this.lblAreaCode.Location = new System.Drawing.Point(155, 16);
+            this.lblAreaCode.Location = new System.Drawing.Point(167, 16);
             this.lblAreaCode.Name = "lblAreaCode";
             this.lblAreaCode.Size = new System.Drawing.Size(57, 13);
-            this.lblAreaCode.TabIndex = 4;
+            this.lblAreaCode.TabIndex = 2;
             this.lblAreaCode.Text = "Area Code";
+            // 
+            // tabWebSites
+            // 
+            this.tabWebSites.Controls.Add(this.gbWebsite);
+            this.tabWebSites.Location = new System.Drawing.Point(4, 22);
+            this.tabWebSites.Name = "tabWebSites";
+            this.tabWebSites.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWebSites.Size = new System.Drawing.Size(407, 195);
+            this.tabWebSites.TabIndex = 2;
+            this.tabWebSites.Text = "Web Sites";
+            this.tabWebSites.UseVisualStyleBackColor = true;
+            // 
+            // gbWebsite
+            // 
+            this.gbWebsite.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbWebsite.Controls.Add(this.btnRemoveWebsite);
+            this.gbWebsite.Controls.Add(this.btnAddWebsite);
+            this.gbWebsite.Controls.Add(this.txtWebsite);
+            this.gbWebsite.Controls.Add(this.lstWebsites);
+            this.gbWebsite.Location = new System.Drawing.Point(6, 6);
+            this.gbWebsite.Name = "gbWebsite";
+            this.gbWebsite.Size = new System.Drawing.Size(395, 180);
+            this.gbWebsite.TabIndex = 5;
+            this.gbWebsite.TabStop = false;
+            this.gbWebsite.Text = "Websites";
+            // 
+            // btnRemoveWebsite
+            // 
+            this.btnRemoveWebsite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveWebsite.Location = new System.Drawing.Point(312, 45);
+            this.btnRemoveWebsite.Name = "btnRemoveWebsite";
+            this.btnRemoveWebsite.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveWebsite.TabIndex = 3;
+            this.btnRemoveWebsite.Tag = "lock=true";
+            this.btnRemoveWebsite.Text = "Remove";
+            this.btnRemoveWebsite.UseVisualStyleBackColor = true;
+            this.btnRemoveWebsite.Click += new System.EventHandler(this.btnRemoveWebsite_Click);
+            // 
+            // btnAddWebsite
+            // 
+            this.btnAddWebsite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddWebsite.Location = new System.Drawing.Point(312, 17);
+            this.btnAddWebsite.Name = "btnAddWebsite";
+            this.btnAddWebsite.Size = new System.Drawing.Size(75, 23);
+            this.btnAddWebsite.TabIndex = 1;
+            this.btnAddWebsite.Tag = "lock=true";
+            this.btnAddWebsite.Text = "Add";
+            this.btnAddWebsite.UseVisualStyleBackColor = true;
+            this.btnAddWebsite.Click += new System.EventHandler(this.btnAddWebsite_Click);
+            // 
+            // txtWebsite
+            // 
+            this.txtWebsite.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWebsite.Location = new System.Drawing.Point(6, 19);
+            this.txtWebsite.Name = "txtWebsite";
+            this.txtWebsite.Size = new System.Drawing.Size(298, 20);
+            this.txtWebsite.TabIndex = 0;
+            this.txtWebsite.Tag = "lock=true";
+            this.txtWebsite.Text = "http://";
+            // 
+            // lstWebsites
+            // 
+            this.lstWebsites.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstWebsites.FormattingEnabled = true;
+            this.lstWebsites.Location = new System.Drawing.Point(6, 45);
+            this.lstWebsites.Name = "lstWebsites";
+            this.lstWebsites.Size = new System.Drawing.Size(298, 121);
+            this.lstWebsites.TabIndex = 2;
+            // 
+            // tabAttributes
+            // 
+            this.tabAttributes.Controls.Add(this.gbAttributes);
+            this.tabAttributes.Location = new System.Drawing.Point(4, 22);
+            this.tabAttributes.Name = "tabAttributes";
+            this.tabAttributes.Size = new System.Drawing.Size(407, 195);
+            this.tabAttributes.TabIndex = 3;
+            this.tabAttributes.Text = "Attributes";
+            this.tabAttributes.UseVisualStyleBackColor = true;
+            // 
+            // gbAttributes
+            // 
+            this.gbAttributes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbAttributes.Controls.Add(this.btnRemoveAttribute);
+            this.gbAttributes.Controls.Add(this.btnAddAttribute);
+            this.gbAttributes.Controls.Add(this.lstAttributes);
+            this.gbAttributes.Controls.Add(this.txtValue);
+            this.gbAttributes.Controls.Add(this.cbKey);
+            this.gbAttributes.Controls.Add(this.lblAttributeValue);
+            this.gbAttributes.Controls.Add(this.lblAttributeKey);
+            this.gbAttributes.Location = new System.Drawing.Point(6, 6);
+            this.gbAttributes.Name = "gbAttributes";
+            this.gbAttributes.Size = new System.Drawing.Size(398, 183);
+            this.gbAttributes.TabIndex = 0;
+            this.gbAttributes.TabStop = false;
+            this.gbAttributes.Text = "Attributes";
+            // 
+            // btnRemoveAttribute
+            // 
+            this.btnRemoveAttribute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveAttribute.Location = new System.Drawing.Point(315, 58);
+            this.btnRemoveAttribute.Name = "btnRemoveAttribute";
+            this.btnRemoveAttribute.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveAttribute.TabIndex = 6;
+            this.btnRemoveAttribute.Tag = "lock=true";
+            this.btnRemoveAttribute.Text = "Remove";
+            this.btnRemoveAttribute.UseVisualStyleBackColor = true;
+            this.btnRemoveAttribute.Click += new System.EventHandler(this.btnRemoveAttribute_Click);
+            // 
+            // btnAddAttribute
+            // 
+            this.btnAddAttribute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddAttribute.Location = new System.Drawing.Point(315, 28);
+            this.btnAddAttribute.Name = "btnAddAttribute";
+            this.btnAddAttribute.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAttribute.TabIndex = 4;
+            this.btnAddAttribute.Tag = "lock=true";
+            this.btnAddAttribute.Text = "Add";
+            this.btnAddAttribute.UseVisualStyleBackColor = true;
+            this.btnAddAttribute.Click += new System.EventHandler(this.btnAddAttribute_Click);
+            // 
+            // lstAttributes
+            // 
+            this.lstAttributes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstAttributes.FormattingEnabled = true;
+            this.lstAttributes.Location = new System.Drawing.Point(6, 58);
+            this.lstAttributes.Name = "lstAttributes";
+            this.lstAttributes.Size = new System.Drawing.Size(301, 108);
+            this.lstAttributes.TabIndex = 5;
+            // 
+            // txtValue
+            // 
+            this.txtValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtValue.Location = new System.Drawing.Point(158, 31);
+            this.txtValue.Name = "txtValue";
+            this.txtValue.Size = new System.Drawing.Size(149, 20);
+            this.txtValue.TabIndex = 3;
+            this.txtValue.Tag = "lock=true";
+            // 
+            // cbKey
+            // 
+            this.cbKey.FormattingEnabled = true;
+            this.cbKey.Location = new System.Drawing.Point(6, 30);
+            this.cbKey.Name = "cbKey";
+            this.cbKey.Size = new System.Drawing.Size(146, 21);
+            this.cbKey.TabIndex = 1;
+            this.cbKey.Tag = "lock=true";
+            this.cbKey.Leave += new System.EventHandler(this.cbKey_Leave);
+            // 
+            // lblAttributeValue
+            // 
+            this.lblAttributeValue.AutoSize = true;
+            this.lblAttributeValue.Location = new System.Drawing.Point(155, 14);
+            this.lblAttributeValue.Name = "lblAttributeValue";
+            this.lblAttributeValue.Size = new System.Drawing.Size(34, 13);
+            this.lblAttributeValue.TabIndex = 2;
+            this.lblAttributeValue.Text = "Value";
+            // 
+            // lblAttributeKey
+            // 
+            this.lblAttributeKey.AutoSize = true;
+            this.lblAttributeKey.Location = new System.Drawing.Point(6, 14);
+            this.lblAttributeKey.Name = "lblAttributeKey";
+            this.lblAttributeKey.Size = new System.Drawing.Size(25, 13);
+            this.lblAttributeKey.TabIndex = 0;
+            this.lblAttributeKey.Text = "Key";
             // 
             // lblRequired
             // 
@@ -311,163 +513,14 @@ namespace KnightRider.ElectionTracker.ui
             this.lblRequired.TabIndex = 0;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
-            // tabWebSites
-            // 
-            this.tabWebSites.Controls.Add(this.gbWebsite);
-            this.tabWebSites.Location = new System.Drawing.Point(4, 22);
-            this.tabWebSites.Name = "tabWebSites";
-            this.tabWebSites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWebSites.Size = new System.Drawing.Size(399, 192);
-            this.tabWebSites.TabIndex = 2;
-            this.tabWebSites.Text = "Web Sites";
-            this.tabWebSites.UseVisualStyleBackColor = true;
-            // 
-            // tabAttributes
-            // 
-            this.tabAttributes.Controls.Add(this.gbAttributes);
-            this.tabAttributes.Location = new System.Drawing.Point(4, 22);
-            this.tabAttributes.Name = "tabAttributes";
-            this.tabAttributes.Size = new System.Drawing.Size(399, 192);
-            this.tabAttributes.TabIndex = 3;
-            this.tabAttributes.Text = "Attributes";
-            this.tabAttributes.UseVisualStyleBackColor = true;
-            // 
-            // gbWebsite
-            // 
-            this.gbWebsite.Controls.Add(this.btnRemoveWebsite);
-            this.gbWebsite.Controls.Add(this.btnAddWebsite);
-            this.gbWebsite.Controls.Add(this.txtWebsite);
-            this.gbWebsite.Controls.Add(this.lstWebsites);
-            this.gbWebsite.Location = new System.Drawing.Point(6, 6);
-            this.gbWebsite.Name = "gbWebsite";
-            this.gbWebsite.Size = new System.Drawing.Size(387, 180);
-            this.gbWebsite.TabIndex = 5;
-            this.gbWebsite.TabStop = false;
-            this.gbWebsite.Text = "Websites";
-            // 
-            // btnRemoveWebsite
-            // 
-            this.btnRemoveWebsite.Location = new System.Drawing.Point(304, 45);
-            this.btnRemoveWebsite.Name = "btnRemoveWebsite";
-            this.btnRemoveWebsite.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveWebsite.TabIndex = 3;
-            this.btnRemoveWebsite.Tag = "lock=true";
-            this.btnRemoveWebsite.Text = "Remove";
-            this.btnRemoveWebsite.UseVisualStyleBackColor = true;
-            // 
-            // btnAddWebsite
-            // 
-            this.btnAddWebsite.Location = new System.Drawing.Point(304, 19);
-            this.btnAddWebsite.Name = "btnAddWebsite";
-            this.btnAddWebsite.Size = new System.Drawing.Size(75, 23);
-            this.btnAddWebsite.TabIndex = 2;
-            this.btnAddWebsite.Tag = "lock=true";
-            this.btnAddWebsite.Text = "Add";
-            this.btnAddWebsite.UseVisualStyleBackColor = true;
-            // 
-            // txtWebsite
-            // 
-            this.txtWebsite.Location = new System.Drawing.Point(6, 19);
-            this.txtWebsite.Name = "txtWebsite";
-            this.txtWebsite.Size = new System.Drawing.Size(290, 20);
-            this.txtWebsite.TabIndex = 1;
-            this.txtWebsite.Tag = "lock=true";
-            this.txtWebsite.Text = "http://";
-            // 
-            // lstWebsites
-            // 
-            this.lstWebsites.FormattingEnabled = true;
-            this.lstWebsites.Location = new System.Drawing.Point(6, 45);
-            this.lstWebsites.Name = "lstWebsites";
-            this.lstWebsites.Size = new System.Drawing.Size(290, 121);
-            this.lstWebsites.TabIndex = 0;
-            // 
-            // gbAttributes
-            // 
-            this.gbAttributes.Controls.Add(this.btnRemoveAttribute);
-            this.gbAttributes.Controls.Add(this.btnAddAttribute);
-            this.gbAttributes.Controls.Add(this.lstAttributes);
-            this.gbAttributes.Controls.Add(this.txtValue);
-            this.gbAttributes.Controls.Add(this.cbKey);
-            this.gbAttributes.Controls.Add(this.lblValue);
-            this.gbAttributes.Controls.Add(this.lblKey);
-            this.gbAttributes.Location = new System.Drawing.Point(6, 6);
-            this.gbAttributes.Name = "gbAttributes";
-            this.gbAttributes.Size = new System.Drawing.Size(387, 183);
-            this.gbAttributes.TabIndex = 6;
-            this.gbAttributes.TabStop = false;
-            this.gbAttributes.Text = "Attributes";
-            // 
-            // btnRemoveAttribute
-            // 
-            this.btnRemoveAttribute.Location = new System.Drawing.Point(304, 58);
-            this.btnRemoveAttribute.Name = "btnRemoveAttribute";
-            this.btnRemoveAttribute.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveAttribute.TabIndex = 6;
-            this.btnRemoveAttribute.Tag = "lock=true";
-            this.btnRemoveAttribute.Text = "Remove";
-            this.btnRemoveAttribute.UseVisualStyleBackColor = true;
-            // 
-            // btnAddAttribute
-            // 
-            this.btnAddAttribute.Location = new System.Drawing.Point(304, 31);
-            this.btnAddAttribute.Name = "btnAddAttribute";
-            this.btnAddAttribute.Size = new System.Drawing.Size(75, 23);
-            this.btnAddAttribute.TabIndex = 5;
-            this.btnAddAttribute.Tag = "lock=true";
-            this.btnAddAttribute.Text = "Add";
-            this.btnAddAttribute.UseVisualStyleBackColor = true;
-            // 
-            // lstAttributes
-            // 
-            this.lstAttributes.FormattingEnabled = true;
-            this.lstAttributes.Location = new System.Drawing.Point(6, 58);
-            this.lstAttributes.Name = "lstAttributes";
-            this.lstAttributes.Size = new System.Drawing.Size(290, 108);
-            this.lstAttributes.TabIndex = 4;
-            // 
-            // txtValue
-            // 
-            this.txtValue.Location = new System.Drawing.Point(158, 31);
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(138, 20);
-            this.txtValue.TabIndex = 3;
-            this.txtValue.Tag = "lock=true";
-            // 
-            // cbKey
-            // 
-            this.cbKey.FormattingEnabled = true;
-            this.cbKey.Location = new System.Drawing.Point(6, 30);
-            this.cbKey.Name = "cbKey";
-            this.cbKey.Size = new System.Drawing.Size(146, 21);
-            this.cbKey.TabIndex = 0;
-            this.cbKey.Tag = "lock=true";
-            // 
-            // lblValue
-            // 
-            this.lblValue.AutoSize = true;
-            this.lblValue.Location = new System.Drawing.Point(155, 14);
-            this.lblValue.Name = "lblValue";
-            this.lblValue.Size = new System.Drawing.Size(34, 13);
-            this.lblValue.TabIndex = 2;
-            this.lblValue.Text = "Value";
-            // 
-            // lblKey
-            // 
-            this.lblKey.AutoSize = true;
-            this.lblKey.Location = new System.Drawing.Point(6, 14);
-            this.lblKey.Name = "lblKey";
-            this.lblKey.Size = new System.Drawing.Size(25, 13);
-            this.lblKey.TabIndex = 1;
-            this.lblKey.Text = "Key";
-            // 
             // frmCounty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 283);
+            this.ClientSize = new System.Drawing.Size(442, 286);
             this.Controls.Add(this.tbDisplay);
             this.Controls.Add(this.lblRequired);
+            this.MinimumSize = new System.Drawing.Size(450, 320);
             this.Name = "frmCounty";
             this.Text = "County";
             this.Controls.SetChildIndex(this.lblRequired, 0);
@@ -482,9 +535,9 @@ namespace KnightRider.ElectionTracker.ui
             this.gbPhone.ResumeLayout(false);
             this.gbPhone.PerformLayout();
             this.tabWebSites.ResumeLayout(false);
-            this.tabAttributes.ResumeLayout(false);
             this.gbWebsite.ResumeLayout(false);
             this.gbWebsite.PerformLayout();
+            this.tabAttributes.ResumeLayout(false);
             this.gbAttributes.ResumeLayout(false);
             this.gbAttributes.PerformLayout();
             this.ResumeLayout(false);
@@ -505,14 +558,14 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.TabPage tabPhoneNumbers;
         private System.Windows.Forms.GroupBox gbPhone;
         private System.Windows.Forms.Button btnRemovePhoneNum;
-        private System.Windows.Forms.Label lblPhoneNum;
+        private System.Windows.Forms.Label lblPhoneNumber;
         private System.Windows.Forms.Label lblAreaCode;
         private System.Windows.Forms.Button btnAddPhoneNum;
         private System.Windows.Forms.ListBox lstPhoneNums;
         private System.Windows.Forms.ComboBox cbPhoneNumberType;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPhoneNumberType;
         private System.Windows.Forms.MaskedTextBox txtCountyWardCount;
-        private System.Windows.Forms.MaskedTextBox txtPhoneNum;
+        private System.Windows.Forms.MaskedTextBox txtPhoneNumber;
         private System.Windows.Forms.MaskedTextBox txtAreaCode;
         private System.Windows.Forms.Label lblRequired;
         private System.Windows.Forms.TabPage tabWebSites;
@@ -528,7 +581,7 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.ListBox lstAttributes;
         private System.Windows.Forms.TextBox txtValue;
         private System.Windows.Forms.ComboBox cbKey;
-        private System.Windows.Forms.Label lblValue;
-        private System.Windows.Forms.Label lblKey;
+        private System.Windows.Forms.Label lblAttributeValue;
+        private System.Windows.Forms.Label lblAttributeKey;
     }
 }

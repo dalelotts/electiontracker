@@ -15,11 +15,11 @@
 
 
 --
--- Create schema degenst
+-- Create schema electiontracker
 --
 
-CREATE DATABASE IF NOT EXISTS degenst;
-USE degenst;
+CREATE DATABASE IF NOT EXISTS electiontracker;
+USE electiontracker;
 
 --
 -- Definition of table `attributetype`

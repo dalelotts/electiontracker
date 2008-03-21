@@ -24,6 +24,7 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
@@ -33,16 +34,17 @@ namespace KnightRider.ElectionTracker.ui {
         private IList<string> lstToPrint;
         private ComboBox cmbElectionType;
 
-        public frmContestVoteSumry(IElectionDAO electionDAO) : base(electionDAO) {
+        public frmContestVoteSumry(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport)
+            : base(electionDAO, loadElectionForReport) {
             blnLandscape = true;
             InitializeElectionType();
         }
 
         protected override IList<Election> GetElections() {
             if (cmbElectionType.SelectedIndex == 1)
-                return electionDAO.findInactive();
+                return electionDAO.findInactive(loadTask);
             else
-                return electionDAO.findActive();
+                return electionDAO.findActive(loadTask);
         }
 
         protected override string GetTitle() {
@@ -52,6 +54,7 @@ namespace KnightRider.ElectionTracker.ui {
         private static int GetVoteTotals(ElectionContest ec, Response r) {
             int total = 0;
             foreach (ContestCounty cc in ec.Counties) {
+                // ToDo: Fix lazy load.
                 foreach (ResponseValue rv in cc.ResponseValues) {
                     if (rv.Response == r) {
                         total += rv.VoteCount;
@@ -86,7 +89,7 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        string noResponseValue = FormatTextLength(" ", 21);
+        private string noResponseValue = FormatTextLength(" ", 21);
 
         protected override void CreateReport(Election election) {
             intCount = 0;
@@ -138,9 +141,8 @@ namespace KnightRider.ElectionTracker.ui {
                 lstToPrint.Add("</HEADER>");
 
                 foreach (ContestCounty cc in electionContest.Counties) {
-                    
                     string strVoteCounts = FormatTextLength(cc.County.Name, 17);
-    
+
                     for (int i = 0; i <= 2; i++) {
                         if (responseCount > i) {
                             strVoteCounts += GetVoteNumbers((Response) responses[i].Key, cc, noResponseValue);
@@ -153,7 +155,9 @@ namespace KnightRider.ElectionTracker.ui {
 
                     if (cc.WardCount > 0)
                         strVoteCounts +=
-                            FormatTextLength("(" + (((double) cc.WardsReporting/(double) cc.WardCount)*100).ToString("0.0") + "%)", 12, false);
+                            FormatTextLength(
+                                "(" + (((double) cc.WardsReporting/(double) cc.WardCount)*100).ToString("0.0") + "%)",
+                                12, false);
                     else {
                         if (cc.WardsReporting > 0) {
                             strVoteCounts += FormatTextLength("(100.0%)", 12, false);
@@ -172,15 +176,20 @@ namespace KnightRider.ElectionTracker.ui {
                 for (int i = 0; i <= 2; i++) {
                     if (responseCount > i)
                         if (electionContest.GetTotalVotes() > 0) {
-                            strTotals += 
-                                FormatTextLength( 
-                                FormatTextLength(GetVoteTotals(electionContest, (Response)responses[i].Key).ToString(), 5, true) +
-                                    FormatTextLength(" (" + ((double)GetVoteTotals(electionContest, (Response)responses[i].Key) / (double) electionContest.GetTotalVotes()).ToString("0.0" + "%)"), 12, true), 
-                                    21);
+                            strTotals +=
+                                FormatTextLength(
+                                    FormatTextLength(
+                                        GetVoteTotals(electionContest, (Response) responses[i].Key).ToString(), 5, true) +
+                                    FormatTextLength(
+                                        " (" +
+                                        ((double) GetVoteTotals(electionContest, (Response) responses[i].Key)/
+                                         (double) electionContest.GetTotalVotes()).ToString("0.0" + "%)"), 12, true), 21);
                         } else {
                             strTotals +=
                                 FormatTextLength(
-                                    FormatTextLength(GetVoteTotals(electionContest, (Response) responses[i].Key).ToString(), 5, true) + FormatTextLength("(" + "00.0%)", 12, true), 21);
+                                    FormatTextLength(
+                                        GetVoteTotals(electionContest, (Response) responses[i].Key).ToString(), 5, true) +
+                                    FormatTextLength("(" + "00.0%)", 12, true), 21);
                         }
                     else {
                         strTotals += noResponseValue;
@@ -190,8 +199,7 @@ namespace KnightRider.ElectionTracker.ui {
                     FormatTextLength(electionContest.GetWardsReporting() + "/" + electionContest.GetWardCount(), 7,
                                      false) +
                     FormatTextLength("(" + (electionContest.GetWardsReportingPercentage()*100).ToString("0.0") + "%)",
-                                     12, false) + 
-                    FormatTextLength(electionContest.GetTotalVotes().ToString(), 6, false);
+                                     12, false) + FormatTextLength(electionContest.GetTotalVotes().ToString(), 6, false);
                 lstToPrint.Add(strTotals);
                 lstToPrint.Add("<BREAK>");
             }
