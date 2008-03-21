@@ -32,16 +32,16 @@ namespace KnightRider.ElectionTracker.ui {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (frmAbstractReport));
 
         protected readonly IElectionDAO electionDAO;
-        protected readonly LoadElectionForReport loadTask;
+        protected readonly IDAOTask<Election> loadTask;
         protected PrintDocument docToPrint;
         protected int intPages;
         protected Font printFont;
         protected bool blnLandscape;
 
-        public frmAbstractReport(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport) {
+        public frmAbstractReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask) {
             blnLandscape = false;
             this.electionDAO = electionDAO;
-            loadTask = loadElectionForReport;
+            this.loadTask = loadTask;
             InitializeComponent();
             printFont = new Font("Courier New", 10);
         }

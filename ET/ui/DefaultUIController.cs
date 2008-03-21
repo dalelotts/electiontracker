@@ -129,8 +129,8 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args) {
-            frmContestVoteSumry contestVoteSumry = makeMDIChildForm<frmContestVoteSumry>();
-            contestVoteSumry.Show();
+            frmContestVoteSummary contestVoteSummary = makeMDIChildForm<frmContestVoteSummary>();
+            contestVoteSummary.Show();
         }
 
         public void HandleCountyContactForm(object sender, CountyContactFormArgs args) {

@@ -31,8 +31,9 @@ namespace KnightRider.ElectionTracker.ui {
         private List<string> lstHeader;
         private int intCount;
 
-        public frmElectionReport(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport)
-            : base(electionDAO, loadElectionForReport) {
+        public frmElectionReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask)
+            : base(electionDAO, loadTask)
+        {
             lstHeader = new List<string>();
         }
 

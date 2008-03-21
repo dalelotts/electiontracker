@@ -28,14 +28,15 @@ using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
-    internal class frmContestVoteSumry : frmAbstractReport {
+    internal class frmContestVoteSummary : frmAbstractReport {
         private int intCount;
         private IList<string> lstHeader;
         private IList<string> lstToPrint;
         private ComboBox cmbElectionType;
 
-        public frmContestVoteSumry(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport)
-            : base(electionDAO, loadElectionForReport) {
+        public frmContestVoteSummary(IElectionDAO electionDAO, IDAOTask<Election> loadTask)
+            : base(electionDAO, loadTask)
+        {
             blnLandscape = true;
             InitializeElectionType();
         }

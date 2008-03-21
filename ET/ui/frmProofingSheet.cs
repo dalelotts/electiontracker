@@ -31,8 +31,9 @@ namespace KnightRider.ElectionTracker.ui {
         private List<string> lstToPrint;
         private List<string> lstHeader;
 
-        public frmProofingSheet(IElectionDAO electionDAO, LoadElectionForReport loadElectionForReport)
-            : base(electionDAO, loadElectionForReport) {
+        public frmProofingSheet(IElectionDAO electionDAO, IDAOTask<Election> loadTask)
+            : base(electionDAO, loadTask)
+        {
             blnLandscape = true;
         }
 

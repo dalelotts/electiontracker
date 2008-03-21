@@ -130,6 +130,7 @@
     <Compile Include="db\task\IDAOTask.cs" />
     <Compile Include="db\task\LoadCountyForUI.cs" />
     <Compile Include="db\task\LoadElectionForReport.cs" />
+    <Compile Include="db\task\LoadElectionForReportWithResults.cs" />
     <Compile Include="db\task\LoadElectionForUI.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
@@ -206,7 +207,7 @@
     <Compile Include="ui\frmAbstractReport.Designer.cs">
       <DependentUpon>frmAbstractReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\frmContestVoteSumry.cs">
+    <Compile Include="ui\frmContestVoteSummary.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ui\frmCounty.cs">
