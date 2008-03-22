@@ -96,7 +96,7 @@ namespace KnightRider.ElectionTracker.ui
             // btnAdd
             // 
             this.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Image = global::KnightRider.ElectionTracker.Properties.Resources.btnAdd_Image;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.RightToLeftAutoMirrorImage = true;
             this.btnAdd.Size = new System.Drawing.Size(23, 22);
@@ -121,7 +121,7 @@ namespace KnightRider.ElectionTracker.ui
             // btnReset
             // 
             this.btnReset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
+            this.btnReset.Image = global::KnightRider.ElectionTracker.Properties.Resources.btnReset_Image;
             this.btnReset.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(23, 22);
@@ -136,7 +136,7 @@ namespace KnightRider.ElectionTracker.ui
             // btnDelete
             // 
             this.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Image = global::KnightRider.ElectionTracker.Properties.Resources.btnDelete_Image;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.RightToLeftAutoMirrorImage = true;
             this.btnDelete.Size = new System.Drawing.Size(23, 22);
@@ -149,8 +149,9 @@ namespace KnightRider.ElectionTracker.ui
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 136);
             this.Controls.Add(this.toolStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BaseMDIChild";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "BaseMDIChild";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

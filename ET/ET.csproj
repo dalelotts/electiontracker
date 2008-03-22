@@ -358,6 +358,7 @@
     <Content Include="Resources\EditTableHS.png" />
     <Content Include="Resources\NewCardHS.png" />
     <Content Include="Resources\saveHS.png" />
+    <None Include="Resources\vote.ico" />
     <Content Include="spring.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

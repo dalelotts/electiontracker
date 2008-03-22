@@ -8,16 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-using System.Globalization;
-using System.Resources;
-using System.Runtime.CompilerServices;
-
 namespace KnightRider.ElectionTracker.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -25,68 +19,149 @@ namespace KnightRider.ElectionTracker.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
-    [DebuggerNonUserCode()]
-    [CompilerGenerated()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        private static ResourceManager resourceMan;
-
-        private static CultureInfo resourceCulture;
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {}
-
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        internal static ResourceManager ResourceManager {
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if (ReferenceEquals(resourceMan, null)) {
-                    ResourceManager temp =
-                        new ResourceManager("KnightRider.ElectionTracker.Properties.Resources",
-                                            typeof (Resources).Assembly);
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KnightRider.ElectionTracker.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        internal static CultureInfo Culture {
-            get { return resourceCulture; }
-            set { resourceCulture = value; }
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
         }
-
-        internal static Bitmap EditInformationHS {
+        
+        internal static System.Drawing.Bitmap btnAdd_Image {
+            get {
+                object obj = ResourceManager.GetObject("btnAdd_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnDelete_Image {
+            get {
+                object obj = ResourceManager.GetObject("btnDelete_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnEdit_Image {
+            get {
+                object obj = ResourceManager.GetObject("btnEdit_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnNew_Image {
+            get {
+                object obj = ResourceManager.GetObject("btnNew_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnReset_Image {
+            get {
+                object obj = ResourceManager.GetObject("btnReset_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnSave_Image {
+            get {
+                object obj = ResourceManager.GetObject("btnSave_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap EditInformationHS {
             get {
                 object obj = ResourceManager.GetObject("EditInformationHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static Bitmap EditTableHS {
+        
+        internal static System.Drawing.Bitmap EditInformationHS1 {
+            get {
+                object obj = ResourceManager.GetObject("EditInformationHS1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap EditTableHS {
             get {
                 object obj = ResourceManager.GetObject("EditTableHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static Bitmap NewCardHS {
+        
+        internal static System.Drawing.Bitmap EditTableHS1 {
+            get {
+                object obj = ResourceManager.GetObject("EditTableHS1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap NewCardHS {
             get {
                 object obj = ResourceManager.GetObject("NewCardHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static Bitmap saveHS {
+        
+        internal static System.Drawing.Bitmap NewCardHS1 {
+            get {
+                object obj = ResourceManager.GetObject("NewCardHS1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap saveHS {
             get {
                 object obj = ResourceManager.GetObject("saveHS", resourceCulture);
-                return ((Bitmap) (obj));
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap saveHS1 {
+            get {
+                object obj = ResourceManager.GetObject("saveHS1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon vote {
+            get {
+                object obj = ResourceManager.GetObject("vote", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }
