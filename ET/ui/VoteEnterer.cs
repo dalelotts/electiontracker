@@ -17,30 +17,26 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.ui {
     internal sealed class VoteEnterer : Panel {
-        private static readonly IList<string> excluded = new List<string>();
 
         private readonly IList<ContestDisplay> displays = new List<ContestDisplay>();
-
-        static VoteEnterer() {
-            excluded.Add("ID");
-            excluded.Add("WardCount");
-            excluded.Add("WardsReporting");
-        }
 
         public VoteEnterer(IList<ContestCounty> contestCounties, IContestCountyDAO contestCountyDAO)
         {
             InitializeComponent();
-            int currentTop = 0;
+            int currentTop = 5;
             foreach (ContestCounty contestCounty in contestCounties) {
                 ContestDisplay display = new ContestDisplay(contestCounty, contestCountyDAO);
-                display.Top = currentTop;
-                currentTop += display.Height + 1;
+                display.Anchor = ((AnchorStyles.Top) | AnchorStyles.Left) | AnchorStyles.Right;
+                display.Location = new Point(5, currentTop);
+                currentTop += display.Height + 5;
+                display.Width = Width - 5;
                 Controls.Add(display);
                 displays.Add(display);
             }
@@ -55,14 +51,12 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void InitializeComponent() {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // VoteEnterer
             // 
-            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResumeLayout(false);
+            Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right; 
+            ResumeLayout(false);
 
         }
     }

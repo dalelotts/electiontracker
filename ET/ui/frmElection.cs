@@ -25,8 +25,8 @@ using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmElection : BaseMDIChild {
-        private readonly LoadElectionForUI loadElectionForUI;
 
+        private readonly IDAOTask<Election> loadTask;
         private readonly IElectionDAO electionDAO;
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
@@ -41,12 +41,11 @@ namespace KnightRider.ElectionTracker.ui {
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
 
-        public frmElection(IElectionDAO electionDAO, IContestDAO contestDAO, ICandidateDAO candidateDAO,
-                           ICountyDAO countyDAO, LoadElectionForUI loadElectionForUI) {
+        public frmElection(IElectionDAO electionDAO, IContestDAO contestDAO, ICandidateDAO candidateDAO, ICountyDAO countyDAO, IDAOTask<Election> loadTask) {
             try {
                 InitializeComponent();
                 this.electionDAO = electionDAO;
-                this.loadElectionForUI = loadElectionForUI;
+                this.loadTask = loadTask;
                 currentElection = new Election();
                 allContests = contestDAO.findAll();
                 allCandidates = candidateDAO.findAll();
@@ -80,7 +79,7 @@ namespace KnightRider.ElectionTracker.ui {
         // [Transaction(ReadOnly = true)]
         public void loadElection(long? id) {
             if (id != null) {
-                Election newElection = electionDAO.findById(id.Value, false, loadElectionForUI);
+                Election newElection = electionDAO.findById(id.Value, false, loadTask);
                 if (newElection != null) {
                     currentElection = newElection;
                 }
@@ -241,7 +240,7 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 currentElection = currentElection.ID == 0
                                       ? new Election()
-                                      : electionDAO.findById(currentElection.ID, false, loadElectionForUI);
+                                      : electionDAO.findById(currentElection.ID, false, loadTask);
                 resetControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {

@@ -28,6 +28,7 @@ using KnightRider.ElectionTracker.util;
 namespace KnightRider.ElectionTracker.ui {
     internal sealed class ContestDisplay : Panel {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (ContestDisplay));
+        private static readonly int LEFT = 5;
 
         private TextBox txtReporting;
         private Boolean _bDirty;
@@ -45,31 +46,36 @@ namespace KnightRider.ElectionTracker.ui {
             BorderStyle = BorderStyle.FixedSingle;
             Visible = true;
 
-
             Label lblContest = new Label();
-            lblContest.Left = 5;
+            lblContest.Location = new Point(LEFT,LEFT);
             lblContest.Width = 300;
+            lblContest.AutoSize = true;
             lblContest.Text = contestCounty.ElectionContest.Contest.Name;
+            lblContest.TextAlign = ContentAlignment.MiddleLeft;
+            lblContest.Font = new Font(lblContest.Font, FontStyle.Bold);
             Controls.Add(lblContest);
 
             Label lblWardCount = new Label();
-            lblWardCount.Text = " / " + contestCounty.WardCount;
-            lblWardCount.Left = Width - 55;
+            lblWardCount.Text = "/ " + contestCounty.WardCount;
+            lblWardCount.Location = new Point(Width - 55, lblContest.Top);
             lblWardCount.Width = 25;
             lblWardCount.AutoSize = true;
             lblWardCount.TextAlign = ContentAlignment.MiddleLeft;
+            lblWardCount.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);
             Controls.Add(lblWardCount);
 
             txtReporting = new TextBox();
-            txtReporting.Width = 30;
-            txtReporting.Left = lblWardCount.Left - txtReporting.Width - 10;
+            txtReporting.Width = 50;
+            txtReporting.Location = new Point(lblWardCount.Left - txtReporting.Width - 5, lblContest.Top);
             txtReporting.Text = contestCounty.WardsReporting.ToString();
+            txtReporting.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);
             Controls.Add(txtReporting);
 
             Label lblReporting = new Label();
             lblReporting.Text = "Wards Reporting: ";
             lblReporting.TextAlign = ContentAlignment.MiddleRight;
-            lblReporting.Left = txtReporting.Left - lblReporting.Width - 10;
+            lblReporting.Location = new Point(txtReporting.Left - lblReporting.Width - 10, lblContest.Top);
+            lblReporting.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);
             Controls.Add(lblReporting);
 
             responseToTextBox = new Map<ResponseValue, TextBox>();
@@ -125,21 +131,20 @@ namespace KnightRider.ElectionTracker.ui {
             IList<Response> responses = contestCounty.ElectionContest.Responses;
 
             foreach (Response response in responses) {
-                i += 5;
+                i += LEFT;
                 Label label = new Label();
                 label.Text = response.ToString();
-                label.Left = 5;
                 label.BackColor = Color.Transparent;
                 label.Width = 300;
-                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height) * (responseToTextBox.Count + 1)) + i;
+                label.Location = new Point(LEFT, (txtReporting.Height + 1) + ((txtReporting.Height) * (responseToTextBox.Count + 1)) + i);
                 Controls.Add(label);
 
                 TextBox textBox = new TextBox();
                 textBox.Text = "NA";
                 textBox.TextChanged += new EventHandler(DataChanged);
-                textBox.Top = label.Top;
-                textBox.Left = txtReporting.Left;
+                textBox.Location = new Point(txtReporting.Left, label.Top);
                 textBox.Width = txtReporting.Width;
+                textBox.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);
 
                 ResponseValue value = responseIDToResponseValue.Get(response.ID);
                 if (value == null) {
