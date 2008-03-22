@@ -18,14 +18,11 @@
  **/
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Common.Logging;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.ui {
     internal sealed class VoteEnterer : Panel {
-        private static readonly ILog LOG = LogManager.GetLogger(typeof (VoteEnterer));
-
         private static readonly IList<string> excluded = new List<string>();
 
         private readonly IList<ContestDisplay> displays = new List<ContestDisplay>();
@@ -36,39 +33,37 @@ namespace KnightRider.ElectionTracker.ui {
             excluded.Add("WardsReporting");
         }
 
-        public VoteEnterer(Election election, County county, IContestCountyDAO contestCountyDAO,
-                           ResponseValueDAO responseValueDAO) {
+        public VoteEnterer(IList<ContestCounty> contestCounties, IContestCountyDAO contestCountyDAO)
+        {
+            InitializeComponent();
             int currentTop = 0;
-
-            foreach (ElectionContest electionContest in election.ElectionContests) {
-                // To Do: Figure out why query by example does not work.
-//                ContestCounty example = new ContestCounty();
-//                example.County = county;
-//                example.ElectionContest = electionContest;
-//                IList<ContestCounty> contestCounties = contestCountyDAO.findByExample(example, excluded);
-
-                IList<ContestCounty> contestCounties = contestCountyDAO.find(county.ID, electionContest.ID);
-
-                if (contestCounties.Count == 0) {
-                    LOG.Error("Unalbe to locate contest county where countyID =" + county.ID +
-                              " AND electionContestID =" + electionContest.ID);
-                } else {
-                    ContestDisplay display =
-                        new ContestDisplay(electionContest, contestCounties[0], contestCountyDAO, responseValueDAO);
-                    display.Top = currentTop;
-                    currentTop += display.Height + 1;
-                    Controls.Add(display);
-                    displays.Add(display);
-                }
+            foreach (ContestCounty contestCounty in contestCounties) {
+                ContestDisplay display = new ContestDisplay(contestCounty, contestCountyDAO);
+                display.Top = currentTop;
+                currentTop += display.Height + 1;
+                Controls.Add(display);
+                displays.Add(display);
             }
             AutoScroll = true;
-            BorderStyle = BorderStyle.FixedSingle;
+            BorderStyle = BorderStyle.Fixed3D;
         }
 
         public void Persist() {
             foreach (ContestDisplay display in displays) {
                 display.Persist();
             }
+        }
+
+        private void InitializeComponent() {
+            this.SuspendLayout();
+            // 
+            // VoteEnterer
+            // 
+            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResumeLayout(false);
+
         }
     }
 }

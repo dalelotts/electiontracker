@@ -29,18 +29,16 @@ namespace KnightRider.ElectionTracker.ui {
     internal sealed class ContestDisplay : Panel {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (ContestDisplay));
 
-        private ContestCounty contestCounty;
-        private readonly IContestCountyDAO contestCountyDAO;
-        private ResponseValueDAO responseValueDAO;
-
         private TextBox txtReporting;
         private Boolean _bDirty;
         private readonly Map<ResponseValue, TextBox> responseToTextBox;
+        private readonly Map<long, ResponseValue> responseIDToResponseValue;
+        private readonly ContestCounty contestCounty;
+        private IContestCountyDAO contestCountyDAO;
 
-        public ContestDisplay(ElectionContest electionContest, ContestCounty contestCounty,
-                              IContestCountyDAO contestCountyDAO, ResponseValueDAO responseValueDAO) {
+        public ContestDisplay(ContestCounty contestCounty, IContestCountyDAO contestCountyDAO)
+        {
             this.contestCounty = contestCounty;
-            this.responseValueDAO = responseValueDAO;
             this.contestCountyDAO = contestCountyDAO;
 
             Width = 450;
@@ -51,7 +49,7 @@ namespace KnightRider.ElectionTracker.ui {
             Label lblContest = new Label();
             lblContest.Left = 5;
             lblContest.Width = 300;
-            lblContest.Text = electionContest.Contest.Name;
+            lblContest.Text = contestCounty.ElectionContest.Contest.Name;
             Controls.Add(lblContest);
 
             Label lblWardCount = new Label();
@@ -74,9 +72,10 @@ namespace KnightRider.ElectionTracker.ui {
             lblReporting.Left = txtReporting.Left - lblReporting.Width - 10;
             Controls.Add(lblReporting);
 
-            IList<Response> responses = electionContest.Responses;
             responseToTextBox = new Map<ResponseValue, TextBox>();
-            InitializeResponses(responses);
+            responseIDToResponseValue = new Map<long, ResponseValue>();
+
+            InitializeResponses();
 
             lblContest.SendToBack();
             lblReporting.BringToFront();
@@ -90,41 +89,40 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public void Persist() {
+            if (!Dirty) return;
             try {
                 contestCounty.WardsReporting = int.Parse(txtReporting.Text);
+
+                foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
+                    ResponseValue responseValue = entry.Key;
+                    TextBox textBox = entry.Value;
+                    responseValue.VoteCount = int.Parse(textBox.Text);
+                }
 
                 IList<Fault> contestCountyFaults = contestCountyDAO.canMakePersistent(contestCounty);
                 bool persistData = BaseMDIChild.reportFaults(contestCountyFaults);
 
                 //If there were no errors, persist data to the database
                 if (persistData) {
-                    contestCounty = contestCountyDAO.makePersistent(contestCounty);
-
-                    foreach (KeyValuePair<ResponseValue, TextBox> entry in responseToTextBox) {
-                        ResponseValue responseValue = entry.Key;
-                        TextBox textBox = entry.Value;
-                        responseValue.VoteCount = int.Parse(textBox.Text);
-
-                        IList<Fault> responseValueFaults = responseValueDAO.canMakePersistent(responseValue);
-                        bool persistResponseValue = BaseMDIChild.reportFaults(responseValueFaults);
-
-                        //If there were no errors, persist data to the database
-                        if (persistResponseValue) {
-                            responseValueDAO.makePersistent(responseValue);
-                        }
-                    }
+                    contestCountyDAO.makePersistent(contestCounty);
+                    Dirty = false;
                 }
-                Dirty = false;
             } catch (Exception ex) {
                 LOG.Error("Persist", ex);
             }
         }
 
-        private void InitializeResponses(IList<Response> responses) {
+        private void InitializeResponses() {
             int i = 0;
             IList<string> excluded = new List<string>();
             excluded.Add("ID");
             excluded.Add("VoteCount");
+
+            foreach (ResponseValue responseValue in contestCounty.ResponseValues) {
+                responseIDToResponseValue.Put(responseValue.Response.ID, responseValue);
+            }
+
+            IList<Response> responses = contestCounty.ElectionContest.Responses;
 
             foreach (Response response in responses) {
                 i += 5;
@@ -133,7 +131,7 @@ namespace KnightRider.ElectionTracker.ui {
                 label.Left = 5;
                 label.BackColor = Color.Transparent;
                 label.Width = 300;
-                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height)*(responseToTextBox.Count + 1)) + i;
+                label.Top = (txtReporting.Height + 1) + ((txtReporting.Height) * (responseToTextBox.Count + 1)) + i;
                 Controls.Add(label);
 
                 TextBox textBox = new TextBox();
@@ -142,22 +140,14 @@ namespace KnightRider.ElectionTracker.ui {
                 textBox.Top = label.Top;
                 textBox.Left = txtReporting.Left;
                 textBox.Width = txtReporting.Width;
-                // To Do: Find out why find by example does not work
-//                ResponseValue example = new ResponseValue();
-//                example.Response = response;
-//                example.ContestCounty = contestCounty;
 
-                IList<ResponseValue> values = responseValueDAO.find(response.ID, contestCounty.ID);
-
-                ResponseValue value;
-
-                if (values.Count == 0) {
+                ResponseValue value = responseIDToResponseValue.Get(response.ID);
+                if (value == null) {
                     value = new ResponseValue();
                     value.ContestCounty = contestCounty;
                     value.Response = response;
                     value.VoteCount = 0;
-                } else {
-                    value = values[values.Count - 1];
+                    contestCounty.ResponseValues.Add(value);
                 }
 
                 textBox.Text = value.VoteCount.ToString();

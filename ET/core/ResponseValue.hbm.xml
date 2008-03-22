@@ -22,8 +22,8 @@
     <id name="ID" column="ResponseValueID" type="Int64">
       <generator class="identity"/>
     </id>
-    <many-to-one name="Response" class="KnightRider.ElectionTracker.core.Response, ElectionTracker" column="ResponseID" />
-    <many-to-one name="ContestCounty" class="KnightRider.ElectionTracker.core.ContestCounty, ElectionTracker" column="ContestCountyID" />
+    <many-to-one name="Response" class="KnightRider.ElectionTracker.core.Response, ElectionTracker" column="ResponseID" lazy="false"/>
+    <many-to-one name="ContestCounty" class="KnightRider.ElectionTracker.core.ContestCounty, ElectionTracker" column="ContestCountyID" lazy="false"/>
     <property name="VoteCount" column="VoteCount" type="Int32" length="100" not-null="true"/>
   </class>
 </hibernate-mapping>

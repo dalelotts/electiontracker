@@ -25,8 +25,6 @@ namespace KnightRider.ElectionTracker.core {
         private int voteCount;
         private long id;
 
-        #region Properties
-
         public virtual long ID {
             get { return id; }
             set { id = value; }
@@ -49,10 +47,8 @@ namespace KnightRider.ElectionTracker.core {
             set { voteCount = value; }
         }
 
-        #endregion
-
         public virtual double GetVotePercentage() {
-            return ContestCounty.GetTotalVotes() != 0 ? (double) voteCount/(double) ContestCounty.GetTotalVotes() : 0;
+            return ContestCounty.GetTotalVotes() != 0 ? (double) voteCount / (double) ContestCounty.GetTotalVotes() : 0;
         }
     }
 }

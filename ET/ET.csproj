@@ -122,6 +122,7 @@
     <Compile Include="db\IGenericDAO.cs" />
     <Compile Include="db\HibernateDAO.cs" />
     <Compile Include="db\IElectionDAO.cs" />
+    <Compile Include="db\IVoteEntryDAO.cs" />
     <Compile Include="db\PhoneNumberTypeDAO.cs" />
     <Compile Include="db\PoliticalPartyDAO.cs" />
     <Compile Include="db\RequiredProperty.cs" />
@@ -132,6 +133,8 @@
     <Compile Include="db\task\LoadElectionForReport.cs" />
     <Compile Include="db\task\LoadElectionForReportWithResults.cs" />
     <Compile Include="db\task\LoadElectionForUI.cs" />
+    <Compile Include="db\task\LoadElectionForVoteEntry.cs" />
+    <Compile Include="db\VoteEntryDAO.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
     <Compile Include="events\ContestVoteSumryArgs.cs" />
@@ -194,6 +197,12 @@
     </Compile>
     <Compile Include="ui\ContestDisplay.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\ContestVoteEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\ContestVoteEntry.Designer.cs">
+      <DependentUpon>ContestVoteEntry.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\frmAboutBox.cs">
       <SubType>Form</SubType>
@@ -358,6 +367,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>BaseMDIChild.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ui\ContestVoteEntry.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ContestVoteEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\frmAbstractReport.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmAbstractReport.cs</DependentUpon>
@@ -369,6 +382,10 @@
     <EmbeddedResource Include="ui\frmEnterVotes.resx">
       <DependentUpon>frmEnterVotes.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\VoteEnterer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VoteEnterer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

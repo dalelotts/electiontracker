@@ -18,6 +18,7 @@
  **/
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
@@ -26,26 +27,28 @@ using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmEnterVotes : BaseMDIChild {
-        private Map<String, VoteEnterer> countyToVoteEnterer;
+        private Map<long, VoteEnterer> countyIDToVoteEnterer;
         private readonly IElectionDAO electionDAO;
         private readonly IContestCountyDAO contestCountyDAO;
-        private readonly ResponseValueDAO responseValueDAO;
-        private readonly LoadElectionForUI loadElectionForUI;
+        private readonly IDAOTask<Election> loadTask;
+        private Map<long, County> countyIDToCounty;
+        private Map<long, IList<ContestCounty>> countyIDContestCounty;
 
-        public frmEnterVotes(IElectionDAO electionDAO, IContestCountyDAO contestCountyDAO,
-                             ResponseValueDAO responseValueDAO, LoadElectionForUI loadElectionForUI) {
+        public frmEnterVotes(IElectionDAO electionDAO, IContestCountyDAO contestCountyDAO, IDAOTask<Election> loadTask) {
             this.electionDAO = electionDAO;
             this.contestCountyDAO = contestCountyDAO;
-            this.responseValueDAO = responseValueDAO;
-            this.loadElectionForUI = loadElectionForUI;
-            countyToVoteEnterer = new Map<String, VoteEnterer>();
+            this.loadTask = loadTask;
             InitializeComponent();
+            countyIDToVoteEnterer = new Map<long, VoteEnterer>();
+            countyIDToCounty = new Map<long, County>();
+            countyIDContestCounty = new Map<long, IList<ContestCounty>>();
             toolStrip1.Visible = false;
         }
 
         public void HideCurrentVoteEnterer() {
-            foreach (VoteEnterer enterer in countyToVoteEnterer.Values) {
+            foreach (VoteEnterer enterer in countyIDToVoteEnterer.Values) {
                 enterer.Visible = false;
+                gbContest.Controls.Remove(enterer);
             }
         }
 
@@ -59,60 +62,76 @@ namespace KnightRider.ElectionTracker.ui {
 
         // Loads the elections into the listbox.
         private void LoadElections() {
-            IList<Election> elections = electionDAO.findActive(loadElectionForUI);
+            IList<Election> elections = electionDAO.findActive(loadTask);
             foreach (Election election in elections) {
-                cmbElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString("d"), election));
+                cboElections.Items.Add(new ListItemWrapper<Election>(election.Date.ToString("d"), election));
             }
-            if (elections.Count > 0) cmbElections.SelectedIndex = 0;
+            if (elections.Count > 0) cboElections.SelectedIndex = 0;
         }
 
         private void cmbElections_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                LoadCounties(((ListItemWrapper<Election>) cmbElections.SelectedItem).Value);
+                loadElection(((ListItemWrapper<Election>) cboElections.SelectedItem).Value);
             } catch (Exception ex) {
-                reportException("cmbElections_SelectedIndexChanged", ex);
+                reportException("cboElections_SelectedIndexChanged", ex);
             }
         }
 
-        private void LoadCounties(Election election) {
-            lstCounties.Items.Clear();
-            IDictionary<long, County> counties = new Dictionary<long, County>();
+        private void loadElection(Election election) {
+            HideCurrentVoteEnterer();
+            countyIDToCounty.Clear();
+            countyIDContestCounty.Clear();
+            countyIDToVoteEnterer.Clear();
 
-            IList<ElectionContest> electionContests = election.ElectionContests;
-            foreach (ElectionContest contest in electionContests) {
-                IList<ContestCounty> contestCounties = contest.Counties;
-                foreach (ContestCounty county in contestCounties) {
-                    if (!counties.ContainsKey(county.County.ID)) {
-                        counties.Add(county.County.ID, county.County);
-                    }
+            for (int i = 0; i < election.ElectionContests.Count; i++) {
+                ElectionContest electionContest = election.ElectionContests[i];
+                for (int j = 0; j < electionContest.Counties.Count; j++) {
+                    ContestCounty contestCounty = electionContest.Counties[j];
+                    countyIDToCounty.Put(contestCounty.County.ID, contestCounty.County);
+                    addElectionContestToMap(countyIDContestCounty, contestCounty.County.ID, contestCounty);
                 }
             }
 
-            foreach (KeyValuePair<long, County> county in counties) {
-                lstCounties.Items.Add(new ListItemWrapper<County>(county.Value.Name, county.Value));
+            foreach (KeyValuePair<long, IList<ContestCounty>> entry in countyIDContestCounty) {
+                VoteEnterer enterer = new VoteEnterer(entry.Value, contestCountyDAO);
+                countyIDToVoteEnterer.Add(entry.Key, enterer);
+            }
+
+            refreshControls();
+        }
+
+        private static void addElectionContestToMap<T, V>(Map<T, IList<V>> map, T key, V value) {
+            IList<V> valueList = map.Get(key);
+            if (valueList == null) valueList = new List<V>();
+            valueList.Add(value);
+            map.Put(key, valueList);
+        }
+
+        private void refreshControls() {
+            refreshCountyListbox();
+        }
+
+        private void refreshCountyListbox() {
+            lstCounties.Items.Clear();
+            foreach (KeyValuePair<long, County> entry in countyIDToCounty) {
+                lstCounties.Items.Add(new ListItemWrapper<County>(entry.Value.Name, entry.Value));
             }
             if (lstCounties.Items.Count > 0) lstCounties.SelectedIndex = 0;
         }
 
         private void lstCounties_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                Election election = ((ListItemWrapper<Election>) cmbElections.SelectedItem).Value;
                 County county = ((ListItemWrapper<County>) lstCounties.SelectedItem).Value;
 
                 HideCurrentVoteEnterer();
 
-                VoteEnterer enterer = countyToVoteEnterer.Get("" + election.ID + "_" + county.ID);
+                VoteEnterer enterer = countyIDToVoteEnterer.Get(county.ID);
 
-                if (enterer == null) {
-                    enterer = new VoteEnterer(election, county, contestCountyDAO, responseValueDAO);
-                    enterer.Height = gbContest.Height - 60;
-                    enterer.Top = 18;
-                    enterer.Left = 6;
-                    enterer.Width = gbContest.Width - 10;
-                    countyToVoteEnterer.Put("" + election.ID + "_" + county.ID, enterer);
-                    gbContest.Controls.Add(enterer);
-                }
+                enterer.Location = new Point(10, 20);
+                enterer.Width = gbContest.Width - 20;
+                enterer.Height = btnSaveVotes.Location.Y - 30;
 
+                gbContest.Controls.Add(enterer);
                 enterer.Visible = true;
             } catch (Exception ex) {
                 reportException("lstCounties_SelectedIndexChanged", ex);
@@ -141,32 +160,12 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnSaveVotes_Click(object sender, EventArgs e) {
             try {
-                // TODO: Save contest information.
-                foreach (VoteEnterer voteEnterer in countyToVoteEnterer.Values) {
+                foreach (VoteEnterer voteEnterer in countyIDToVoteEnterer.Values)
+                {
                     voteEnterer.Persist();
-                } // foreach(VoteEnterer...
+                } 
             } catch (Exception ex) {
                 reportException("btnSaveVotes_Click", ex);
-            }
-        }
-
-        private void frmEnterVotes_Resize(object sender, EventArgs e) {
-            try {
-                gbCounty.Height = Height - 117;
-                gbContest.Height = Height - 117;
-                btnNext.Top = gbCounty.Height - 30;
-                btnSaveVotes.Top = gbContest.Height - 30;
-                gbContest.Width = Width - 231;
-                btnSaveVotes.Left = gbContest.Width - 81;
-                lstCounties.Height = gbCounty.Height - 60;
-
-                // Resize vote enterer.
-                foreach (String k in countyToVoteEnterer.Keys) {
-                    countyToVoteEnterer.Get(k).Height = gbContest.Height - 60;
-                    countyToVoteEnterer.Get(k).Width = gbContest.Width - 10;
-                }
-            } catch (Exception ex) {
-                reportException("frmEnterVotes_Resize", ex);
             }
         }
     }
