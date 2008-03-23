@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
+using System.Reflection;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.core {
@@ -64,6 +65,27 @@ namespace KnightRider.ElectionTracker.core {
 
         public override string ToString() {
             return (type.Name + ": (" + areaCode + ") " + phoneNumber);
+        }
+
+        public override bool Equals(object obj) {
+            if (obj == null) return false;
+            if (this == obj) return true;
+            CountyPhoneNumber that = obj as CountyPhoneNumber;
+            if (that == null) return false;
+            if (id == 0 && that.ID == 0) {
+                return base.Equals(obj);
+            } else {
+                return id.Equals(that.ID);
+            }
+        }
+
+        public override int GetHashCode() {
+            if (id == 0) {
+                return base.GetHashCode();
+            } else {
+                string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
+                return stringRepresentation.GetHashCode();
+            }
         }
     }
 }

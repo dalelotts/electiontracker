@@ -147,12 +147,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C935F78FD7B042449C40F7728E09DA6A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CE7F28741261C449183B3B1F087A7B94"
         "OwnerKey" = "8:_8B8BDF235DFC42AA98E56BD9BD67B143"
         "MsmSig" = "8:_UNDEFINED"
@@ -740,26 +734,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C935F78FD7B042449C40F7728E09DA6A"
-            {
-            "SourcePath" = "8:..\\ET\\db\\BatabaseBackup1.sql"
-            "TargetName" = "8:BatabaseBackup1.sql"
-            "Tag" = "8:"
-            "Folder" = "8:_B4DEC71BD7974DE0A100C25C6344EBBA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CE7F28741261C449183B3B1F087A7B94"

@@ -44,10 +44,12 @@ namespace KnightRider.ElectionTracker.ui {
             BorderStyle = BorderStyle.Fixed3D;
         }
 
-        public void Persist() {
+        public IList<string> Persist() {
+            List<string> result = new List<string>();
             foreach (ContestDisplay display in displays) {
-                display.Persist();
+                result.AddRange(display.Persist());
             }
+            return result;
         }
 
         private void InitializeComponent() {

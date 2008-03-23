@@ -24,28 +24,22 @@ using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
+using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
-    internal class frmElectionReport : frmAbstractReport {
+    internal sealed class frmElectionReport : BaseReport {
         private List<string> lstToPrint;
         private List<string> lstHeader;
         private int intCount;
 
-        public frmElectionReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask)
-            : base(electionDAO, loadTask)
+        public frmElectionReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask, IList<TreeViewFilter> filters)
+            : base(electionDAO, loadTask, filters, false)
         {
+            Text = "Vote County Tally Sheet";
             lstHeader = new List<string>();
         }
 
-        protected override IList<Election> GetElections() {
-            return electionDAO.findActive(loadTask);
-        }
-
-        protected override string GetTitle() {
-            return "Tally Form";
-        }
-
-        protected override void CreateReport(Election election) {
+        protected override PrintDocument CreateDocumnt(Election election) {
             intCount = 0;
             intPages = 0;
             lstToPrint = new List<string>();
@@ -109,20 +103,9 @@ namespace KnightRider.ElectionTracker.ui {
                 lstToPrint.Add("<BREAK>");
             }
 
-            Controls.Remove(ppcElection);
-            docToPrint = new PrintDocument();
-            docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
-            ppcElection = new PrintPreviewControl();
-            ppcElection.Document = null;
-            ppcElection.Document = docToPrint;
-
-
-            ppcElection.Location = new Point(190, 12);
-            ppcElection.Name = "ppcElection";
-            ppcElection.Width = Width - 237;
-            ppcElection.Height = Height - 58;
-            ppcElection.TabIndex = 3;
-            Controls.Add(ppcElection);
+            PrintDocument document = new PrintDocument();
+            document.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+            return document;
         }
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {

@@ -18,6 +18,7 @@
  **/
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 
@@ -60,8 +61,8 @@ namespace KnightRider.ElectionTracker.ui {
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
                 currentContest.IsActive = chkActive.Checked;
-                currentContest.Name = txtName.Text.Trim();
-                currentContest.Notes = txtNotes.Text.Trim();
+                currentContest.Name = txtName.Text;
+                currentContest.Notes = txtNotes.Text;
 
                 //Validate the current data and get a list of faults.
                 IList<Fault> faults = contestDAO.canMakePersistent(currentContest);
@@ -72,6 +73,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentContest = contestDAO.makePersistent(currentContest);
                     refreshControls();
                     raiseMakePersistentEvent();
+                    MessageBox.Show(this, currentContest + " saved.", "Sucessful Save");
                 }
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);

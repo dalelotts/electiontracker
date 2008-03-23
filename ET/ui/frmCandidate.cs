@@ -98,12 +98,11 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                currentCandidate.FirstName = txtFirstName.Text.Trim();
-                currentCandidate.MiddleName = txtMiddleName.Text.Trim();
-                currentCandidate.LastName = txtLastName.Text.Trim();
-                currentCandidate.PoliticalParty =
-                    ((ListItemWrapper<PoliticalParty>) cboPoliticalParty.SelectedItem).Value;
-                currentCandidate.Notes = txtNotes.Text.Trim();
+                currentCandidate.FirstName = txtFirstName.Text;
+                currentCandidate.MiddleName = txtMiddleName.Text;
+                currentCandidate.LastName = txtLastName.Text;
+                currentCandidate.PoliticalParty = ((ListItemWrapper<PoliticalParty>) cboPoliticalParty.SelectedItem).Value;
+                currentCandidate.Notes = txtNotes.Text;
                 currentCandidate.IsActive = chkActive.Checked;
 
                 IList<Fault> faults = candidateDAO.canMakePersistent(currentCandidate);
@@ -115,6 +114,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentCandidate = candidateDAO.makePersistent(currentCandidate);
                     refreshGoToList();
                     raiseMakePersistentEvent();
+                    MessageBox.Show(this, currentCandidate + " saved.", "Sucessful Save");
                 }
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);

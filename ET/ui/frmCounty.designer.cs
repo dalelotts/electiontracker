@@ -47,7 +47,7 @@ namespace KnightRider.ElectionTracker.ui
         private void InitializeComponent()
         {
             this.gbCounty = new System.Windows.Forms.GroupBox();
-            this.txtCountyWardCount = new System.Windows.Forms.MaskedTextBox();
+            this.txtCountyWardCount = new System.Windows.Forms.TextBox();
             this.txtCountyName = new System.Windows.Forms.TextBox();
             this.lblCountyWardCount = new System.Windows.Forms.Label();
             this.lblCountyName = new System.Windows.Forms.Label();
@@ -78,7 +78,7 @@ namespace KnightRider.ElectionTracker.ui
             this.btnAddAttribute = new System.Windows.Forms.Button();
             this.lstAttributes = new System.Windows.Forms.ListBox();
             this.txtValue = new System.Windows.Forms.TextBox();
-            this.cbKey = new System.Windows.Forms.ComboBox();
+            this.cboAttributeKey = new System.Windows.Forms.ComboBox();
             this.lblAttributeValue = new System.Windows.Forms.Label();
             this.lblAttributeKey = new System.Windows.Forms.Label();
             this.lblRequired = new System.Windows.Forms.Label();
@@ -112,12 +112,10 @@ namespace KnightRider.ElectionTracker.ui
             // txtCountyWardCount
             // 
             this.txtCountyWardCount.Location = new System.Drawing.Point(79, 43);
-            this.txtCountyWardCount.Mask = "0000";
             this.txtCountyWardCount.Name = "txtCountyWardCount";
-            this.txtCountyWardCount.Size = new System.Drawing.Size(66, 20);
+            this.txtCountyWardCount.Size = new System.Drawing.Size(49, 20);
             this.txtCountyWardCount.TabIndex = 3;
-            this.txtCountyWardCount.Tag = "lock=true";
-            this.txtCountyWardCount.Text = "0";
+            this.txtCountyWardCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(numericInputOnly);
             // 
             // txtCountyName
             // 
@@ -419,7 +417,7 @@ namespace KnightRider.ElectionTracker.ui
             this.gbAttributes.Controls.Add(this.btnAddAttribute);
             this.gbAttributes.Controls.Add(this.lstAttributes);
             this.gbAttributes.Controls.Add(this.txtValue);
-            this.gbAttributes.Controls.Add(this.cbKey);
+            this.gbAttributes.Controls.Add(this.cboAttributeKey);
             this.gbAttributes.Controls.Add(this.lblAttributeValue);
             this.gbAttributes.Controls.Add(this.lblAttributeKey);
             this.gbAttributes.Location = new System.Drawing.Point(6, 6);
@@ -474,15 +472,15 @@ namespace KnightRider.ElectionTracker.ui
             this.txtValue.TabIndex = 3;
             this.txtValue.Tag = "lock=true";
             // 
-            // cbKey
+            // cboAttributeKey
             // 
-            this.cbKey.FormattingEnabled = true;
-            this.cbKey.Location = new System.Drawing.Point(6, 30);
-            this.cbKey.Name = "cbKey";
-            this.cbKey.Size = new System.Drawing.Size(146, 21);
-            this.cbKey.TabIndex = 1;
-            this.cbKey.Tag = "lock=true";
-            this.cbKey.Leave += new System.EventHandler(this.cbKey_Leave);
+            this.cboAttributeKey.FormattingEnabled = true;
+            this.cboAttributeKey.Location = new System.Drawing.Point(6, 30);
+            this.cboAttributeKey.Name = "cboAttributeKey";
+            this.cboAttributeKey.Size = new System.Drawing.Size(146, 21);
+            this.cboAttributeKey.TabIndex = 1;
+            this.cboAttributeKey.Tag = "lock=true";
+            this.cboAttributeKey.Leave += new System.EventHandler(this.cbKey_Leave);
             // 
             // lblAttributeValue
             // 
@@ -564,7 +562,6 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.ListBox lstPhoneNums;
         private System.Windows.Forms.ComboBox cbPhoneNumberType;
         private System.Windows.Forms.Label lblPhoneNumberType;
-        private System.Windows.Forms.MaskedTextBox txtCountyWardCount;
         private System.Windows.Forms.MaskedTextBox txtPhoneNumber;
         private System.Windows.Forms.MaskedTextBox txtAreaCode;
         private System.Windows.Forms.Label lblRequired;
@@ -580,8 +577,9 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.Button btnAddAttribute;
         private System.Windows.Forms.ListBox lstAttributes;
         private System.Windows.Forms.TextBox txtValue;
-        private System.Windows.Forms.ComboBox cbKey;
+        private System.Windows.Forms.ComboBox cboAttributeKey;
         private System.Windows.Forms.Label lblAttributeValue;
         private System.Windows.Forms.Label lblAttributeKey;
+        private System.Windows.Forms.TextBox txtCountyWardCount;
     }
 }

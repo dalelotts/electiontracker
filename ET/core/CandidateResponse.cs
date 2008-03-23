@@ -31,16 +31,12 @@ namespace KnightRider.ElectionTracker.core {
             set {
                 if (value == null) throw new ArgumentException("Null: candidate");
                 candidate = value;
-                string abbreviation = "";
-                if (candidate.PoliticalParty != null) {
-                    abbreviation = " (" + candidate.PoliticalParty.Abbreviation + ')';
-                }
-                toStringResult = candidate.FirstName + " " + candidate.LastName + abbreviation;
+                toStringResult = candidate.ToString();
             }
         }
 
         public override string ToString() {
-            return toStringResult;
+            return toStringResult + (IsIncumbent ? " (Inc.)" : "");
         }
     }
 }

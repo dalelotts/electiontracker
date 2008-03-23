@@ -24,28 +24,21 @@ using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
+using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
-    internal class frmProofingSheet : frmAbstractReport {
+    internal sealed class frmProofingSheet : BaseReport {
         private int intCount;
         private List<string> lstToPrint;
         private List<string> lstHeader;
 
-        public frmProofingSheet(IElectionDAO electionDAO, IDAOTask<Election> loadTask)
-            : base(electionDAO, loadTask)
+        public frmProofingSheet(IElectionDAO electionDAO, IDAOTask<Election> loadTask, IList<TreeViewFilter> filters)
+            : base(electionDAO, loadTask, filters, true)
         {
-            blnLandscape = true;
+            Text = "Proofing Sheet";
         }
 
-        protected override string GetTitle() {
-            return "Proofing Sheet";
-        }
-
-        protected override IList<Election> GetElections() {
-            return electionDAO.findActive(loadTask);
-        }
-
-        protected override void CreateReport(Election election) {
+        protected override PrintDocument CreateDocumnt(Election election) {
             intCount = 0;
             intPages = 0;
             lstToPrint = new List<string>();
@@ -124,21 +117,10 @@ namespace KnightRider.ElectionTracker.ui {
                 lstToPrint.Add("");
             }
 
-
-            // Set up print preview control.
-            Controls.Remove(ppcElection);
-            docToPrint = new PrintDocument();
-            docToPrint.PrintPage += new PrintPageEventHandler(pd_PrintPage);
-            ppcElection = new PrintPreviewControl();
-            ppcElection.Document = null;
-            ppcElection.Document = docToPrint;
-            docToPrint.DefaultPageSettings.Landscape = true;
-            ppcElection.Location = new Point(190, 12);
-            ppcElection.Name = "ppcElection";
-            ppcElection.Width = Width - 237;
-            ppcElection.Height = Height - 58;
-            ppcElection.TabIndex = 3;
-            Controls.Add(ppcElection);
+            PrintDocument document = new PrintDocument();
+            document.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+            document.DefaultPageSettings.Landscape = true;
+            return document;
         }
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {

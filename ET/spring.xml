@@ -52,8 +52,6 @@
   <object name="ContestDAO" type="KnightRider.ElectionTracker.db.ContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="CountyDAO" type="KnightRider.ElectionTracker.db.CountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ResponseValueDAO" type="KnightRider.ElectionTracker.db.ResponseValueDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-  <object name="AttributeTypeDAO" type="KnightRider.ElectionTracker.db.AttributeTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-  <object name="PhoneNumberTypeDAO" type="KnightRider.ElectionTracker.db.PhoneNumberTypeDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ElectionContestDAO" type="KnightRider.ElectionTracker.db.ElectionContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ResponseDAO" type="KnightRider.ElectionTracker.db.ResponseDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ContestCountyDAO" type="KnightRider.ElectionTracker.db.ContestCountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
@@ -128,13 +126,31 @@
   <object name="KnightRider.ElectionTracker.ui.frmElectionReport" type="KnightRider.ElectionTracker.ui.frmElectionReport, ElectionTracker" autowire="no" singleton="false">
     <constructor-arg name="electionDAO" ref="ElectionDAO"/>
     <constructor-arg name="loadTask" ref="LoadElectionForReport"/>
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionFilter"/>
+        <ref object="InactiveElectionFilter"/>
+      </list>
+    </constructor-arg>   
   </object>
   <object name="KnightRider.ElectionTracker.ui.frmProofingSheet" type="KnightRider.ElectionTracker.ui.frmProofingSheet, ElectionTracker" autowire="no" singleton="false">
     <constructor-arg name="electionDAO" ref="ElectionDAO"/>
     <constructor-arg name="loadTask" ref="LoadElectionForReport"/>
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionFilter"/>
+        <ref object="InactiveElectionFilter"/>
+      </list>
+    </constructor-arg>
   </object>
   <object name="KnightRider.ElectionTracker.ui.frmContestVoteSummary" type="KnightRider.ElectionTracker.ui.frmContestVoteSummary, ElectionTracker" autowire="no" singleton="false">
     <constructor-arg name="electionDAO" ref="ElectionDAO"/>
     <constructor-arg name="loadTask" ref="LoadElectionForReportWithResults"/>
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionFilter"/>
+        <ref object="InactiveElectionFilter"/>
+      </list>
+    </constructor-arg>
   </object>
 </objects>

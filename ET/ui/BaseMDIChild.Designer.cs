@@ -151,7 +151,6 @@ namespace KnightRider.ElectionTracker.ui
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BaseMDIChild";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "BaseMDIChild";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

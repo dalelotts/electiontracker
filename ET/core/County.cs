@@ -17,11 +17,12 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System.Collections.Generic;
+using System.Reflection;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.core {
     public class County {
-        private long? id;
+        private long id;
         private string name;
         private string notes;
         private int wardCount;
@@ -30,7 +31,7 @@ namespace KnightRider.ElectionTracker.core {
         private IList<CountyWebsite> websites = new List<CountyWebsite>();
 
         public virtual long ID {
-            get { return id.HasValue ? id.Value : 0; }
+            get { return id; }
             set { id = value; }
         }
 
@@ -72,18 +73,22 @@ namespace KnightRider.ElectionTracker.core {
         public override bool Equals(object obj) {
             if (obj == null) return false;
             if (this == obj) return true;
-            if (!GetType().Equals(obj.GetType())) return false;
-            County that = (County) obj;
-            if (id.HasValue && that.id.HasValue) {
-                return id.Equals(that.id);
+            County that = obj as County;
+            if (that == null) return false;
+            if (id == 0 && that.ID == 0) {
+                return base.Equals(obj);
             } else {
-                return false;
+                return id.Equals(that.ID);
             }
         }
 
-
         public override int GetHashCode() {
-            return id.HasValue ? (int) id.Value : base.GetHashCode();
+            if (id == 0) {
+                return base.GetHashCode();
+            } else {
+                string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
+                return stringRepresentation.GetHashCode();
+            }
         }
     }
 }

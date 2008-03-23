@@ -22,27 +22,19 @@ using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
-using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmCounty : BaseMDIChild {
         private readonly ICountyDAO countyDAO;
-        private readonly PhoneNumberTypeDAO phoneNumberTypeDAO;
         private readonly LoadCountyForUI loadCountyForUI;
-        private readonly AttributeTypeDAO attributeTypeDAO;
 
         private County currentCounty;
 
-        public frmCounty(ICountyDAO countyDAO, AttributeTypeDAO attributeTypeDAO, PhoneNumberTypeDAO phoneNumberTypeDAO,
-                         LoadCountyForUI loadCountyForUI) {
+        public frmCounty(ICountyDAO countyDAO, LoadCountyForUI loadCountyForUI) {
             InitializeComponent();
 
-
             this.countyDAO = countyDAO;
-            this.attributeTypeDAO = attributeTypeDAO;
-            this.phoneNumberTypeDAO = phoneNumberTypeDAO;
             this.loadCountyForUI = loadCountyForUI;
-
 
             refreshPhoneNumberTypes();
             refreshAttributeTypes();
@@ -66,6 +58,7 @@ namespace KnightRider.ElectionTracker.ui {
             txtCountyWardCount.Text = currentCounty.WardCount.ToString();
             txtNotes.Text = currentCounty.Notes;
 
+            refreshPhoneNumberTypes();
             refreshPhoneNumbers();
             refreshWebsites();
             refreshAttributes();
@@ -73,18 +66,20 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void refreshPhoneNumbers() {
+            refreshPhoneNumberTypes();
             lstPhoneNums.Items.Clear();
             IList<CountyPhoneNumber> phoneNumbers = currentCounty.PhoneNumbers;
             foreach (CountyPhoneNumber phoneNumber in phoneNumbers) {
                 lstPhoneNums.Items.Add(phoneNumber);
+                cbPhoneNumberType.Items.Remove(phoneNumber.Type);
             }
         }
 
         private void refreshPhoneNumberTypes() {
             cbPhoneNumberType.Items.Clear();
-            IList<PhoneNumberType> phoneNumberTypes = phoneNumberTypeDAO.findAll();
+            IList<PhoneNumberType> phoneNumberTypes = countyDAO.findAllPhoneNumberTypes();
             foreach (PhoneNumberType phoneNumberType in phoneNumberTypes) {
-                cbPhoneNumberType.Items.Add(new ListItemWrapper<PhoneNumberType>(phoneNumberType.Name, phoneNumberType));
+                cbPhoneNumberType.Items.Add(phoneNumberType);
             }
 
             if (phoneNumberTypes.Count > 0) cbPhoneNumberType.SelectedIndex = 0;
@@ -99,29 +94,32 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void refreshAttributes() {
+            refreshAttributeTypes();
             lstAttributes.Items.Clear();
             IList<CountyAttribute> attributes = currentCounty.Attributes;
             foreach (CountyAttribute attribute in attributes) {
                 lstAttributes.Items.Add(attribute);
+                cboAttributeKey.Items.Remove(attribute.Type);
             }
         }
 
         private void refreshAttributeTypes() {
-            cbKey.Items.Clear();
-            IList<AttributeType> attributeTypes = attributeTypeDAO.findAll();
+            cboAttributeKey.Items.Clear();
+            IList<AttributeType> attributeTypes = countyDAO.findAllAttributeTypes();
             foreach (AttributeType attributeType in attributeTypes) {
-                cbKey.Items.Add(new ListItemWrapper<AttributeType>(attributeType.Name, attributeType));
+                cboAttributeKey.Items.Add(attributeType);
             }
 
-            if (attributeTypes.Count > 0) cbKey.SelectedIndex = 0;
+            if (attributeTypes.Count > 0) cboAttributeKey.SelectedIndex = 0;
         }
 
         private void btnAddPhoneNum_Click(object sender, EventArgs e) {
             try {
+                PhoneNumberType phoneNumberType = cbPhoneNumberType.SelectedItem as PhoneNumberType;
                 CountyPhoneNumber tmpPhoneNumber = new CountyPhoneNumber();
-                tmpPhoneNumber.AreaCode = txtAreaCode.Text.Trim();
-                tmpPhoneNumber.PhoneNumber = txtPhoneNumber.Text.Trim();
-                tmpPhoneNumber.Type = ((ListItemWrapper<PhoneNumberType>) cbPhoneNumberType.SelectedItem).Value;
+                tmpPhoneNumber.AreaCode = txtAreaCode.Text;
+                tmpPhoneNumber.PhoneNumber = txtPhoneNumber.Text;
+                tmpPhoneNumber.Type = phoneNumberType;
                 tmpPhoneNumber.County = currentCounty;
 
                 IList<Fault> faults = countyDAO.canMakePersistent(tmpPhoneNumber);
@@ -153,7 +151,7 @@ namespace KnightRider.ElectionTracker.ui {
         private void btnAddWebsite_Click(object sender, EventArgs e) {
             try {
                 CountyWebsite tmpWebsite = new CountyWebsite();
-                tmpWebsite.URL = txtWebsite.Text.Trim();
+                tmpWebsite.URL = txtWebsite.Text;
                 tmpWebsite.County = currentCounty;
 
                 IList<Fault> faults = countyDAO.canMakePersistent(tmpWebsite);
@@ -184,8 +182,9 @@ namespace KnightRider.ElectionTracker.ui {
         private void btnAddAttribute_Click(object sender, EventArgs e) {
             try {
                 CountyAttribute tmpAttribute = new CountyAttribute();
-                if (cbKey != null) tmpAttribute.Type = ((ListItemWrapper<AttributeType>) cbKey.SelectedItem).Value;
-                tmpAttribute.Value = txtValue.Text.Trim();
+                AttributeType attributeType = cboAttributeKey.SelectedItem as AttributeType;
+                tmpAttribute.Type = attributeType;
+                tmpAttribute.Value = txtValue.Text;
                 tmpAttribute.County = currentCounty;
 
                 IList<Fault> faults = countyDAO.canMakePersistent(tmpAttribute);
@@ -225,10 +224,10 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                currentCounty.Name = txtCountyName.Text.Trim();
-                currentCounty.Notes = txtNotes.Text.Trim();
+                currentCounty.Name = txtCountyName.Text;
+                currentCounty.Notes = txtNotes.Text;
                 int i;
-                Int32.TryParse(txtCountyWardCount.Text.Trim(), out i);
+                Int32.TryParse(txtCountyWardCount.Text, out i);
                 currentCounty.WardCount = i;
 
                 IList<Fault> faults = countyDAO.canMakePersistent(currentCounty);
@@ -239,6 +238,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentCounty = countyDAO.makePersistent(currentCounty);
                     refreshGoToList();
                     raiseMakePersistentEvent();
+                    MessageBox.Show(this, currentCounty.Name + " county saved.", "Sucessful Save");
                 }
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
@@ -247,29 +247,22 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
-                currentCounty = currentCounty.ID == 0
-                                    ? new County()
-                                    : countyDAO.findById(currentCounty.ID, false, loadCountyForUI);
-                resetControls();
+                if (currentCounty.ID == 0 ) {
+                    currentCounty = new County();
+                    loadCounty(null);
+                } else {
+                    loadCounty(currentCounty.ID);
+                }
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
                 reportException("btnReset_Click", ex);
             }
         }
 
-        private void resetControls() {
-            currentCounty = currentCounty.ID == 0
-                                ? new County()
-                                : countyDAO.findById(currentCounty.ID, false, loadCountyForUI);
-            refreshControls();
-        }
-
-
         public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
             try {
                 County selectedCounty = (County) cboGoTo.SelectedItem;
-                currentCounty = countyDAO.findById(selectedCounty.ID, false, loadCountyForUI);
-                refreshControls();
+                loadCounty(selectedCounty.ID);
                 base.cboGoTo_SelectedIndexChanged(sender, e);
             } catch (Exception ex) {
                 reportException("cboGoTo_SelectedIndexChanged", ex);
@@ -306,28 +299,31 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void cbPhoneNumberType_Leave(object sender, EventArgs e) {
             try {
-                if ((cbPhoneNumberType.SelectedIndex == -1) && (!cbPhoneNumberType.Text.Equals(""))) {
-                    String newTypeName = cbPhoneNumberType.Text;
-                    String message = "Phone number type \"" + newTypeName +
-                                     "\" does not exist.\nWould you like to create it?";
+                String newTypeName = cbPhoneNumberType.Text.Trim();
+                if ((cbPhoneNumberType.SelectedIndex == -1) && (newTypeName.Length > 0)) {
+                    String message = "Phone number type \"" + newTypeName + "\" does not exist.\nWould you like to create it?";
                     String caption = "Unidentified Type";
                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                     DialogResult result = MessageBox.Show(message, caption, buttons);
                     if (result == DialogResult.Yes) {
-                        PhoneNumberType newType = new PhoneNumberType();
-                        newType.Name = newTypeName;
-                        phoneNumberTypeDAO.makePersistent(newType);
-                        refreshPhoneNumberTypes();
+                        PhoneNumberType type = new PhoneNumberType();
+                        type.Name = newTypeName;
 
-                        for (int i = 0; i < cbPhoneNumberType.Items.Count; i++) {
-                            if (
-                                (((ListItemWrapper<PhoneNumberType>) cbPhoneNumberType.Items[i]).Value).Name.Equals(
-                                    newTypeName)) {
-                                cbPhoneNumberType.SelectedIndex = i;
+                        IList<Fault> faults = countyDAO.canMakePersistent(type);
+                        bool persistData = reportFaults(faults);
+
+                        //If there were no errors, persist data to the database
+                        if (persistData) {
+                            countyDAO.makePersistent(type);
+                            refreshPhoneNumberTypes();
+
+                            for (int i = 0; i < cbPhoneNumberType.Items.Count; i++) {
+                                if (((PhoneNumberType) cbPhoneNumberType.Items[i]).Name.Equals(newTypeName)) {
+                                    cbPhoneNumberType.SelectedIndex = i;
+                                }
                             }
                         }
-                    }
-                    if (result == DialogResult.No) {
+                    } else {
                         cbPhoneNumberType.SelectedIndex = 0;
                     }
                 }
@@ -338,26 +334,32 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void cbKey_Leave(object sender, EventArgs e) {
             try {
-                if ((cbKey.SelectedIndex == -1) && (!cbKey.Text.Equals(""))) {
-                    String newTypeName = cbKey.Text;
+                String newTypeName = cboAttributeKey.Text.Trim();
+                if ((cboAttributeKey.SelectedIndex == -1) && (newTypeName.Length > 0)) {
                     String message = "Attribute \"" + newTypeName + "\" does not exist.\nWould you like to create it?";
                     String caption = "Unidentified Attribute";
                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                     DialogResult result = MessageBox.Show(message, caption, buttons);
                     if (result == DialogResult.Yes) {
-                        AttributeType newType = new AttributeType();
-                        newType.Name = newTypeName;
-                        attributeTypeDAO.makePersistent(newType);
-                        refreshAttributeTypes();
+                        AttributeType type = new AttributeType();
+                        type.Name = newTypeName;
 
-                        for (int i = 0; i < cbKey.Items.Count; i++) {
-                            if ((((ListItemWrapper<AttributeType>) cbKey.Items[i]).Value).Name.Equals(newTypeName)) {
-                                cbKey.SelectedIndex = i;
+                        IList<Fault> faults = countyDAO.canMakePersistent(type);
+                        bool persistData = reportFaults(faults);
+
+                        //If there were no errors, persist data to the database
+                        if (persistData) {
+                            countyDAO.makePersistent(type);
+                            refreshAttributeTypes();
+
+                            for (int i = 0; i < cboAttributeKey.Items.Count; i++) {
+                                if (((AttributeType) cboAttributeKey.Items[i]).Name.Equals(newTypeName)) {
+                                    cboAttributeKey.SelectedIndex = i;
+                                }
                             }
                         }
-                    }
-                    if (result == DialogResult.No) {
-                        cbKey.SelectedIndex = 0;
+                    } else {
+                        cboAttributeKey.SelectedIndex = 0;
                     }
                 }
             } catch (Exception ex) {

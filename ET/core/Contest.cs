@@ -17,18 +17,19 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 
+using System.Reflection;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.core {
     public class Contest {
-        private long? id;
+        private long id;
         private string name = null;
         private string notes = null;
         private bool isActive = true;
 
 
         public virtual long ID {
-            get { return id.HasValue ? id.Value : 0; }
+            get { return id; }
             set { id = value; }
         }
 
@@ -55,17 +56,29 @@ namespace KnightRider.ElectionTracker.core {
         public override bool Equals(object obj) {
             if (obj == null) return false;
             if (this == obj) return true;
-            if (!GetType().Equals(obj.GetType())) return false;
-            Contest that = (Contest) obj;
-            if (id.HasValue && that.id.HasValue) {
-                return id.Equals(that.id);
-            } else {
-                return false;
+            Contest that = obj as Contest;
+            if (that == null) return false;
+            if (id == 0 && that.ID == 0)
+            {
+                return base.Equals(obj);
+            }
+            else
+            {
+                return id.Equals(that.ID);
             }
         }
 
-        public override int GetHashCode() {
-            return id.HasValue ? (int) id.Value : base.GetHashCode();
+        public override int GetHashCode()
+        {
+            if (id == 0)
+            {
+                return base.GetHashCode();
+            }
+            else
+            {
+                string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
+                return stringRepresentation.GetHashCode();
+            }
         }
     }
 }

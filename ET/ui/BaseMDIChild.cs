@@ -99,5 +99,10 @@ namespace KnightRider.ElectionTracker.ui {
             MakeTransientArgs args = new MakeTransientArgs();
             EventUtil.RaiseEvent<Object, MakeTransientArgs>(makeTransient, this, args);
         }
+
+        public static void numericInputOnly(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(e.KeyChar == 8 || e.KeyChar == 9 || (e.KeyChar > 48 && e.KeyChar < 57));
+        }
     }
 }

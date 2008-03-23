@@ -18,6 +18,7 @@
  **/
 
 using System.Collections.Generic;
+using System.Reflection;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.core {
@@ -77,6 +78,27 @@ namespace KnightRider.ElectionTracker.core {
                 result += rv.VoteCount;
             }
             return result;
+        }
+
+        public override bool Equals(object obj) {
+            if (obj == null) return false;
+            if (this == obj) return true;
+            ContestCounty that = obj as ContestCounty;
+            if (that == null) return false;
+            if (id == 0 && that.ID == 0) {
+                return base.Equals(obj);
+            } else {
+                return id.Equals(that.ID);
+            }
+        }
+
+        public override int GetHashCode() {
+            if (id == 0) {
+                return base.GetHashCode();
+            } else {
+                string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
+                return stringRepresentation.GetHashCode();
+            }
         }
     }
 }

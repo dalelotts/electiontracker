@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
@@ -127,14 +128,14 @@ namespace KnightRider.ElectionTracker.ui {
         private void refreshCountyListbox() {
             lstCounties.Items.Clear();
             foreach (KeyValuePair<long, County> entry in countyIDToCounty) {
-                lstCounties.Items.Add(new ListItemWrapper<County>(entry.Value.Name, entry.Value));
+                lstCounties.Items.Add(entry.Value);
             }
             if (lstCounties.Items.Count > 0) lstCounties.SelectedIndex = 0;
         }
 
         private void lstCounties_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                County county = ((ListItemWrapper<County>) lstCounties.SelectedItem).Value;
+                County county = (County)lstCounties.SelectedItem;
 
                 HideCurrentVoteEnterer();
 
@@ -173,10 +174,16 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnSaveVotes_Click(object sender, EventArgs e) {
             try {
+                List<string> result = new List<string>();
                 foreach (VoteEnterer voteEnterer in countyIDToVoteEnterer.Values)
                 {
-                    voteEnterer.Persist();
-                } 
+                    result.AddRange(voteEnterer.Persist());
+                }
+                string message = "";
+                foreach (string s in result) {
+                    message += s + "\n";
+                }
+                MessageBox.Show(this, "The follow vote results were saved:\n" + message.Trim() , "Sucessful Save");
             } catch (Exception ex) {
                 reportException("btnSaveVotes_Click", ex);
             }

@@ -16,12 +16,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
+using System.Reflection;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.core {
     public abstract class Response {
         private long id;
         private int sortorder;
+        private bool isIncumbent = false;
         private ElectionContest electionContest;
 
         public virtual long ID {
@@ -40,6 +42,11 @@ namespace KnightRider.ElectionTracker.core {
             set { sortorder = value; }
         }
 
+        public virtual bool IsIncumbent {
+            get { return isIncumbent; }
+            set { isIncumbent = value; }
+        }
+
         public abstract override string ToString();
 
         public virtual int GetTotalVotes() {
@@ -54,6 +61,24 @@ namespace KnightRider.ElectionTracker.core {
                 }
             }
             return result;
+        }
+
+        public override bool Equals(object obj) {
+            if (obj == null) return false;
+            if (this == obj) return true;
+            Response that = obj as Response;
+            if (that == null) return false;
+            if (id == 0 && that.ID == 0) return base.Equals(obj);
+            return id.Equals(that.ID);
+        }
+
+        public override int GetHashCode() {
+            if (id == 0) {
+                return base.GetHashCode();
+            } else {
+                string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
+                return stringRepresentation.GetHashCode();
+            }
         }
     }
 }

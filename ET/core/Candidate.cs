@@ -17,11 +17,12 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 
+using System.Reflection;
 using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.core {
     public class Candidate {
-        private long? id;
+        private long id;
         private string firstName;
         private string middleName;
         private string lastName;
@@ -31,7 +32,7 @@ namespace KnightRider.ElectionTracker.core {
 
 
         public virtual long ID {
-            get { return id.HasValue ? id.Value : 0; }
+            get { return id; }
             set { id = value; }
         }
 
@@ -80,25 +81,37 @@ namespace KnightRider.ElectionTracker.core {
         }
 
         public override string ToString() {
-            string name = lastName + ", " + firstName + " " + middleName;
-            return name + (politicalParty != null ? " (" + politicalParty.Abbreviation + ")" : "");
+            string name = (lastName + ", " + firstName + " " + middleName).Trim();
+            return name + (politicalParty != null ? " - " + politicalParty.Abbreviation : "");
         }
 
 
         public override bool Equals(object obj) {
             if (obj == null) return false;
             if (this == obj) return true;
-            if (!GetType().Equals(obj.GetType())) return false;
-            Candidate that = (Candidate) obj;
-            if (id.HasValue && that.id.HasValue) {
-                return id.Equals(that.id);
-            } else {
-                return false;
+            Candidate that = obj as Candidate;
+            if (that == null) return false;
+            if (id == 0 && that.ID == 0)
+            {
+                return base.Equals(obj);
+            }
+            else
+            {
+                return id.Equals(that.ID);
             }
         }
 
-        public override int GetHashCode() {
-            return id.HasValue ? (int) id.Value : base.GetHashCode();
+        public override int GetHashCode()
+        {
+            if (id == 0)
+            {
+                return base.GetHashCode();
+            }
+            else
+            {
+                string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
+                return stringRepresentation.GetHashCode();
+            }
         }
     }
 }

@@ -159,5 +159,15 @@ namespace KnightRider.ElectionTracker.ui {
                 MessageBox.Show("Error: " + ex);
             }
         }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            ppcViewer.Zoom -= .1;
+        }
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            ppcViewer.Zoom += .1;
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace KnightRider.ElectionTracker.core {
         }
 
         public override string ToString() {
-            return description;
+            return description + (IsIncumbent ? " (Inc.)" : ""); 
         }
     }
 }

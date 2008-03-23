@@ -18,7 +18,7 @@
  **/
 namespace KnightRider.ElectionTracker.ui
 {
-    partial class frmAbstractReport
+    partial class BaseReport
     {
         /// <summary>
         /// Required designer variable.
@@ -46,11 +46,17 @@ namespace KnightRider.ElectionTracker.ui
         /// </summary>
         protected void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseReport));
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.ppcElection = new System.Windows.Forms.PrintPreviewControl();
-            this.lstElections = new System.Windows.Forms.ListBox();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.cboFilter = new System.Windows.Forms.ComboBox();
+            this.tvElections = new System.Windows.Forms.TreeView();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnZoomOut = new System.Windows.Forms.Button();
+            this.ctlToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnDown
@@ -84,23 +90,12 @@ namespace KnightRider.ElectionTracker.ui
             this.ppcElection.Name = "ppcElection";
             this.ppcElection.Size = new System.Drawing.Size(648, 616);
             this.ppcElection.TabIndex = 8;
-            // 
-            // lstElections
-            // 
-            this.lstElections.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstElections.FormattingEnabled = true;
-            this.lstElections.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.lstElections.Location = new System.Drawing.Point(12, 12);
-            this.lstElections.Name = "lstElections";
-            this.lstElections.Size = new System.Drawing.Size(172, 615);
-            this.lstElections.TabIndex = 7;
-            this.lstElections.SelectedIndexChanged += new System.EventHandler(this.lstElections_SelectedIndexChanged);
+            this.ppcElection.UseAntiAlias = true;
             // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrint.Location = new System.Drawing.Point(12, 632);
+            this.btnPrint.Location = new System.Drawing.Point(190, 634);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(88, 23);
             this.btnPrint.TabIndex = 6;
@@ -108,20 +103,69 @@ namespace KnightRider.ElectionTracker.ui
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // frmAbstractReport
+            // cboFilter
+            // 
+            this.cboFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cboFilter.FormattingEnabled = true;
+            this.cboFilter.Location = new System.Drawing.Point(12, 636);
+            this.cboFilter.Name = "cboFilter";
+            this.cboFilter.Size = new System.Drawing.Size(172, 21);
+            this.cboFilter.TabIndex = 11;
+            this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
+            // 
+            // tvElections
+            // 
+            this.tvElections.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.tvElections.Location = new System.Drawing.Point(9, 12);
+            this.tvElections.Name = "tvElections";
+            this.tvElections.Size = new System.Drawing.Size(174, 615);
+            this.tvElections.TabIndex = 12;
+            this.ctlToolTip.SetToolTip(this.tvElections, "Click the Election to generate the report.");
+            this.tvElections.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvElections_AfterSelect);
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnZoomIn.Image = global::KnightRider.ElectionTracker.Properties.Resources.zoom_in;
+            this.btnZoomIn.Location = new System.Drawing.Point(284, 633);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(24, 24);
+            this.btnZoomIn.TabIndex = 13;
+            this.ctlToolTip.SetToolTip(this.btnZoomIn, "Zoom In");
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnZoomOut.Image = global::KnightRider.ElectionTracker.Properties.Resources.zoom_out;
+            this.btnZoomOut.Location = new System.Drawing.Point(314, 633);
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.Size = new System.Drawing.Size(24, 24);
+            this.btnZoomOut.TabIndex = 14;
+            this.ctlToolTip.SetToolTip(this.btnZoomOut, "Zoom Out");
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            // 
+            // BaseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 660);
+            this.Controls.Add(this.btnZoomOut);
+            this.Controls.Add(this.btnZoomIn);
+            this.Controls.Add(this.tvElections);
+            this.Controls.Add(this.cboFilter);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.ppcElection);
-            this.Controls.Add(this.lstElections);
             this.Controls.Add(this.btnPrint);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(450, 450);
-            this.Name = "frmAbstractReport";
-            this.Text = "frmAbstractReport";
-            this.Load += new System.EventHandler(this.frmAbstractReport_Load);
+            this.Name = "BaseReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+            this.Text = "Base Report";
             this.ResumeLayout(false);
 
         }
@@ -131,7 +175,11 @@ namespace KnightRider.ElectionTracker.ui
         protected System.Windows.Forms.Button btnDown;
         protected System.Windows.Forms.Button btnUp;
         protected System.Windows.Forms.PrintPreviewControl ppcElection;
-        protected System.Windows.Forms.ListBox lstElections;
         protected System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.ComboBox cboFilter;
+        private System.Windows.Forms.TreeView tvElections;
+        private System.Windows.Forms.Button btnZoomIn;
+        private System.Windows.Forms.Button btnZoomOut;
+        private System.Windows.Forms.ToolTip ctlToolTip;
     }
 }

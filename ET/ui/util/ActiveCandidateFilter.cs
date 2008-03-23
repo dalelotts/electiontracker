@@ -36,12 +36,7 @@ namespace KnightRider.ElectionTracker.ui.util {
             IList<Candidate> candidates = dao.findActive();
 
             foreach (Candidate candidate in candidates) {
-                string displayName =
-                    string.Format("{0}, {1} {2}", candidate.LastName, candidate.FirstName, candidate.MiddleName);
-                if (candidate.PoliticalParty != null) {
-                    displayName += string.Format(" ({0})", candidate.PoliticalParty.Abbreviation);
-                }
-                TreeNode newNode = nodes.Add(DBEntity.CANDIDATE + "=" + candidate.ID, displayName);
+                TreeNode newNode = nodes.Add(DBEntity.CANDIDATE + "=" + candidate.ID, candidate.ToString());
                 newNode.ToolTipText = candidate.Notes;
             }
         }

@@ -37,8 +37,7 @@ namespace KnightRider.ElectionTracker.ui {
         private readonly ContestCounty contestCounty;
         private IContestCountyDAO contestCountyDAO;
 
-        public ContestDisplay(ContestCounty contestCounty, IContestCountyDAO contestCountyDAO)
-        {
+        public ContestDisplay(ContestCounty contestCounty, IContestCountyDAO contestCountyDAO) {
             this.contestCounty = contestCounty;
             this.contestCountyDAO = contestCountyDAO;
 
@@ -47,7 +46,7 @@ namespace KnightRider.ElectionTracker.ui {
             Visible = true;
 
             Label lblContest = new Label();
-            lblContest.Location = new Point(LEFT,LEFT);
+            lblContest.Location = new Point(LEFT, LEFT);
             lblContest.Width = 300;
             lblContest.AutoSize = true;
             lblContest.Text = contestCounty.ElectionContest.Contest.Name;
@@ -69,6 +68,9 @@ namespace KnightRider.ElectionTracker.ui {
             txtReporting.Location = new Point(lblWardCount.Left - txtReporting.Width - 5, lblContest.Top);
             txtReporting.Text = contestCounty.WardsReporting.ToString();
             txtReporting.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);
+            txtReporting.Enter += new EventHandler(selectAllText);
+            txtReporting.TextChanged += new EventHandler(DataChanged);
+            txtReporting.KeyPress += new KeyPressEventHandler(BaseMDIChild.numericInputOnly);
             Controls.Add(txtReporting);
 
             Label lblReporting = new Label();
@@ -89,13 +91,22 @@ namespace KnightRider.ElectionTracker.ui {
             Dirty = false;
         }
 
+        private static void selectAllText(Object sender, EventArgs e) {
+            if (sender is TextBox) {
+                TextBox senderTextBox = (TextBox) sender;
+                senderTextBox.SelectionStart = 0;
+                senderTextBox.SelectionLength = senderTextBox.Text.Length;
+            }
+        }
+
         public Boolean Dirty {
             get { return _bDirty; }
             set { _bDirty = value; }
         }
 
-        public void Persist() {
-            if (!Dirty) return;
+        public IList<string> Persist() {
+            List<string> result = new List<string>();
+            if (!Dirty) return result;
             try {
                 contestCounty.WardsReporting = int.Parse(txtReporting.Text);
 
@@ -111,11 +122,13 @@ namespace KnightRider.ElectionTracker.ui {
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     contestCountyDAO.makePersistent(contestCounty);
+                    result.Add(contestCounty.County + " county, " + contestCounty.ElectionContest.Contest.Name);
                     Dirty = false;
                 }
             } catch (Exception ex) {
                 LOG.Error("Persist", ex);
             }
+            return result;
         }
 
         private void InitializeResponses() {
@@ -142,6 +155,7 @@ namespace KnightRider.ElectionTracker.ui {
                 TextBox textBox = new TextBox();
                 textBox.Text = "NA";
                 textBox.TextChanged += new EventHandler(DataChanged);
+                textBox.KeyPress += new KeyPressEventHandler(BaseMDIChild.numericInputOnly);
                 textBox.Location = new Point(txtReporting.Left, label.Top);
                 textBox.Width = txtReporting.Width;
                 textBox.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);

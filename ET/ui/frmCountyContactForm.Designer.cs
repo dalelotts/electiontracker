@@ -46,10 +46,14 @@ namespace KnightRider.ElectionTracker.ui
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ppcViewer = new System.Windows.Forms.PrintPreviewControl();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
+            this.btnZoomOut = new System.Windows.Forms.Button();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.ctlToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // ppcViewer
@@ -67,9 +71,9 @@ namespace KnightRider.ElectionTracker.ui
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPrint.Location = new System.Drawing.Point(12, 458);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.Size = new System.Drawing.Size(104, 23);
             this.btnPrint.TabIndex = 1;
-            this.btnPrint.Text = "&Print";
+            this.btnPrint.Text = "&Print Report";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
@@ -87,7 +91,7 @@ namespace KnightRider.ElectionTracker.ui
             // btnUp
             // 
             this.btnUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUp.Location = new System.Drawing.Point(322, 458);
+            this.btnUp.Location = new System.Drawing.Point(322, 459);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(104, 23);
             this.btnUp.TabIndex = 2;
@@ -95,16 +99,43 @@ namespace KnightRider.ElectionTracker.ui
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnZoomOut.Image = global::KnightRider.ElectionTracker.Properties.Resources.zoom_out;
+            this.btnZoomOut.Location = new System.Drawing.Point(152, 458);
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.Size = new System.Drawing.Size(24, 24);
+            this.btnZoomOut.TabIndex = 16;
+            this.ctlToolTip.SetToolTip(this.btnZoomOut, "Zoom Out");
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnZoomIn.Image = global::KnightRider.ElectionTracker.Properties.Resources.zoom_in;
+            this.btnZoomIn.Location = new System.Drawing.Point(122, 457);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(24, 24);
+            this.btnZoomIn.TabIndex = 15;
+            this.ctlToolTip.SetToolTip(this.btnZoomIn, "Zoom In");
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            // 
             // frmCountyContactForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 488);
+            this.Controls.Add(this.btnZoomOut);
+            this.Controls.Add(this.btnZoomIn);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.ppcViewer);
             this.Name = "frmCountyContactForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "County Contact Listing";
             this.Load += new System.EventHandler(this.frmCountyContactForm_Load);
             this.ResumeLayout(false);
@@ -117,5 +148,8 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.Button btnPrint;
         protected System.Windows.Forms.Button btnDown;
         protected System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnZoomOut;
+        private System.Windows.Forms.Button btnZoomIn;
+        private System.Windows.Forms.ToolTip ctlToolTip;
     }
 }

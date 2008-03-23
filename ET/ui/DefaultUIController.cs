@@ -117,9 +117,7 @@ namespace KnightRider.ElectionTracker.ui {
         public void HandleErrorMessage(object sender, ShowErrorMessageArgs args) {
             string message = args.Text;
             LOG.Info(message, args.Exception);
-            message +=
-                "\n\nPlease restart the application and try again.\n\nDetailed information about this error was logged to " +
-                Application.StartupPath + "\\logs\\";
+            message += "\n\nPlease restart the application and try again.\n\nDetailed information about this error was logged to " + Application.StartupPath + "\\logs\\";
             MessageBox.Show(message, args.Caption);
         }
 
@@ -156,20 +154,16 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private static void wireSubscriberToPublisher(object currentPublisher, Type currentSubscriberType,
-                                                      object subscriber) {
+        private static void wireSubscriberToPublisher(object currentPublisher, Type currentSubscriberType, object subscriber) {
             Type currentPublisherType = currentPublisher.GetType();
             EventInfo[] events = currentPublisherType.GetEvents();
             foreach (EventInfo currentEvent in events) {
                 Type eventHandlerType = currentEvent.EventHandlerType;
                 MethodInfo invoke = eventHandlerType.GetMethod("Invoke");
-                MethodInfo eventHandler =
-                    EventManipulationUtils.GetMethodInfoMatchingSignature(invoke, currentSubscriberType);
+                MethodInfo eventHandler = EventManipulationUtils.GetMethodInfoMatchingSignature(invoke, currentSubscriberType);
 
                 if (eventHandler != null && eventHandler.IsPublic) {
-                    currentEvent.AddEventHandler(currentPublisher,
-                                                 EventManipulationUtils.GetHandlerDelegate(eventHandlerType, subscriber,
-                                                                                           eventHandler));
+                    currentEvent.AddEventHandler(currentPublisher, EventManipulationUtils.GetHandlerDelegate(eventHandlerType, subscriber, eventHandler));
                 }
             }
         }

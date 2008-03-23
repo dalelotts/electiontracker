@@ -23,6 +23,7 @@
       <generator class="identity" />
     </id>
     <property name="SortOrder" column="SortOrder" type="Int32" length="100" not-null="true"/>
+    <property name="IsIncumbent" column="Incumbent" type="Boolean" not-null="true" />
     <many-to-one name="ElectionContest" class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true"/>
     
     <joined-subclass name="KnightRider.ElectionTracker.core.CandidateResponse, ElectionTracker" table="CandidateResponse">

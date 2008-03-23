@@ -25,13 +25,13 @@ using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmElection : BaseMDIChild {
+        private static readonly ContestCountyComparer BY_NAME = new ContestCountyComparer();
 
         private readonly IDAOTask<Election> loadTask;
         private readonly IElectionDAO electionDAO;
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
         private readonly IList<County> allCounties;
-        private readonly IList<ElectionContest> addedContests;
 
         private Election currentElection;
         private ElectionContest currentElectionContest;
@@ -50,9 +50,6 @@ namespace KnightRider.ElectionTracker.ui {
                 allContests = contestDAO.findAll();
                 allCandidates = candidateDAO.findAll();
                 allCounties = countyDAO.findAll();
-                addedContests = new List<ElectionContest>();
-
-                // refreshControls();
             } catch (Exception ex) {
                 reportException("frmElection constructor", ex);
             }
@@ -76,7 +73,6 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        // [Transaction(ReadOnly = true)]
         public void loadElection(long? id) {
             if (id != null) {
                 Election newElection = electionDAO.findById(id.Value, false, loadTask);
@@ -88,6 +84,11 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void refreshContestLists() {
+            lstElectionContests.BeginUpdate();
+            lstContestCandidate.BeginUpdate();
+            lstContestCounty.BeginUpdate();
+            lstAllContests.BeginUpdate();
+
             lstElectionContests.Items.Clear();
             lstContestCandidate.Items.Clear();
             lstContestCounty.Items.Clear();
@@ -103,51 +104,32 @@ namespace KnightRider.ElectionTracker.ui {
                 lstContestCounty.Items.Add(electionContest);
                 lstAllContests.Items.Remove(electionContest.Contest);
             }
+
+            lstAllContests.EndUpdate();
+            lstContestCounty.EndUpdate();
+            lstContestCandidate.EndUpdate();
+            lstElectionContests.EndUpdate();
         }
 
         private void refreshCountyLists() {
-            Dictionary<County, int> mapCounts = new Dictionary<County, int>();
+            lstAllCounties.Items.Clear();
+            dgvContestCounties.Rows.Clear();
 
-            object[] o = new object[2];
-            int i;
-            foreach (DataGridViewRow row in dgvCounties.Rows) {
-                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)) {
-                    mapCounts.Add(((County) row.Cells[0].Value), i);
-                }
-            }
-            dgvCounties.Rows.Clear();
             foreach (County county in allCounties) {
-                o[0] = county;
+                lstAllCounties.Items.Add(county);
+            }
 
-                if (mapCounts.TryGetValue(county, out i)) {
-                    o[1] = i;
-                } else {
-                    o[1] = county.WardCount;
-                }
-                dgvCounties.Rows.Add(o);
-            }
-            foreach (DataGridViewRow row in dgvContestCounties.Rows) {
-                if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)) {
-                    ((ContestCounty) row.Cells[0].Value).WardCount = i;
-                }
-            }
             dgvContestCounties.Rows.Clear();
 
             if (currentElectionContest != null) {
-                dgvContestCounties.Rows.Clear();
                 List<ContestCounty> selectedCounties = new List<ContestCounty>(currentElectionContest.Counties);
-                selectedCounties.Sort(new ContestCountyComparer());
+
+                selectedCounties.Sort(BY_NAME);
 
                 foreach (ContestCounty contestCounty in selectedCounties) {
-                    o[0] = contestCounty;
-                    o[1] = contestCounty.WardCount;
-                    dgvContestCounties.Rows.Add(o);
-                    foreach (DataGridViewRow row in dgvCounties.Rows) {
-                        if (((County) row.Cells[0].Value).ID == contestCounty.County.ID) {
-                            dgvCounties.Rows.Remove(row);
-                            break;
-                        }
-                    }
+                    object[] rowData = new object[] {contestCounty, contestCounty.WardCount};
+                    dgvContestCounties.Rows.Add(rowData);
+                    lstAllCounties.Items.Remove(contestCounty.County);
                 }
             }
         }
@@ -159,6 +141,9 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void refreshCandidateLists() {
+            lstAllCandidates.BeginUpdate();
+            lstContestCandidates.BeginUpdate();
+
             lstAllCandidates.Items.Clear();
             foreach (Candidate candidate in allCandidates) {
                 lstAllCandidates.Items.Add(candidate);
@@ -169,31 +154,13 @@ namespace KnightRider.ElectionTracker.ui {
             if (currentElectionContest != null) {
                 foreach (Response response in currentElectionContest.Responses) {
                     lstContestCandidates.Items.Add(response);
-//                    for (int i = 0; i < lstDeletedResponses.Count; i++) {
-//                        // sdegen 5-10-07 - Inheritance messes up Hibernate's persistence of 
-//                        //  responses- mainly in deletions.  So we handle it manually now.
-//                        if (lstDeletedResponses[i].GetType().Equals(typeof (CandidateResponse)) &&
-//                            response.GetType().Equals(typeof (CandidateResponse))) {
-//                            CandidateResponse cr;
-//                            cr = (CandidateResponse) lstDeletedResponses[i];
-//                            if (cr.Candidate.ID == ((CandidateResponse) response).Candidate.ID) {
-//                                lstDeletedResponses.RemoveAt(i);
-//                            }
-//                        }
-//                        if (lstDeletedResponses[i].GetType().Equals(typeof (CustomResponse)) &&
-//                            response.GetType().Equals(typeof (CustomResponse))) {
-//                            if (((CustomResponse) response).Description ==
-//                                ((CustomResponse) lstDeletedResponses[i]).Description) {
-//                                lstDeletedResponses.RemoveAt(i);
-//                            }
-//                        }
-//                    }
-//
-                    if (response.GetType().Equals(typeof (CandidateResponse))) {
-                        lstAllCandidates.Items.Remove(((CandidateResponse) response).Candidate);
+                    if (response is CandidateResponse) {
+                        lstAllCandidates.Items.Remove(((CandidateResponse)response).Candidate);
                     }
                 }
             }
+            lstContestCandidates.EndUpdate();
+            lstAllCandidates.EndUpdate();
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
@@ -208,7 +175,6 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             refreshCountyLists();
-            addedContests.Clear();
 
             foreach (ElectionContest ec in currentElection.ElectionContests) {
                 foreach (Response r in ec.Responses) {
@@ -218,7 +184,7 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
-                currentElection.Notes = txtNotes.Text.Trim();
+                currentElection.Notes = txtNotes.Text;
 
                 IList<Fault> faults = electionDAO.canMakePersistent(currentElection);
                 bool persistData = reportFaults(faults);
@@ -228,8 +194,8 @@ namespace KnightRider.ElectionTracker.ui {
                     currentElection = electionDAO.makePersistent(currentElection);
                     refreshControls();
                     raiseMakePersistentEvent();
+                    MessageBox.Show(this, currentElection + " election saved.", "Sucessful Save");
                 }
-                //lstDeletedResponses.Clear();
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
             }
@@ -238,59 +204,14 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
-                currentElection = currentElection.ID == 0
-                                      ? new Election()
-                                      : electionDAO.findById(currentElection.ID, false, loadTask);
-                resetControls();
+                currentElection = currentElection.ID == 0 ? new Election() : electionDAO.findById(currentElection.ID, false, loadTask);
+                refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
                 reportException("btnReset_Click", ex);
             }
         }
 
-        private void resetControls() {
-            chkActive.Checked = currentElection.IsActive;
-            dtpDate.Value = currentElection.Date;
-            txtNotes.Text = currentElection.Notes;
-
-            resetContestLists();
-            refreshCountyLists();
-            refreshCandidateLists();
-        }
-
-        private void resetContestLists() {
-            lstElectionContests.Items.Clear();
-            lstContestCandidate.Items.Clear();
-            lstContestCandidate.Items.Clear();
-            lstAllContests.Items.Clear();
-
-            foreach (Contest contest in allContests) {
-                lstAllContests.Items.Add(contest);
-            }
-
-            IList<ElectionContest> removeList = new List<ElectionContest>();
-            foreach (ElectionContest electionContest in currentElection.ElectionContests) {
-                if (!addedContests.Contains(electionContest)) {
-                    lstElectionContests.Items.Add(electionContest);
-                    lstContestCandidate.Items.Add(electionContest);
-                    lstContestCounty.Items.Add(electionContest);
-                    lstAllContests.Items.Remove(electionContest.Contest);
-
-                    int removeAt = 0;
-                    foreach (Contest c in lstAllContests.Items) {
-                        if (c.Name == electionContest.Contest.Name)
-                            removeAt = lstAllContests.Items.IndexOf(c);
-                    }
-                    lstAllContests.Items.RemoveAt(removeAt);
-                } else {
-                    removeList.Add(electionContest);
-                }
-            }
-
-            foreach (ElectionContest ec in removeList) {
-                currentElection.ElectionContests.Remove(ec);
-            }
-        }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
@@ -322,9 +243,7 @@ namespace KnightRider.ElectionTracker.ui {
                 foreach (Contest contest in allContests) {
                     ElectionContest electionContest = makeElectionContest(contest);
                     currentElection.ElectionContests.Add(electionContest);
-                    addedContests.Add(electionContest);
                 }
-
                 refreshContestLists();
             } catch (Exception ex) {
                 reportException("btnAddAllContests_Click", ex);
@@ -348,7 +267,6 @@ namespace KnightRider.ElectionTracker.ui {
                     foreach (Contest contest in selectedItems) {
                         ElectionContest electionContest = makeElectionContest(contest);
                         currentElection.ElectionContests.Add(electionContest);
-                        addedContests.Add(electionContest);
                     }
 
                     refreshContestLists();
@@ -467,23 +385,13 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
             try {
-                if (currentElectionContest != null) {
-                    foreach (DataGridViewRow row in dgvCounties.SelectedRows) {
-                        County county;
-                        county = (County) row.Cells[0].Value;
-                        ContestCounty contestCounty;
-                        contestCounty = new ContestCounty();
-                        contestCounty.ElectionContest = currentElectionContest;
-                        contestCounty.County = county;
-                        int i;
-                        if (Int32.TryParse(row.Cells[1].Value.ToString(), out i)) {
-                            contestCounty.WardCount = i;
-                        } else {
-                            contestCounty.WardCount = 0;
-                        }
-                        contestCounty.WardsReporting = 0;
-                        currentElectionContest.Counties.Add(contestCounty);
-                    }
+                County selectedCounty = (County)lstAllCounties.SelectedItem;
+                if (selectedCounty != null) {
+                    ContestCounty contestCounty = new ContestCounty();
+                    contestCounty.ElectionContest = currentElectionContest;
+                    contestCounty.County = selectedCounty;
+                    selectedCounty.WardCount = selectedCounty.WardCount;
+                    currentElectionContest.Counties.Add(contestCounty);
                     refreshCountyLists();
                 }
             } catch (Exception ex) {
@@ -545,9 +453,9 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnResponseUp_Click(object sender, EventArgs e) {
             try {
-                Object o = lstContestCandidates.SelectedItem;
                 int ind = lstContestCandidates.SelectedIndex;
                 if (ind > 0) {
+                    Object o = lstContestCandidates.SelectedItem;
                     lstContestCandidates.Items.RemoveAt(ind);
                     lstContestCandidates.Items.Insert(ind - 1, o);
                     lstContestCandidates.SelectedIndex = ind - 1;
@@ -583,6 +491,17 @@ namespace KnightRider.ElectionTracker.ui {
                 refreshCountyLists();
             } catch (Exception ex) {
                 reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
+            }
+        }
+
+        private void btnSetIncumbent_Click(object sender, EventArgs e) {
+            Response incumbent = (Response) lstContestCandidates.SelectedItem;
+            if (incumbent != null && !incumbent.IsIncumbent) {
+                foreach (Response response in lstContestCandidates.Items) {
+                    if (response.IsIncumbent) response.IsIncumbent = false;
+                }
+                incumbent.IsIncumbent = true;
+                refreshCandidateLists();
             }
         }
     }

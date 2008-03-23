@@ -21,33 +21,38 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using Common.Logging;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
-    internal abstract partial class frmAbstractReport : Form {
-        private static readonly ILog LOG = LogManager.GetLogger(typeof (frmAbstractReport));
-
+    internal partial class BaseReport : Form {
         protected readonly IElectionDAO electionDAO;
         protected readonly IDAOTask<Election> loadTask;
-        protected PrintDocument docToPrint;
+        private readonly bool isLandscape;
         protected int intPages;
         protected Font printFont;
-        protected bool blnLandscape;
 
-        public frmAbstractReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask) {
-            blnLandscape = false;
+        protected BaseReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask, IList<TreeViewFilter> filters, bool isLandscape) {
+            InitializeComponent();
             this.electionDAO = electionDAO;
             this.loadTask = loadTask;
-            InitializeComponent();
+            this.isLandscape = isLandscape;
+
             printFont = new Font("Courier New", 10);
+
+            foreach (TreeViewFilter filter in filters) {
+                cboFilter.Items.Add(filter);
+            }
+
+            if (cboFilter.Items.Count > 0) cboFilter.SelectedIndex = 0;
+            displayDocument(null);
         }
 
-        private int GetMarginSpot() {
-            if (blnLandscape) {
+        private int GetMarginSpot()
+        {
+            if (isLandscape) {
                 return 105;
             } else {
                 return 75;
@@ -82,7 +87,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         protected string CenterText(string text, char space) {
             int length = text.Length;
-            for (int i = 0; i <= ((GetMarginSpot() - length)/2); i++) {
+            for (int i = 0; i <= ((GetMarginSpot() - length) / 2); i++) {
                 text = "" + space + text + space;
             }
             return text;
@@ -96,19 +101,9 @@ namespace KnightRider.ElectionTracker.ui {
             return text;
         }
 
-        public void LoadElections() {
-            IList<Election> e = GetElections();
-            lstElections.Items.Clear();
-            foreach (Election election in e) {
-                lstElections.Items.Add(new ListItemWrapper<Election>(election.ToString(), election));
-            }
-        }
-
-        #region Events
-
         protected void btnPrint_Click(object sender, EventArgs e) {
             intPages = 0;
-            docToPrint.Print();
+            ppcElection.Document.Print();
         }
 
         protected void btnUp_Click(object sender, EventArgs e) {
@@ -123,28 +118,49 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        protected void lstElections_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                CreateReport(((ListItemWrapper<Election>) lstElections.SelectedItem).Value);
-            } catch (Exception ex) {
-                // Bad selection, just ignore.
-                LOG.Error(ex);
+
+        protected virtual PrintDocument CreateDocumnt(Election election) {
+            // No Op
+            return null;
+        }
+
+        private void cboFilter_SelectedIndexChanged(object sender, EventArgs e) {
+            tvElections.Nodes.Clear();
+            ((TreeViewFilter) cboFilter.SelectedItem).apply(tvElections.Nodes);
+        }
+
+        private void tvElections_AfterSelect(object sender, TreeViewEventArgs e) {
+            TreeNode node = tvElections.SelectedNode;
+            if (node == null) return;
+            string[] entityID = node.Name.Split('=');
+            if (entityID.Length == 2) {
+                long id = long.Parse(entityID[1]);
+                Election election = electionDAO.findById(id, false, loadTask);
+                PrintDocument document = CreateDocumnt(election);
+                displayDocument(document);
             }
         }
 
-        protected void frmAbstractReport_Load(object sender, EventArgs e) {
-            LoadElections();
-            Text = GetTitle();
+        protected void displayDocument(PrintDocument document) {
+            Controls.Remove(ppcElection);
+
+            ppcElection = new PrintPreviewControl();
+            ppcElection.Location = new Point(190, 12);
+            ppcElection.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
+            ppcElection.Size = new Size(Width - 206, Height - 78);
+            ppcElection.TabIndex = 8;
+            ppcElection.UseAntiAlias = true;
+            ppcElection.Document = document;
+
+            Controls.Add(ppcElection);
         }
 
-        #endregion
+        private void btnZoomIn_Click(object sender, EventArgs e) {
+            ppcElection.Zoom += .1;
+        }
 
-        #region Abstract
-
-        protected abstract string GetTitle();
-        protected abstract IList<Election> GetElections();
-        protected abstract void CreateReport(Election election);
-
-        #endregion
+        private void btnZoomOut_Click(object sender, EventArgs e) {
+            ppcElection.Zoom -= .1;
+        }
     }
 }
