@@ -1,5 +1,5 @@
 /**
- *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  Copyright (C) 2008 Knight Rider Consulting, Inc.
  *  support@knightrider.com
  *  http://www.knightrider.com
  *  
@@ -25,8 +25,8 @@ using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
 
-namespace KnightRider.ElectionTracker.ui {
-    internal partial class frmCountyContactForm : Form {
+namespace KnightRider.ElectionTracker.reports {
+    internal partial class frmCountyContactReport : Form {
         private ICountyDAO countyDAO;
         private readonly LoadCountyForUI loadTask;
         private Font printFont;
@@ -36,7 +36,7 @@ namespace KnightRider.ElectionTracker.ui {
         private int intCount;
         private PrintDocument toPrint;
 
-        public frmCountyContactForm(ICountyDAO countyDAO, LoadCountyForUI loadTask) {
+        public frmCountyContactReport(ICountyDAO countyDAO, LoadCountyForUI loadTask) {
             this.countyDAO = countyDAO;
             this.loadTask = loadTask;
             InitializeComponent();
@@ -67,8 +67,7 @@ namespace KnightRider.ElectionTracker.ui {
             foreach (County c in countyDAO.findAll(loadTask)) {
                 lstToPrint.Add(c.Name);
                 foreach (CountyPhoneNumber cpn in c.PhoneNumbers) {
-                    lstToPrint.Add("   " + cpn.Type.Name + ": (" + cpn.AreaCode + ")" + cpn.PhoneNumber +
-                                   ((cpn.Extension != "" && cpn.Extension != null) ? ("(" + cpn.Extension + ")") : ""));
+                    lstToPrint.Add("   " + cpn.Type.Name + ": (" + cpn.AreaCode + ")" + cpn.PhoneNumber + ((cpn.Extension != "" && cpn.Extension != null) ? ("(" + cpn.Extension + ")") : ""));
                 }
                 foreach (CountyWebsite cw in c.Websites) {
                     lstToPrint.Add("   " + cw.URL);
@@ -89,7 +88,7 @@ namespace KnightRider.ElectionTracker.ui {
                 float topMargin = ev.MarginBounds.Top;
 
                 // Calculate the number of lines per page.
-                linesPerPage = ev.MarginBounds.Height/printFont.GetHeight(ev.Graphics);
+                linesPerPage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics);
 
                 while (intPageCount < linesPerPage && intCount < lstToPrint.Count) {
                     if (lstToPrint[intCount] == "<HEADER>") {
@@ -106,14 +105,13 @@ namespace KnightRider.ElectionTracker.ui {
                         float yPos;
                         if (intPageCount == 0) {
                             foreach (string s in lstHeader) {
-                                yPos = topMargin + (intPageCount*printFont.GetHeight(ev.Graphics));
+                                yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
                                 ev.Graphics.DrawString(s, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
                                 intPageCount++;
                             }
                         }
-                        yPos = topMargin + (intPageCount*printFont.GetHeight(ev.Graphics));
-                        ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos,
-                                               new StringFormat());
+                        yPos = topMargin + (intPageCount * printFont.GetHeight(ev.Graphics));
+                        ev.Graphics.DrawString(lstToPrint[intCount], printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
                         intCount++;
                         intPageCount++;
                     }
@@ -160,13 +158,11 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void btnZoomOut_Click(object sender, EventArgs e)
-        {
+        private void btnZoomOut_Click(object sender, EventArgs e) {
             ppcViewer.Zoom -= .1;
         }
 
-        private void btnZoomIn_Click(object sender, EventArgs e)
-        {
+        private void btnZoomIn_Click(object sender, EventArgs e) {
             ppcViewer.Zoom += .1;
         }
     }

@@ -227,11 +227,18 @@ namespace KnightRider.ElectionTracker.util {
         ///</summary>
         ///
         ///<returns>
-        ///A <see cref="T:System.Collections.Generic.IEnumerator`1"></see> that can be used to iterate through the collection.
+        ///A <see cref="T:System.Collections.Generic.IEnumerator`1">IEnumerator</see> that can be used to iterate through the collection.
         ///</returns>
         ///<filterpriority>1</filterpriority>
         public IEnumerator<KeyValuePair<T, V>> GetEnumerator() {
             return dictionary.GetEnumerator();
+        }
+
+        public static void addValueToList<KEY, VAL>(Map<KEY, IList<VAL>> map, KEY key, VAL value) {
+            IList<VAL> valueList = map.Get(key);
+            if (valueList == null) valueList = new List<VAL>();
+            valueList.Add(value);
+            map.Put(key, valueList);
         }
 
         #region IEnumerable Members

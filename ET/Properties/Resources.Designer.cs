@@ -8,10 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Globalization;
+using System.Resources;
+using System.Runtime.CompilerServices;
+
 namespace KnightRider.ElectionTracker.Properties {
-    using System;
-    
-    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,198 +25,220 @@ namespace KnightRider.ElectionTracker.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
+    [DebuggerNonUserCode()]
+    [CompilerGenerated()]
     internal class Resources {
-        
-        private static global::System.Resources.ResourceManager resourceMan;
-        
-        private static global::System.Globalization.CultureInfo resourceCulture;
-        
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
-        }
-        
+        private static ResourceManager resourceMan;
+
+        private static CultureInfo resourceCulture;
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {}
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KnightRider.ElectionTracker.Properties.Resources", typeof(Resources).Assembly);
+                if (ReferenceEquals(resourceMan, null)) {
+                    ResourceManager temp = new ResourceManager("KnightRider.ElectionTracker.Properties.Resources", typeof (Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
-                return resourceCulture;
-            }
-            set {
-                resourceCulture = value;
-            }
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static CultureInfo Culture {
+            get { return resourceCulture; }
+            set { resourceCulture = value; }
         }
-        
-        internal static System.Drawing.Bitmap arrow_down {
+
+        internal static Bitmap arrow_down {
             get {
                 object obj = ResourceManager.GetObject("arrow_down", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap arrow_left {
+
+        internal static Bitmap arrow_left {
             get {
                 object obj = ResourceManager.GetObject("arrow_left", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap arrow_right {
+
+        internal static Bitmap arrow_right {
             get {
                 object obj = ResourceManager.GetObject("arrow_right", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap arrow_up {
+
+        internal static Bitmap arrow_up {
             get {
                 object obj = ResourceManager.GetObject("arrow_up", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap btnAdd_Image {
+
+        internal static Bitmap btnAdd_Image {
             get {
                 object obj = ResourceManager.GetObject("btnAdd_Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap btnDelete_Image {
+
+        internal static Bitmap btnDelete_Image {
             get {
                 object obj = ResourceManager.GetObject("btnDelete_Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap btnEdit_Image {
+
+        internal static Bitmap btnEdit_Image {
             get {
                 object obj = ResourceManager.GetObject("btnEdit_Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap btnNew_Image {
+
+        internal static Bitmap btnNew_Image {
             get {
                 object obj = ResourceManager.GetObject("btnNew_Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap btnReset_Image {
+
+        internal static Bitmap btnReset_Image {
             get {
                 object obj = ResourceManager.GetObject("btnReset_Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap btnSave_Image {
+
+        internal static Bitmap btnSave_Image {
             get {
                 object obj = ResourceManager.GetObject("btnSave_Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap EditInformationHS {
+
+        internal static Bitmap EditInformationHS {
             get {
                 object obj = ResourceManager.GetObject("EditInformationHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap EditInformationHS1 {
+
+        internal static Bitmap EditInformationHS1 {
             get {
                 object obj = ResourceManager.GetObject("EditInformationHS1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap EditTableHS {
+
+        internal static Bitmap EditTableHS {
             get {
                 object obj = ResourceManager.GetObject("EditTableHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap EditTableHS1 {
+
+        internal static Bitmap EditTableHS1 {
             get {
                 object obj = ResourceManager.GetObject("EditTableHS1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap NewCardHS {
+
+        internal static Bitmap NewCardHS {
             get {
                 object obj = ResourceManager.GetObject("NewCardHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap NewCardHS1 {
+
+        internal static Bitmap NewCardHS1 {
             get {
                 object obj = ResourceManager.GetObject("NewCardHS1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap saveHS {
+
+        internal static Bitmap page_gear {
+            get {
+                object obj = ResourceManager.GetObject("page_gear", resourceCulture);
+                return ((Bitmap) (obj));
+            }
+        }
+
+        internal static Bitmap printer {
+            get {
+                object obj = ResourceManager.GetObject("printer", resourceCulture);
+                return ((Bitmap) (obj));
+            }
+        }
+
+        internal static Bitmap resultset_next {
+            get {
+                object obj = ResourceManager.GetObject("resultset_next", resourceCulture);
+                return ((Bitmap) (obj));
+            }
+        }
+
+        internal static Bitmap resultset_previous {
+            get {
+                object obj = ResourceManager.GetObject("resultset_previous", resourceCulture);
+                return ((Bitmap) (obj));
+            }
+        }
+
+        internal static Bitmap saveHS {
             get {
                 object obj = ResourceManager.GetObject("saveHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap saveHS1 {
+
+        internal static Bitmap saveHS1 {
             get {
                 object obj = ResourceManager.GetObject("saveHS1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap tick {
+
+        internal static Bitmap tick {
             get {
                 object obj = ResourceManager.GetObject("tick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Icon vote {
+
+        internal static Icon vote {
             get {
                 object obj = ResourceManager.GetObject("vote", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((Icon) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap zoom_in {
+
+        internal static Bitmap zoom_in {
             get {
                 object obj = ResourceManager.GetObject("zoom_in", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap zoom_out {
+
+        internal static Bitmap zoom_out {
             get {
                 object obj = ResourceManager.GetObject("zoom_out", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap) (obj));
             }
         }
     }

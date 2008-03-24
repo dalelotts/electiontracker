@@ -55,8 +55,7 @@ namespace KnightRider.ElectionTracker.db {
             return delegateDAO.findByCriteria(DelegateDAO<County>.EMPTY_CRITERION, ORDER_BY_NAME, tasks);
         }
 
-        public IList<AttributeType> findAllAttributeTypes(params IDAOTask<AttributeType>[] tasks)
-        {
+        public IList<AttributeType> findAllAttributeTypes(params IDAOTask<AttributeType>[] tasks) {
             return attributeTypeDAO.findByCriteria(DelegateDAO<AttributeType>.EMPTY_CRITERION, tasks);
         }
 
@@ -104,11 +103,10 @@ namespace KnightRider.ElectionTracker.db {
         }
 
         [Transaction(ReadOnly = true)]
-        public IList<Fault> canMakePersistent(AttributeType entity)
-        {
+        public IList<Fault> canMakePersistent(AttributeType entity) {
             FindHibernateDelegate<AttributeType> findDelegate = delegate(ISession session)
                                                                     {
-                                                                        IQuery query = session.CreateSQLQuery("select * from attributetype where AttributeTypeName = '" + entity.Name + "';").AddEntity(typeof(AttributeType));
+                                                                        IQuery query = session.CreateSQLQuery("select * from attributetype where AttributeTypeName = '" + entity.Name + "';").AddEntity(typeof (AttributeType));
                                                                         return query.List<AttributeType>();
                                                                     };
 
@@ -123,8 +121,7 @@ namespace KnightRider.ElectionTracker.db {
         }
 
         [Transaction(ReadOnly = true)]
-        public IList<Fault> canMakePersistent(PhoneNumberType entity)
-        {
+        public IList<Fault> canMakePersistent(PhoneNumberType entity) {
             FindHibernateDelegate<PhoneNumberType> findDelegate = delegate(ISession session)
                                                                       {
                                                                           IQuery query = session.CreateSQLQuery("select * from phonenumbertype where PhoneNumberTypeName = '" + entity.Name + "';").AddEntity(typeof (PhoneNumberType));

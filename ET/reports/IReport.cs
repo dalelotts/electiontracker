@@ -1,5 +1,5 @@
 /**
- *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  Copyright (C) 2008 Knight Rider Consulting, Inc.
  *  support@knightrider.com
  *  http://www.knightrider.com
  *  
@@ -17,7 +17,18 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 
-namespace KnightRider.ElectionTracker.events {
-    internal class ContestVoteSumryArgs : EventArgs {}
+namespace KnightRider.ElectionTracker.reports {
+    internal interface IReport<T> {
+        string Name();
+        void Generate(T entity);
+        List<String> Header();
+        List<String> Body();
+        List<String> Footer();
+        void Reset();
+        bool IsLandscape();
+        Font Font();
+    }
 }

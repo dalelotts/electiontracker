@@ -81,9 +81,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
-                currentPoliticalParty = currentPoliticalParty.ID == 0
-                                            ? new PoliticalParty()
-                                            : politicalPartyDAO.findById(currentPoliticalParty.ID, false);
+                currentPoliticalParty = currentPoliticalParty.ID == 0 ? new PoliticalParty() : politicalPartyDAO.findById(currentPoliticalParty.ID, false);
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {

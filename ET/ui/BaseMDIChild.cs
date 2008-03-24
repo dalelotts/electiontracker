@@ -55,8 +55,7 @@ namespace KnightRider.ElectionTracker.ui {
                 MessageBox.Show(message, "Validation Failure", MessageBoxButtons.OK);
             } else {
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult messageResult =
-                    MessageBox.Show(message + "Would you like to contunue anyway?", "Validation Failure", buttons);
+                DialogResult messageResult = MessageBox.Show(message + "Would you like to contunue anyway?", "Validation Failure", buttons);
                 if (messageResult == DialogResult.Yes) {
                     result = true;
                 }
@@ -84,8 +83,7 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         protected void reportException(string methodName, Exception ex) {
-            string message = "Unable to complete the requested action.\n\nEncountered '" + ex.GetType() +
-                             "' exception in the '" + methodName + "' method.";
+            string message = "Unable to complete the requested action.\n\nEncountered '" + ex.GetType() + "' exception in the '" + methodName + "' method.";
             ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
             EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
         }
@@ -100,9 +98,8 @@ namespace KnightRider.ElectionTracker.ui {
             EventUtil.RaiseEvent<Object, MakeTransientArgs>(makeTransient, this, args);
         }
 
-        public static void numericInputOnly(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !(e.KeyChar == 8 || e.KeyChar == 9 || (e.KeyChar > 48 && e.KeyChar < 57));
+        public static void numericInputOnly(object sender, KeyPressEventArgs e) {
+            e.Handled = !(e.KeyChar == 8 || e.KeyChar == 9 || (e.KeyChar >= 48 && e.KeyChar <= 57));
         }
     }
 }

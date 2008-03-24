@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db.task;
 using Spring.Data.NHibernate.Generic;
 
-namespace KnightRider.ElectionTracker.db
-{
-    public class VoteEntryDAO : IVoteEntryDAO
-    {
+namespace KnightRider.ElectionTracker.db {
+    public class VoteEntryDAO : IVoteEntryDAO {
         private readonly DelegateDAO<ResponseValue> reponseValueDAO;
         private readonly IElectionDAO electionDAO;
 
-        public VoteEntryDAO(HibernateTemplate factory, IElectionDAO electionDAO)
-        {
+        public VoteEntryDAO(HibernateTemplate factory, IElectionDAO electionDAO) {
             reponseValueDAO = new DelegateDAO<ResponseValue>(factory);
             this.electionDAO = electionDAO;
         }

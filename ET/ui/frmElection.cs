@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
+using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmElection : BaseMDIChild {
@@ -127,16 +128,20 @@ namespace KnightRider.ElectionTracker.ui {
                 selectedCounties.Sort(BY_NAME);
 
                 foreach (ContestCounty contestCounty in selectedCounties) {
-                    object[] rowData = new object[] {contestCounty, contestCounty.WardCount};
-                    dgvContestCounties.Rows.Add(rowData);
+                    DataGridViewTextBoxCell countyCell = new DataGridViewTextBoxCell();
+                    countyCell.Value = contestCounty;
+
+                    DataGridViewTextBoxCell wardCountCell = new DataGridViewTextBoxCell();
+                    wardCountCell.Value = contestCounty.WardCount;
+                    wardCountCell.Tag = contestCounty.WardCount;
+
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.Cells.Add(countyCell);
+                    row.Cells.Add(wardCountCell);
+
+                    dgvContestCounties.Rows.Add(row);
                     lstAllCounties.Items.Remove(contestCounty.County);
                 }
-            }
-        }
-
-        private class ContestCountyComparer : IComparer<ContestCounty> {
-            public int Compare(ContestCounty x, ContestCounty y) {
-                return x.County.Name.CompareTo(y.County.Name);
             }
         }
 
@@ -155,7 +160,7 @@ namespace KnightRider.ElectionTracker.ui {
                 foreach (Response response in currentElectionContest.Responses) {
                     lstContestCandidates.Items.Add(response);
                     if (response is CandidateResponse) {
-                        lstAllCandidates.Items.Remove(((CandidateResponse)response).Candidate);
+                        lstAllCandidates.Items.Remove(((CandidateResponse) response).Candidate);
                     }
                 }
             }
@@ -176,9 +181,9 @@ namespace KnightRider.ElectionTracker.ui {
         public override void btnSave_Click(object sender, EventArgs e) {
             refreshCountyLists();
 
-            foreach (ElectionContest ec in currentElection.ElectionContests) {
-                foreach (Response r in ec.Responses) {
-                    r.SortOrder = ec.Responses.IndexOf(r);
+            foreach (ElectionContest electionContest in currentElection.ElectionContests) {
+                foreach (Response response in electionContest.Responses) {
+                    response.SortOrder = electionContest.Responses.IndexOf(response);
                 }
             }
             try {
@@ -385,7 +390,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
             try {
-                County selectedCounty = (County)lstAllCounties.SelectedItem;
+                County selectedCounty = (County) lstAllCounties.SelectedItem;
                 if (selectedCounty != null) {
                     ContestCounty contestCounty = new ContestCounty();
                     contestCounty.ElectionContest = currentElectionContest;
@@ -502,6 +507,23 @@ namespace KnightRider.ElectionTracker.ui {
                 }
                 incumbent.IsIncumbent = true;
                 refreshCandidateLists();
+            }
+        }
+
+        private void dgvContestCounties_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            DataGridViewRow row = dgvContestCounties.CurrentRow;
+             
+            DataGridViewCell wardCell = row.Cells["wardCountColumn"];
+            object wardValue = wardCell.Value;
+            int wardCount;
+            if (int.TryParse(wardValue.ToString(), out wardCount)) {
+                DataGridViewCell countyCell = row.Cells["countyColumn"];
+                ContestCounty contestCounty = (ContestCounty)countyCell.Value;
+                contestCounty.WardCount = wardCount;
+                wardCell.Tag = wardCount;
+            } else {
+                MessageBox.Show(this, "Ward count must be a number. " + wardValue + " is not a valid number.", "Invalid ward count");
+                wardCell.Value = wardCell.Tag;
             }
         }
     }

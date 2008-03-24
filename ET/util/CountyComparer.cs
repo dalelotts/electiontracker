@@ -1,5 +1,5 @@
 /**
- *  Copyright (C) 2007 Knight Rider Consulting, Inc.
+ *  Copyright (C) 2008 Knight Rider Consulting, Inc.
  *  support@knightrider.com
  *  http://www.knightrider.com
  *  
@@ -16,8 +16,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-using System;
+using System.Collections.Generic;
+using KnightRider.ElectionTracker.core;
 
-namespace KnightRider.ElectionTracker.events {
-    internal class CountyContactFormArgs : EventArgs {}
+namespace KnightRider.ElectionTracker.util {
+    internal class CountyComparer : Comparer<County> {
+        public override int Compare(County x, County y) {
+            return x.Name.CompareTo(y.Name);
+        }
+    }
 }

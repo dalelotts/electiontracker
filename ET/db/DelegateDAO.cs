@@ -15,8 +15,7 @@ namespace KnightRider.ElectionTracker.db {
         public static readonly IList<ICriterion> EMPTY_CRITERION = new List<ICriterion>();
         public static readonly IList<ICriterion> NOT_ACTIVE_CRITERION = new List<ICriterion>();
 
-        private static readonly Map<Type, IList<PropertyInfo>> TYPE_TO_REQUIRED_PROPERTIES =
-            new Map<Type, IList<PropertyInfo>>();
+        private static readonly Map<Type, IList<PropertyInfo>> TYPE_TO_REQUIRED_PROPERTIES = new Map<Type, IList<PropertyInfo>>();
 
         private static readonly CustomBinder BINDER = new CustomBinder();
         private static readonly Type STRING_TYPE = typeof (string);
@@ -82,10 +81,7 @@ namespace KnightRider.ElectionTracker.db {
 
         public IList<Fault> canMakeTransient(T entity) {
             IList<Fault> result = new List<Fault>();
-            result.Add(
-                new Fault(false,
-                          "Are you sure you want to perminantly delete this " + objectType.Name + " (" + entity +
-                          ") ? \nNOTE: You cannot undo a delete, the data is perminantly deleted."));
+            result.Add(new Fault(false, "Are you sure you want to perminantly delete this " + objectType.Name + " (" + entity + ") ? \nNOTE: You cannot undo a delete, the data is perminantly deleted."));
 
             return result;
         }
@@ -122,40 +118,30 @@ namespace KnightRider.ElectionTracker.db {
             IList<PropertyInfo> properties = TYPE_TO_REQUIRED_PROPERTIES.Get(objectType);
 
             foreach (PropertyInfo property in properties) {
-                RequiredProperty attribute =
-                    (RequiredProperty) Attribute.GetCustomAttribute(property, typeof (RequiredProperty));
+                RequiredProperty attribute = (RequiredProperty) Attribute.GetCustomAttribute(property, typeof (RequiredProperty));
 
                 if (attribute != null) {
-                    object propertyResult =
-                        objectType.InvokeMember(property.Name, BindingFlags.GetProperty, BINDER, entity, new object[0]);
+                    object propertyResult = objectType.InvokeMember(property.Name, BindingFlags.GetProperty, BINDER, entity, new object[0]);
 
                     if (propertyResult == null) {
                         result.Add(new Fault(true, "The " + attribute.FriendlyName + " property cannot be null."));
                     } else if (STRING_TYPE.IsAssignableFrom(propertyResult.GetType())) {
                         string resultString = (string) propertyResult;
                         if (resultString.Length == 0) {
-                            result.Add(
-                                new Fault(true,
-                                          "The " + attribute.FriendlyName + " property cannot be a zero length string."));
+                            result.Add(new Fault(true, "The " + attribute.FriendlyName + " property cannot be a zero length string."));
                         } else if (resultString.Length < attribute.minLength) {
-                            string message = "The " + attribute.FriendlyName + " property must be a minimum of " +
-                                             attribute.minLength + " characters.";
+                            string message = "The " + attribute.FriendlyName + " property must be a minimum of " + attribute.minLength + " characters.";
                             if (attribute.example != null) message = message + " For example: " + attribute.example;
                             result.Add(new Fault(true, message));
                         } else if (resultString.Length > attribute.maxLength) {
-                            string message = "The " + attribute.FriendlyName + " property cannot be greater than " +
-                                             attribute.minLength + " characters.";
+                            string message = "The " + attribute.FriendlyName + " property cannot be greater than " + attribute.minLength + " characters.";
                             if (attribute.example != null) message = message + " For example: " + attribute.example;
                             result.Add(new Fault(true, message));
                         }
-                    } else if (typeof (ICollection).IsAssignableFrom(propertyResult.GetType()) &&
-                               attribute.AllowEmptyList == false) {
+                    } else if (typeof (ICollection).IsAssignableFrom(propertyResult.GetType()) && attribute.AllowEmptyList == false) {
                         ICollection collectionResult = (ICollection) propertyResult;
                         if (collectionResult.Count == 0) {
-                            result.Add(
-                                new Fault(true,
-                                          "The " + attribute.FriendlyName +
-                                          " property must have one or more members."));
+                            result.Add(new Fault(true, "The " + attribute.FriendlyName + " property must have one or more members."));
                         }
                     }
                 }
@@ -178,9 +164,7 @@ namespace KnightRider.ElectionTracker.db {
 
 
         private class CustomBinder : Binder {
-            public override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args,
-                                                    ParameterModifier[] modifiers, CultureInfo culture, string[] names,
-                                                    out object state) {
+            public override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] names, out object state) {
                 if (match == null)
                     throw new ArgumentNullException("match");
                 // Arguments are not being reordered.
@@ -207,18 +191,15 @@ namespace KnightRider.ElectionTracker.db {
                 return true;
             }
 
-            public override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value,
-                                                  CultureInfo culture) {
+            public override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value, CultureInfo culture) {
                 throw new NotImplementedException();
             }
 
-            public override MethodBase SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types,
-                                                    ParameterModifier[] modifiers) {
+            public override MethodBase SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[] modifiers) {
                 throw new NotImplementedException();
             }
 
-            public override PropertyInfo SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type returnType,
-                                                        Type[] indexes, ParameterModifier[] modifiers) {
+            public override PropertyInfo SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type returnType, Type[] indexes, ParameterModifier[] modifiers) {
                 if (match == null)
                     throw new ArgumentNullException("match");
                 foreach (PropertyInfo pi in match) {

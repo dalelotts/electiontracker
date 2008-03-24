@@ -58,24 +58,17 @@ namespace KnightRider.ElectionTracker.core {
             if (this == obj) return true;
             Contest that = obj as Contest;
             if (that == null) return false;
-            if (id == 0 && that.ID == 0)
-            {
+            if (id == 0 && that.ID == 0) {
                 return base.Equals(obj);
-            }
-            else
-            {
+            } else {
                 return id.Equals(that.ID);
             }
         }
 
-        public override int GetHashCode()
-        {
-            if (id == 0)
-            {
+        public override int GetHashCode() {
+            if (id == 0) {
                 return base.GetHashCode();
-            }
-            else
-            {
+            } else {
                 string stringRepresentation = MethodBase.GetCurrentMethod().DeclaringType.FullName + "#" + id;
                 return stringRepresentation.GetHashCode();
             }

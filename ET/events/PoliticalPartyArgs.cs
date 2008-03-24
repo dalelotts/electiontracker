@@ -16,8 +16,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
+using KnightRider.ElectionTracker.ui;
+
 namespace KnightRider.ElectionTracker.events {
-    internal class PoliticalPartyArgs : DBEntityArgs {
+    internal class PoliticalPartyArgs : DBEntityArgs<frmPoliticalParty> {
         public PoliticalPartyArgs() {}
         public PoliticalPartyArgs(long id) : base(id) {}
     }

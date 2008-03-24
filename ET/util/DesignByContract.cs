@@ -101,8 +101,7 @@ namespace DesignByContract {
         /// <summary>
         /// Precondition check.
         /// </summary>
-        [Conditional("DBC_CHECK_ALL"), Conditional("DBC_CHECK_INVARIANT"), Conditional("DBC_CHECK_POSTCONDITION"),
-         Conditional("DBC_CHECK_PRECONDITION")]
+        [Conditional("DBC_CHECK_ALL"), Conditional("DBC_CHECK_INVARIANT"), Conditional("DBC_CHECK_POSTCONDITION"), Conditional("DBC_CHECK_PRECONDITION")]
         public static void Require(bool assertion, string message) {
             if (UseExceptions) {
                 if (!assertion) throw new PreconditionException(message);
@@ -114,8 +113,7 @@ namespace DesignByContract {
         /// <summary>
         /// Precondition check.
         /// </summary>
-        [Conditional("DBC_CHECK_ALL"), Conditional("DBC_CHECK_INVARIANT"), Conditional("DBC_CHECK_POSTCONDITION"),
-         Conditional("DBC_CHECK_PRECONDITION")]
+        [Conditional("DBC_CHECK_ALL"), Conditional("DBC_CHECK_INVARIANT"), Conditional("DBC_CHECK_POSTCONDITION"), Conditional("DBC_CHECK_PRECONDITION")]
         public static void Require(bool assertion, string message, Exception inner) {
             if (UseExceptions) {
                 if (!assertion) throw new PreconditionException(message, inner);
@@ -127,8 +125,7 @@ namespace DesignByContract {
         /// <summary>
         /// Precondition check.
         /// </summary>
-        [Conditional("DBC_CHECK_ALL"), Conditional("DBC_CHECK_INVARIANT"), Conditional("DBC_CHECK_POSTCONDITION"),
-         Conditional("DBC_CHECK_PRECONDITION")]
+        [Conditional("DBC_CHECK_ALL"), Conditional("DBC_CHECK_INVARIANT"), Conditional("DBC_CHECK_POSTCONDITION"), Conditional("DBC_CHECK_PRECONDITION")]
         public static void Require(bool assertion) {
             if (UseExceptions) {
                 if (!assertion) throw new PreconditionException("Precondition failed.");

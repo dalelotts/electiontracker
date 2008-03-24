@@ -34,17 +34,15 @@ namespace KnightRider.ElectionTracker.ui {
         public event GenericEventHandler<object, ContestArgs> contest;
         public event GenericEventHandler<object, PoliticalPartyArgs> politicalParty;
         public event GenericEventHandler<object, ElectionArgs> election;
-        public event GenericEventHandler<object, ElectionReportArgs> electionReport;
-        public event GenericEventHandler<object, ProofingSheetArgs> proofingSheet;
-        public event GenericEventHandler<object, CountyContactFormArgs> countyContactForm;
-        public event GenericEventHandler<object, ContestVoteSumryArgs> contestVoteSumry;
+        public event GenericEventHandler<object, ReportArgs> showReport;
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
 
-        private static readonly ShowMessageArgs NOT_IMPLEMENTED_MESSAGE_ARGS =
-            new ShowMessageArgs("This feature is not implemented yet.", "Not Implemented");
+        private static readonly ShowMessageArgs NOT_IMPLEMENTED_MESSAGE_ARGS = new ShowMessageArgs("This feature is not implemented yet.", "Not Implemented");
 
         internal MDIForm() {
             InitializeComponent();
+
+            // ToDo: Inject and autowire the events for reports using spring.
 
             aboutToolStripMenuItem.Click += new EventHandler(AboutBoxHandler);
             voteResultsToolStripMenuItem.Click += new EventHandler(VoteResultsHandler);
@@ -53,28 +51,31 @@ namespace KnightRider.ElectionTracker.ui {
             contestToolStripMenuItem.Click += new EventHandler(ContestHandler);
             politicalPartyToolStripMenuItem.Click += new EventHandler(PoliticalPartyHandler);
             electionToolStripMenuItem.Click += new EventHandler(ElectionHandler);
-            electionReportToolStripMenuItem.Click += new EventHandler(ElectionReportHandler);
-            proofingSheetToolStripMenuItem.Click += new EventHandler(ProofingSheetHandler);
-            contestVoteSummaryToolStripMenuItem.Click += new EventHandler(ContestVoteSumryHandler);
-            countyContactFormToolStripMenuItem.Click += new EventHandler(CountyContactFormHandler);
+            countyContactFormToolStripMenuItem.Click += new EventHandler(CountyContactReportHandler);
+            proofingSheetToolStripMenuItem.Click += new EventHandler(ProofingSheetReportHandler);
+            voteCountyTallySheetToolStripMenuItem.Click += new EventHandler(VoteCountyTallySheetHandler);
+            contestVoteSummaryToolStripMenuItem.Click += new EventHandler(ContestVoteSummaryHandler);
+            electionQuickScanSheetToolStripMenuItem.Click += new EventHandler(ElectionQuickScanHandler);
+        }
 
-            ToolStripItemCollection menuStripItems = mainMenuStrip.Items;
-            foreach (ToolStripItem menuStripItem in menuStripItems) {
-                if (menuStripItem is ToolStripMenuItem) {
-                    ToolStripItemCollection dropDownItems = ((ToolStripMenuItem) menuStripItem).DropDownItems;
-                    foreach (ToolStripItem dropDownItem in dropDownItems) {
-                        if (dropDownItem != aboutToolStripMenuItem && dropDownItem != voteResultsToolStripMenuItem &&
-                            dropDownItem != countyToolStripMenuItem && dropDownItem != candidateToolStripMenuItem &&
-                            dropDownItem != contestToolStripMenuItem && dropDownItem != politicalPartyToolStripMenuItem &&
-                            dropDownItem != electionToolStripMenuItem && dropDownItem != electionReportToolStripMenuItem &&
-                            dropDownItem != proofingSheetToolStripMenuItem &&
-                            dropDownItem != countyContactFormToolStripMenuItem &&
-                            dropDownItem != contestVoteSummaryToolStripMenuItem) {
-                            dropDownItem.Click += new EventHandler(NotImplementedMessageHandler);
-                        }
-                    }
-                }
-            }
+        private void ElectionQuickScanHandler(object sender, EventArgs e) {
+            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ElectionQuickScanSheet"));
+        }
+
+        private void ContestVoteSummaryHandler(object sender, EventArgs e) {
+            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ContestVoteSummary"));
+        }
+
+        private void VoteCountyTallySheetHandler(object sender, EventArgs e) {
+            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("VoteCountyTallySheet"));
+        }
+
+        private void ProofingSheetReportHandler(object sender, EventArgs e) {
+            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ProofingSheet"));
+        }
+
+        private void CountyContactReportHandler(object sender, EventArgs e) {
+            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("CountyContactReport"));
         }
 
         private void VoteResultsHandler(object sender, EventArgs e) {
@@ -101,21 +102,6 @@ namespace KnightRider.ElectionTracker.ui {
             EventUtil.RaiseEvent<object, ElectionArgs>(election, this, new ElectionArgs());
         }
 
-        private void ElectionReportHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ElectionReportArgs>(electionReport, this, new ElectionReportArgs());
-        }
-
-        private void CountyContactFormHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, CountyContactFormArgs>(countyContactForm, this, new CountyContactFormArgs());
-        }
-
-        private void ContestVoteSumryHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ContestVoteSumryArgs>(contestVoteSumry, this, new ContestVoteSumryArgs());
-        }
-
-        private void ProofingSheetHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ProofingSheetArgs>(proofingSheet, this, new ProofingSheetArgs());
-        }
 
         public IList<TreeViewFilter> Filters {
             set {
@@ -133,8 +119,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void NotImplementedMessageHandler(object sender, EventArgs e) {
             DefaultShowMessageSender messageSender = new DefaultShowMessageSender();
-            EventUtil.RaiseEvent<IShowMessageSender, ShowMessageArgs>(showMessage, messageSender,
-                                                                      NOT_IMPLEMENTED_MESSAGE_ARGS);
+            EventUtil.RaiseEvent<IShowMessageSender, ShowMessageArgs>(showMessage, messageSender, NOT_IMPLEMENTED_MESSAGE_ARGS);
         }
 
         private void filterBar_ButtonClicked(object sender, EventArgs e) {
@@ -196,8 +181,7 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void reportException(string methodName, Exception ex) {
-            string message = "Unable to complete the requested action.\n\nEncountered '" + ex.GetType() +
-                             "' exception in the '" + methodName + "' method.";
+            string message = "Unable to complete the requested action.\n\nEncountered '" + ex.GetType() + "' exception in the '" + methodName + "' method.";
             ShowErrorMessageArgs args = new ShowErrorMessageArgs(message, ex);
             EventUtil.RaiseEvent<Object, ShowErrorMessageArgs>(showErrorMessage, this, args);
         }

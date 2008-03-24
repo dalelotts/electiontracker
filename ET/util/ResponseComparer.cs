@@ -16,9 +16,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
-namespace KnightRider.ElectionTracker.db.task
-{
-    public interface IDAOTask<T> {
-        void perform(T entity);
+using System.Collections.Generic;
+using KnightRider.ElectionTracker.core;
+
+namespace KnightRider.ElectionTracker.util {
+    internal class ResponseComparer : Comparer<Response> {
+        private readonly int factor;
+
+        public ResponseComparer(bool descending) {
+            factor = descending ? -1 : 1;
+        }
+
+        public override int Compare(Response x, Response y) {
+            int result = x.GetTotalVotes().CompareTo(y.GetTotalVotes());
+            if (result == 0) {
+                // Use natural sort order for names.
+                return x.ToString().CompareTo(y.ToString());
+            }
+            return factor * result;
+        }
     }
 }

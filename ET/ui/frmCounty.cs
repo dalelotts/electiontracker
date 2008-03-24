@@ -247,7 +247,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
-                if (currentCounty.ID == 0 ) {
+                if (currentCounty.ID == 0) {
                     currentCounty = new County();
                     loadCounty(null);
                 } else {

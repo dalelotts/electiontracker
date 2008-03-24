@@ -24,11 +24,9 @@ using KnightRider.ElectionTracker.db;
 
 namespace KnightRider.ElectionTracker.ui {
     internal sealed class VoteEnterer : Panel {
-
         private readonly IList<ContestDisplay> displays = new List<ContestDisplay>();
 
-        public VoteEnterer(IList<ContestCounty> contestCounties, IContestCountyDAO contestCountyDAO)
-        {
+        public VoteEnterer(IList<ContestCounty> contestCounties, IContestCountyDAO contestCountyDAO) {
             InitializeComponent();
             int currentTop = 5;
             foreach (ContestCounty contestCounty in contestCounties) {
@@ -57,9 +55,8 @@ namespace KnightRider.ElectionTracker.ui {
             // 
             // VoteEnterer
             // 
-            Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right; 
+            Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
             ResumeLayout(false);
-
         }
     }
 }

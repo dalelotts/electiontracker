@@ -39,26 +39,14 @@ namespace KnightRider.ElectionTracker.db {
         protected override IList<Fault> performCanMakePersistent(PoliticalParty entity) {
             FindHibernateDelegate<PoliticalParty> findDuplicateNames = delegate(ISession session)
                                                                            {
-                                                                               IQuery query =
-                                                                                   session.CreateSQLQuery(
-                                                                                       "select * from politicalparty pp where pp.politicalpartyname = '" +
-                                                                                       entity.Name +
-                                                                                       "' and pp.politicalpartyid != " +
-                                                                                       entity.ID + ";").AddEntity(
-                                                                                       objectType);
+                                                                               IQuery query = session.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = '" + entity.Name + "' and pp.politicalpartyid != " + entity.ID + ";").AddEntity(objectType);
                                                                                return query.List<PoliticalParty>();
                                                                            };
             IList<PoliticalParty> duplicateNames = ExecuteFind(findDuplicateNames);
 
             FindHibernateDelegate<PoliticalParty> findDuplicateAbb = delegate(ISession session)
                                                                          {
-                                                                             IQuery query =
-                                                                                 session.CreateSQLQuery(
-                                                                                     "select * from politicalparty where PoliticalPartyAbbrev = '" +
-                                                                                     entity.Abbreviation +
-                                                                                     "' and PoliticalPartyID != " +
-                                                                                     entity.ID + ";").AddEntity(
-                                                                                     objectType);
+                                                                             IQuery query = session.CreateSQLQuery("select * from politicalparty where PoliticalPartyAbbrev = '" + entity.Abbreviation + "' and PoliticalPartyID != " + entity.ID + ";").AddEntity(objectType);
                                                                              return query.List<PoliticalParty>();
                                                                          };
 
@@ -69,17 +57,12 @@ namespace KnightRider.ElectionTracker.db {
             IList<Fault> result = new List<Fault>();
 
             if (duplicateNames.Count > 0) {
-                result.Add(
-                    new Fault(true,
-                              "Duplicate Political Party: a Political Party named '" + entity.Name + "' already exists."));
+                result.Add(new Fault(true, "Duplicate Political Party: a Political Party named '" + entity.Name + "' already exists."));
             }
 
 
             if (duplicateAbb.Count > 0) {
-                result.Add(
-                    new Fault(true,
-                              "Duplicate Political Party Abbreviation: a Political Party with the Abbreviation '" +
-                              entity.Name + "' already exists."));
+                result.Add(new Fault(true, "Duplicate Political Party Abbreviation: a Political Party with the Abbreviation '" + entity.Name + "' already exists."));
             }
 
             return result;

@@ -66,19 +66,14 @@ namespace KnightRider.ElectionTracker.db {
             IList<Fault> result = delegateDAO.canMakePersistent(entity);
             FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
                                                               {
-                                                                  IQuery query =
-                                                                      session.CreateSQLQuery(
-                                                                          "select * from contest where contestname = '" +
-                                                                          entity.Name + "' and contestid != " +
-                                                                          entity.ID + ";").AddEntity(contestObjectType);
+                                                                  IQuery query = session.CreateSQLQuery("select * from contest where contestname = '" + entity.Name + "' and contestid != " + entity.ID + ";").AddEntity(contestObjectType);
                                                                   return query.List<Contest>();
                                                               };
 
             IList<Contest> duplicates = delegateDAO.ExecuteFind(findDelegate);
 
             if (duplicates.Count > 0) {
-                result.Add(
-                    new Fault(true, "Duplicate Contest Name: a contest named '" + entity.Name + "' already exists."));
+                result.Add(new Fault(true, "Duplicate Contest Name: a contest named '" + entity.Name + "' already exists."));
             }
 
             return result;
@@ -91,11 +86,7 @@ namespace KnightRider.ElectionTracker.db {
         protected IList<Fault> performCanMakePersistent(Contest entity) {
             FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
                                                               {
-                                                                  IQuery query =
-                                                                      session.CreateSQLQuery(
-                                                                          "select * from contest where contestname = '" +
-                                                                          entity.Name + "' and contestid != " +
-                                                                          entity.ID + ";").AddEntity(contestObjectType);
+                                                                  IQuery query = session.CreateSQLQuery("select * from contest where contestname = '" + entity.Name + "' and contestid != " + entity.ID + ";").AddEntity(contestObjectType);
                                                                   return query.List<Contest>();
                                                               };
 
@@ -104,10 +95,7 @@ namespace KnightRider.ElectionTracker.db {
             IList<Fault> result = new List<Fault>();
 
             if (duplicates.Count > 0) {
-                result.Add(
-                    new Fault(true,
-                              "Duplicate Phone Number Type: a phone number type named '" + entity.Name +
-                              "' already exists."));
+                result.Add(new Fault(true, "Duplicate Phone Number Type: a phone number type named '" + entity.Name + "' already exists."));
             }
 
             return result;

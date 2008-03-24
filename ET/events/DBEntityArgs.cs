@@ -17,11 +17,14 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System;
+using System.Windows.Forms;
 
 namespace KnightRider.ElectionTracker.events {
-    internal abstract class DBEntityArgs : EventArgs {
-        private readonly long? id;
+    internal abstract class DBEntityArgs<T> : EventArgs where T : Form {
+        private static readonly Type objectType = typeof (T);
+        private static readonly string objectName = objectType.ToString();
 
+        private readonly long? id;
 
         public DBEntityArgs() {
             id = null;
@@ -34,6 +37,14 @@ namespace KnightRider.ElectionTracker.events {
 
         public long? ID {
             get { return id; }
+        }
+
+        public Type ObjectType {
+            get { return objectType; }
+        }
+
+        public virtual string ObjectName {
+            get { return objectName; }
         }
     }
 }

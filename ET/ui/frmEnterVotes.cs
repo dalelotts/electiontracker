@@ -28,15 +28,14 @@ using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmEnterVotes : BaseMDIChild {
-
         private static readonly ContestCountyComparer CONTEST_COUNTY_COMPARER = new ContestCountyComparer();
 
+        private Map<long, County> countyIDToCounty;
+        private Map<long, IList<ContestCounty>> countyIDContestCounty;
         private Map<long, VoteEnterer> countyIDToVoteEnterer;
         private readonly IElectionDAO electionDAO;
         private readonly IContestCountyDAO contestCountyDAO;
         private readonly IDAOTask<Election> loadTask;
-        private Map<long, County> countyIDToCounty;
-        private Map<long, IList<ContestCounty>> countyIDContestCounty;
 
         public frmEnterVotes(IElectionDAO electionDAO, IContestCountyDAO contestCountyDAO, IDAOTask<Election> loadTask) {
             this.electionDAO = electionDAO;
@@ -92,33 +91,20 @@ namespace KnightRider.ElectionTracker.ui {
                 for (int j = 0; j < electionContest.Counties.Count; j++) {
                     ContestCounty contestCounty = electionContest.Counties[j];
                     countyIDToCounty.Put(contestCounty.County.ID, contestCounty.County);
-                    addElectionContestToMap(countyIDContestCounty, contestCounty.County.ID, contestCounty);
+                    Map<long, IList<ContestCounty>>.addValueToList(countyIDContestCounty, contestCounty.County.ID, contestCounty);
                 }
             }
 
             foreach (KeyValuePair<long, IList<ContestCounty>> entry in countyIDContestCounty) {
                 IList<ContestCounty> contestCounties = entry.Value;
-                
+
                 ((List<ContestCounty>) contestCounties).Sort(CONTEST_COUNTY_COMPARER);
-                
+
                 VoteEnterer enterer = new VoteEnterer(contestCounties, contestCountyDAO);
                 countyIDToVoteEnterer.Add(entry.Key, enterer);
             }
 
             refreshControls();
-        }
-
-        private class ContestCountyComparer : IComparer<ContestCounty> {
-            public int Compare(ContestCounty x, ContestCounty y) {
-                return x.ElectionContest.Contest.Name.CompareTo(y.ElectionContest.Contest.Name);
-            }
-        }
-
-        private static void addElectionContestToMap<T, V>(Map<T, IList<V>> map, T key, V value) {
-            IList<V> valueList = map.Get(key);
-            if (valueList == null) valueList = new List<V>();
-            valueList.Add(value);
-            map.Put(key, valueList);
         }
 
         private void refreshControls() {
@@ -135,7 +121,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void lstCounties_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                County county = (County)lstCounties.SelectedItem;
+                County county = (County) lstCounties.SelectedItem;
 
                 HideCurrentVoteEnterer();
 
@@ -175,15 +161,14 @@ namespace KnightRider.ElectionTracker.ui {
         private void btnSaveVotes_Click(object sender, EventArgs e) {
             try {
                 List<string> result = new List<string>();
-                foreach (VoteEnterer voteEnterer in countyIDToVoteEnterer.Values)
-                {
+                foreach (VoteEnterer voteEnterer in countyIDToVoteEnterer.Values) {
                     result.AddRange(voteEnterer.Persist());
                 }
                 string message = "";
                 foreach (string s in result) {
                     message += s + "\n";
                 }
-                MessageBox.Show(this, "The follow vote results were saved:\n" + message.Trim() , "Sucessful Save");
+                MessageBox.Show(this, "The follow vote results were saved:\n" + message.Trim(), "Sucessful Save");
             } catch (Exception ex) {
                 reportException("btnSaveVotes_Click", ex);
             }

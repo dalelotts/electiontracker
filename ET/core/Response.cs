@@ -52,10 +52,10 @@ namespace KnightRider.ElectionTracker.core {
         public virtual int GetTotalVotes() {
             int result = 0;
             if (electionContest != null) {
-                foreach (ContestCounty cc in electionContest.Counties) {
-                    foreach (ResponseValue rv in cc.ResponseValues) {
-                        if (rv.Response.ID == ID) {
-                            result += rv.VoteCount;
+                foreach (ContestCounty contestCounty in electionContest.Counties) {
+                    foreach (ResponseValue responseValue in contestCounty.ResponseValues) {
+                        if (responseValue.Response.ID == ID) {
+                            result += responseValue.VoteCount;
                         }
                     }
                 }

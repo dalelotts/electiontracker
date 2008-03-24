@@ -17,7 +17,14 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **/
 using System;
+using KnightRider.ElectionTracker.ui;
 
 namespace KnightRider.ElectionTracker.events {
-    internal class EnterVotesArgs : EventArgs {}
+    internal class EnterVotesArgs : EventArgs {
+        private static readonly string objectName = typeof (frmEnterVotes).ToString();
+
+        public string ObjectName {
+            get { return objectName; }
+        }
+    }
 }

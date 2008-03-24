@@ -136,32 +136,24 @@ namespace KnightRider.ElectionTracker.db {
         private IList<Fault> validateRequiredProperties(T entity) {
             IList<Fault> result = new List<Fault>();
             foreach (PropertyInfo property in properties) {
-                RequiredProperty attribute =
-                    (RequiredProperty) Attribute.GetCustomAttribute(property, typeof (RequiredProperty));
+                RequiredProperty attribute = (RequiredProperty) Attribute.GetCustomAttribute(property, typeof (RequiredProperty));
 
                 if (attribute != null) {
-                    object propertyResult =
-                        objectType.InvokeMember(property.Name, BindingFlags.GetProperty, binder, entity, new object[0]);
+                    object propertyResult = objectType.InvokeMember(property.Name, BindingFlags.GetProperty, binder, entity, new object[0]);
 
                     if (propertyResult == null) {
                         result.Add(new Fault(true, "The " + attribute.FriendlyName + " property cannot be null."));
                     } else if (typeof (string).IsAssignableFrom(propertyResult.GetType())) {
                         string resultString = (string) propertyResult;
                         if (resultString.Length == 0) {
-                            result.Add(
-                                new Fault(true,
-                                          "The " + attribute.FriendlyName + " property cannot be a zero length string."));
+                            result.Add(new Fault(true, "The " + attribute.FriendlyName + " property cannot be a zero length string."));
                         }
-                    } else if (typeof (ICollection).IsAssignableFrom(propertyResult.GetType()) &&
-                               attribute.AllowEmptyList == false) {
+                    } else if (typeof (ICollection).IsAssignableFrom(propertyResult.GetType()) && attribute.AllowEmptyList == false) {
                         ICollection collectionResult = (ICollection) propertyResult;
                         // Hack: sdegen - We are presenting in 10 minutes.
                         if (entity.GetType() != typeof (ContestCounty)) {
                             if (collectionResult.Count == 0) {
-                                result.Add(
-                                    new Fault(true,
-                                              "The " + attribute.FriendlyName +
-                                              " property must have one or more members."));
+                                result.Add(new Fault(true, "The " + attribute.FriendlyName + " property must have one or more members."));
                             }
                         }
                     }
@@ -186,9 +178,7 @@ namespace KnightRider.ElectionTracker.db {
         private readonly CustomBinder binder = new CustomBinder();
 
         private class CustomBinder : Binder {
-            public override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args,
-                                                    ParameterModifier[] modifiers, CultureInfo culture, string[] names,
-                                                    out object state) {
+            public override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] names, out object state) {
                 if (match == null)
                     throw new ArgumentNullException("match");
                 // Arguments are not being reordered.
@@ -215,18 +205,15 @@ namespace KnightRider.ElectionTracker.db {
                 return true;
             }
 
-            public override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value,
-                                                  CultureInfo culture) {
+            public override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value, CultureInfo culture) {
                 throw new NotImplementedException();
             }
 
-            public override MethodBase SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types,
-                                                    ParameterModifier[] modifiers) {
+            public override MethodBase SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[] modifiers) {
                 throw new NotImplementedException();
             }
 
-            public override PropertyInfo SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type returnType,
-                                                        Type[] indexes, ParameterModifier[] modifiers) {
+            public override PropertyInfo SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type returnType, Type[] indexes, ParameterModifier[] modifiers) {
                 if (match == null)
                     throw new ArgumentNullException("match");
                 foreach (PropertyInfo pi in match) {

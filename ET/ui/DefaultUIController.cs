@@ -27,7 +27,7 @@ using Spring.Objects.Events.Support;
 namespace KnightRider.ElectionTracker.ui {
     internal class DefaultUIController : UIController, IApplicationContextAware {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (DefaultUIController));
-        private frmEnterVotes voteForm;
+        private Form voteForm;
         private Form mdiForm;
         private IApplicationContext context;
 
@@ -56,11 +56,11 @@ namespace KnightRider.ElectionTracker.ui {
             ((MDIForm) mdiForm).refreshCurrentFilter();
         }
 
-        private T makeMDIChildForm<T>() where T : Form {
-            T form = (T) context.GetObject(typeof (T).ToString());
+        private Form makeMDIChildForm(string objectName) {
+            Form form = (Form) context.GetObject(objectName);
             form.MdiParent = mdiForm;
-            wireTextBoxTrimmerOnLeave(form);
-            wireSubscriberToPublisher(form, typeof (DefaultUIController), this);
+            wireTextBoxTrimOnLeave(form);
+            wireSubscriberToPublisher(form, GetType(), this);
             return form;
         }
 
@@ -75,41 +75,42 @@ namespace KnightRider.ElectionTracker.ui {
 
         public void HandleEnterVotes(object sender, EnterVotesArgs args) {
             if (voteForm == null || voteForm.Visible == false)
-                voteForm = makeMDIChildForm<frmEnterVotes>();
+                voteForm = makeMDIChildForm(args.ObjectName);
             voteForm.Show();
         }
 
         public void HandleCountyForm(object sender, CountyFormArgs args) {
-            frmCounty frmCounty = makeMDIChildForm<frmCounty>();
+            frmCounty frmCounty = (frmCounty) makeMDIChildForm(args.ObjectName);
             frmCounty.loadCounty(args.ID);
             frmCounty.Show();
         }
 
         public void HandleCandidate(object sender, CandidateArgs args) {
-            frmCandidate candidateForm = makeMDIChildForm<frmCandidate>();
+            frmCandidate candidateForm = (frmCandidate) makeMDIChildForm(args.ObjectName);
             candidateForm.loadCandidate(args.ID);
             candidateForm.Show();
         }
 
+        public void HandleReport(object sender, ReportArgs args) {
+            Form report = makeMDIChildForm(args.ReportName);
+            report.Show();
+        }
+
         public void HandleContest(object sender, ContestArgs args) {
-            frmContest contestForm = makeMDIChildForm<frmContest>();
+            frmContest contestForm = (frmContest) makeMDIChildForm(args.ObjectName);
             contestForm.loadContest(args.ID);
             contestForm.Show();
         }
 
         public void HandlePoliticalParty(object sender, PoliticalPartyArgs args) {
-            frmPoliticalParty politicalPartyForm = makeMDIChildForm<frmPoliticalParty>();
+            frmPoliticalParty politicalPartyForm = (frmPoliticalParty) makeMDIChildForm(args.ObjectName);
             politicalPartyForm.loadPoliticalParty(args.ID);
             politicalPartyForm.Show();
         }
 
-        public void HandleProofingSheet(object sender, ProofingSheetArgs args) {
-            frmProofingSheet proofingSheetForm = makeMDIChildForm<frmProofingSheet>();
-            proofingSheetForm.Show();
-        }
 
         public void HandleElection(object sender, ElectionArgs args) {
-            frmElection electionForm = makeMDIChildForm<frmElection>();
+            frmElection electionForm = (frmElection) makeMDIChildForm(args.ObjectName);
             electionForm.loadElection(args.ID);
             electionForm.Show();
         }
@@ -121,21 +122,6 @@ namespace KnightRider.ElectionTracker.ui {
             MessageBox.Show(message, args.Caption);
         }
 
-        public void HandleElectionReport(object sender, ElectionReportArgs args) {
-            frmElectionReport electionReportForm = makeMDIChildForm<frmElectionReport>();
-            electionReportForm.Show();
-        }
-
-        public void HandleContestVoteSumry(object sender, ContestVoteSumryArgs args) {
-            frmContestVoteSummary contestVoteSummary = makeMDIChildForm<frmContestVoteSummary>();
-            contestVoteSummary.Show();
-        }
-
-        public void HandleCountyContactForm(object sender, CountyContactFormArgs args) {
-            frmCountyContactForm countyContactForm = makeMDIChildForm<frmCountyContactForm>();
-            countyContactForm.Show();
-        }
-
         private static void trimTextBoxOnLeave(Object sender, EventArgs e) {
             if (sender is TextBox) {
                 TextBox senderTextBox = (TextBox) sender;
@@ -143,7 +129,7 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private static void wireTextBoxTrimmerOnLeave(object theObject) {
+        private static void wireTextBoxTrimOnLeave(object theObject) {
             if (theObject is Form) {
                 Form form = (Form) theObject;
                 foreach (Control control in form.Controls) {

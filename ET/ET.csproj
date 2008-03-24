@@ -135,8 +135,6 @@
     <Compile Include="db\VoteEntryDAO.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
-    <Compile Include="events\ContestVoteSumryArgs.cs" />
-    <Compile Include="events\CountyContactFormArgs.cs" />
     <Compile Include="events\CountyFormArgs.cs" />
     <Compile Include="events\DBEntityArgs.cs" />
     <Compile Include="events\DefaultShowMessageSender.cs" />
@@ -147,7 +145,6 @@
     <Compile Include="events\MakePersistentArgs.cs" />
     <Compile Include="events\MakeTransientArgs.cs" />
     <Compile Include="events\PoliticalPartyArgs.cs" />
-    <Compile Include="events\ProofingSheetArgs.cs" />
     <Compile Include="events\ShowAboutBoxArgs.cs" />
     <Compile Include="events\ElectionArgs.cs" />
     <Compile Include="events\ShowErrorMessageArgs.cs" />
@@ -185,6 +182,24 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="db\HibernateUtil.cs" />
+    <Compile Include="reports\BaseReport.cs" />
+    <Compile Include="reports\ContestVoteSummary.cs" />
+    <Compile Include="reports\ElectionQuickScanSheet.cs" />
+    <Compile Include="reports\frmCountyContactReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reports\frmCountyContactReport.designer.cs">
+      <DependentUpon>frmCountyContactReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reports\frmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reports\frmReport.Designer.cs">
+      <DependentUpon>frmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reports\IReport.cs" />
+    <Compile Include="reports\ProofingSheet.cs" />
+    <Compile Include="reports\VoteCountyTallySheet.cs" />
     <Compile Include="type\DBEntity.cs" />
     <Compile Include="type\NoSuchMemberException.cs" />
     <Compile Include="ui\BaseMDIChild.cs">
@@ -192,12 +207,6 @@
     </Compile>
     <Compile Include="ui\BaseMDIChild.Designer.cs">
       <DependentUpon>BaseMDIChild.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ui\BaseReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ui\BaseReport.Designer.cs">
-      <DependentUpon>BaseReport.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\ContestDisplay.cs">
       <SubType>Component</SubType>
@@ -208,9 +217,6 @@
     <Compile Include="ui\frmAboutBox.Designer.cs">
       <DependentUpon>frmAboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\frmContestVoteSummary.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ui\frmCounty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,12 +224,6 @@
       <DependentUpon>frmCounty.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\DefaultUIController.cs" />
-    <Compile Include="ui\frmCountyContactForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ui\frmCountyContactForm.Designer.cs">
-      <DependentUpon>frmCountyContactForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ui\frmElection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,9 +242,6 @@
     <Compile Include="ui\frmContest.designer.cs">
       <DependentUpon>frmContest.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\frmElectionReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ui\frmEnterVotes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,9 +253,6 @@
     </Compile>
     <Compile Include="ui\frmPoliticalParty.designer.cs">
       <DependentUpon>frmPoliticalParty.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ui\frmProofingSheet.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ui\MDIForm.cs">
       <SubType>Form</SubType>
@@ -283,11 +277,14 @@
     <Compile Include="ui\VoteEnterer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="util\ContestCountyComparer.cs" />
+    <Compile Include="util\CountyComparer.cs" />
     <Compile Include="util\DesignByContract.cs" />
+    <Compile Include="util\ElectionContestComparer.cs" />
     <Compile Include="util\Map.cs" />
+    <Compile Include="util\ResponseComparer.cs" />
     <Compile Include="util\ValidationFailedException.cs" />
     <Compile Include="util\Validator.cs" />
-    <Compile Include="util\ValueSortedList.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="core\PoliticalParty.hbm.xml" />
@@ -353,6 +350,10 @@
     <Content Include="Resources\EditInformationHS.png" />
     <Content Include="Resources\EditTableHS.png" />
     <Content Include="Resources\NewCardHS.png" />
+    <None Include="Resources\printer.png" />
+    <None Include="Resources\page_gear.png" />
+    <None Include="Resources\resultset_previous.png" />
+    <None Include="Resources\resultset_next.png" />
     <Content Include="Resources\saveHS.png" />
     <None Include="Resources\vote.ico" />
     <None Include="Resources\zoom_out.png" />
@@ -363,17 +364,17 @@
     </Content>
     <Content Include="vote.ico" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
+    <EmbeddedResource Include="reports\frmCountyContactReport.resx">
+      <DependentUpon>frmCountyContactReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\frmReport.resx">
+      <DependentUpon>frmReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\BaseMDIChild.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BaseMDIChild.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ui\BaseReport.resx">
-      <DependentUpon>BaseReport.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ui\frmCountyContactForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmCountyContactForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\frmEnterVotes.resx">
       <DependentUpon>frmEnterVotes.cs</DependentUpon>
@@ -393,7 +394,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="db\dao\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

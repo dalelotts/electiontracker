@@ -72,8 +72,7 @@ namespace KnightRider.ElectionTracker.ui {
                 cboPoliticalParty.SelectedIndex = 0;
             } else {
                 for (int i = 1, limit = cboPoliticalParty.Items.Count; i < limit; i++) {
-                    if (((ListItemWrapper<PoliticalParty>) cboPoliticalParty.Items[i]).Value.ID ==
-                        currentCandidate.PoliticalParty.ID) {
+                    if (((ListItemWrapper<PoliticalParty>) cboPoliticalParty.Items[i]).Value.ID == currentCandidate.PoliticalParty.ID) {
                         cboPoliticalParty.SelectedIndex = i;
                     }
                 }
@@ -123,9 +122,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
-                currentCandidate = currentCandidate.ID == 0
-                                       ? new Candidate()
-                                       : candidateDAO.findById(currentCandidate.ID, false);
+                currentCandidate = currentCandidate.ID == 0 ? new Candidate() : candidateDAO.findById(currentCandidate.ID, false);
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
@@ -157,8 +154,7 @@ namespace KnightRider.ElectionTracker.ui {
         private void cboPoliticalParty_Leave(object sender, EventArgs e) {
             try {
                 if (cboPoliticalParty.SelectedIndex == -1) {
-                    MessageBox.Show(
-                        "Please use \"Insert > Political Party\" if you wish to create a new political party.");
+                    MessageBox.Show("Please use \"Insert > Political Party\" if you wish to create a new political party.");
                     cboPoliticalParty.SelectedIndex = 0;
                 }
             } catch (Exception ex) {
