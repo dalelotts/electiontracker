@@ -30,10 +30,10 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("County Website URL", minLength = 12, example = "http://www.example.com")]
+        [RequiredProperty("County Website URL", minLength = 12, maxLength = 255, example = "http://www.example.com")]
         public virtual string URL {
             get { return url; }
-            set { url = value; }
+            set { url = value == null || value.Length == 0 ? null : value; }
         }
 
         [RequiredProperty("County Website County")]

@@ -22,10 +22,10 @@ namespace KnightRider.ElectionTracker.core {
     internal class CustomResponse : Response {
         private string description;
 
-        [RequiredProperty("Custom Response Description")]
+        [RequiredProperty("Custom Response Description", minLength = 1, maxLength = 100)]
         public virtual string Description {
             get { return description; }
-            set { description = value; }
+            set { description = value == null || value.Length == 0 ? null : value; }
         }
 
         public override string ToString() {

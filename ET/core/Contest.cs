@@ -33,7 +33,7 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("Contest Name", minLength = 3)]
+        [RequiredProperty("Contest Name", minLength = 3, maxLength = 100)]
         public virtual string Name {
             get { return name; }
             set { name = value == null || value.Length == 0 ? null : value; }

@@ -45,12 +45,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_689BC3688A104B79AC39C1A7B49ADDD1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_701208CF71782BDDB8DFBE017024C804"
         "OwnerKey" = "8:_FC7B62855AB4AC696962EF243CABCCAC"
         "MsmSig" = "8:_UNDEFINED"
@@ -71,12 +65,6 @@
         {
         "MsmKey" = "8:_701208CF71782BDDB8DFBE017024C804"
         "OwnerKey" = "8:_8B8BDF235DFC42AA98E56BD9BD67B143"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_88A3B02F082548C6885F428870B1865B"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -129,6 +117,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BF89E28A8445471498DB30CB5452DA91"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C32732D95C1A58510BD9A258177EB001"
         "OwnerKey" = "8:_8B8BDF235DFC42AA98E56BD9BD67B143"
         "MsmSig" = "8:_UNDEFINED"
@@ -143,6 +137,12 @@
         {
         "MsmKey" = "8:_C32732D95C1A58510BD9A258177EB001"
         "OwnerKey" = "8:_584E8B0ABEFA3357F93EC3166E9C3FB0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C5AFE08D98994E57BC947C13126E6622"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -197,12 +197,6 @@
         {
         "MsmKey" = "8:_D61DDF4D1CD9107DFB9724EC35FBA054"
         "OwnerKey" = "8:_8B8BDF235DFC42AA98E56BD9BD67B143"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DAD087CD485849CA8E6918841A4F18BB"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -490,26 +484,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_689BC3688A104B79AC39C1A7B49ADDD1"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\Downloads\\dotnetfx.exe"
-            "TargetName" = "8:dotnetfx.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_3AFC0E44B8A54DF9B51D2943C91C9CBD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_701208CF71782BDDB8DFBE017024C804"
             {
             "AssemblyRegister" = "3:1"
@@ -539,26 +513,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_88A3B02F082548C6885F428870B1865B"
-            {
-            "SourcePath" = "8:mysql-gui-tools-5.0-r12-win32.msi"
-            "TargetName" = "8:mysql-gui-tools-5.0-r12-win32.msi"
-            "Tag" = "8:"
-            "Folder" = "8:_3AFC0E44B8A54DF9B51D2943C91C9CBD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9511D7D654500D208044AD1B4B5C07FC"
@@ -705,6 +659,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF89E28A8445471498DB30CB5452DA91"
+            {
+            "SourcePath" = "8:et20080324_empty.sql"
+            "TargetName" = "8:et20080324_empty.sql"
+            "Tag" = "8:"
+            "Folder" = "8:_3AFC0E44B8A54DF9B51D2943C91C9CBD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C32732D95C1A58510BD9A258177EB001"
             {
             "AssemblyRegister" = "3:1"
@@ -734,6 +708,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5AFE08D98994E57BC947C13126E6622"
+            {
+            "SourcePath" = "8:et20080323.sql"
+            "TargetName" = "8:et20080323.sql"
+            "Tag" = "8:"
+            "Folder" = "8:_3AFC0E44B8A54DF9B51D2943C91C9CBD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CE7F28741261C449183B3B1F087A7B94"
@@ -829,26 +823,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAD087CD485849CA8E6918841A4F18BB"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\Downloads\\mysql-setup.exe"
-            "TargetName" = "8:mysql-setup.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_3AFC0E44B8A54DF9B51D2943C91C9CBD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EB836F04880858FCCC3456EDEFFC7BA7"
             {
             "AssemblyRegister" = "3:1"
@@ -940,7 +914,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_3AFC0E44B8A54DF9B51D2943C91C9CBD"
                     {
-                    "Name" = "8:installations"
+                    "Name" = "8:scripts"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -960,17 +934,6 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_D932AC125E514178A289FA6CC41A9089"
-                    {
-                    "Name" = "8:Election Tracker"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_75B64C22F24943189457DBCFC53AE5E4"
-                        "Folders"
-                        {
-                        }
-                    }
                 }
             }
         }
@@ -1131,7 +1094,7 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_8B8BDF235DFC42AA98E56BD9BD67B143"
-            "Folder" = "8:_D932AC125E514178A289FA6CC41A9089"
+            "Folder" = "8:_E5B6AAFFF4ED45DFBC36A313E21269AD"
             "WorkingFolder" = "8:_B4DEC71BD7974DE0A100C25C6344EBBA"
             "Icon" = "8:_23F244DB05184BAC9CBAAE195949F404"
             "Feature" = "8:"

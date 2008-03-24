@@ -31,7 +31,7 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("County Attribute Type", minLength = 3)]
+        [RequiredProperty("County Attribute Type")]
         public virtual AttributeType Type {
             get { return type; }
             set { type = value; }
@@ -43,10 +43,10 @@ namespace KnightRider.ElectionTracker.core {
             set { county = value; }
         }
 
-        [RequiredProperty("County Attribute Value", minLength = 3)]
+        [RequiredProperty("County Attribute Value", minLength = 1, maxLength = 100)]
         public virtual string Value {
             get { return value; }
-            set { this.value = value; }
+            set { this.value = value == null || value.Length == 0 ? null : value; }
         }
 
         public override string ToString() {

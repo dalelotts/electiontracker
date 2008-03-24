@@ -334,9 +334,9 @@
   <ItemGroup>
     <Content Include="core\CustomResponse.hbm.xml" />
     <EmbeddedResource Include="core\ResponseValue.hbm.xml" />
-    <Content Include="Log4Net.xml">
+    <None Include="Log4Net.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="Resources\arrow_down.png" />
     <None Include="Resources\arrow_left.png" />
     <None Include="Resources\arrow_right.png" />
@@ -359,9 +359,9 @@
     <None Include="Resources\zoom_out.png" />
     <None Include="Resources\zoom_in.png" />
     <None Include="Resources\tick.png" />
-    <Content Include="spring.xml">
+    <None Include="spring.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="vote.ico" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
     <EmbeddedResource Include="reports\frmCountyContactReport.resx">

@@ -46,7 +46,7 @@ namespace KnightRider.ElectionTracker.core {
 
         public virtual string Notes {
             get { return notes; }
-            set { notes = value; }
+            set { notes = value == null || value.Length == 0 ? null : value; ; }
         }
 
         public virtual bool IsActive {

@@ -43,18 +43,18 @@ namespace KnightRider.ElectionTracker.core {
         [RequiredProperty("Area Code", minLength = 3, maxLength = 3, example = "715")]
         public virtual string AreaCode {
             get { return areaCode; }
-            set { areaCode = value; }
+            set { areaCode = value == null || value.Length == 0 ? null : value; }
         }
 
         [RequiredProperty("Phone Number", minLength = 8, maxLength = 8, example = "123-4567")]
         public virtual string PhoneNumber {
             get { return phoneNumber; }
-            set { phoneNumber = value; }
+            set { phoneNumber = value == null || value.Length == 0 ? null : value; }
         }
 
         public virtual string Extension {
             get { return extension; }
-            set { extension = value; }
+            set { extension = value == null || value.Length == 0 ? null : value; }
         }
 
         [RequiredProperty("Phone Number County")]

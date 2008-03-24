@@ -36,7 +36,7 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("Candidate First Name")]
+        [RequiredProperty("Candidate First Name", minLength = 1, maxLength = 100)]
         public virtual string FirstName {
             get { return firstName; }
             set {
@@ -53,7 +53,7 @@ namespace KnightRider.ElectionTracker.core {
             }
         }
 
-        [RequiredProperty("Candidate Last Name")]
+        [RequiredProperty("Candidate Last Name", minLength = 1, maxLength = 100)]
         public virtual string LastName {
             get { return lastName; }
             set {

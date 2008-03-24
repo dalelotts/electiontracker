@@ -40,16 +40,16 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("Political Party Name")]
+        [RequiredProperty("Political Party Name", minLength = 3, maxLength = 100)]
         public virtual string Name {
             get { return name; }
-            set { name = value; }
+            set { name = value == null || value.Length == 0 ? null : value; }
         }
 
-        [RequiredProperty("Political Party Abbreviation")]
+        [RequiredProperty("Political Party Abbreviation", minLength = 1, maxLength = 5)]
         public virtual string Abbreviation {
             get { return abbreviation; }
-            set { abbreviation = value; }
+            set { abbreviation = value == null || value.Length == 0 ? null : value; }
         }
 
         public virtual bool IsActive {

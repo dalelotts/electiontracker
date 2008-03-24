@@ -35,15 +35,15 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("County Name")]
+        [RequiredProperty("County Name", minLength = 3, maxLength = 255)]
         public virtual string Name {
             get { return name; }
-            set { name = value; }
+            set { name = value == null || value.Length == 0 ? null : value; }
         }
 
         public virtual string Notes {
             get { return notes; }
-            set { notes = value; }
+            set { notes = value == null || value.Length == 0 ? null : value; }
         }
 
         public virtual int WardCount {

@@ -30,10 +30,10 @@ namespace KnightRider.ElectionTracker.core {
             set { id = value; }
         }
 
-        [RequiredProperty("Phone Number Type Name")]
+        [RequiredProperty("Phone Number Type Name", minLength = 3, maxLength = 45)]
         public virtual string Name {
             get { return name; }
-            set { name = value; }
+            set { name = value == null || value.Length == 0 ? null : value; }
         }
 
 
