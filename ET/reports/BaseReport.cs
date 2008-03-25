@@ -31,10 +31,12 @@ namespace KnightRider.ElectionTracker.reports {
         private bool isGenerated;
         private readonly string name;
         private readonly bool isLandscape;
+        private int marginPoint;
 
         public BaseReport(string name, bool isLandscape) {
             this.name = name;
             this.isLandscape = isLandscape;
+            marginPoint = isLandscape ? 105 : 75;
         }
 
         public string Name() {
@@ -85,7 +87,11 @@ namespace KnightRider.ElectionTracker.reports {
             return CenterText(text, ' ');
         }
 
-        protected static string FormatTextLength(string text, int length, bool padRight) {
+        protected static string PadString(string text, int length, bool padRight) {
+            return PadString(text, length, ' ', padRight);
+        }
+
+        protected static string PadString(string text, int length, char padChar, bool padRight) {
             int textLength = text.Length;
             string result = text;
             if (textLength > length) {
@@ -93,41 +99,34 @@ namespace KnightRider.ElectionTracker.reports {
             } else {
                 while (result.Length < length) {
                     if (padRight) {
-                        result = result + " ";
+                        result = result + padChar;
                     } else {
-                        result = " " + result;
+                        result = padChar + result;
                     }
                 }
             }
             return result;
         }
 
-        protected static string FormatTextLength(string text, int length) {
-            return FormatTextLength(text, length, true);
+        protected static string PadString(string text, int length) {
+            return PadString(text, length, true);
         }
 
         protected string CenterText(string text, char space) {
+            // ToDo: Use actual margins and character sizes to center.
             int length = text.Length;
-            for (int i = 0; i <= ((GetMarginSpot() - length) / 2); i++) {
-                text = "" + space + text + space;
+            for (int i = 0; i <= ((marginPoint - length) / 2); i++) {
+                text = space + text + space;
             }
             return text;
         }
 
         protected string AlignRight(string text) {
             int length = text.Length;
-            for (int i = 0; i <= ((GetMarginSpot() - length)); i++) {
+            for (int i = 0; i <= ((marginPoint - length)); i++) {
                 text = " " + text;
             }
             return text;
-        }
-
-        private int GetMarginSpot() {
-            if (isLandscape) {
-                return 105;
-            } else {
-                return 75;
-            }
         }
     }
 }

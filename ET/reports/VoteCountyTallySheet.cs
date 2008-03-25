@@ -25,7 +25,7 @@ namespace KnightRider.ElectionTracker.reports {
     internal class VoteCountyTallySheet : BaseReport<Election> {
         public VoteCountyTallySheet() : base("Vote County Tally Sheet", false) {}
 
-        private static readonly IComparer<ContestCounty> CONTEST_COUNTY_BY_NAME = new ContestCountyComparer();
+        private static readonly IComparer<ContestCounty> BY_CONTEST_NAME = new ContestCountyComparer(true);
         private static readonly IComparer<County> COUNTY_BY_NAME = new CountyComparer();
 
         protected override bool performGenerate(Election entity) {
@@ -53,6 +53,7 @@ namespace KnightRider.ElectionTracker.reports {
             foreach (County county in counties) {
                 body.Add("<GROUP>");
                 body.Add("<GROUP_HEADER>");
+
                 body.Add(CenterText(county.Name));
                 foreach (CountyPhoneNumber phoneNumber in county.PhoneNumbers) {
                     body.Add(AlignRight(phoneNumber.Type.Name + ": " + phoneNumber.AreaCode + "-" + phoneNumber.PhoneNumber));
@@ -71,7 +72,7 @@ namespace KnightRider.ElectionTracker.reports {
 
                 List<ContestCounty> contestCounties = new List<ContestCounty>(countyIDContestCounty.Get(county.ID));
 
-                contestCounties.Sort(CONTEST_COUNTY_BY_NAME);
+                contestCounties.Sort(BY_CONTEST_NAME);
 
                 foreach (ContestCounty contestCounty in contestCounties) {
                     body.Add("<KEEP_TOGETHER>");
@@ -79,13 +80,12 @@ namespace KnightRider.ElectionTracker.reports {
                     body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
                     body.Add("");
                     foreach (Response response in electionContest.Responses) {
-                        string responseColumn = FormatTextLength(response.ToString(), 51, true);
+                        string responseColumn = PadString(response.ToString(), 51, true);
                         body.Add(responseColumn + "_________________________");
                         body.Add("");
                         body.Add("");
                     }
-                    body.Add(AlignRight("Wards Reporting: _________________________"));
-                    body.Add(AlignRight("Total Wards:                 " + contestCounty.WardCount + "          "));
+                    body.Add(AlignRight("Wards Reporting: ______________" + PadString(" of " + contestCounty.WardCount, 10, '_', false)));
                     body.Add("</KEEP_TOGETHER>");
                 }
                 body.Add("</GROUP>");

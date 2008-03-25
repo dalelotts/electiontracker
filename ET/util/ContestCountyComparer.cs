@@ -21,8 +21,18 @@ using KnightRider.ElectionTracker.core;
 
 namespace KnightRider.ElectionTracker.util {
     internal class ContestCountyComparer : IComparer<ContestCounty> {
+        private readonly bool compareContestName;
+
+        public ContestCountyComparer(bool compareContestName) {
+            this.compareContestName = compareContestName;
+        }
+
         public int Compare(ContestCounty x, ContestCounty y) {
-            return x.ElectionContest.Contest.Name.CompareTo(y.ElectionContest.Contest.Name);
+            if (compareContestName) {
+                return x.ElectionContest.Contest.Name.CompareTo(y.ElectionContest.Contest.Name);
+            } else {
+                return x.County.Name.CompareTo(y.County.Name);
+            }
         }
     }
 }

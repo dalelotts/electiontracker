@@ -18,6 +18,7 @@
  **/
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 
@@ -61,7 +62,6 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
-                //TODO performCanMakePersistent political party
                 currentPoliticalParty.Name = txtName.Text;
                 currentPoliticalParty.Abbreviation = txtAbbrev.Text;
                 currentPoliticalParty.IsActive = chkActive.Checked;
@@ -73,6 +73,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentPoliticalParty = politicalPartyDAO.makePersistent(currentPoliticalParty);
                     refreshGoToList();
                     raiseMakePersistentEvent();
+                    MessageBox.Show(this, currentPoliticalParty.Name + " party saved.", "Sucessful Save");;
                 }
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);

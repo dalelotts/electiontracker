@@ -26,7 +26,7 @@ using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmElection : BaseMDIChild {
-        private static readonly ContestCountyComparer BY_NAME = new ContestCountyComparer();
+        private static readonly ContestCountyComparer BY_COUNTY_NAME = new ContestCountyComparer(false);
 
         private readonly IDAOTask<Election> loadTask;
         private readonly IElectionDAO electionDAO;
@@ -120,12 +120,10 @@ namespace KnightRider.ElectionTracker.ui {
                 lstAllCounties.Items.Add(county);
             }
 
-            dgvContestCounties.Rows.Clear();
-
             if (currentElectionContest != null) {
                 List<ContestCounty> selectedCounties = new List<ContestCounty>(currentElectionContest.Counties);
 
-                selectedCounties.Sort(BY_NAME);
+                selectedCounties.Sort(BY_COUNTY_NAME);
 
                 foreach (ContestCounty contestCounty in selectedCounties) {
                     DataGridViewTextBoxCell countyCell = new DataGridViewTextBoxCell();
@@ -210,6 +208,7 @@ namespace KnightRider.ElectionTracker.ui {
         public override void btnReset_Click(object sender, EventArgs e) {
             try {
                 currentElection = currentElection.ID == 0 ? new Election() : electionDAO.findById(currentElection.ID, false, loadTask);
+                currentElectionContest = null;
                 refreshControls();
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
@@ -390,13 +389,15 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
             try {
-                County selectedCounty = (County) lstAllCounties.SelectedItem;
-                if (selectedCounty != null) {
-                    ContestCounty contestCounty = new ContestCounty();
-                    contestCounty.ElectionContest = currentElectionContest;
-                    contestCounty.County = selectedCounty;
-                    selectedCounty.WardCount = selectedCounty.WardCount;
-                    currentElectionContest.Counties.Add(contestCounty);
+                ListBox.SelectedObjectCollection counties = lstAllCounties.SelectedItems;
+                if (counties.Count > 0) {
+                    foreach (County county in counties) {
+                        ContestCounty contestCounty = new ContestCounty();
+                        contestCounty.ElectionContest = currentElectionContest;
+                        contestCounty.County = county;
+                        contestCounty.WardCount = county.WardCount;
+                        currentElectionContest.Counties.Add(contestCounty);
+                    }
                     refreshCountyLists();
                 }
             } catch (Exception ex) {
@@ -512,13 +513,13 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void dgvContestCounties_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
             DataGridViewRow row = dgvContestCounties.CurrentRow;
-             
+
             DataGridViewCell wardCell = row.Cells["wardCountColumn"];
             object wardValue = wardCell.Value;
             int wardCount;
             if (int.TryParse(wardValue.ToString(), out wardCount)) {
                 DataGridViewCell countyCell = row.Cells["countyColumn"];
-                ContestCounty contestCounty = (ContestCounty)countyCell.Value;
+                ContestCounty contestCounty = (ContestCounty) countyCell.Value;
                 contestCounty.WardCount = wardCount;
                 wardCell.Tag = wardCount;
             } else {

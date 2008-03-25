@@ -59,12 +59,12 @@ namespace KnightRider.ElectionTracker.reports {
                 int responseColumnWidth = ALL_RESPONSE_SPACE / responseCount;
 
                 if (responseCount == 0) {
-                    candidateNames = FormatTextLength("----------NO CANDIDATES----------", ALL_RESPONSE_SPACE);
+                    candidateNames = PadString("----------NO CANDIDATES----------", ALL_RESPONSE_SPACE);
                 } else {
                     for (int i = 0; i < responseCount; i++) {
                         Response response = responses[i];
                         // Divide the available space equally for all candidates.
-                        candidateNames += FormatTextLength(response.ToString(), responseColumnWidth, true);
+                        candidateNames += PadString(response.ToString(), responseColumnWidth, true);
                     }
                 }
 
@@ -74,25 +74,25 @@ namespace KnightRider.ElectionTracker.reports {
                 body.Add("County           " + candidateNames + "   Wards             Votes");
 
                 foreach (ContestCounty cc in electionContest.Counties) {
-                    string strVoteCounts = FormatTextLength(cc.County.Name, COUNTY_COLUMN_WIDTH);
+                    string strVoteCounts = PadString(cc.County.Name, COUNTY_COLUMN_WIDTH);
 
                     for (int i = 0; i < responseCount; i++)
                     {
                         strVoteCounts += GetVoteNumbers(responses[i], cc, responseColumnWidth);
                     }
 
-                    strVoteCounts += FormatTextLength(cc.WardsReporting + "/" + cc.WardCount, 7, false);
+                    strVoteCounts += PadString(cc.WardsReporting + "/" + cc.WardCount, 7, false);
 
                     if (cc.WardCount > 0)
-                        strVoteCounts += FormatTextLength("(" + (((double) cc.WardsReporting / (double) cc.WardCount) * 100).ToString("0.0") + "%)", 12, false);
+                        strVoteCounts += PadString("(" + (((double) cc.WardsReporting / (double) cc.WardCount) * 100).ToString("0.0") + "%)", 12, false);
                     else {
                         if (cc.WardsReporting > 0) {
-                            strVoteCounts += FormatTextLength("(100.0%)", 12, false);
+                            strVoteCounts += PadString("(100.0%)", 12, false);
                         } else {
-                            strVoteCounts += FormatTextLength("(0.0%)", 12, false);
+                            strVoteCounts += PadString("(0.0%)", 12, false);
                         }
                     }
-                    strVoteCounts += FormatTextLength(" " + cc.GetTotalVotes(), 6, false);
+                    strVoteCounts += PadString(" " + cc.GetTotalVotes(), 6, false);
                     body.Add(strVoteCounts);
                 }
                 body.Add("");
@@ -105,13 +105,13 @@ namespace KnightRider.ElectionTracker.reports {
                     string responseString = responseVotes.ToString();
 
                     if (totalVotes > 0) {
-                        strTotals += FormatTextLength(FormatTextLength(responseString, 7, false) + FormatTextLength(" (" + ((double)responseVotes / (double)totalVotes).ToString("0.0" + "%)"), 12, false), responseColumnWidth);
+                        strTotals += PadString(PadString(responseString, 7, false) + PadString(" (" + ((double)responseVotes / (double)totalVotes).ToString("0.0" + "%)"), 12, false), responseColumnWidth);
                     } else {
-                        strTotals += FormatTextLength(FormatTextLength(responseString, 7, false) + FormatTextLength("(" + "0.0%)", 12, false), responseColumnWidth);                        
+                        strTotals += PadString(PadString(responseString, 7, false) + PadString("(" + "0.0%)", 12, false), responseColumnWidth);                        
                     }
                 }
 
-                strTotals += FormatTextLength(electionContest.GetWardsReporting() + "/" + electionContest.GetWardCount(), 7, false) + FormatTextLength("(" + (electionContest.GetWardsReportingPercentage() * 100).ToString("0.0") + "%)", 12, false) + FormatTextLength(totalVotes.ToString(), 6, false);
+                strTotals += PadString(electionContest.GetWardsReporting() + "/" + electionContest.GetWardCount(), 7, false) + PadString("(" + (electionContest.GetWardsReportingPercentage() * 100).ToString("0.0") + "%)", 12, false) + PadString(totalVotes.ToString(), 6, false);
                 body.Add(strTotals);
                 body.Add("</KEEP_TOGETHER>");    
             }
@@ -136,7 +136,7 @@ namespace KnightRider.ElectionTracker.reports {
                 votePercentage = Math.Round(resultValue.GetVotePercentage() * 100, 2);
             }
 
-            return FormatTextLength(FormatTextLength(voteCount.ToString(), 7, false) + FormatTextLength(" (" + votePercentage + "%)", 12, false), columnWidth, true);            
+            return PadString(PadString(voteCount.ToString(), 7, false) + PadString(" (" + votePercentage + "%)", 12, false), columnWidth, true);            
         }
 
         public override Font Font() {

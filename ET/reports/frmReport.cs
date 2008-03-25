@@ -138,13 +138,13 @@ namespace KnightRider.ElectionTracker.reports {
             bottomMargin -= (int) (footer.Count * fontHeight);
 
             int lineNumber = 0;
-            float yPos = GetYPos(fontHeight, lineNumber, topMargin);
+            float yPos = GetYPos(topMargin, lineNumber, fontHeight);
 
             // Print the header.
             foreach (string line in report.Header()) {
                 ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
                 lineNumber++;
-                yPos = GetYPos(fontHeight, lineNumber, topMargin);
+                yPos = GetYPos(topMargin, lineNumber, fontHeight);
             }
 
 
@@ -152,7 +152,7 @@ namespace KnightRider.ElectionTracker.reports {
             foreach (string line in groupHeader) {
                 ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
                 lineNumber++;
-                yPos = GetYPos(fontHeight, lineNumber, topMargin);
+                yPos = GetYPos(topMargin, lineNumber, fontHeight);
             }
 
             // Print the body of the report, keeping track of the line number 
@@ -164,6 +164,12 @@ namespace KnightRider.ElectionTracker.reports {
                 string line = bodyLines[bodyLineNumber];
                 bodyLineNumber++;
 
+                if (line.Length == 0) {
+                    lineNumber++;  // Nothing to do, just increment the line number and loop again.
+                    yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                    continue;
+                }
+                
                 if ("<PAGE_BREAK/>".Equals(line)) {
                     break;
                 } else if ("<KEEP_TOGETHER>".Equals(line)) {
@@ -173,7 +179,7 @@ namespace KnightRider.ElectionTracker.reports {
                         // the lines to keep togehter.
                         // NOTE: This does not support nested keep together tags.
                         int keepTogetherLines = linesToTag("</KEEP_TOGETHER>", bodyLines, bodyLineNumber);
-                        float tmpYPos = GetYPos(fontHeight, lineNumber + keepTogetherLines, topMargin);
+                        float tmpYPos = GetYPos(topMargin, lineNumber + keepTogetherLines, fontHeight);
                         if (tmpYPos > bottomMargin) {
                             break; // There are not enough lines remianing on the page so move to the next page.
                         }
@@ -195,7 +201,7 @@ namespace KnightRider.ElectionTracker.reports {
 
                 ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
                 lineNumber++;
-                yPos = GetYPos(fontHeight, lineNumber, topMargin);
+                yPos = GetYPos(topMargin, lineNumber, fontHeight);
             }
 
             // Reset the bottom margin so it no longer reserves space for the footer.
@@ -239,10 +245,8 @@ namespace KnightRider.ElectionTracker.reports {
         }
 
 
-        private static float GetYPos(float fontHeight, int lineNumber, float topMargin) {
-            float yPos;
-            yPos = topMargin + (lineNumber * fontHeight);
-            return yPos;
+        private static float GetYPos(float topMargin, int lineNumber, float fontHeight) {
+            return topMargin + (lineNumber * fontHeight);
         }
 
         private void btnZoomIn_Click(object sender, EventArgs e) {

@@ -54,7 +54,7 @@ namespace KnightRider.ElectionTracker.reports {
                 int totalCounties = contest.Counties.Count;
                 bool printContestColumn = true;
 
-                string contestName = FormatTextLength(contest.Contest.Name, CONTEST_COLUMN_WIDTH);
+                string contestName = PadString(contest.Contest.Name, CONTEST_COLUMN_WIDTH);
 
                 // If there are no responses or counties the while loop later
                 // in this method will fail to print the contest name, so print it now.
@@ -68,37 +68,37 @@ namespace KnightRider.ElectionTracker.reports {
                     string contestColumn;
                     if (printContestColumn) {
                         printContestColumn = false;
-                        contestColumn = FormatTextLength(contestName, CONTEST_COLUMN_WIDTH);
+                        contestColumn = PadString(contestName, CONTEST_COLUMN_WIDTH);
                     } else {
-                        contestColumn = FormatTextLength(" ", CONTEST_COLUMN_WIDTH);
+                        contestColumn = PadString(" ", CONTEST_COLUMN_WIDTH);
                     }
 
                     string countyColumn;
                     string wardColumn;
                     if (countyCount < totalCounties) {
                         ContestCounty currentCounty = contest.Counties[countyCount];
-                        wardColumn = FormatTextLength(currentCounty.WardCount.ToString(), WARD_COLUMN_WIDTH, false);
-                        countyColumn = FormatTextLength(currentCounty.County.Name, COUNTY_COLUMN_WIDTH);
+                        wardColumn = PadString(currentCounty.WardCount.ToString(), WARD_COLUMN_WIDTH, false);
+                        countyColumn = PadString(currentCounty.County.Name, COUNTY_COLUMN_WIDTH);
                         wardCount += currentCounty.WardCount;
                     } else {
-                        wardColumn = FormatTextLength(" ", WARD_COLUMN_WIDTH);
-                        countyColumn = FormatTextLength(" ", COUNTY_COLUMN_WIDTH);
+                        wardColumn = PadString(" ", WARD_COLUMN_WIDTH);
+                        countyColumn = PadString(" ", COUNTY_COLUMN_WIDTH);
                     }
 
                     string responseColumn;
                     if (responseCount < totalResponses) {
                         Response currentResponse = contest.Responses[responseCount];
-                        responseColumn = FormatTextLength(currentResponse.ToString(), RESPONSE_COLUMN_WIDTH);
+                        responseColumn = PadString(currentResponse.ToString(), RESPONSE_COLUMN_WIDTH);
                     } else {
-                        responseColumn = FormatTextLength(" ", RESPONSE_COLUMN_WIDTH);
+                        responseColumn = PadString(" ", RESPONSE_COLUMN_WIDTH);
                     }
 
                     body.Add(contestColumn + wardColumn + WARD_COLUMN_PADDING + countyColumn + responseColumn);
                     responseCount++;
                     countyCount++;
                 }
-                body.Add(FormatTextLength(" ", CONTEST_COLUMN_WIDTH) + "-----");
-                body.Add(FormatTextLength(" ", 13) + "Total Wards:" + FormatTextLength(wardCount.ToString(), WARD_COLUMN_WIDTH, false));
+                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH) + "-----");
+                body.Add(PadString(" ", 13) + "Total Wards:" + PadString(wardCount.ToString(), WARD_COLUMN_WIDTH, false));
                 body.Add("");
                 body.Add("</KEEP_TOGETHER>");
             }

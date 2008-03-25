@@ -777,7 +777,7 @@ namespace KnightRider.ElectionTracker.ui
             this.lstAllCounties.FormattingEnabled = true;
             this.lstAllCounties.Location = new System.Drawing.Point(401, 31);
             this.lstAllCounties.Name = "lstAllCounties";
-            this.lstAllCounties.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstAllCounties.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstAllCounties.Size = new System.Drawing.Size(161, 225);
             this.lstAllCounties.Sorted = true;
             this.lstAllCounties.TabIndex = 10;

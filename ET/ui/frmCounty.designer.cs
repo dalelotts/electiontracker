@@ -115,7 +115,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtCountyWardCount.Name = "txtCountyWardCount";
             this.txtCountyWardCount.Size = new System.Drawing.Size(49, 20);
             this.txtCountyWardCount.TabIndex = 3;
-            this.txtCountyWardCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(numericInputOnly);
             // 
             // txtCountyName
             // 

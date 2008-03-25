@@ -28,7 +28,7 @@ using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmEnterVotes : BaseMDIChild {
-        private static readonly ContestCountyComparer CONTEST_COUNTY_COMPARER = new ContestCountyComparer();
+        private static readonly ContestCountyComparer BY_CONTEST_NAME = new ContestCountyComparer(true);
 
         private Map<long, County> countyIDToCounty;
         private Map<long, IList<ContestCounty>> countyIDContestCounty;
@@ -98,7 +98,7 @@ namespace KnightRider.ElectionTracker.ui {
             foreach (KeyValuePair<long, IList<ContestCounty>> entry in countyIDContestCounty) {
                 IList<ContestCounty> contestCounties = entry.Value;
 
-                ((List<ContestCounty>) contestCounties).Sort(CONTEST_COUNTY_COMPARER);
+                ((List<ContestCounty>) contestCounties).Sort(BY_CONTEST_NAME);
 
                 VoteEnterer enterer = new VoteEnterer(contestCounties, contestCountyDAO);
                 countyIDToVoteEnterer.Add(entry.Key, enterer);
