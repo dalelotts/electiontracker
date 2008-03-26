@@ -21,10 +21,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using KnightRider.ElectionTracker.ui;
 using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.reports {
-    internal sealed partial class frmReport : Form {
+    internal sealed partial class frmReport : BaseMDIChild {
         private readonly IReport report;
         private int pageCount;
         private int bodyLineNumber;
@@ -33,54 +34,67 @@ namespace KnightRider.ElectionTracker.reports {
 
         public frmReport(IReport report) {
             InitializeComponent();
+            toolStrip1.Visible = false;
             this.report = report;
             Text = report.Name();
 
-            if (report.Filters().Count > 0) {
-                previewControlLocation = new Point(190, 12);
-                foreach (TreeViewFilter filter in report.Filters()) {
-                    cboFilter.Items.Add(filter);
-                }
-                if (cboFilter.Items.Count > 0) cboFilter.SelectedIndex = 0;
-            } else {
-                // Hide the filter combo and tree view
-                ctlTreeView.Visible = false;
-                cboFilter.Visible = false;
-
-                previewControlLocation = new Point(ctlTreeView.Location.X, ctlTreeView.Location.Y);
+            previewControlLocation = new Point(190, 12);
+            foreach (TreeViewFilter filter in report.Filters()) {
+                cboFilter.Items.Add(filter);
             }
+            if (cboFilter.Items.Count > 0) cboFilter.SelectedIndex = 0;
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
-            pageCount = 0;
-            DialogResult result = ctlPrintDialog.ShowDialog(this);
-            if (DialogResult.OK.Equals(result)) {
-                ppcElection.Document.PrinterSettings = ctlPrintDialog.PrinterSettings;
-                ppcElection.Document.Print();
+            try {
+                pageCount = 0;
+                DialogResult result = ctlPrintDialog.ShowDialog(this);
+                if (DialogResult.OK.Equals(result)) {
+                    ctlPrintPreview.Document.PrinterSettings = ctlPrintDialog.PrinterSettings;
+                    ctlPrintPreview.Document.Print();
+                }
+            } catch (Exception ex) {
+                reportException("btnPrint_Click", ex);
             }
         }
 
         private void btnPrevious_Click(object sender, EventArgs e) {
-            if (ppcElection.StartPage > 0) {
-                ppcElection.StartPage--;
+            try {
+                if (ctlPrintPreview.StartPage > 0) {
+                    ctlPrintPreview.StartPage--;
+                }
+            } catch (Exception ex) {
+                reportException("btnPrevious_Click", ex);
             }
         }
 
         private void btnNext_Click(object sender, EventArgs e) {
-            if (ppcElection.StartPage < pageCount) {
-                ppcElection.StartPage++;
+            try {
+                if (ctlPrintPreview.StartPage < pageCount) {
+                    ctlPrintPreview.StartPage++;
+                }
+            } catch (Exception ex) {
+                reportException("btnNext_Click", ex);
             }
         }
 
         private void cboFilter_SelectedIndexChanged(object sender, EventArgs e) {
-            ctlTreeView.Nodes.Clear();
-            ((TreeViewFilter) cboFilter.SelectedItem).apply(ctlTreeView.Nodes);
+            try {
+                ctlTreeView.Nodes.Clear();
+                ((TreeViewFilter) cboFilter.SelectedItem).apply(ctlTreeView.Nodes);
+            } catch (Exception ex) {
+                reportException("cboFilter_SelectedIndexChanged", ex);
+            }
         }
 
-        private void tvElections_AfterSelect(object sender, TreeViewEventArgs e) {
-            TreeNode node = ctlTreeView.SelectedNode;
-            if (node == null) return;
-            displayReport(node);
+        private void ctlTreeView_AfterSelect(object sender, TreeViewEventArgs e) {
+            try {
+                TreeNode node = ctlTreeView.SelectedNode;
+                if (node == null) return;
+                displayReport(node);
+            } catch (Exception ex) {
+                reportException("tvElections_AfterSelect", ex);
+            }
         }
 
         private void displayReport(TreeNode node) {
@@ -100,15 +114,15 @@ namespace KnightRider.ElectionTracker.reports {
         }
 
         private void refreshReport(PrintDocument document) {
-            Controls.Remove(ppcElection);
-            ppcElection = new PrintPreviewControl();
-            ppcElection.Location = previewControlLocation;
-            ppcElection.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
-            ppcElection.Size = new Size(Width - ppcElection.Location.X - 12, Height - 78);
-            ppcElection.TabIndex = 8;
-            ppcElection.UseAntiAlias = true;
-            ppcElection.Document = document;
-            Controls.Add(ppcElection);
+            Controls.Remove(ctlPrintPreview);
+            ctlPrintPreview = new PrintPreviewControl();
+            ctlPrintPreview.Location = previewControlLocation;
+            ctlPrintPreview.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
+            ctlPrintPreview.Size = new Size(Width - ctlPrintPreview.Location.X - 12, Height - 78);
+            ctlPrintPreview.TabIndex = 8;
+            ctlPrintPreview.UseAntiAlias = true;
+            ctlPrintPreview.Document = document;
+            Controls.Add(ctlPrintPreview);
         }
 
         private void endPrint(object sender, PrintEventArgs e) {
@@ -248,20 +262,24 @@ namespace KnightRider.ElectionTracker.reports {
         }
 
         private void btnZoomIn_Click(object sender, EventArgs e) {
-            ppcElection.Zoom += .1;
+            ctlPrintPreview.Zoom += .1;
         }
 
         private void btnZoomOut_Click(object sender, EventArgs e) {
-            ppcElection.Zoom -= .1;
+            ctlPrintPreview.Zoom -= .1;
         }
 
         private void btnPageSetup_Click(object sender, EventArgs e) {
-            PrintDocument document = ppcElection.Document;
-            ctlPageSetup.Document = document;
-            DialogResult result = ctlPageSetup.ShowDialog(this);
-            if (DialogResult.OK.Equals(result)) {
-                document.DefaultPageSettings = ctlPageSetup.PageSettings;
-                refreshReport(document);
+            try {
+                PrintDocument document = ctlPrintPreview.Document;
+                ctlPageSetup.Document = document;
+                DialogResult result = ctlPageSetup.ShowDialog(this);
+                if (DialogResult.OK.Equals(result)) {
+                    document.DefaultPageSettings = ctlPageSetup.PageSettings;
+                    refreshReport(document);
+                }
+            } catch (Exception ex) {
+                reportException("btnPageSetup_Click", ex);
             }
         }
     }

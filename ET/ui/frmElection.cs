@@ -501,30 +501,38 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void btnSetIncumbent_Click(object sender, EventArgs e) {
-            Response incumbent = (Response) lstContestCandidates.SelectedItem;
-            if (incumbent != null && !incumbent.IsIncumbent) {
-                foreach (Response response in lstContestCandidates.Items) {
-                    if (response.IsIncumbent) response.IsIncumbent = false;
+            try {
+                Response incumbent = (Response) lstContestCandidates.SelectedItem;
+                if (incumbent != null && !incumbent.IsIncumbent) {
+                    foreach (Response response in lstContestCandidates.Items) {
+                        if (response.IsIncumbent) response.IsIncumbent = false;
+                    }
+                    incumbent.IsIncumbent = true;
+                    refreshCandidateLists();
                 }
-                incumbent.IsIncumbent = true;
-                refreshCandidateLists();
+            } catch (Exception ex) {
+                reportException("btnSetIncumbent_Click", ex);
             }
         }
 
         private void dgvContestCounties_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            DataGridViewRow row = dgvContestCounties.CurrentRow;
+            try {
+                DataGridViewRow row = dgvContestCounties.CurrentRow;
 
-            DataGridViewCell wardCell = row.Cells["wardCountColumn"];
-            object wardValue = wardCell.Value;
-            int wardCount;
-            if (int.TryParse(wardValue.ToString(), out wardCount)) {
-                DataGridViewCell countyCell = row.Cells["countyColumn"];
-                ContestCounty contestCounty = (ContestCounty) countyCell.Value;
-                contestCounty.WardCount = wardCount;
-                wardCell.Tag = wardCount;
-            } else {
-                MessageBox.Show(this, "Ward count must be a number. " + wardValue + " is not a valid number.", "Invalid ward count");
-                wardCell.Value = wardCell.Tag;
+                DataGridViewCell wardCell = row.Cells["wardCountColumn"];
+                object wardValue = wardCell.Value;
+                int wardCount;
+                if (int.TryParse(wardValue.ToString(), out wardCount)) {
+                    DataGridViewCell countyCell = row.Cells["countyColumn"];
+                    ContestCounty contestCounty = (ContestCounty) countyCell.Value;
+                    contestCounty.WardCount = wardCount;
+                    wardCell.Tag = wardCount;
+                } else {
+                    MessageBox.Show(this, "Ward count must be a number. " + wardValue + " is not a valid number.", "Invalid ward count");
+                    wardCell.Value = wardCell.Tag;
+                }
+            } catch (Exception ex) {
+                reportException("dgvContestCounties_CellEndEdit", ex);
             }
         }
     }

@@ -27,7 +27,6 @@ using KnightRider.ElectionTracker.ui.util;
 namespace KnightRider.ElectionTracker.ui {
     internal partial class MDIForm : Form {
         public event GenericEventHandler<object, ShowAboutBoxArgs> showAboutBox;
-        public event GenericEventHandler<IShowMessageSender, ShowMessageArgs> showMessage;
         public event GenericEventHandler<object, EnterVotesArgs> enterVotes;
         public event GenericEventHandler<object, CountyFormArgs> countyForm;
         public event GenericEventHandler<object, CandidateArgs> candidate;
@@ -36,8 +35,6 @@ namespace KnightRider.ElectionTracker.ui {
         public event GenericEventHandler<object, ElectionArgs> election;
         public event GenericEventHandler<object, ReportArgs> showReport;
         public event GenericEventHandler<Object, ShowErrorMessageArgs> showErrorMessage;
-
-        private static readonly ShowMessageArgs NOT_IMPLEMENTED_MESSAGE_ARGS = new ShowMessageArgs("This feature is not implemented yet.", "Not Implemented");
 
         internal MDIForm() {
             InitializeComponent();
@@ -59,47 +56,91 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void ElectionQuickScanHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ElectionQuickScanSheet"));
+            try {
+                EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ElectionQuickScanSheet"));
+            } catch (Exception ex) {
+                reportException("ElectionQuickScanHandler", ex);
+            }
         }
 
         private void ContestVoteSummaryHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ContestVoteSummary"));
+            try {
+                EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ContestVoteSummary"));
+            } catch (Exception ex) {
+                reportException("ContestVoteSummaryHandler", ex);
+            }
         }
 
         private void VoteCountyTallySheetHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("VoteCountyTallySheet"));
+            try {
+                EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("VoteCountyTallySheet"));
+            } catch (Exception ex) {
+                reportException("VoteCountyTallySheetHandler", ex);
+            }
         }
 
         private void ProofingSheetReportHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ProofingSheet"));
+            try {
+                EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("ProofingSheet"));
+            } catch (Exception ex) {
+                reportException("ProofingSheetReportHandler", ex);
+            }
         }
 
         private void CountyContactReportHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("CountyContactReport"));
+            try {
+                EventUtil.RaiseEvent<object, ReportArgs>(showReport, this, new ReportArgs("CountyContactReport"));
+            } catch (Exception ex) {
+                reportException("CountyContactReportHandler", ex);
+            }
         }
 
         private void VoteResultsHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, EnterVotesArgs>(enterVotes, this, new EnterVotesArgs());
+            try {
+                EventUtil.RaiseEvent<object, EnterVotesArgs>(enterVotes, this, new EnterVotesArgs());
+            } catch (Exception ex) {
+                reportException("VoteResultsHandler", ex);
+            }
         }
 
         private void CountyFormHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, CountyFormArgs>(countyForm, this, new CountyFormArgs());
+            try {
+                EventUtil.RaiseEvent<object, CountyFormArgs>(countyForm, this, new CountyFormArgs());
+            } catch (Exception ex) {
+                reportException("CountyFormHandler", ex);
+            }
         }
 
         private void CandidateHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, CandidateArgs>(candidate, this, new CandidateArgs());
+            try {
+                EventUtil.RaiseEvent<object, CandidateArgs>(candidate, this, new CandidateArgs());
+            } catch (Exception ex) {
+                reportException("CandidateHandler", ex);
+            }
         }
 
         private void ContestHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ContestArgs>(contest, this, new ContestArgs());
+            try {
+                EventUtil.RaiseEvent<object, ContestArgs>(contest, this, new ContestArgs());
+            } catch (Exception ex) {
+                reportException("ContestHandler", ex);
+            }
         }
 
         private void PoliticalPartyHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, PoliticalPartyArgs>(politicalParty, this, new PoliticalPartyArgs());
+            try {
+                EventUtil.RaiseEvent<object, PoliticalPartyArgs>(politicalParty, this, new PoliticalPartyArgs());
+            } catch (Exception ex) {
+                reportException("PoliticalPartyHandler", ex);
+            }
         }
 
         private void ElectionHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ElectionArgs>(election, this, new ElectionArgs());
+            try {
+                EventUtil.RaiseEvent<object, ElectionArgs>(election, this, new ElectionArgs());
+            } catch (Exception ex) {
+                reportException("ElectionHandler", ex);
+            }
         }
 
 
@@ -114,12 +155,11 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void AboutBoxHandler(object sender, EventArgs e) {
-            EventUtil.RaiseEvent<object, ShowAboutBoxArgs>(showAboutBox, this, new ShowAboutBoxArgs());
-        }
-
-        private void NotImplementedMessageHandler(object sender, EventArgs e) {
-            DefaultShowMessageSender messageSender = new DefaultShowMessageSender();
-            EventUtil.RaiseEvent<IShowMessageSender, ShowMessageArgs>(showMessage, messageSender, NOT_IMPLEMENTED_MESSAGE_ARGS);
+            try {
+                EventUtil.RaiseEvent<object, ShowAboutBoxArgs>(showAboutBox, this, new ShowAboutBoxArgs());
+            } catch (Exception ex) {
+                reportException("AboutBoxHandler", ex);
+            }
         }
 
         private void filterBar_ButtonClicked(object sender, EventArgs e) {
@@ -191,7 +231,11 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void MDIForm_Shown(object sender, EventArgs e) {
-            if (filterBar.Buttons.Count > 0) filterBar.Buttons[0].Selected = true;
+            try {
+                if (filterBar.Buttons.Count > 0) filterBar.Buttons[0].Selected = true;
+            } catch (Exception ex) {
+                reportException("MDIForm_Shown", ex);
+            }
         }
     }
 }

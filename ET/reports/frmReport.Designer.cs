@@ -49,7 +49,7 @@ namespace KnightRider.ElectionTracker.reports {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReport));
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
-            this.ppcElection = new System.Windows.Forms.PrintPreviewControl();
+            this.ctlPrintPreview = new System.Windows.Forms.PrintPreviewControl();
             this.btnPrint = new System.Windows.Forms.Button();
             this.cboFilter = new System.Windows.Forms.ComboBox();
             this.ctlTreeView = new System.Windows.Forms.TreeView();
@@ -92,14 +92,14 @@ namespace KnightRider.ElectionTracker.reports {
             // 
             // ppcElection
             // 
-            this.ppcElection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.ctlPrintPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.ppcElection.Location = new System.Drawing.Point(190, 12);
-            this.ppcElection.Name = "ppcElection";
-            this.ppcElection.Size = new System.Drawing.Size(648, 616);
-            this.ppcElection.TabIndex = 8;
-            this.ppcElection.UseAntiAlias = true;
+            this.ctlPrintPreview.Location = new System.Drawing.Point(190, 12);
+            this.ctlPrintPreview.Name = "ctlPrintPreview";
+            this.ctlPrintPreview.Size = new System.Drawing.Size(648, 616);
+            this.ctlPrintPreview.TabIndex = 8;
+            this.ctlPrintPreview.UseAntiAlias = true;
             // 
             // btnPrint
             // 
@@ -134,7 +134,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.ctlTreeView.Size = new System.Drawing.Size(174, 615);
             this.ctlTreeView.TabIndex = 12;
             this.ctlToolTip.SetToolTip(this.ctlTreeView, "Click the Election to generate the report.");
-            this.ctlTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvElections_AfterSelect);
+            this.ctlTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ctlTreeView_AfterSelect);
             // 
             // btnZoomIn
             // 
@@ -192,7 +192,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.Controls.Add(this.cboFilter);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
-            this.Controls.Add(this.ppcElection);
+            this.Controls.Add(this.ctlPrintPreview);
             this.Controls.Add(this.btnPrint);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(450, 450);
@@ -207,7 +207,7 @@ namespace KnightRider.ElectionTracker.reports {
 
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
-        private System.Windows.Forms.PrintPreviewControl ppcElection;
+        private System.Windows.Forms.PrintPreviewControl ctlPrintPreview;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ComboBox cboFilter;
         private System.Windows.Forms.TreeView ctlTreeView;

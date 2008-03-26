@@ -31,15 +31,13 @@ CREATE TABLE `attributetype` (
   `AttributeTypeName` varchar(100) NOT NULL,
   PRIMARY KEY  (`AttributeTypeID`),
   UNIQUE KEY `UNQ_AttributeTypeName` (`AttributeTypeName`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `attributetype`
 --
 
 /*!40000 ALTER TABLE `attributetype` DISABLE KEYS */;
-INSERT INTO `attributetype` (`AttributeTypeID`,`AttributeTypeName`) VALUES 
- (7,'Election Day Contact');
 /*!40000 ALTER TABLE `attributetype` ENABLE KEYS */;
 
 
@@ -59,7 +57,7 @@ CREATE TABLE `candidate` (
   PRIMARY KEY  (`CandidateID`),
   KEY `FK_candidate_political_party` (`CandidatePoliticalPartyID`),
   CONSTRAINT `FK_candidate_political_party` FOREIGN KEY (`CandidatePoliticalPartyID`) REFERENCES `politicalparty` (`PoliticalPartyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=387 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=388 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `candidate`
@@ -74,7 +72,7 @@ INSERT INTO `candidate` (`CandidateID`,`CandidateFirstName`,`CandidateMiddleName
  (333,'Mary',NULL,'Williams',2,NULL,1),
  (334,'Barbara',NULL,'Gronemus',1,NULL,1),
  (335,'David',NULL,'Anderson',2,NULL,1),
- (337,'Terry',NULL,'Musser',2,NULL,0),
+ (337,'Terry',NULL,'Musser',2,NULL,1),
  (339,'Rob',NULL,'Kreibich',2,NULL,1),
  (341,'Mark',NULL,'Pettis',2,NULL,1),
  (344,'Jeff',NULL,'Smith',1,NULL,1),
@@ -102,8 +100,9 @@ INSERT INTO `candidate` (`CandidateID`,`CandidateFirstName`,`CandidateMiddleName
  (376,'Mark',NULL,'Green',2,NULL,1),
  (377,'Nelson',NULL,'Eisman',4,NULL,1),
  (381,'Linda','M.','Clifford',NULL,NULL,1),
- (382,'Annette','K.','Ziegler',NULL,'',1),
- (386,'Terry',NULL,'Moulton',2,'',1);
+ (382,'Annette','K.','Ziegler',NULL,NULL,1),
+ (386,'Terry',NULL,'Moulton',2,'',1),
+ (387,'Shawna','Marie','Sloop',3,NULL,1);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 
 
@@ -126,115 +125,6 @@ CREATE TABLE `candidateresponse` (
 --
 
 /*!40000 ALTER TABLE `candidateresponse` DISABLE KEYS */;
-INSERT INTO `candidateresponse` (`ResponseID`,`CandidateID`) VALUES 
- (299,314),
- (365,314),
- (296,324),
- (378,324),
- (302,326),
- (331,326),
- (341,326),
- (350,326),
- (385,326),
- (307,330),
- (363,330),
- (310,333),
- (330,333),
- (346,333),
- (384,333),
- (311,334),
- (320,334),
- (337,334),
- (343,334),
- (361,334),
- (260,335),
- (312,335),
- (321,335),
- (329,335),
- (351,335),
- (314,337),
- (373,337),
- (315,339),
- (367,339),
- (292,341),
- (375,341),
- (316,344),
- (332,344),
- (335,344),
- (379,344),
- (313,349),
- (370,349),
- (265,350),
- (295,350),
- (336,350),
- (359,350),
- (308,351),
- (369,351),
- (264,352),
- (309,352),
- (328,352),
- (344,352),
- (358,352),
- (294,353),
- (372,353),
- (291,354),
- (362,354),
- (301,355),
- (334,355),
- (376,355),
- (338,356),
- (340,356),
- (382,356),
- (305,360),
- (380,360),
- (306,361),
- (333,361),
- (345,361),
- (381,361),
- (289,364),
- (364,364),
- (290,365),
- (377,365),
- (287,366),
- (324,366),
- (354,366),
- (262,367),
- (288,367),
- (326,367),
- (356,367),
- (387,368),
- (285,369),
- (368,369),
- (251,370),
- (298,370),
- (322,370),
- (352,370),
- (297,371),
- (339,371),
- (349,371),
- (383,371),
- (293,372),
- (366,372),
- (300,373),
- (374,373),
- (261,375),
- (317,375),
- (319,375),
- (325,375),
- (347,375),
- (355,375),
- (318,376),
- (348,376),
- (360,376),
- (263,377),
- (327,377),
- (342,377),
- (357,377),
- (258,381),
- (323,381),
- (353,381),
- (386,382),
- (371,386);
 /*!40000 ALTER TABLE `candidateresponse` ENABLE KEYS */;
 
 
@@ -250,7 +140,7 @@ CREATE TABLE `contest` (
   `ContestIsActive` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`ContestID`),
   UNIQUE KEY `UNQ_ContestName` USING BTREE (`ContestName`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contest`
@@ -268,7 +158,7 @@ INSERT INTO `contest` (`ContestID`,`ContestName`,`ContestNotes`,`ContestIsActive
  (31,'69th Assembly',NULL,1),
  (32,'3rd Congressional - Republicans',NULL,1),
  (33,'3rd Congressional',NULL,1),
- (34,'68th Assembly - Democrats','Notes',1),
+ (34,'68th Assembly - Democrats',NULL,1),
  (37,'94th Assembly',NULL,1),
  (38,'95th Assembly',NULL,1),
  (39,'87th Assembly',NULL,1),
@@ -293,7 +183,8 @@ INSERT INTO `contest` (`ContestID`,`ContestName`,`ContestNotes`,`ContestIsActive
  (94,'91 Assembly',NULL,1),
  (101,'25th Senate',NULL,1),
  (104,'Supreme Court',NULL,1),
- (108,'President',NULL,1);
+ (108,'President',NULL,1),
+ (115,'Test Contest',NULL,1);
 /*!40000 ALTER TABLE `contest` ENABLE KEYS */;
 
 
@@ -313,92 +204,13 @@ CREATE TABLE `contestcounty` (
   KEY `ElectionContestID` (`ElectionContestID`),
   CONSTRAINT `CountyID` FOREIGN KEY (`CountyID`) REFERENCES `county` (`CountyID`),
   CONSTRAINT `ElectionContestID` FOREIGN KEY (`ElectionContestID`) REFERENCES `electioncontest` (`ElectionContestID`)
-) ENGINE=InnoDB AUTO_INCREMENT=368 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=407 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contestcounty`
 --
 
 /*!40000 ALTER TABLE `contestcounty` DISABLE KEYS */;
-INSERT INTO `contestcounty` (`ContestCountyID`,`ElectionContestID`,`CountyID`,`WardCount`,`WardsReporting`) VALUES 
- (282,87,34,3,2),
- (283,87,33,4,2),
- (284,87,36,6,10),
- (293,92,33,5,4),
- (294,125,36,38,1),
- (295,125,33,5,0),
- (296,125,41,59,59),
- (297,125,43,20,20),
- (298,125,37,26,0),
- (299,125,47,17,0),
- (300,125,55,1,0),
- (301,125,97,0,0),
- (302,127,35,15,15),
- (303,127,51,32,32),
- (304,127,54,2,2),
- (305,128,43,10,10),
- (306,128,50,4,0),
- (307,128,54,0,28),
- (308,129,50,12,0),
- (309,129,54,0,7),
- (310,130,34,23,22),
- (311,130,41,2,2),
- (312,130,43,5,5),
- (313,130,37,31,0),
- (314,130,45,27,0),
- (315,130,48,19,0),
- (316,130,49,11,0),
- (317,130,50,12,0),
- (318,130,56,0,0),
- (319,94,43,5,5),
- (320,94,42,9,8),
- (321,94,41,57,57),
- (322,94,36,10,3),
- (323,94,35,5,3),
- (324,94,34,13,7),
- (325,94,33,10,10),
- (326,126,33,10,0),
- (327,126,34,0,0),
- (328,126,35,5,0),
- (329,126,36,0,0),
- (330,103,43,5,5),
- (331,105,44,42,16),
- (332,98,36,142,1),
- (333,95,34,16,19),
- (334,95,43,5,1),
- (335,101,37,78,13),
- (336,93,33,10,10),
- (337,99,41,33,9),
- (338,100,43,5,3),
- (339,96,41,19,3),
- (340,96,43,5,2),
- (341,102,43,5,4),
- (342,141,33,10,0),
- (343,141,34,0,0),
- (344,141,35,5,0),
- (345,141,36,0,0),
- (346,141,41,0,0),
- (347,141,42,0,0),
- (348,141,43,5,0),
- (349,141,37,0,0),
- (350,141,44,0,0),
- (351,141,45,0,0),
- (352,141,46,0,0),
- (353,141,47,0,0),
- (354,141,48,0,0),
- (355,141,49,5,0),
- (356,141,50,0,0),
- (357,141,51,0,0),
- (358,141,52,5,0),
- (359,141,53,0,0),
- (360,141,85,0,0),
- (361,141,101,0,0),
- (362,141,54,0,0),
- (363,141,55,0,0),
- (364,141,56,0,0),
- (365,141,57,0,0),
- (366,141,80,0,0),
- (367,141,97,0,0);
 /*!40000 ALTER TABLE `contestcounty` ENABLE KEYS */;
 
 
@@ -415,7 +227,7 @@ CREATE TABLE `county` (
   PRIMARY KEY  (`CountyID`),
   UNIQUE KEY `UNQ_CountyName` (`CountyName`),
   UNIQUE KEY `IDX_CountyName` USING BTREE (`CountyName`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `county`
@@ -429,7 +241,7 @@ INSERT INTO `county` (`CountyID`,`CountyName`,`CountyNotes`,`CountyWardCount`) V
  (36,'Chippewa','Day 726-7980',0),
  (37,'Eau Claire','839-4803 if needed',0),
  (41,'Clark','715-743-5150-night',0),
- (42,'Crawford','',0),
+ (42,'Crawford',NULL,0),
  (43,'Dunn','Use Explorer only',5),
  (44,'Grant','COUNTY CLERK',0),
  (45,'Jackson','day-715-284-0201',0),
@@ -437,7 +249,7 @@ INSERT INTO `county` (`CountyID`,`CountyName`,`CountyNotes`,`CountyWardCount`) V
  (47,'Marathon','day 715-261-1500',0),
  (48,'Monroe','COUNTY CLERK',0),
  (49,'Pepin','Paper ballots',5),
- (50,'Pierce','',0),
+ (50,'Pierce',NULL,0),
  (51,'Polk','715-485-9226 day/nt.',0),
  (52,'Price','Summary has ward ct.',5),
  (53,'Rusk','day 715-532-2100',0),
@@ -474,8 +286,6 @@ CREATE TABLE `countyattribute` (
 --
 
 /*!40000 ALTER TABLE `countyattribute` DISABLE KEYS */;
-INSERT INTO `countyattribute` (`CountyID`,`AttributeTypeID`,`CountyAttributeValue`,`CountyAttributeID`) VALUES 
- (33,7,'Test Value',1);
 /*!40000 ALTER TABLE `countyattribute` ENABLE KEYS */;
 
 
@@ -496,7 +306,7 @@ CREATE TABLE `countyphonenumber` (
   KEY `FK_countyphonenumber_type` (`PhoneNumberTypeID`),
   CONSTRAINT `FK_countyphonenumber_county` FOREIGN KEY (`CountyID`) REFERENCES `county` (`CountyID`),
   CONSTRAINT `FK_countyphonenumber_type` FOREIGN KEY (`PhoneNumberTypeID`) REFERENCES `phonenumbertype` (`PhoneNumberTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `countyphonenumber`
@@ -600,20 +410,17 @@ DROP TABLE IF EXISTS `election`;
 CREATE TABLE `election` (
   `ElectionID` int(10) unsigned NOT NULL auto_increment,
   `ElectionDate` date NOT NULL,
-  `ElectionNotes` text NOT NULL,
+  `ElectionNotes` text,
   `ElectionIsActive` tinyint(1) NOT NULL,
   PRIMARY KEY  (`ElectionID`),
   UNIQUE KEY `UNQ_ElectionDate` USING BTREE (`ElectionDate`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1 COMMENT='Election Table';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Election Table';
 
 --
 -- Dumping data for table `election`
 --
 
 /*!40000 ALTER TABLE `election` DISABLE KEYS */;
-INSERT INTO `election` (`ElectionID`,`ElectionDate`,`ElectionNotes`,`ElectionIsActive`) VALUES 
- (68,'2008-11-11','',1),
- (71,'2006-11-14','',1);
 /*!40000 ALTER TABLE `election` ENABLE KEYS */;
 
 
@@ -631,44 +438,13 @@ CREATE TABLE `electioncontest` (
   KEY `ContestID` (`ContestID`),
   CONSTRAINT `ContestID` FOREIGN KEY (`ContestID`) REFERENCES `contest` (`ContestID`),
   CONSTRAINT `ElectionID` FOREIGN KEY (`ElectionID`) REFERENCES `election` (`ElectionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `electioncontest`
 --
 
 /*!40000 ALTER TABLE `electioncontest` DISABLE KEYS */;
-INSERT INTO `electioncontest` (`ElectionContestID`,`ElectionID`,`ContestID`) VALUES 
- (87,68,24),
- (92,68,25),
- (103,68,28),
- (105,68,29),
- (94,68,30),
- (98,68,31),
- (95,68,33),
- (101,68,39),
- (93,68,46),
- (99,68,47),
- (100,68,83),
- (96,68,89),
- (102,68,94),
- (130,71,22),
- (125,71,23),
- (127,71,24),
- (128,71,25),
- (139,71,28),
- (140,71,29),
- (129,71,30),
- (134,71,31),
- (131,71,33),
- (137,71,39),
- (141,71,41),
- (135,71,47),
- (136,71,83),
- (132,71,89),
- (142,71,93),
- (138,71,94),
- (126,71,101);
 /*!40000 ALTER TABLE `electioncontest` ENABLE KEYS */;
 
 
@@ -711,7 +487,7 @@ CREATE TABLE `politicalparty` (
   PRIMARY KEY  (`PoliticalPartyID`),
   UNIQUE KEY `UNQ_PoliticalPartyName` (`PoliticalPartyName`),
   UNIQUE KEY `UNQ_PoliticalPartyAbbrev` (`PoliticalPartyAbbrev`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `politicalparty`
@@ -722,8 +498,7 @@ INSERT INTO `politicalparty` (`PoliticalPartyID`,`PoliticalPartyName`,`Political
  (1,'Democrat','D',1),
  (2,'Republican','R',1),
  (3,'Independent','Ind.',1),
- (4,'Green','Gr',1),
- (9,'Socialist','Soc',1);
+ (4,'Green','Gr',1);
 /*!40000 ALTER TABLE `politicalparty` ENABLE KEYS */;
 
 
@@ -740,122 +515,13 @@ CREATE TABLE `response` (
   PRIMARY KEY  USING BTREE (`ResponseID`),
   KEY `FK_response_ElectionContest` (`ElectionContestID`),
   CONSTRAINT `FK_response_ElectionContest` FOREIGN KEY (`ElectionContestID`) REFERENCES `electioncontest` (`ElectionContestID`)
-) ENGINE=InnoDB AUTO_INCREMENT=388 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `response`
 --
 
 /*!40000 ALTER TABLE `response` DISABLE KEYS */;
-INSERT INTO `response` (`ResponseID`,`ElectionContestID`,`SortOrder`,`Incumbent`) VALUES 
- (251,87,0,0),
- (258,87,1,1),
- (260,92,0,1),
- (261,92,1,0),
- (262,92,2,0),
- (263,92,3,0),
- (264,92,4,0),
- (265,92,5,0),
- (285,125,0,1),
- (287,142,0,0),
- (288,142,1,0),
- (289,126,0,0),
- (290,126,1,0),
- (291,127,0,0),
- (292,127,1,0),
- (293,128,0,0),
- (294,128,1,0),
- (295,129,0,0),
- (296,129,1,0),
- (297,130,0,0),
- (298,130,1,0),
- (299,131,0,0),
- (300,131,1,0),
- (301,132,0,0),
- (302,132,1,0),
- (305,134,0,0),
- (306,134,1,0),
- (307,135,0,0),
- (308,135,1,0),
- (309,137,0,0),
- (310,137,1,0),
- (311,138,0,0),
- (312,138,1,0),
- (313,139,0,0),
- (314,139,1,0),
- (315,140,0,0),
- (316,140,1,0),
- (317,141,0,0),
- (318,141,1,0),
- (319,93,0,1),
- (320,93,1,0),
- (321,94,0,1),
- (322,94,1,0),
- (323,94,2,0),
- (324,94,3,0),
- (325,94,4,0),
- (326,94,5,0),
- (327,94,6,0),
- (328,94,7,0),
- (329,125,1,0),
- (330,136,0,0),
- (331,136,1,0),
- (332,103,0,1),
- (333,103,1,0),
- (334,105,0,0),
- (335,105,1,1),
- (336,98,0,0),
- (337,98,1,1),
- (338,95,0,1),
- (339,95,1,0),
- (340,101,0,0),
- (341,101,1,1),
- (342,99,0,0),
- (343,99,1,1),
- (344,100,0,0),
- (345,100,1,0),
- (346,100,2,1),
- (347,96,0,0),
- (348,96,1,1),
- (349,102,0,1),
- (350,102,1,0),
- (351,141,2,0),
- (352,141,3,0),
- (353,141,4,0),
- (354,141,5,0),
- (355,141,6,0),
- (356,141,7,0),
- (357,141,8,0),
- (358,141,9,0),
- (359,141,10,0),
- (360,141,11,0),
- (361,141,12,0),
- (362,141,13,0),
- (363,141,14,0),
- (364,141,15,0),
- (365,141,16,0),
- (366,141,17,0),
- (367,141,18,0),
- (368,141,19,0),
- (369,141,20,0),
- (370,141,21,0),
- (371,141,22,0),
- (372,141,23,0),
- (373,141,24,0),
- (374,141,25,0),
- (375,141,26,0),
- (376,141,27,0),
- (377,141,28,0),
- (378,141,29,0),
- (379,141,30,0),
- (380,141,31,0),
- (381,141,32,0),
- (382,141,33,0),
- (383,141,34,0),
- (384,141,35,0),
- (385,141,36,0),
- (386,141,37,0),
- (387,141,38,0);
 /*!40000 ALTER TABLE `response` ENABLE KEYS */;
 
 
@@ -881,100 +547,6 @@ CREATE TABLE `responsevalue` (
 --
 
 /*!40000 ALTER TABLE `responsevalue` DISABLE KEYS */;
-INSERT INTO `responsevalue` (`ResponseValueID`,`ResponseID`,`ContestCountyID`,`VoteCount`) VALUES 
- (267,319,336,5),
- (268,320,336,1),
- (269,260,293,5),
- (270,261,293,10),
- (271,262,293,15),
- (272,263,293,20),
- (273,264,293,25),
- (274,265,293,30),
- (275,251,283,2),
- (276,258,283,3),
- (277,321,321,900),
- (278,322,321,600),
- (279,323,321,300),
- (280,324,321,42),
- (281,325,321,333),
- (282,326,321,71),
- (283,327,321,2),
- (284,328,321,600),
- (285,321,324,2),
- (286,322,324,4),
- (287,323,324,6),
- (288,324,324,8),
- (289,325,324,10),
- (290,326,324,12),
- (291,327,324,14),
- (292,328,324,16),
- (293,321,322,5),
- (294,322,322,10),
- (295,323,322,7),
- (296,324,322,59),
- (297,325,322,5),
- (298,326,322,3),
- (299,327,322,1),
- (300,328,322,0),
- (301,340,335,4),
- (302,341,335,2),
- (303,321,325,35),
- (304,322,325,40),
- (305,323,325,45),
- (306,324,325,50),
- (307,325,325,55),
- (308,326,325,60),
- (309,327,325,65),
- (310,328,325,70),
- (311,251,282,1),
- (312,258,282,2),
- (313,338,333,99),
- (314,339,333,500),
- (315,321,323,599),
- (316,322,323,42),
- (317,323,323,2),
- (318,324,323,95),
- (319,325,323,43),
- (320,326,323,9999),
- (321,327,323,428),
- (322,328,323,777),
- (323,251,284,5),
- (324,258,284,19),
- (325,336,332,55),
- (326,337,332,9),
- (327,347,339,55),
- (328,348,339,55),
- (329,342,337,33),
- (330,343,337,15),
- (331,321,320,5),
- (332,322,320,5),
- (333,323,320,48),
- (334,324,320,19),
- (335,325,320,3),
- (336,326,320,75),
- (337,327,320,4),
- (338,328,320,22),
- (339,321,319,1),
- (340,322,319,2),
- (341,323,319,2),
- (342,324,319,2),
- (343,325,319,2),
- (344,326,319,5),
- (345,327,319,19),
- (346,328,319,75),
- (347,338,334,19),
- (348,339,334,22),
- (349,347,340,3),
- (350,348,340,7),
- (351,344,338,6),
- (352,345,338,9),
- (353,346,338,12),
- (354,349,341,8),
- (355,350,341,16),
- (356,332,330,10),
- (357,333,330,20),
- (358,334,331,64),
- (359,335,331,32);
 /*!40000 ALTER TABLE `responsevalue` ENABLE KEYS */;
 
 
