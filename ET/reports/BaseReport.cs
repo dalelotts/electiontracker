@@ -19,9 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.reports {
-    public abstract class BaseReport<T> : IReport<T> {
+    public abstract class BaseReport<T> : IReport {
         private static readonly Font printFont = new Font("Courier New", 10);
 
 
@@ -31,11 +33,14 @@ namespace KnightRider.ElectionTracker.reports {
         private bool isGenerated;
         private readonly string name;
         private readonly bool isLandscape;
+        private readonly IList<TreeViewFilter> filters;
         private int marginPoint;
+        private T selectedEntity = default(T);
 
-        public BaseReport(string name, bool isLandscape) {
+        public BaseReport(string name, bool isLandscape, IList<TreeViewFilter> filters) {
             this.name = name;
             this.isLandscape = isLandscape;
+            this.filters = filters;
             marginPoint = isLandscape ? 105 : 75;
         }
 
@@ -43,8 +48,8 @@ namespace KnightRider.ElectionTracker.reports {
             return name;
         }
 
-        public void Generate(T entity) {
-            isGenerated = performGenerate(entity);
+        public void Generate() {
+            isGenerated = performGenerate(selectedEntity);
         }
 
         protected abstract bool performGenerate(T entity);
@@ -81,6 +86,14 @@ namespace KnightRider.ElectionTracker.reports {
 
         public virtual Font Font() {
             return printFont;
+        }
+
+        public List<TreeViewFilter> Filters() {
+            return new List<TreeViewFilter>(filters);
+        }
+
+        public void NodeSelected(TreeNode node) {
+            selectedEntity = (T) node.Tag;
         }
 
         protected string CenterText(string text) {

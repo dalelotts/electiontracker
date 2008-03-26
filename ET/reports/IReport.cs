@@ -19,16 +19,20 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.reports {
-    internal interface IReport<T> {
+    internal interface IReport {
         string Name();
-        void Generate(T entity);
+        void Generate();
         List<String> Header();
         List<String> Body();
         List<String> Footer();
         void Reset();
         bool IsLandscape();
         Font Font();
+        List<TreeViewFilter> Filters();
+        void NodeSelected(TreeNode node);
     }
 }

@@ -52,7 +52,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.ppcElection = new System.Windows.Forms.PrintPreviewControl();
             this.btnPrint = new System.Windows.Forms.Button();
             this.cboFilter = new System.Windows.Forms.ComboBox();
-            this.tvElections = new System.Windows.Forms.TreeView();
+            this.ctlTreeView = new System.Windows.Forms.TreeView();
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.ctlToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -125,16 +125,16 @@ namespace KnightRider.ElectionTracker.reports {
             this.cboFilter.TabIndex = 11;
             this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
             // 
-            // tvElections
+            // ctlTreeView
             // 
-            this.tvElections.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.ctlTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.tvElections.Location = new System.Drawing.Point(9, 12);
-            this.tvElections.Name = "tvElections";
-            this.tvElections.Size = new System.Drawing.Size(174, 615);
-            this.tvElections.TabIndex = 12;
-            this.ctlToolTip.SetToolTip(this.tvElections, "Click the Election to generate the report.");
-            this.tvElections.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvElections_AfterSelect);
+            this.ctlTreeView.Location = new System.Drawing.Point(9, 12);
+            this.ctlTreeView.Name = "ctlTreeView";
+            this.ctlTreeView.Size = new System.Drawing.Size(174, 615);
+            this.ctlTreeView.TabIndex = 12;
+            this.ctlToolTip.SetToolTip(this.ctlTreeView, "Click the Election to generate the report.");
+            this.ctlTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvElections_AfterSelect);
             // 
             // btnZoomIn
             // 
@@ -188,7 +188,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.Controls.Add(this.btnPageSetup);
             this.Controls.Add(this.btnZoomOut);
             this.Controls.Add(this.btnZoomIn);
-            this.Controls.Add(this.tvElections);
+            this.Controls.Add(this.ctlTreeView);
             this.Controls.Add(this.cboFilter);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
@@ -198,7 +198,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.MinimumSize = new System.Drawing.Size(450, 450);
             this.Name = "frmReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
-            this.Text = "frmReport";
+            this.Text = "4";
             this.ResumeLayout(false);
 
         }
@@ -210,7 +210,7 @@ namespace KnightRider.ElectionTracker.reports {
         private System.Windows.Forms.PrintPreviewControl ppcElection;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ComboBox cboFilter;
-        private System.Windows.Forms.TreeView tvElections;
+        private System.Windows.Forms.TreeView ctlTreeView;
         private System.Windows.Forms.Button btnZoomIn;
         private System.Windows.Forms.Button btnZoomOut;
         private System.Windows.Forms.ToolTip ctlToolTip;

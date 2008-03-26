@@ -19,7 +19,7 @@
 using System.Windows.Forms;
 
 namespace KnightRider.ElectionTracker.ui.util {
-    internal interface TreeViewFilter {
+    public interface TreeViewFilter {
         void apply(TreeNodeCollection nodes);
     }
 }

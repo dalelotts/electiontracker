@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.ui.util;
 using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.reports {
@@ -31,7 +32,7 @@ namespace KnightRider.ElectionTracker.reports {
         private static readonly IComparer<ElectionContest> BY_NAME = new ElectionContestComparer();
         private int RESPONSE_COLUMN_WIDTH = 30;
 
-        public ProofingSheet() : base("Election Proofing Sheet", false) {}
+        public ProofingSheet(IList<TreeViewFilter> filters) : base("Election Proofing Sheet", false, filters) { }
 
         protected override bool performGenerate(Election entity) {
             header.Add(CenterText("ELECTION PROOFING SHEET"));

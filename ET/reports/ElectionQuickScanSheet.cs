@@ -19,11 +19,12 @@
 using System;
 using System.Collections.Generic;
 using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.ui.util;
 using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.reports {
     public class ElectionQuickScanSheet : BaseReport<Election> {
-        public ElectionQuickScanSheet() : base("Election Candidates' Quick Scan Sheet", false) {}
+        public ElectionQuickScanSheet(IList<TreeViewFilter> filters) : base("Election Candidates' Quick Scan Sheet", false, filters) { }
 
         private static readonly IComparer<ElectionContest> CONTESTS_BY_NAME = new ElectionContestComparer();
         private static readonly IComparer<Response> RESPONSE_BY_VOTE_THEN_NAME = new ResponseComparer(true);

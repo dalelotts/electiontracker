@@ -21,32 +21,34 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using KnightRider.ElectionTracker.core;
-using KnightRider.ElectionTracker.db;
-using KnightRider.ElectionTracker.db.task;
 using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.reports {
     internal sealed partial class frmReport : Form {
-        private readonly IElectionDAO electionDAO;
-        private readonly IDAOTask<Election> loadTask;
-        private readonly IReport<Election> report;
+        private readonly IReport report;
         private int pageCount;
         private int bodyLineNumber;
         private List<String> groupHeader = new List<string>();
+        private readonly Point previewControlLocation;
 
-        public frmReport(IElectionDAO electionDAO, IDAOTask<Election> loadTask, IList<TreeViewFilter> filters, IReport<Election> report) {
+        public frmReport(IReport report) {
             InitializeComponent();
-            this.electionDAO = electionDAO;
-            this.loadTask = loadTask;
             this.report = report;
             Text = report.Name();
 
-            foreach (TreeViewFilter filter in filters) {
-                cboFilter.Items.Add(filter);
-            }
+            if (report.Filters().Count > 0) {
+                previewControlLocation = new Point(190, 12);
+                foreach (TreeViewFilter filter in report.Filters()) {
+                    cboFilter.Items.Add(filter);
+                }
+                if (cboFilter.Items.Count > 0) cboFilter.SelectedIndex = 0;
+            } else {
+                // Hide the filter combo and tree view
+                ctlTreeView.Visible = false;
+                cboFilter.Visible = false;
 
-            if (cboFilter.Items.Count > 0) cboFilter.SelectedIndex = 0;
+                previewControlLocation = new Point(ctlTreeView.Location.X, ctlTreeView.Location.Y);
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
@@ -71,25 +73,21 @@ namespace KnightRider.ElectionTracker.reports {
         }
 
         private void cboFilter_SelectedIndexChanged(object sender, EventArgs e) {
-            tvElections.Nodes.Clear();
-            ((TreeViewFilter) cboFilter.SelectedItem).apply(tvElections.Nodes);
+            ctlTreeView.Nodes.Clear();
+            ((TreeViewFilter) cboFilter.SelectedItem).apply(ctlTreeView.Nodes);
         }
 
         private void tvElections_AfterSelect(object sender, TreeViewEventArgs e) {
-            TreeNode node = tvElections.SelectedNode;
+            TreeNode node = ctlTreeView.SelectedNode;
             if (node == null) return;
-            string[] entityID = node.Name.Split('=');
-            if (entityID.Length == 2) {
-                long id = long.Parse(entityID[1]);
-                Election election = electionDAO.findById(id, false, loadTask);
-                displayReport(election);
-            }
+            displayReport(node);
         }
 
-        private void displayReport(Election election) {
+        private void displayReport(TreeNode node) {
             pageCount = 0;
             report.Reset();
-            report.Generate(election);
+            report.NodeSelected(node);
+            report.Generate();
 
             PrintDocument document = new PrintDocument();
             document.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50);
@@ -104,9 +102,9 @@ namespace KnightRider.ElectionTracker.reports {
         private void refreshReport(PrintDocument document) {
             Controls.Remove(ppcElection);
             ppcElection = new PrintPreviewControl();
-            ppcElection.Location = new Point(190, 12);
+            ppcElection.Location = previewControlLocation;
             ppcElection.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
-            ppcElection.Size = new Size(Width - 206, Height - 78);
+            ppcElection.Size = new Size(Width - ppcElection.Location.X - 12, Height - 78);
             ppcElection.TabIndex = 8;
             ppcElection.UseAntiAlias = true;
             ppcElection.Document = document;
@@ -165,11 +163,11 @@ namespace KnightRider.ElectionTracker.reports {
                 bodyLineNumber++;
 
                 if (line.Length == 0) {
-                    lineNumber++;  // Nothing to do, just increment the line number and loop again.
+                    lineNumber++; // Nothing to do, just increment the line number and loop again.
                     yPos = GetYPos(topMargin, lineNumber, fontHeight);
                     continue;
                 }
-                
+
                 if ("<PAGE_BREAK/>".Equals(line)) {
                     break;
                 } else if ("<KEEP_TOGETHER>".Equals(line)) {

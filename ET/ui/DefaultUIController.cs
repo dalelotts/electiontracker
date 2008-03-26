@@ -27,7 +27,7 @@ using Spring.Objects.Events.Support;
 namespace KnightRider.ElectionTracker.ui {
     internal class DefaultUIController : UIController, IApplicationContextAware {
         private static readonly ILog LOG = LogManager.GetLogger(typeof (DefaultUIController));
-        private Form voteForm;
+        private Form voteEntryForm;
         private Form mdiForm;
         private IApplicationContext context;
 
@@ -57,11 +57,18 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private Form makeMDIChildForm(string objectName) {
-            Form form = (Form) context.GetObject(objectName);
-            form.MdiParent = mdiForm;
-            wireTextBoxTrimOnLeave(form);
-            wireSubscriberToPublisher(form, GetType(), this);
-            return form;
+            try {
+                Form form = (Form) context.GetObject(objectName);
+                form.MdiParent = mdiForm;
+                wireTextBoxTrimOnLeave(form);
+                wireSubscriberToPublisher(form, GetType(), this);
+                return form;
+            } catch (Exception ex) {
+                LOG.Error("makeMDIChildForm(" + objectName + ")", ex);
+                string message = "Unable to create MDI Child form named " + objectName + "\n\nPlease contact tech support and inform them that there is a configuration issue with the application.\n\nDetailed information about this error was logged to " + Application.StartupPath + "\\logs\\";
+                MessageBox.Show(message, "Spring Configuration Issue");
+                return null;
+            }
         }
 
         public void HandleShowAboutBoxEvents(object sender, ShowAboutBoxArgs args) {
@@ -74,50 +81,60 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public void HandleEnterVotes(object sender, EnterVotesArgs args) {
-            if (voteForm == null || voteForm.Visible == false)
-                voteForm = makeMDIChildForm(args.ObjectName);
-            voteForm.Show();
+            if (voteEntryForm == null || voteEntryForm.Visible == false)
+                voteEntryForm = makeMDIChildForm(args.ObjectName);
+            if (voteEntryForm != null) voteEntryForm.Show();
         }
 
         public void HandleCountyForm(object sender, CountyFormArgs args) {
-            frmCounty frmCounty = (frmCounty) makeMDIChildForm(args.ObjectName);
-            frmCounty.loadCounty(args.ID);
-            frmCounty.Show();
+            frmCounty form = (frmCounty) makeMDIChildForm(args.ObjectName);
+            if (form != null) {
+                form.loadCounty(args.ID);
+                form.Show();
+            }
         }
 
         public void HandleCandidate(object sender, CandidateArgs args) {
-            frmCandidate candidateForm = (frmCandidate) makeMDIChildForm(args.ObjectName);
-            candidateForm.loadCandidate(args.ID);
-            candidateForm.Show();
+            frmCandidate form = (frmCandidate) makeMDIChildForm(args.ObjectName);
+            if (form != null) {
+                form.loadCandidate(args.ID);
+                form.Show();
+            }
         }
 
         public void HandleReport(object sender, ReportArgs args) {
-            Form report = makeMDIChildForm(args.ReportName);
-            report.Show();
+            Form form = makeMDIChildForm(args.ReportName);
+            if (form != null) form.Show();
         }
 
         public void HandleContest(object sender, ContestArgs args) {
-            frmContest contestForm = (frmContest) makeMDIChildForm(args.ObjectName);
-            contestForm.loadContest(args.ID);
-            contestForm.Show();
+            frmContest form = (frmContest) makeMDIChildForm(args.ObjectName);
+            if (form != null) {
+                form.loadContest(args.ID);
+                form.Show();
+            }
         }
 
         public void HandlePoliticalParty(object sender, PoliticalPartyArgs args) {
-            frmPoliticalParty politicalPartyForm = (frmPoliticalParty) makeMDIChildForm(args.ObjectName);
-            politicalPartyForm.loadPoliticalParty(args.ID);
-            politicalPartyForm.Show();
+            frmPoliticalParty form = (frmPoliticalParty) makeMDIChildForm(args.ObjectName);
+            if (form != null) {
+                form.loadPoliticalParty(args.ID);
+                form.Show();
+            }
         }
 
 
         public void HandleElection(object sender, ElectionArgs args) {
-            frmElection electionForm = (frmElection) makeMDIChildForm(args.ObjectName);
-            electionForm.loadElection(args.ID);
-            electionForm.Show();
+            frmElection form = (frmElection) makeMDIChildForm(args.ObjectName);
+            if (form != null) {
+                form.loadElection(args.ID);
+                form.Show();
+            }
         }
 
         public void HandleErrorMessage(object sender, ShowErrorMessageArgs args) {
             string message = args.Text;
-            LOG.Info(message, args.Exception);
+            LOG.Error(message, args.Exception);
             message += "\n\nPlease restart the application and try again.\n\nDetailed information about this error was logged to " + Application.StartupPath + "\\logs\\";
             MessageBox.Show(message, args.Caption);
         }

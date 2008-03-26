@@ -19,11 +19,12 @@
 using System;
 using System.Collections.Generic;
 using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.ui.util;
 using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.reports {
     internal class VoteCountyTallySheet : BaseReport<Election> {
-        public VoteCountyTallySheet() : base("Vote County Tally Sheet", false) {}
+        public VoteCountyTallySheet(IList<TreeViewFilter> filters) : base("Vote County Tally Sheet", false, filters) { }
 
         private static readonly IComparer<ContestCounty> BY_CONTEST_NAME = new ContestCountyComparer(true);
         private static readonly IComparer<County> COUNTY_BY_NAME = new CountyComparer();

@@ -122,72 +122,82 @@
   <!-- END TREE VIEW FILTERS -->
   
   <!-- BEGIN REPORTS -->
-  <object name="CountyContactReport" type="KnightRider.ElectionTracker.reports.frmCountyContactReport, ElectionTracker" autowire="constructor" singleton="false"/>
-  <object name="KnightRider.ElectionTracker.ui.frmElectionReport" type="KnightRider.ElectionTracker.ui.frmElectionReport, ElectionTracker" autowire="no" singleton="false">
-    <constructor-arg name="electionDAO" ref="ElectionDAO"/>
-    <constructor-arg name="loadTask" ref="LoadElectionForReport"/>
-    <constructor-arg name="filters">
-      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
-        <ref object="ActiveElectionFilter"/>
-        <ref object="InactiveElectionFilter"/>
-      </list>
-    </constructor-arg>
-  </object>
+  <object name="CountyContactReport" type="KnightRider.ElectionTracker.reports.frmReport, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="report" ref="CountyContactReportGenerator" />
+  </object>  
   <object name="ProofingSheet" type="KnightRider.ElectionTracker.reports.frmReport, ElectionTracker" autowire="no" singleton="false">
-    <constructor-arg name="electionDAO" ref="ElectionDAO"/>
-    <constructor-arg name="loadTask" ref="LoadElectionForReport"/>
-    <constructor-arg name="filters">
-      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
-        <ref object="ActiveElectionFilter"/>
-        <ref object="InactiveElectionFilter"/>
-      </list>
-    </constructor-arg>
     <constructor-arg name="report" ref="ProofingSheetReportGenerator" />
   </object>
-  <object name="VoteCountyTallySheet" type="KnightRider.ElectionTracker.reports.frmReport, ElectionTracker" autowire="no" singleton="false">
-    <constructor-arg name="electionDAO" ref="ElectionDAO"/>
-    <constructor-arg name="loadTask" ref="LoadElectionForReport"/>
-    <constructor-arg name="filters">
-      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
-        <ref object="ActiveElectionFilter"/>
-        <ref object="InactiveElectionFilter"/>
-      </list>
-    </constructor-arg>
+  <object name="VoteCountyTallySheet" type="KnightRider.ElectionTracker.reports.frmReport, ElectionTracker" autowire="constructor" singleton="false">
     <constructor-arg name="report" ref="VoteCountyTallySheetGenerator" />
   </object>
-
   <object name="ContestVoteSummary" type="KnightRider.ElectionTracker.reports.frmReport, ElectionTracker" autowire="no" singleton="false">
-    <constructor-arg name="electionDAO" ref="ElectionDAO"/>
-    <constructor-arg name="loadTask" ref="LoadElectionForReportWithResults"/>
-    <constructor-arg name="filters">
-      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
-        <ref object="ActiveElectionFilter"/>
-        <ref object="InactiveElectionFilter"/>
-      </list>
-    </constructor-arg>
     <constructor-arg name="report" ref="ContestVoteSummaryGenerator" />
   </object>
-
   <object name="ElectionQuickScanSheet" type="KnightRider.ElectionTracker.reports.frmReport, ElectionTracker" autowire="no" singleton="false">
-    <constructor-arg name="electionDAO" ref="ElectionDAO"/>
-    <constructor-arg name="loadTask" ref="LoadElectionForReportWithResults"/>
-    <constructor-arg name="filters">
-      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
-        <ref object="ActiveElectionFilter"/>
-        <ref object="InactiveElectionFilter"/>
-      </list>
-    </constructor-arg>
     <constructor-arg name="report" ref="ElectionQuickScanSheetGenerator" />
-  </object>
-  
+  </object>  
   <!-- END REPORTS -->
 
+  <!-- BEGIN REPORT FILTERS -->
+  <object name="ActiveElectionReportFilter" type="KnightRider.ElectionTracker.reports.ElectionReportFilter, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="name" value="Elections - Active"/>
+    <constructor-arg name="dao" ref="ElectionDAO"/>
+    <constructor-arg name="loadTask" ref="LoadElectionForReportWithResults"/>
+    <constructor-arg name="isActive" value="true"/>
+  </object>
+  <object name="InactiveElectionReportFilter" type="KnightRider.ElectionTracker.reports.ElectionReportFilter, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="name" value="Elections - Inactive"/>
+    <constructor-arg name="dao" ref="ElectionDAO"/>
+    <constructor-arg name="loadTask" ref="LoadElectionForReportWithResults"/>
+    <constructor-arg name="isActive" value="false"/>
+  </object>
+  <object name="AllCountiesFilter" type="KnightRider.ElectionTracker.reports.CountyContactReportFilter, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="dao" ref="CountyDAO"/>
+    <constructor-arg name="loadTask" ref="LoadCountyForUI"/>
+  </object>
+  <!-- END REPORT FILTERS -->
+
   <!-- BEGIN REPORT GENERATORS -->
-  <object name="ProofingSheetReportGenerator" type="KnightRider.ElectionTracker.reports.ProofingSheet, ElectionTracker" autowire="no" singleton="false" />
-  <object name="VoteCountyTallySheetGenerator" type="KnightRider.ElectionTracker.reports.VoteCountyTallySheet, ElectionTracker" autowire="no" singleton="false" />
-  <object name="ContestVoteSummaryGenerator" type="KnightRider.ElectionTracker.reports.ContestVoteSummary, ElectionTracker" autowire="no" singleton="false" />
-  <object name="ElectionQuickScanSheetGenerator" type="KnightRider.ElectionTracker.reports.ElectionQuickScanSheet, ElectionTracker" autowire="no" singleton="false" />
-  
+  <object name="ProofingSheetReportGenerator" type="KnightRider.ElectionTracker.reports.ProofingSheet, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionReportFilter"/>
+        <ref object="InactiveElectionReportFilter"/>
+      </list>
+    </constructor-arg>    
+  </object>
+  <object name="VoteCountyTallySheetGenerator" type="KnightRider.ElectionTracker.reports.VoteCountyTallySheet, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionReportFilter"/>
+        <ref object="InactiveElectionReportFilter"/>
+      </list>
+    </constructor-arg>
+  </object>
+  <object name="ContestVoteSummaryGenerator" type="KnightRider.ElectionTracker.reports.ContestVoteSummary, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionReportFilter"/>
+        <ref object="InactiveElectionReportFilter"/>
+      </list>
+    </constructor-arg>
+  </object>    
+  <object name="ElectionQuickScanSheetGenerator" type="KnightRider.ElectionTracker.reports.ElectionQuickScanSheet, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="ActiveElectionReportFilter"/>
+        <ref object="InactiveElectionReportFilter"/>
+      </list>
+    </constructor-arg>
+  </object>
+  <object name="CountyContactReportGenerator" type="KnightRider.ElectionTracker.reports.CountyContactSheet, ElectionTracker" autowire="no" singleton="false">
+    <constructor-arg name="filters">
+      <list element-type="KnightRider.ElectionTracker.ui.util.TreeViewFilter, ElectionTracker">
+        <ref object="AllCountiesFilter"/>
+      </list>
+    </constructor-arg>
+  </object>
   <!-- END REPORT GENERATORS -->
   
 </objects>

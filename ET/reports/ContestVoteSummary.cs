@@ -20,18 +20,19 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using KnightRider.ElectionTracker.core;
+using KnightRider.ElectionTracker.ui.util;
 using KnightRider.ElectionTracker.util;
 
 namespace KnightRider.ElectionTracker.reports {
     public class ContestVoteSummary : BaseReport<Election> {
         private static readonly IComparer<ElectionContest> CONTESTS_BY_NAME = new ElectionContestComparer();
         private static readonly IComparer<Response> RESPONSE_BY_VOTE_THEN_NAME = new ResponseComparer(true);
-
-        public ContestVoteSummary() : base("Contest Vote Summary", true) {}
         private static readonly Font font = new Font("Courier New", 9);
         private const int ALL_RESPONSE_SPACE = 78;
         private const int COUNTY_COLUMN_WIDTH = 17;
 
+
+        public ContestVoteSummary(IList<TreeViewFilter> filters) : base("Contest Vote Summary", true, filters) { }
 
         protected override bool performGenerate(Election entity) {
             
