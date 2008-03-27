@@ -27,7 +27,7 @@ namespace KnightRider.ElectionTracker.reports {
         private const int CONTEST_COLUMN_WIDTH = 25;
         private const int COUNTY_COLUMN_WIDTH = 17;
         private const int WARD_COLUMN_WIDTH = 5;
-        private const string WARD_COLUMN_PADDING = "   ";
+        private const string COLUMN_PADDING = "   ";
 
         private static readonly IComparer<ElectionContest> BY_NAME = new ElectionContestComparer();
         private int RESPONSE_COLUMN_WIDTH = 30;
@@ -38,8 +38,8 @@ namespace KnightRider.ElectionTracker.reports {
             header.Add(CenterText("ELECTION PROOFING SHEET"));
             header.Add(CenterText("ELECTION DATE " + entity));
             header.Add("");
-            header.Add("CONTEST                  WARDS   COUNTY           CANDIDATE");
-            header.Add("----------------------   -----   --------------   ----------------------");
+            header.Add("CONTEST                  COUNTY           WARDS   CANDIDATE");
+            header.Add("----------------------   --------------   -----   ----------------------");
 
             List<ElectionContest> contests = new List<ElectionContest>(entity.ElectionContests);
 
@@ -60,46 +60,53 @@ namespace KnightRider.ElectionTracker.reports {
                 // If there are no responses or counties the while loop later
                 // in this method will fail to print the contest name, so print it now.
 
-                if (totalResponses == 0 && totalCounties == 0) {
-                    body.Add(contestName);
-                    printContestColumn = false;
+                string contestColumn;
+                string countyColumn;
+                string wardColumn;
+                string responseColumn;
+
+                if (totalResponses == 0 && totalCounties == 0)
+                {
+                    contestColumn = PadString(contestName, CONTEST_COLUMN_WIDTH);
+                    countyColumn = PadString("*** NO COUNTIES ***", COUNTY_COLUMN_WIDTH + WARD_COLUMN_WIDTH);
+                    wardColumn = "";
+                    responseColumn = "*** NO CANDIDATES ***";
+                    body.Add(contestColumn + countyColumn + wardColumn + COLUMN_PADDING + responseColumn);
+                    
+                } else {
+                    while (responseCount < totalResponses || countyCount < totalCounties) {
+                        if (printContestColumn) {
+                            printContestColumn = false;
+                            contestColumn = PadString(contestName, CONTEST_COLUMN_WIDTH);
+                        } else {
+                            contestColumn = PadString(" ", CONTEST_COLUMN_WIDTH);
+                        }
+
+                        if (countyCount < totalCounties) {
+                            ContestCounty currentCounty = contest.Counties[countyCount];
+                            wardColumn = PadString(currentCounty.WardCount.ToString(), WARD_COLUMN_WIDTH, false);
+                            countyColumn = PadString(currentCounty.County.Name, COUNTY_COLUMN_WIDTH);
+                            wardCount += currentCounty.WardCount;
+                        } else {
+                            wardColumn = PadString(" ", WARD_COLUMN_WIDTH);
+                            countyColumn = PadString(" ", COUNTY_COLUMN_WIDTH);
+                        }
+
+                        
+                        if (responseCount < totalResponses) {
+                            Response currentResponse = contest.Responses[responseCount];
+                            responseColumn = PadString(currentResponse.ToString(), RESPONSE_COLUMN_WIDTH);
+                        } else {
+                            responseColumn = PadString(" ", RESPONSE_COLUMN_WIDTH);
+                        }
+
+                        body.Add(contestColumn + countyColumn + wardColumn + COLUMN_PADDING + responseColumn);
+                        responseCount++;
+                        countyCount++;
+                    }
                 }
-
-                while (responseCount < totalResponses || countyCount < totalCounties) {
-                    string contestColumn;
-                    if (printContestColumn) {
-                        printContestColumn = false;
-                        contestColumn = PadString(contestName, CONTEST_COLUMN_WIDTH);
-                    } else {
-                        contestColumn = PadString(" ", CONTEST_COLUMN_WIDTH);
-                    }
-
-                    string countyColumn;
-                    string wardColumn;
-                    if (countyCount < totalCounties) {
-                        ContestCounty currentCounty = contest.Counties[countyCount];
-                        wardColumn = PadString(currentCounty.WardCount.ToString(), WARD_COLUMN_WIDTH, false);
-                        countyColumn = PadString(currentCounty.County.Name, COUNTY_COLUMN_WIDTH);
-                        wardCount += currentCounty.WardCount;
-                    } else {
-                        wardColumn = PadString(" ", WARD_COLUMN_WIDTH);
-                        countyColumn = PadString(" ", COUNTY_COLUMN_WIDTH);
-                    }
-
-                    string responseColumn;
-                    if (responseCount < totalResponses) {
-                        Response currentResponse = contest.Responses[responseCount];
-                        responseColumn = PadString(currentResponse.ToString(), RESPONSE_COLUMN_WIDTH);
-                    } else {
-                        responseColumn = PadString(" ", RESPONSE_COLUMN_WIDTH);
-                    }
-
-                    body.Add(contestColumn + wardColumn + WARD_COLUMN_PADDING + countyColumn + responseColumn);
-                    responseCount++;
-                    countyCount++;
-                }
-                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH) + "-----");
-                body.Add(PadString(" ", 13) + "Total Wards:" + PadString(wardCount.ToString(), WARD_COLUMN_WIDTH, false));
+                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH + COUNTY_COLUMN_WIDTH) + "-----");
+                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH) + PadString("Total Wards:", COUNTY_COLUMN_WIDTH, false) + PadString(wardCount.ToString(), WARD_COLUMN_WIDTH, false));
                 body.Add("");
                 body.Add("</KEEP_TOGETHER>");
             }

@@ -87,6 +87,7 @@ namespace KnightRider.ElectionTracker.ui {
         private void refreshContestLists() {
             lstElectionContests.BeginUpdate();
             lstContestCandidate.BeginUpdate();
+            lstContestCandidates.BeginUpdate();
             lstContestCounty.BeginUpdate();
             lstAllContests.BeginUpdate();
 
@@ -109,6 +110,7 @@ namespace KnightRider.ElectionTracker.ui {
             lstAllContests.EndUpdate();
             lstContestCounty.EndUpdate();
             lstContestCandidate.EndUpdate();
+            lstContestCandidates.EndUpdate();
             lstElectionContests.EndUpdate();
         }
 
@@ -249,6 +251,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentElection.ElectionContests.Add(electionContest);
                 }
                 refreshContestLists();
+                refreshCandidateLists();
             } catch (Exception ex) {
                 reportException("btnAddAllContests_Click", ex);
             }
@@ -274,6 +277,7 @@ namespace KnightRider.ElectionTracker.ui {
                     }
 
                     refreshContestLists();
+                    refreshCandidateLists();
                 }
             } catch (Exception ex) {
                 reportException("btnAddContest_Click", ex);
@@ -289,6 +293,7 @@ namespace KnightRider.ElectionTracker.ui {
                         currentElection.ElectionContests.Remove(electionContest);
                     }
                     refreshContestLists();
+                    refreshCandidateLists();
                 }
             } catch (Exception ex) {
                 reportException("btnRemoveContest_Click", ex);
@@ -300,6 +305,7 @@ namespace KnightRider.ElectionTracker.ui {
                 if (currentElection.ElectionContests.Count > 0) {
                     currentElection.ElectionContests = new List<ElectionContest>(allContests.Count);
                     refreshContestLists();
+                    refreshCandidateLists();
                 }
             } catch (Exception ex) {
                 reportException("btnRemoveAllContests_Click", ex);
@@ -503,13 +509,17 @@ namespace KnightRider.ElectionTracker.ui {
         private void btnSetIncumbent_Click(object sender, EventArgs e) {
             try {
                 Response incumbent = (Response) lstContestCandidates.SelectedItem;
-                if (incumbent != null && !incumbent.IsIncumbent) {
+                if (incumbent == null) return;
+
+                if (incumbent.IsIncumbent) {
+                    incumbent.IsIncumbent = false;
+                } else {
                     foreach (Response response in lstContestCandidates.Items) {
                         if (response.IsIncumbent) response.IsIncumbent = false;
                     }
                     incumbent.IsIncumbent = true;
-                    refreshCandidateLists();
                 }
+                refreshCandidateLists();
             } catch (Exception ex) {
                 reportException("btnSetIncumbent_Click", ex);
             }

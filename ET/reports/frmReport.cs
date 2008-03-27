@@ -47,9 +47,12 @@ namespace KnightRider.ElectionTracker.reports {
 
         private void btnPrint_Click(object sender, EventArgs e) {
             try {
-                pageCount = 0;
+                ctlPrintDialog.AllowCurrentPage = true;
+                ctlPrintDialog.AllowSomePages = true;
+                ctlPrintDialog.UseEXDialog = true;
                 DialogResult result = ctlPrintDialog.ShowDialog(this);
                 if (DialogResult.OK.Equals(result)) {
+                    pageCount = 0;
                     ctlPrintPreview.Document.PrinterSettings = ctlPrintDialog.PrinterSettings;
                     ctlPrintPreview.Document.Print();
                 }
