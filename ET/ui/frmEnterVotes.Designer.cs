@@ -91,18 +91,21 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // gbCounty
             // 
+            this.gbCounty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.gbCounty.Controls.Add(this.btnNext);
             this.gbCounty.Controls.Add(this.lstCounties);
             this.gbCounty.Location = new System.Drawing.Point(12, 71);
             this.gbCounty.Name = "gbCounty";
-            this.gbCounty.Size = new System.Drawing.Size(194, 350);
+            this.gbCounty.Size = new System.Drawing.Size(194, 333);
             this.gbCounty.TabIndex = 1;
             this.gbCounty.TabStop = false;
             this.gbCounty.Text = "Counties";
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(106, 321);
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNext.Location = new System.Drawing.Point(106, 304);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 1;
@@ -112,27 +115,33 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // lstCounties
             // 
+            this.lstCounties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstCounties.FormattingEnabled = true;
             this.lstCounties.Location = new System.Drawing.Point(9, 19);
             this.lstCounties.Name = "lstCounties";
-            this.lstCounties.Size = new System.Drawing.Size(172, 290);
+            this.lstCounties.Size = new System.Drawing.Size(172, 264);
             this.lstCounties.Sorted = true;
             this.lstCounties.TabIndex = 0;
             this.lstCounties.SelectedIndexChanged += new System.EventHandler(this.lstCounties_SelectedIndexChanged);
             // 
             // gbContest
             // 
+            this.gbContest.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbContest.Controls.Add(this.btnSaveVotes);
             this.gbContest.Location = new System.Drawing.Point(212, 71);
             this.gbContest.Name = "gbContest";
-            this.gbContest.Size = new System.Drawing.Size(480, 350);
+            this.gbContest.Size = new System.Drawing.Size(449, 333);
             this.gbContest.TabIndex = 2;
             this.gbContest.TabStop = false;
             this.gbContest.Text = "Contests";
             // 
             // btnSaveVotes
             // 
-            this.btnSaveVotes.Location = new System.Drawing.Point(399, 321);
+            this.btnSaveVotes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveVotes.Location = new System.Drawing.Point(368, 304);
             this.btnSaveVotes.Name = "btnSaveVotes";
             this.btnSaveVotes.Size = new System.Drawing.Size(75, 23);
             this.btnSaveVotes.TabIndex = 0;
@@ -144,10 +153,11 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 433);
+            this.ClientSize = new System.Drawing.Size(672, 416);
             this.Controls.Add(this.gbContest);
             this.Controls.Add(this.gbCounty);
             this.Controls.Add(this.gbElection);
+            this.MinimumSize = new System.Drawing.Size(680, 450);
             this.Name = "frmEnterVotes";
             this.Text = "Enter Votes";
             this.Load += new System.EventHandler(this.frmEnterVotes_Load);

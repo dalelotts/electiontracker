@@ -146,14 +146,18 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private static void wireTextBoxTrimOnLeave(object theObject) {
-            if (theObject is Form) {
-                Form form = (Form) theObject;
-                foreach (Control control in form.Controls) {
-                    if (control is TextBox) {
-                        control.Leave += new EventHandler(trimTextBoxOnLeave);
-                    }
-                }
+        private static void wireTextBoxTrimOnLeave(Form form) {
+            foreach (Control control in form.Controls) {
+                wireTextBoxTrimOnLeave(control);
+            }
+        }
+
+        private static void wireTextBoxTrimOnLeave(Control control) {
+            if (control is TextBox) {
+                control.Leave += new EventHandler(trimTextBoxOnLeave);
+            }
+            foreach (Control childControl in control.Controls) {
+                wireTextBoxTrimOnLeave(childControl);
             }
         }
 

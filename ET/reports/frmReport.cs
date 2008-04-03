@@ -222,10 +222,13 @@ namespace KnightRider.ElectionTracker.reports {
             // Reset the bottom margin so it no longer reserves space for the footer.
             bottomMargin = ev.MarginBounds.Height;
 
+
+            string pageString = (pageCount + 1).ToString();
             // Print the footer at the bottom of the page.
             for (int i = footer.Count - 1, j = 1; i >= 0; i--, j++) {
                 yPos = bottomMargin - (j * fontHeight);
                 string line = footer[i];
+                line = line.Replace("${Page}", pageString);
                 ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
             }
 

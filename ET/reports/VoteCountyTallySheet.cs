@@ -93,7 +93,7 @@ namespace KnightRider.ElectionTracker.reports {
                 body.Add("<PAGE_BREAK/>");
             }
 
-            footer.Add(DateTime.Now.ToString());
+            footer.Add("Page ${Page}     " + DateTime.Now);
 
             return true;
         }

@@ -111,7 +111,7 @@ namespace KnightRider.ElectionTracker.reports {
                 body.Add("</KEEP_TOGETHER>");
             }
 
-            footer.Add(DateTime.Now.ToString());
+            footer.Add("Page ${Page}     " + DateTime.Now);
 
             return true;
         }
