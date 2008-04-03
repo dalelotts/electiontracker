@@ -268,11 +268,19 @@ namespace KnightRider.ElectionTracker.reports {
         }
 
         private void btnZoomIn_Click(object sender, EventArgs e) {
-            ctlPrintPreview.Zoom += .1;
+            try {
+                ctlPrintPreview.Zoom += .1;
+            } catch (Exception ex) {
+                reportException("btnZoomIn_Click", ex);
+            }
         }
 
         private void btnZoomOut_Click(object sender, EventArgs e) {
-            ctlPrintPreview.Zoom -= .1;
+            try {
+                if (ctlPrintPreview.Zoom >= .1) ctlPrintPreview.Zoom -= .1;
+            } catch (Exception ex) {
+                reportException("btnZoomOut_Click", ex);
+            }
         }
 
         private void btnPageSetup_Click(object sender, EventArgs e) {
