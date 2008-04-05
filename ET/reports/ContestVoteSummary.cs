@@ -57,18 +57,18 @@ namespace KnightRider.ElectionTracker.reports {
                 
                 int responseCount = Math.Min(3, responses.Count);
 
-                int responseColumnWidth = ALL_RESPONSE_SPACE / responseCount;
+                int responseColumnWidth = ALL_RESPONSE_SPACE;
 
                 if (responseCount == 0) {
                     candidateNames = PadString("----------NO CANDIDATES----------", ALL_RESPONSE_SPACE);
                 } else {
+                    responseColumnWidth = ALL_RESPONSE_SPACE / responseCount;
                     for (int i = 0; i < responseCount; i++) {
                         Response response = responses[i];
                         // Divide the available space equally for all candidates.
                         candidateNames += PadString(response.ToString(), responseColumnWidth, true);
                     }
                 }
-
                 
                 body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
                 body.Add("");
