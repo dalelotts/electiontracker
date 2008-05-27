@@ -48,7 +48,6 @@
   <object name="ContestDAO" type="KnightRider.ElectionTracker.db.ContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="CountyDAO" type="KnightRider.ElectionTracker.db.CountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ResponseValueDAO" type="KnightRider.ElectionTracker.db.ResponseValueDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
-  <object name="ElectionContestDAO" type="KnightRider.ElectionTracker.db.ElectionContestDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ResponseDAO" type="KnightRider.ElectionTracker.db.ResponseDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ContestCountyDAO" type="KnightRider.ElectionTracker.db.ContestCountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <!-- END DAO OBJECTS -->

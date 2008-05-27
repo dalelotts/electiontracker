@@ -111,7 +111,6 @@
     <Compile Include="db\ContestDAO.cs" />
     <Compile Include="db\CountyDAO.cs" />
     <Compile Include="db\DelegateDAO.cs" />
-    <Compile Include="db\ElectionContestDAO.cs" />
     <Compile Include="db\ElectionDAO.cs" />
     <Compile Include="db\Fault.cs" />
     <Compile Include="db\ICandidateDAO.cs" />

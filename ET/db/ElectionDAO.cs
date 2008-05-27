@@ -73,7 +73,9 @@ namespace KnightRider.ElectionTracker.db {
 
         [Transaction(ReadOnly = true)]
         public IList<Fault> canMakeTransient(Election entity) {
-            return delegateDAO.canMakeTransient(entity);
+            IList<Fault> faults = delegateDAO.canMakeTransient(entity);
+            faults.Add(new Fault(false, "All vote results for this election will be perminintly deleted."));
+            return faults;
         }
     }
 }
