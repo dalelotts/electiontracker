@@ -45,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6D68EF9C0C7F44B79C968AF8C5E5D841"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_701208CF71782BDDB8DFBE017024C804"
         "OwnerKey" = "8:_FC7B62855AB4AC696962EF243CABCCAC"
         "MsmSig" = "8:_UNDEFINED"
@@ -77,6 +83,12 @@
         {
         "MsmKey" = "8:_9511D7D654500D208044AD1B4B5C07FC"
         "OwnerKey" = "8:_8B8BDF235DFC42AA98E56BD9BD67B143"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96941B354E6D4B7CA2540474210CE813"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -478,6 +490,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D68EF9C0C7F44B79C968AF8C5E5D841"
+            {
+            "SourcePath" = "8:..\\ET\\Log4Net.xml"
+            "TargetName" = "8:Log4Net.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_B4DEC71BD7974DE0A100C25C6344EBBA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_701208CF71782BDDB8DFBE017024C804"
             {
             "AssemblyRegister" = "3:1"
@@ -538,6 +570,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_96941B354E6D4B7CA2540474210CE813"
+            {
+            "SourcePath" = "8:..\\ET\\spring.xml"
+            "TargetName" = "8:spring.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_B4DEC71BD7974DE0A100C25C6344EBBA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9DAC59E1C3B192602FC9170C0A3C1BD7"
