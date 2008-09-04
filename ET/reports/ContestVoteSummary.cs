@@ -39,7 +39,6 @@ namespace KnightRider.ElectionTracker.reports
 
         protected override bool performGenerate(Election entity)
         {
-
             header.Add(CenterText("CONTEST VOTE SUMMARY"));
             header.Add(CenterText(" ELECTION DATE " + entity.Date.ToShortDateString()));
             header.Add("");
