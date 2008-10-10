@@ -26,7 +26,7 @@
     <property name="IsIncumbent" column="Incumbent" type="Boolean" not-null="true" />
     <many-to-one name="ElectionContest" class="KnightRider.ElectionTracker.core.ElectionContest, ElectionTracker" column="ElectionContestID" not-null="true"/>
     
-    <joined-subclass name="KnightRider.ElectionTracker.core.CandidateResponse, ElectionTracker" table="CandidateResponse">
+    <joined-subclass name="KnightRider.ElectionTracker.core.CandidateResponse, ElectionTracker" table="candidateresponse">
       <key column="ResponseID"/>
       <many-to-one name="Candidate" class="KnightRider.ElectionTracker.core.Candidate, ElectionTracker" column="CandidateID"/>
     </joined-subclass>
