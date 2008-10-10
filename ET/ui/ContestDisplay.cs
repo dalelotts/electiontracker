@@ -155,6 +155,7 @@ namespace KnightRider.ElectionTracker.ui {
                 TextBox textBox = new TextBox();
                 textBox.Text = "NA";
                 textBox.TextChanged += new EventHandler(DataChanged);
+                textBox.Enter += new EventHandler(selectAllText);
                 textBox.KeyPress += new KeyPressEventHandler(BaseMDIChild.numericInputOnly);
                 textBox.Location = new Point(txtReporting.Left, label.Top);
                 textBox.Width = txtReporting.Width;
