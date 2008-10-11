@@ -173,5 +173,44 @@ namespace KnightRider.ElectionTracker.ui {
                 reportException("btnSaveVotes_Click", ex);
             }
         }
+        private void frmEnterVotes_Closing(object sender, FormClosingEventArgs e)
+        {
+            Boolean canClose = true ;
+            foreach (VoteEnterer VECheckDirty in countyIDToVoteEnterer.Values)
+            {
+                if (VECheckDirty.isDirty() )
+                {
+                    canClose = false;
+                    break;
+                }
+            }
+            if (!canClose)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save changes?", "Save Data", MessageBoxButtons.YesNo);
+
+                if (dr.Equals(DialogResult.Yes))
+                {
+                    //need to save changes
+                    try
+                    {
+                        List<string> result = new List<string>();
+                        foreach (VoteEnterer voteEnterer in countyIDToVoteEnterer.Values)
+                        {
+                            result.AddRange(voteEnterer.Persist());
+                        }
+                        string message = "";
+                        foreach (string s in result)
+                        {
+                            message += s + "\n";
+                        }
+                        MessageBox.Show(this, "The follow vote results were saved:\n" + message.Trim(), "Sucessful Save");
+                    }
+                    catch (Exception ex)
+                    {
+                        reportException("frmEnterVotes_Closing", ex);
+                    }
+                }
+            }
+        }
     }
 }

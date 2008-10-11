@@ -33,6 +33,7 @@ namespace KnightRider.ElectionTracker.ui {
                 ContestDisplay display = new ContestDisplay(contestCounty, contestCountyDAO);
                 display.Anchor = ((AnchorStyles.Top) | AnchorStyles.Left) | AnchorStyles.Right;
                 display.Location = new Point(5, currentTop);
+                display.Dirty = false;
                 currentTop += display.Height + 5;
                 display.Width = Width - 5;
                 Controls.Add(display);
@@ -57,6 +58,19 @@ namespace KnightRider.ElectionTracker.ui {
             // 
             Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
             ResumeLayout(false);
+        }
+        public bool isDirty()
+        {
+            bool dirty = false;
+            foreach (ContestDisplay dis in displays)
+            {
+                if (dis.Dirty)
+                {
+                    dirty = true;
+                    break;
+                }
+            }
+            return dirty;
         }
     }
 }

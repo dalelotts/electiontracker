@@ -161,6 +161,7 @@ namespace KnightRider.ElectionTracker.ui
             this.Name = "frmEnterVotes";
             this.Text = "Enter Votes";
             this.Load += new System.EventHandler(this.frmEnterVotes_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEnterVotes_Closing);
             this.Controls.SetChildIndex(this.gbElection, 0);
             this.Controls.SetChildIndex(this.gbCounty, 0);
             this.Controls.SetChildIndex(this.gbContest, 0);
