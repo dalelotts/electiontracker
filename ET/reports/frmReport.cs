@@ -26,7 +26,7 @@ using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.reports {
     internal sealed partial class frmReport : BaseMDIChild {
-        private readonly IReport report;
+        private  IReport report;
         private int pageCount;
         private int bodyLineNumber;
         private List<String> groupHeader = new List<string>();
@@ -47,14 +47,20 @@ namespace KnightRider.ElectionTracker.reports {
 
         private void btnPrint_Click(object sender, EventArgs e) {
             try {
-                ctlPrintDialog.AllowCurrentPage = true;
+                ctlPrintDialog.AllowCurrentPage = false ;
                 ctlPrintDialog.AllowSomePages = true;
                 ctlPrintDialog.UseEXDialog = true;
+                ctlPrintDialog.Document = ctlPrintPreview.Document;
                 DialogResult result = ctlPrintDialog.ShowDialog(this);
                 if (DialogResult.OK.Equals(result)) {
                     pageCount = 0;
-                    ctlPrintPreview.Document.PrinterSettings = ctlPrintDialog.PrinterSettings;
-                    ctlPrintPreview.Document.Print();
+                    //PrinterSettings = ctlPrintDialog.PrinterSettings;
+                    PrinterSettings settings = ctlPrintDialog.PrinterSettings;
+                    
+                    ctlPrintDialog.Document.PrinterSettings = settings;
+                    ctlPrintDialog.Document.Print();
+                    //ctlPrintPreview.Document.Print();
+                    
                 }
             } catch (Exception ex) {
                 reportException("btnPrint_Click", ex);
@@ -108,6 +114,7 @@ namespace KnightRider.ElectionTracker.reports {
 
             PrintDocument document = new PrintDocument();
             document.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50);
+            ctlPrintDialog.Document = document;
             document.PrintPage += new PrintPageEventHandler(PrintPageHandler);
             document.DefaultPageSettings.Landscape = report.IsLandscape();
             document.DocumentName = report.Name();
@@ -139,105 +146,256 @@ namespace KnightRider.ElectionTracker.reports {
 
 
         private void PrintPageHandler(object sender, PrintPageEventArgs ev) {
-            float leftMargin = ev.MarginBounds.Left;
-            float topMargin = ev.MarginBounds.Top;
+            //check to see if there are from and to pages selected
 
-            // Calculate the number of lines per page.
-            Font printFont = report.Font();
-            float fontHeight = printFont.GetHeight(ev.Graphics);
-            int bottomMargin = ev.MarginBounds.Height;
+            
+            if (ev.PageSettings.PrinterSettings.PrintRange.Equals(PrintRange.SomePages))
+            {
+                if (pageCount + 1 < ev.PageSettings.PrinterSettings.FromPage && pageCount + 1 < ev.PageSettings.PrinterSettings.ToPage)
+                {
+                    //increment to get to the page we need to print
+                    while (pageCount + 1 < ev.PageSettings.PrinterSettings.FromPage)
+                    {
+                        float leftMargin = ev.MarginBounds.Left;
+                        float topMargin = ev.MarginBounds.Top;
 
-            // reserve space for the footer.
+                        // Calculate the number of lines per page.
+                        Font printFont = report.Font();
+                        float fontHeight = printFont.GetHeight(ev.Graphics);
+                        int bottomMargin = ev.MarginBounds.Height;
 
-            List<string> footer = report.Footer();
-            bottomMargin -= (int) (footer.Count * fontHeight);
+                        // reserve space for the footer.
 
-            int lineNumber = 0;
-            float yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                        List<string> footer = report.Footer();
+                        bottomMargin -= (int)(footer.Count * fontHeight);
 
-            // Print the header.
-            foreach (string line in report.Header()) {
-                ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
-                lineNumber++;
-                yPos = GetYPos(topMargin, lineNumber, fontHeight);
-            }
+                        int lineNumber = 0;
+                        float yPos = GetYPos(topMargin, lineNumber, fontHeight);
 
-
-            // Print the group header if there is one.
-            foreach (string line in groupHeader) {
-                ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
-                lineNumber++;
-                yPos = GetYPos(topMargin, lineNumber, fontHeight);
-            }
-
-            // Print the body of the report, keeping track of the line number 
-            // just in case there is a page break somewhere in the body.
-            List<string> bodyLines = report.Body();
-
-            //while (bodyLineNumber < bodyLines.Count && ((availableLines - lineNumber) > 0)) {
-            while (bodyLineNumber < bodyLines.Count && ((yPos + fontHeight) <= bottomMargin)) {
-                string line = bodyLines[bodyLineNumber];
-                bodyLineNumber++;
-
-                if (line.Length == 0) {
-                    lineNumber++; // Nothing to do, just increment the line number and loop again.
-                    yPos = GetYPos(topMargin, lineNumber, fontHeight);
-                    continue;
-                }
-
-                if ("<PAGE_BREAK/>".Equals(line)) {
-                    break;
-                } else if ("<KEEP_TOGETHER>".Equals(line)) {
-                    // Ignore keep together as the first tag in the body of the page
-                    if (lineNumber > report.Header().Count) {
-                        // Look ahead to see if there is enough room on the page to fit 
-                        // the lines to keep togehter.
-                        // NOTE: This does not support nested keep together tags.
-                        int keepTogetherLines = linesToTag("</KEEP_TOGETHER>", bodyLines, bodyLineNumber);
-                        float tmpYPos = GetYPos(topMargin, lineNumber + keepTogetherLines, fontHeight);
-                        if (tmpYPos > bottomMargin) {
-                            break; // There are not enough lines remianing on the page so move to the next page.
+                        // Print the header.
+                        foreach (string line in report.Header())
+                        {
+                            lineNumber++;
+                            yPos = GetYPos(topMargin, lineNumber, fontHeight);
                         }
+
+
+                        // Print the group header if there is one.
+                        foreach (string line in groupHeader)
+                        {
+                            lineNumber++;
+                            yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                        }
+
+                        // Print the body of the report, keeping track of the line number 
+                        // just in case there is a page break somewhere in the body.
+
+                        List<string> bodyLines = report.Body();
+                        //while (bodyLineNumber < bodyLines.Count && ((availableLines - lineNumber) > 0)) {
+                        while (bodyLineNumber < bodyLines.Count && ((yPos + fontHeight) <= bottomMargin))
+                        {
+                            string line = bodyLines[bodyLineNumber];
+                            bodyLineNumber++;
+
+                            if (line.Length == 0)
+                            {
+                                lineNumber++; // Nothing to do, just increment the line number and loop again.
+                                yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                                continue;
+                            }
+
+                            if ("<PAGE_BREAK/>".Equals(line))
+                            {
+                                break;
+                            }
+                            else if ("<KEEP_TOGETHER>".Equals(line))
+                            {
+                                // Ignore keep together as the first tag in the body of the page
+                                if (lineNumber > report.Header().Count)
+                                {
+                                    // Look ahead to see if there is enough room on the page to fit 
+                                    // the lines to keep togehter.
+                                    // NOTE: This does not support nested keep together tags.
+                                    int keepTogetherLines = linesToTag("</KEEP_TOGETHER>", bodyLines, bodyLineNumber);
+                                    float tmpYPos = GetYPos(topMargin, lineNumber + keepTogetherLines, fontHeight);
+                                    if (tmpYPos > bottomMargin)
+                                    {
+                                        break; // There are not enough lines remianing on the page so move to the next page.
+                                    }
+                                }
+                                continue; // always skip the rest of this loop when encountering this tag
+                            }
+                            else if ("</KEEP_TOGETHER>".Equals(line))
+                            {
+                                continue; // always skip the rest of this loop when encountering this tag
+                            }
+                            else if ("<GROUP>".Equals(line))
+                            {
+                                continue;
+                            }
+                            else if ("</GROUP>".Equals(line))
+                            {
+                                groupHeader.Clear();
+                                continue;
+                            }
+                            else if ("<GROUP_HEADER>".Equals(line))
+                            {
+                                fillGroupHeader("</GROUP_HEADER>", bodyLines, bodyLineNumber);
+                                continue;
+                            }
+                            else if ("</GROUP_HEADER>".Equals(line))
+                            {
+                                continue;
+                            }
+
+                            lineNumber++;
+                            yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                        }
+                        pageCount++;
                     }
-                    continue; // always skip the rest of this loop when encountering this tag
-                } else if ("</KEEP_TOGETHER>".Equals(line)) {
-                    continue; // always skip the rest of this loop when encountering this tag
-                } else if ("<GROUP>".Equals(line)) {
-                    continue;
-                } else if ("</GROUP>".Equals(line)) {
-                    groupHeader.Clear();
-                    continue;
-                } else if ("<GROUP_HEADER>".Equals(line)) {
-                    fillGroupHeader("</GROUP_HEADER>", bodyLines, bodyLineNumber);
-                    continue;
-                } else if ("</GROUP_HEADER>".Equals(line)) {
-                    continue;
                 }
 
-                ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
-                lineNumber++;
-                yPos = GetYPos(topMargin, lineNumber, fontHeight);
             }
+            if ((ev.PageSettings.PrinterSettings.PrintRange.Equals(PrintRange.SomePages) && pageCount + 1 <= ev.PageSettings.PrinterSettings.ToPage) || ev.PageSettings.PrinterSettings.PrintRange.Equals(PrintRange.AllPages))
+            {
+                //print page
+                float leftMargin = ev.MarginBounds.Left;
+                float topMargin = ev.MarginBounds.Top;
 
-            // Reset the bottom margin so it no longer reserves space for the footer.
-            bottomMargin = ev.MarginBounds.Height;
+                // Calculate the number of lines per page.
+                Font printFont = report.Font();
+                float fontHeight = printFont.GetHeight(ev.Graphics);
+                int bottomMargin = ev.MarginBounds.Height;
+
+                // reserve space for the footer.
+
+                List<string> footer = report.Footer();
+                bottomMargin -= (int)(footer.Count * fontHeight);
+
+                int lineNumber = 0;
+                float yPos = GetYPos(topMargin, lineNumber, fontHeight);
+
+                // Print the header.
+                foreach (string line in report.Header())
+                {
+                    ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
+                    lineNumber++;
+                    yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                }
 
 
-            string pageString = (pageCount + 1).ToString();
-            // Print the footer at the bottom of the page.
-            for (int i = footer.Count - 1, j = 1; i >= 0; i--, j++) {
-                yPos = bottomMargin - (j * fontHeight);
-                string line = footer[i];
-                line = line.Replace("${Page}", pageString);
-                ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
+                // Print the group header if there is one.
+                foreach (string line in groupHeader)
+                {
+                    ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
+                    lineNumber++;
+                    yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                }
+
+                // Print the body of the report, keeping track of the line number 
+                // just in case there is a page break somewhere in the body.
+
+                List<string> bodyLines = report.Body();
+
+                //while (bodyLineNumber < bodyLines.Count && ((availableLines - lineNumber) > 0)) {
+                while (bodyLineNumber < bodyLines.Count && ((yPos + fontHeight) <= bottomMargin))
+                {
+                    string line = bodyLines[bodyLineNumber];
+                    bodyLineNumber++;
+
+                    if (line.Length == 0)
+                    {
+                        lineNumber++; // Nothing to do, just increment the line number and loop again.
+                        yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                        continue;
+                    }
+
+                    if ("<PAGE_BREAK/>".Equals(line))
+                    {
+                        break;
+                    }
+                    else if ("<KEEP_TOGETHER>".Equals(line))
+                    {
+                        // Ignore keep together as the first tag in the body of the page
+                        if (lineNumber > report.Header().Count)
+                        {
+                            // Look ahead to see if there is enough room on the page to fit 
+                            // the lines to keep togehter.
+                            // NOTE: This does not support nested keep together tags.
+                            int keepTogetherLines = linesToTag("</KEEP_TOGETHER>", bodyLines, bodyLineNumber);
+                            float tmpYPos = GetYPos(topMargin, lineNumber + keepTogetherLines, fontHeight);
+                            if (tmpYPos > bottomMargin)
+                            {
+                                break; // There are not enough lines remianing on the page so move to the next page.
+                            }
+                        }
+                        continue; // always skip the rest of this loop when encountering this tag
+                    }
+                    else if ("</KEEP_TOGETHER>".Equals(line))
+                    {
+                        continue; // always skip the rest of this loop when encountering this tag
+                    }
+                    else if ("<GROUP>".Equals(line))
+                    {
+                        continue;
+                    }
+                    else if ("</GROUP>".Equals(line))
+                    {
+                        groupHeader.Clear();
+                        continue;
+                    }
+                    else if ("<GROUP_HEADER>".Equals(line))
+                    {
+                        fillGroupHeader("</GROUP_HEADER>", bodyLines, bodyLineNumber);
+                        continue;
+                    }
+                    else if ("</GROUP_HEADER>".Equals(line))
+                    {
+                        continue;
+                    }
+
+                    ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
+                    lineNumber++;
+                    yPos = GetYPos(topMargin, lineNumber, fontHeight);
+                }
+
+                // Reset the bottom margin so it no longer reserves space for the footer.
+                bottomMargin = ev.MarginBounds.Height;
+
+                string pageString = (pageCount + 1).ToString();
+                // Print the footer at the bottom of the page.
+                for (int i = footer.Count - 1, j = 1; i >= 0; i--, j++)
+                {
+                    yPos = bottomMargin - (j * fontHeight);
+                    string line = footer[i];
+                    line = line.Replace("${Page}", pageString);
+                    ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
+                }
+                if (bodyLines.Count > bodyLineNumber)
+                {
+                    ev.HasMorePages = true;
+                    pageCount++;
+                }
+                else
+                {
+                    bodyLineNumber = 0;
+                }
+                if (pageCount == ev.PageSettings.PrinterSettings.ToPage)
+                {
+                    ev.HasMorePages = false;
+                }
             }
-
-            if (bodyLines.Count > bodyLineNumber) {
-                ev.HasMorePages = true;
-                pageCount++;
-            } else {
+            else
+            {
+                ev.HasMorePages = false;
                 bodyLineNumber = 0;
             }
+            
+                //Print a page
+                
+                
+
+           
         }
 
         private void fillGroupHeader(string tag, List<string> lines, int lineNumber) {

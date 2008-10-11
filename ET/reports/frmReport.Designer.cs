@@ -90,7 +90,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
-            // ppcElection
+            // ctlPrintPreview
             // 
             this.ctlPrintPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
@@ -164,6 +164,8 @@ namespace KnightRider.ElectionTracker.reports {
             // 
             // ctlPrintDialog
             // 
+            this.ctlPrintDialog.AllowCurrentPage = true;
+            this.ctlPrintDialog.AllowSomePages = true;
             this.ctlPrintDialog.UseEXDialog = true;
             // 
             // btnPageSetup
@@ -199,7 +201,17 @@ namespace KnightRider.ElectionTracker.reports {
             this.Name = "frmReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "4";
+            this.Controls.SetChildIndex(this.btnPrint, 0);
+            this.Controls.SetChildIndex(this.ctlPrintPreview, 0);
+            this.Controls.SetChildIndex(this.btnPrevious, 0);
+            this.Controls.SetChildIndex(this.btnNext, 0);
+            this.Controls.SetChildIndex(this.cboFilter, 0);
+            this.Controls.SetChildIndex(this.ctlTreeView, 0);
+            this.Controls.SetChildIndex(this.btnZoomIn, 0);
+            this.Controls.SetChildIndex(this.btnZoomOut, 0);
+            this.Controls.SetChildIndex(this.btnPageSetup, 0);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
