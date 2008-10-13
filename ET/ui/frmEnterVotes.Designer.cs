@@ -46,6 +46,7 @@ namespace KnightRider.ElectionTracker.ui
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbElection = new System.Windows.Forms.GroupBox();
             this.cboElections = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,9 +55,16 @@ namespace KnightRider.ElectionTracker.ui
             this.lstCounties = new System.Windows.Forms.ListBox();
             this.gbContest = new System.Windows.Forms.GroupBox();
             this.btnSaveVotes = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbl_electionDayNumber = new System.Windows.Forms.Label();
+            this.lbl_mainNumber = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.gbElection.SuspendLayout();
             this.gbCounty.SuspendLayout();
             this.gbContest.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbElection
@@ -124,6 +132,7 @@ namespace KnightRider.ElectionTracker.ui
             this.lstCounties.Sorted = true;
             this.lstCounties.TabIndex = 0;
             this.lstCounties.SelectedIndexChanged += new System.EventHandler(this.lstCounties_SelectedIndexChanged);
+            this.lstCounties.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lstCounties_MouseMove);
             // 
             // gbContest
             // 
@@ -149,11 +158,63 @@ namespace KnightRider.ElectionTracker.ui
             this.btnSaveVotes.UseVisualStyleBackColor = true;
             this.btnSaveVotes.Click += new System.EventHandler(this.btnSaveVotes_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbl_electionDayNumber);
+            this.groupBox1.Controls.Add(this.lbl_mainNumber);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(356, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(325, 53);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "County Contact Information";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lbl_electionDayNumber
+            // 
+            this.lbl_electionDayNumber.AutoSize = true;
+            this.lbl_electionDayNumber.Location = new System.Drawing.Point(117, 34);
+            this.lbl_electionDayNumber.Name = "lbl_electionDayNumber";
+            this.lbl_electionDayNumber.Size = new System.Drawing.Size(102, 13);
+            this.lbl_electionDayNumber.TabIndex = 3;
+            this.lbl_electionDayNumber.Text = "election day number";
+            // 
+            // lbl_mainNumber
+            // 
+            this.lbl_mainNumber.AutoSize = true;
+            this.lbl_mainNumber.Location = new System.Drawing.Point(78, 16);
+            this.lbl_mainNumber.Name = "lbl_mainNumber";
+            this.lbl_mainNumber.Size = new System.Drawing.Size(67, 13);
+            this.lbl_mainNumber.TabIndex = 2;
+            this.lbl_mainNumber.Text = "main number";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Election Day Number: ";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Main Number: ";
+            // 
             // frmEnterVotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(692, 416);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbContest);
             this.Controls.Add(this.gbCounty);
             this.Controls.Add(this.gbElection);
@@ -165,10 +226,13 @@ namespace KnightRider.ElectionTracker.ui
             this.Controls.SetChildIndex(this.gbElection, 0);
             this.Controls.SetChildIndex(this.gbCounty, 0);
             this.Controls.SetChildIndex(this.gbContest, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
             this.gbElection.ResumeLayout(false);
             this.gbElection.PerformLayout();
             this.gbCounty.ResumeLayout(false);
             this.gbContest.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +248,12 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.ListBox lstCounties;
         private System.Windows.Forms.GroupBox gbContest;
         private System.Windows.Forms.Button btnSaveVotes;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_electionDayNumber;
+        private System.Windows.Forms.Label lbl_mainNumber;
+        private System.Windows.Forms.ToolTip toolTip1;
 
     }
 }

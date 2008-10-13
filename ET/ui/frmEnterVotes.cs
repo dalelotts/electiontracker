@@ -35,17 +35,25 @@ namespace KnightRider.ElectionTracker.ui {
         private Map<long, VoteEnterer> countyIDToVoteEnterer;
         private readonly IElectionDAO electionDAO;
         private readonly IContestCountyDAO contestCountyDAO;
+        private readonly ICountyDAO countyDAO;
         private readonly IDAOTask<Election> loadTask;
+        private readonly IDAOTask<County> countyTask;
 
-        public frmEnterVotes(IElectionDAO electionDAO, IContestCountyDAO contestCountyDAO, IDAOTask<Election> loadTask) {
+        private County currentCounty;
+
+        public frmEnterVotes(IElectionDAO electionDAO, IContestCountyDAO contestCountyDAO, ICountyDAO countyDAO, IDAOTask<Election> loadTask, IDAOTask<County> countyTask) {
             this.electionDAO = electionDAO;
             this.contestCountyDAO = contestCountyDAO;
+            this.countyDAO = countyDAO;
             this.loadTask = loadTask;
+            this.countyTask = countyTask;
             InitializeComponent();
             countyIDToVoteEnterer = new Map<long, VoteEnterer>();
             countyIDToCounty = new Map<long, County>();
             countyIDContestCounty = new Map<long, IList<ContestCounty>>();
             toolStrip1.Visible = false;
+
+            currentCounty = new County();           
         }
 
         public void HideCurrentVoteEnterer() {
@@ -116,7 +124,9 @@ namespace KnightRider.ElectionTracker.ui {
             foreach (KeyValuePair<long, County> entry in countyIDToCounty) {
                 lstCounties.Items.Add(entry.Value);
             }
+
             if (lstCounties.Items.Count > 0) lstCounties.SelectedIndex = 0;
+
         }
 
         private void lstCounties_SelectedIndexChanged(object sender, EventArgs e) {
@@ -132,6 +142,27 @@ namespace KnightRider.ElectionTracker.ui {
                 enterer.Height = btnSaveVotes.Location.Y - 30;
 
                 gbContest.Controls.Add(enterer);
+
+                // display county contact information
+                lbl_electionDayNumber.Text = "";
+                lbl_mainNumber.Text = "";
+                currentCounty = countyDAO.findById(county.ID, false, countyTask);
+                IList<CountyPhoneNumber> phoneNumbers = currentCounty.PhoneNumbers;
+                foreach (CountyPhoneNumber phoneNumber in phoneNumbers)
+                {
+                    if(phoneNumber.Type.ToString().Equals("Election Day")){
+                        lbl_electionDayNumber.Text = phoneNumber.AreaCode + "-" + phoneNumber.PhoneNumber;
+                        if(phoneNumber.Extension != "" && phoneNumber.Extension != " " && phoneNumber.Extension != null) {
+                            lbl_electionDayNumber.Text = lbl_electionDayNumber.Text.ToString() + " ext. " + phoneNumber.Extension;
+                        }
+                    } else if(phoneNumber.Type.ToString().Equals("Main")){
+                        lbl_mainNumber.Text = phoneNumber.AreaCode + "-" + phoneNumber.PhoneNumber;
+                        if(phoneNumber.Extension != "" && phoneNumber.Extension != " " && phoneNumber.Extension != null) {
+                            lbl_mainNumber.Text = lbl_mainNumber.Text.ToString() + " ext. " + phoneNumber.Extension;
+                        }
+                    }
+                }
+
                 enterer.Visible = true;
             } catch (Exception ex) {
                 reportException("lstCounties_SelectedIndexChanged", ex);
@@ -212,5 +243,51 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             }
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstCounties_MouseMove(object sender, MouseEventArgs e)
+        {
+            string tooltip = "";
+        
+            int index = lstCounties.IndexFromPoint(e.Location);
+            if ((index >= 0) && (index < lstCounties.Items.Count))
+            {
+                try
+                {
+                    County county = (County)lstCounties.Items[index];
+
+                    // display county contact notes information in a tooltip
+                    currentCounty = countyDAO.findById(county.ID, false, countyTask);
+
+                    tooltip = currentCounty.Notes;
+                }
+                catch (Exception ex)
+                {
+                    reportException("lstCounties_MouseMove", ex);
+                }
+            }
+
+            toolTip1.SetToolTip(lstCounties, tooltip);
+        }
+
     }
 }

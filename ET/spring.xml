@@ -19,7 +19,7 @@
     <property name="CacheQueries" value="true"/>
   </object>
   <!-- Database and NHibernate Configuration -->
-  <db:provider id="DbProvider" provider="MySql" connectionString="Server=localhost;database=electiontracker;uid=root;pwd=pass;"/>
+  <db:provider id="DbProvider" provider="MySql" connectionString="Server=localhost;database=electiontracker;uid=username;pwd=password;"/>
   <object id="SessionFactory" type="Spring.Data.NHibernate.LocalSessionFactoryObject, Spring.Data.NHibernate12">
     <property name="DbProvider" ref="DbProvider"/>
     <!--<property name="ExposeTransactionAwareSessionFactory" value="true"/> -->
@@ -85,7 +85,9 @@
   <object name="KnightRider.ElectionTracker.ui.frmEnterVotes" type="KnightRider.ElectionTracker.ui.frmEnterVotes, ElectionTracker" autowire="constructor" singleton="false">
     <constructor-arg name="electionDAO" ref="ElectionDAO"/>
     <constructor-arg name="contestCountyDAO" ref="ContestCountyDAO"/>
+	<constructor-arg name="countyDAO" ref="CountyDAO"/>  
     <constructor-arg name="loadTask" ref="LoadElectionForVoteEntry"/>
+	<constructor-arg name="countyTask" ref="LoadCountyForUI"/>
   </object>
   <object name="KnightRider.ElectionTracker.ui.frmElection" type="KnightRider.ElectionTracker.ui.frmElection, ElectionTracker" autowire="no" singleton="false">
     <constructor-arg name="electionDAO" ref="ElectionDAO"/>
