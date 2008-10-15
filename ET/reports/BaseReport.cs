@@ -41,7 +41,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.name = name;
             this.isLandscape = isLandscape;
             this.filters = filters;
-            marginPoint = isLandscape ? 105 : 75;
+            marginPoint = isLandscape ? 105 : 82;
         }
 
         public string Name() {

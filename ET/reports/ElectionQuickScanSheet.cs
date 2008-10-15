@@ -32,7 +32,9 @@ namespace KnightRider.ElectionTracker.reports {
         private const int CONTEST_COLUMN_WIDTH = 20;
         private const int RESPONSE_COLUMN_WIDTH = 30;
         private const int REPORTING_COLUMN_WIDTH = 10;
-        private const int VOTE_COLUMN_WIDTH = 10;
+        private const int VOTE_COUNT_WIDTH = 7;
+        private const int VOTE_PERCENTAGE_WIDTH = 8;
+        private const int VOTE_COLUMN_WIDTH = VOTE_COUNT_WIDTH + VOTE_PERCENTAGE_WIDTH;
         private const string COLUMN_PADDING = "   ";
 
         protected override bool performGenerate(Election entity) {
@@ -42,7 +44,7 @@ namespace KnightRider.ElectionTracker.reports {
             string contestHeader = PadString("CONTEST", CONTEST_COLUMN_WIDTH, true);
             string responseHeader = PadString("CANDIDATE", RESPONSE_COLUMN_WIDTH - 7, true);
             string reportingHeader = PadString("% WARDS REPORTING", REPORTING_COLUMN_WIDTH + 7, true);
-            string votesHeader = "  % OF VOTE";
+            string votesHeader = "NUMBER OF VOTES";
             header.Add(contestHeader + COLUMN_PADDING + responseHeader + COLUMN_PADDING + reportingHeader + COLUMN_PADDING + votesHeader);
             List<ElectionContest> electionContests = new List<ElectionContest>(entity.ElectionContests);
             header.Add(CenterText("=", '='));
@@ -70,7 +72,7 @@ namespace KnightRider.ElectionTracker.reports {
                         percentage = ((double) responseVotes / (double) totalVotes) * 100;
                     }
 
-                    string voteColumn = PadString(percentage.ToString("0.0") + "%", VOTE_COLUMN_WIDTH, false);
+                    string voteColumn = PadString(responseVotes.ToString(), VOTE_COUNT_WIDTH, false) + PadString(" (" + percentage.ToString("0.0") + "%)", VOTE_PERCENTAGE_WIDTH, false);
 
                     body.Add(contestColumn + COLUMN_PADDING + responseColumn + COLUMN_PADDING + reportingColumn + COLUMN_PADDING + voteColumn);
 
