@@ -31,13 +31,13 @@ namespace KnightRider.ElectionTracker.reports {
         private int bodyLineNumber;
         private List<String> groupHeader = new List<string>();
         private readonly Point previewControlLocation;
-
+        private Boolean needToRefresh;
         public frmReport(IReport report) {
             InitializeComponent();
             toolStrip1.Visible = false;
             this.report = report;
             Text = report.Name();
-
+            needToRefresh = false;
             previewControlLocation = new Point(190, 12);
             foreach (TreeViewFilter filter in report.Filters()) {
                 cboFilter.Items.Add(filter);
@@ -56,10 +56,10 @@ namespace KnightRider.ElectionTracker.reports {
                     pageCount = 0;
                     //PrinterSettings = ctlPrintDialog.PrinterSettings;
                     PrinterSettings settings = ctlPrintDialog.PrinterSettings;
-                    
+                    needToRefresh = true;
                     ctlPrintDialog.Document.PrinterSettings = settings;
-                    ctlPrintDialog.Document.Print();
-                    //ctlPrintPreview.Document.Print();
+                    //ctlPrintDialog.Document.Print();
+                    ctlPrintPreview.Document.Print();
                     
                 }
             } catch (Exception ex) {
@@ -142,6 +142,12 @@ namespace KnightRider.ElectionTracker.reports {
             btnZoomOut.Enabled = true;
             btnNext.Enabled = true;
             btnPrevious.Enabled = true;
+            if (needToRefresh)
+            {
+                needToRefresh = false;
+                ctlPrintPreview.Document.PrinterSettings = new PrinterSettings();
+                refreshReport(ctlPrintPreview.Document );
+            }
         }
 
 
@@ -256,6 +262,7 @@ namespace KnightRider.ElectionTracker.reports {
                 }
 
             }
+
             if ((ev.PageSettings.PrinterSettings.PrintRange.Equals(PrintRange.SomePages) && pageCount + 1 <= ev.PageSettings.PrinterSettings.ToPage) || ev.PageSettings.PrinterSettings.PrintRange.Equals(PrintRange.AllPages))
             {
                 //print page
@@ -382,6 +389,8 @@ namespace KnightRider.ElectionTracker.reports {
                 }
                 if (pageCount == ev.PageSettings.PrinterSettings.ToPage)
                 {
+                    pageCount = 0;
+                    bodyLineNumber = 0;
                     ev.HasMorePages = false;
                 }
             }
@@ -389,13 +398,8 @@ namespace KnightRider.ElectionTracker.reports {
             {
                 ev.HasMorePages = false;
                 bodyLineNumber = 0;
+                pageCount = 0;
             }
-            
-                //Print a page
-                
-                
-
-           
         }
 
         private void fillGroupHeader(string tag, List<string> lines, int lineNumber) {

@@ -27,6 +27,7 @@ namespace KnightRider.ElectionTracker.ui {
     internal partial class frmCandidate : BaseMDIChild {
         private readonly ICandidateDAO candidateDAO;
         private Candidate currentCandidate;
+        private Boolean dirty;
 
         public frmCandidate(ICandidateDAO candidateDAO, PoliticalPartyDAO politicalPartyDAO) {
             InitializeComponent();
@@ -40,8 +41,19 @@ namespace KnightRider.ElectionTracker.ui {
             }
 
             currentCandidate = new Candidate();
+            //set up text boxes with a hanlder for text changed
+            txtFirstName.TextChanged += new EventHandler(DataChanged);
+            txtLastName.TextChanged += new EventHandler(DataChanged);
+            txtMiddleName.TextChanged += new EventHandler(DataChanged);
+            txtNotes.TextChanged += new EventHandler(DataChanged);
+            cboPoliticalParty.TextChanged += new EventHandler(DataChanged);
+            dirty = false;
         }
-
+        // Event handler.  Marks the Candidate form as dirty.
+        private void DataChanged(object sender, EventArgs e)
+        {
+            dirty = true;
+        }
         private void refreshGoToList() {
             IList<Candidate> candidates = candidateDAO.findAll();
             cboGoTo.Items.Clear();
@@ -51,12 +63,25 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
-            try {
+            Boolean newRecord = false;
+            if (dirty)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save the current record first?", "Candidate not saved", MessageBoxButtons.YesNo);
+                if (String.Equals(dr.ToString(), "Yes"))
+                {
+                    //save record
+                    btnSave_Click(sender, e);
+                }
+            }
+            try
+            {
                 // To Do: Detect Dirty
                 currentCandidate = new Candidate();
                 refreshControls();
                 base.btnAdd_Click(sender, e);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("btnAdd_Click", ex);
             }
         }
@@ -80,6 +105,7 @@ namespace KnightRider.ElectionTracker.ui {
             chkActive.Checked = currentCandidate.IsActive;
 
             refreshGoToList();
+            dirty = false;
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
@@ -118,6 +144,7 @@ namespace KnightRider.ElectionTracker.ui {
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
             }
+            dirty = false;
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
@@ -159,6 +186,19 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("cboPoliticalParty_Leave", ex);
+            }
+        }
+        private void frmCandidate_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //check for dirty
+            if (dirty)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save Candidate before closing?", "Candidate not saved", MessageBoxButtons.YesNo);
+                if (String.Equals("Yes",dr.ToString()))
+                {
+                    btnSave_Click(sender, e);
+                }
+
             }
         }
     }

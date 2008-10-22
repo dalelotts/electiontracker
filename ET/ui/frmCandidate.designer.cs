@@ -99,7 +99,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtNotes.Size = new System.Drawing.Size(416, 198);
             this.txtNotes.TabIndex = 10;
             this.txtNotes.Tag = "lock=true";
-
             // 
             // label6
             // 
@@ -137,7 +136,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtLastName.Size = new System.Drawing.Size(335, 20);
             this.txtLastName.TabIndex = 6;
             this.txtLastName.Tag = "lock=true";
-
             // 
             // lblMiddleName
             // 
@@ -157,7 +155,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtMiddleName.Size = new System.Drawing.Size(335, 20);
             this.txtMiddleName.TabIndex = 4;
             this.txtMiddleName.Tag = "lock=true";
-
             // 
             // lblFirstName
             // 
@@ -177,7 +174,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtFirstName.Size = new System.Drawing.Size(335, 20);
             this.txtFirstName.TabIndex = 2;
             this.txtFirstName.Tag = "lock=true";
-
             // 
             // lblRequired
             // 
@@ -210,6 +206,7 @@ namespace KnightRider.ElectionTracker.ui
             this.MinimumSize = new System.Drawing.Size(350, 350);
             this.Name = "frmCandidate";
             this.Text = "Candidate";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCandidate_FormClosing);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.txtLastName, 0);
             this.Controls.SetChildIndex(this.lblMiddleName, 0);
