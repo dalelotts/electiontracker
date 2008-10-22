@@ -111,7 +111,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // txtCountyWardCount
             // 
-            this.txtCountyWardCount.Location = new System.Drawing.Point(79, 43);
+            this.txtCountyWardCount.Location = new System.Drawing.Point(95, 43);
             this.txtCountyWardCount.Name = "txtCountyWardCount";
             this.txtCountyWardCount.Size = new System.Drawing.Size(49, 20);
             this.txtCountyWardCount.TabIndex = 3;
@@ -120,9 +120,9 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.txtCountyName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCountyName.Location = new System.Drawing.Point(79, 17);
+            this.txtCountyName.Location = new System.Drawing.Point(95, 17);
             this.txtCountyName.Name = "txtCountyName";
-            this.txtCountyName.Size = new System.Drawing.Size(307, 20);
+            this.txtCountyName.Size = new System.Drawing.Size(294, 20);
             this.txtCountyName.TabIndex = 1;
             this.txtCountyName.Tag = "lock=true";
             // 
@@ -131,9 +131,9 @@ namespace KnightRider.ElectionTracker.ui
             this.lblCountyWardCount.AutoSize = true;
             this.lblCountyWardCount.Location = new System.Drawing.Point(7, 46);
             this.lblCountyWardCount.Name = "lblCountyWardCount";
-            this.lblCountyWardCount.Size = new System.Drawing.Size(71, 13);
+            this.lblCountyWardCount.Size = new System.Drawing.Size(87, 13);
             this.lblCountyWardCount.TabIndex = 2;
-            this.lblCountyWardCount.Text = "Ward Count *";
+            this.lblCountyWardCount.Text = "Reporting Units *";
             // 
             // lblCountyName
             // 

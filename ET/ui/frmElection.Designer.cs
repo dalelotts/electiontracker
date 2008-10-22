@@ -108,8 +108,6 @@ namespace KnightRider.ElectionTracker.ui
             this.pgCounties = new System.Windows.Forms.TabPage();
             this.lstAllCounties = new System.Windows.Forms.ListBox();
             this.dgvContestCounties = new System.Windows.Forms.DataGridView();
-            this.countyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wardCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblAllCounties = new System.Windows.Forms.Label();
             this.btnAddAllCounties = new System.Windows.Forms.Button();
             this.btnRemoveCounty = new System.Windows.Forms.Button();
@@ -120,6 +118,8 @@ namespace KnightRider.ElectionTracker.ui
             this.lblCountiesContests = new System.Windows.Forms.Label();
             this.lblRequired = new System.Windows.Forms.Label();
             this.ctlToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.countyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wardCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -399,7 +399,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabElection.Location = new System.Drawing.Point(4, 22);
             this.tabElection.Name = "tabElection";
             this.tabElection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabElection.Size = new System.Drawing.Size(575, 273);
+            this.tabElection.Size = new System.Drawing.Size(579, 273);
             this.tabElection.TabIndex = 0;
             this.tabElection.Text = "Election";
             this.tabElection.UseVisualStyleBackColor = true;
@@ -467,7 +467,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabContests.Location = new System.Drawing.Point(4, 22);
             this.tabContests.Name = "tabContests";
             this.tabContests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContests.Size = new System.Drawing.Size(575, 273);
+            this.tabContests.Size = new System.Drawing.Size(579, 273);
             this.tabContests.TabIndex = 1;
             this.tabContests.Text = "Contests";
             this.tabContests.UseVisualStyleBackColor = true;
@@ -580,7 +580,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabDetails.Location = new System.Drawing.Point(4, 22);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetails.Size = new System.Drawing.Size(575, 273);
+            this.tabDetails.Size = new System.Drawing.Size(579, 273);
             this.tabDetails.TabIndex = 2;
             this.tabDetails.Text = "Candidates";
             this.tabDetails.UseVisualStyleBackColor = true;
@@ -789,7 +789,7 @@ namespace KnightRider.ElectionTracker.ui
             this.dgvContestCounties.AllowUserToResizeRows = false;
             this.dgvContestCounties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvContestCounties.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvContestCounties.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvContestCounties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContestCounties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.countyColumn,
@@ -798,24 +798,11 @@ namespace KnightRider.ElectionTracker.ui
             this.dgvContestCounties.MultiSelect = false;
             this.dgvContestCounties.Name = "dgvContestCounties";
             this.dgvContestCounties.RowHeadersVisible = false;
+            this.dgvContestCounties.RowHeadersWidth = 60;
             this.dgvContestCounties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContestCounties.Size = new System.Drawing.Size(172, 225);
             this.dgvContestCounties.TabIndex = 3;
             this.dgvContestCounties.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContestCounties_CellEndEdit);
-            // 
-            // countyColumn
-            // 
-            this.countyColumn.HeaderText = "County";
-            this.countyColumn.Name = "countyColumn";
-            this.countyColumn.ReadOnly = true;
-            this.countyColumn.Width = 65;
-            // 
-            // wardCountColumn
-            // 
-            this.wardCountColumn.HeaderText = "Ward Count";
-            this.wardCountColumn.Name = "wardCountColumn";
-            this.wardCountColumn.ToolTipText = "Enter the ward count for this county in this contest.";
-            this.wardCountColumn.Width = 89;
             // 
             // lblAllCounties
             // 
@@ -906,6 +893,20 @@ namespace KnightRider.ElectionTracker.ui
             this.lblRequired.Size = new System.Drawing.Size(177, 16);
             this.lblRequired.TabIndex = 1;
             this.lblRequired.Text = "A * indicates a required field.";
+            // 
+            // countyColumn
+            // 
+            this.countyColumn.FillWeight = 76.92308F;
+            this.countyColumn.HeaderText = "County";
+            this.countyColumn.Name = "countyColumn";
+            this.countyColumn.ReadOnly = true;
+            // 
+            // wardCountColumn
+            // 
+            this.wardCountColumn.FillWeight = 123.0769F;
+            this.wardCountColumn.HeaderText = "Reporting Units";
+            this.wardCountColumn.Name = "wardCountColumn";
+            this.wardCountColumn.ToolTipText = "Enter the reporting units for this county in this contest.";
             // 
             // frmElection
             // 
