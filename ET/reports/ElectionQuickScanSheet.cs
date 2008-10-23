@@ -31,7 +31,7 @@ namespace KnightRider.ElectionTracker.reports {
 
         private const int CONTEST_COLUMN_WIDTH = 20;
         private const int RESPONSE_COLUMN_WIDTH = 30;
-        private const int REPORTING_COLUMN_WIDTH = 10;
+        private const int REPORTING_COLUMN_WIDTH = 20;
         private const int VOTE_COUNT_WIDTH = 7;
         private const int VOTE_PERCENTAGE_WIDTH = 8;
         private const int VOTE_COLUMN_WIDTH = VOTE_COUNT_WIDTH + VOTE_PERCENTAGE_WIDTH;
@@ -42,10 +42,12 @@ namespace KnightRider.ElectionTracker.reports {
             header.Add(CenterText(" ELECTION DATE " + entity.Date.ToShortDateString()));
             header.Add("");
             string contestHeader = PadString("CONTEST", CONTEST_COLUMN_WIDTH, true);
-            string responseHeader = PadString("CANDIDATE", RESPONSE_COLUMN_WIDTH - 7, true);
-            string reportingHeader = PadString("% WARDS REPORTING", REPORTING_COLUMN_WIDTH + 7, true);
+            string responseHeader = PadString("CANDIDATE", RESPONSE_COLUMN_WIDTH, true);
+            string reportingHeader1 = PadString("% OF REPORTING", REPORTING_COLUMN_WIDTH, true);
+            string reportingHeader2 = PadString("UNITS REPORTING", REPORTING_COLUMN_WIDTH, true);
             string votesHeader = "NUMBER OF VOTES";
-            header.Add(contestHeader + COLUMN_PADDING + responseHeader + COLUMN_PADDING + reportingHeader + COLUMN_PADDING + votesHeader);
+            header.Add(PadString("", CONTEST_COLUMN_WIDTH) + PadString("", RESPONSE_COLUMN_WIDTH) + reportingHeader1);
+            header.Add(contestHeader + responseHeader+ reportingHeader2 + votesHeader);
             List<ElectionContest> electionContests = new List<ElectionContest>(entity.ElectionContests);
             header.Add(CenterText("=", '='));
 
@@ -55,7 +57,7 @@ namespace KnightRider.ElectionTracker.reports {
                 body.Add("<KEEP_TOGETHER>");
                 body.Add("");
                 string contestColumn = PadString(electionContest.Contest.Name, CONTEST_COLUMN_WIDTH, true);
-                string reportingColumn = PadString((electionContest.GetWardsReportingPercentage() * 100).ToString("0.0") + "%", REPORTING_COLUMN_WIDTH, false);
+                string reportingColumn = PadString((electionContest.GetWardsReportingPercentage() * 100).ToString("0.0") + "%", REPORTING_COLUMN_WIDTH, true);
 
                 List<Response> responses = new List<Response>(electionContest.Responses);
 
@@ -72,12 +74,12 @@ namespace KnightRider.ElectionTracker.reports {
                         percentage = ((double) responseVotes / (double) totalVotes) * 100;
                     }
 
-                    string voteColumn = PadString(responseVotes.ToString(), VOTE_COUNT_WIDTH, false) + PadString(" (" + percentage.ToString("0.0") + "%)", VOTE_PERCENTAGE_WIDTH, false);
+                    string voteColumn = PadString(responseVotes.ToString(), VOTE_COUNT_WIDTH, false) + PadString(" (" + percentage.ToString("0.0") + "%)", VOTE_PERCENTAGE_WIDTH, true);
 
-                    body.Add(contestColumn + COLUMN_PADDING + responseColumn + COLUMN_PADDING + reportingColumn + COLUMN_PADDING + voteColumn);
+                    body.Add(contestColumn + responseColumn + reportingColumn + voteColumn);
 
                     contestColumn = PadString(" ", CONTEST_COLUMN_WIDTH); // Only print the contest on the first line.
-                    reportingColumn = PadString(" ", REPORTING_COLUMN_WIDTH); // Only print the % reporting wards on the first line.
+                    reportingColumn = PadString(" ", REPORTING_COLUMN_WIDTH); // Only print the % reporting units on the first line.
                 }
                 body.Add("</KEEP_TOGETHER>");
             }

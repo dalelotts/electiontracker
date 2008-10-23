@@ -103,7 +103,7 @@ namespace KnightRider.ElectionTracker.reports
 
                     body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
                     body.Add("");
-                    body.Add("County           " + candidateNames + "   Wards             Votes");
+                    body.Add("County           " + candidateNames + " Reporting Units     Votes");
 
                     foreach (ContestCounty cc in electionContest.Counties)
                     {

@@ -26,7 +26,7 @@ namespace KnightRider.ElectionTracker.reports {
     public class ProofingSheet : BaseReport<Election> {
         private const int CONTEST_COLUMN_WIDTH = 25;
         private const int COUNTY_COLUMN_WIDTH = 17;
-        private const int WARD_COLUMN_WIDTH = 5;
+        private const int WARD_COLUMN_WIDTH = 9;
         private const string COLUMN_PADDING = "   ";
 
         private static readonly IComparer<ElectionContest> BY_NAME = new ElectionContestComparer();
@@ -38,8 +38,9 @@ namespace KnightRider.ElectionTracker.reports {
             header.Add(CenterText("ELECTION PROOFING SHEET"));
             header.Add(CenterText("ELECTION DATE " + entity));
             header.Add("");
-            header.Add("CONTEST                  COUNTY           WARDS   CANDIDATE");
-            header.Add("----------------------   --------------   -----   ----------------------");
+            header.Add("                                          REPORTING");
+            header.Add("CONTEST                  COUNTY           UNITS       CANDIDATE");
+            header.Add("----------------------   --------------   ---------   ----------------------");
 
             List<ElectionContest> contests = new List<ElectionContest>(entity.ElectionContests);
 
@@ -105,8 +106,9 @@ namespace KnightRider.ElectionTracker.reports {
                         countyCount++;
                     }
                 }
-                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH + COUNTY_COLUMN_WIDTH) + "-----");
-                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH) + PadString("Total Wards:", COUNTY_COLUMN_WIDTH, false) + PadString(wardCount.ToString(), WARD_COLUMN_WIDTH, false));
+                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH + COUNTY_COLUMN_WIDTH) + PadString("", WARD_COLUMN_WIDTH, '-', true));
+                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH) + PadString("Total Reporting  ", COUNTY_COLUMN_WIDTH, false));
+                body.Add(PadString(" ", CONTEST_COLUMN_WIDTH) + PadString("Units:  ", COUNTY_COLUMN_WIDTH, false) + PadString(wardCount.ToString(), WARD_COLUMN_WIDTH, false));
                 body.Add("");
                 body.Add("</KEEP_TOGETHER>");
             }

@@ -74,7 +74,7 @@ namespace KnightRider.ElectionTracker.ui {
             Controls.Add(txtReporting);
 
             Label lblReporting = new Label();
-            lblReporting.Text = "Wards Reporting: ";
+            lblReporting.Text = "Reporting Units: ";
             lblReporting.TextAlign = ContentAlignment.MiddleRight;
             lblReporting.Location = new Point(txtReporting.Left - lblReporting.Width - 10, lblContest.Top);
             lblReporting.Anchor = ((AnchorStyles.Top) | AnchorStyles.Right);
