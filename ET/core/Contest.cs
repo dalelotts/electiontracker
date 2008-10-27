@@ -26,7 +26,6 @@ namespace KnightRider.ElectionTracker.core {
         private string name = null;
         private string notes = null;
         private bool isActive = true;
-        private bool isFinal = false;
 
 
         public virtual long ID {
@@ -48,12 +47,6 @@ namespace KnightRider.ElectionTracker.core {
         public virtual bool IsActive {
             get { return isActive; }
             set { isActive = value; }
-        }
-
-        public virtual bool IsFinal
-        {
-            get { return isFinal; }
-            set { isFinal = value; }
         }
 
         public override string ToString() {
