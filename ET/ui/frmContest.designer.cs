@@ -55,6 +55,7 @@ namespace KnightRider.ElectionTracker.ui
             this.txtName = new System.Windows.Forms.TextBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.lblRequired = new System.Windows.Forms.Label();
+            this.chkFinal = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblNotes
@@ -85,7 +86,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(354, 126);
             this.txtNotes.TabIndex = 4;
-
             // 
             // txtName
             // 
@@ -95,7 +95,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(317, 20);
             this.txtName.TabIndex = 2;
-
             // 
             // chkActive
             // 
@@ -121,11 +120,24 @@ namespace KnightRider.ElectionTracker.ui
             this.lblRequired.TabIndex = 0;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
+            // chkFinal
+            // 
+            this.chkFinal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkFinal.AutoSize = true;
+            this.chkFinal.Location = new System.Drawing.Point(83, 237);
+            this.chkFinal.Name = "chkFinal";
+            this.chkFinal.Size = new System.Drawing.Size(54, 17);
+            this.chkFinal.TabIndex = 11;
+            this.chkFinal.Text = "Final?";
+            this.chkFinal.UseVisualStyleBackColor = true;
+            this.chkFinal.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // frmContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 266);
+            this.Controls.Add(this.chkFinal);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.txtNotes);
@@ -141,6 +153,7 @@ namespace KnightRider.ElectionTracker.ui
             this.Controls.SetChildIndex(this.txtNotes, 0);
             this.Controls.SetChildIndex(this.chkActive, 0);
             this.Controls.SetChildIndex(this.txtName, 0);
+            this.Controls.SetChildIndex(this.chkFinal, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,6 +167,7 @@ namespace KnightRider.ElectionTracker.ui
         private TextBox txtName;
         private CheckBox chkActive;
         private Label lblRequired;
+        private CheckBox chkFinal;
     }
 }
 
