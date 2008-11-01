@@ -60,7 +60,6 @@ namespace KnightRider.ElectionTracker.reports {
                     ctlPrintDialog.Document.PrinterSettings = settings;
                     //ctlPrintDialog.Document.Print();
                     ctlPrintPreview.Document.Print();
-                    
                 }
             } catch (Exception ex) {
                 reportException("btnPrint_Click", ex);
@@ -125,6 +124,7 @@ namespace KnightRider.ElectionTracker.reports {
 
         private void refreshReport(PrintDocument document) {
             Controls.Remove(ctlPrintPreview);
+            
             ctlPrintPreview = new PrintPreviewControl();
             ctlPrintPreview.Location = previewControlLocation;
             ctlPrintPreview.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right;
@@ -146,7 +146,10 @@ namespace KnightRider.ElectionTracker.reports {
             {
                 needToRefresh = false;
                 ctlPrintPreview.Document.PrinterSettings = new PrinterSettings();
+                ctlPrintPreview.Document.PrinterSettings.PrintRange = PrintRange.AllPages;
+                ctlPrintPreview.Document.DefaultPageSettings.Landscape = report.IsLandscape();
                 refreshReport(ctlPrintPreview.Document );
+                
             }
         }
 
