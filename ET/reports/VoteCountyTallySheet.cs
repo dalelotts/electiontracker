@@ -77,6 +77,7 @@ namespace KnightRider.ElectionTracker.reports {
 
                 foreach (ContestCounty contestCounty in contestCounties) {
                     body.Add("<KEEP_TOGETHER>");
+                    
                     ElectionContest electionContest = contestCounty.ElectionContest;
                     body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
                     body.Add("");

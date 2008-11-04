@@ -58,8 +58,8 @@ namespace KnightRider.ElectionTracker.reports {
                     PrinterSettings settings = ctlPrintDialog.PrinterSettings;
                     needToRefresh = true;
                     ctlPrintDialog.Document.PrinterSettings = settings;
-                    ctlPrintDialog.Document.Print();
-                    //ctlPrintPreview.Document.Print();
+                    //ctlPrintDialog.Document.Print();
+                    ctlPrintPreview.Document.Print();
                 }
             } catch (Exception ex) {
                 reportException("btnPrint_Click", ex);
