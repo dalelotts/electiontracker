@@ -77,9 +77,12 @@ namespace KnightRider.ElectionTracker.reports {
 
                 foreach (ContestCounty contestCounty in contestCounties) {
                     body.Add("<KEEP_TOGETHER>");
-                    body.Add(AlignRight("Reporting Units: ______________" + PadString(" of " + contestCounty.WardCount, 10, '_', false)));
                     ElectionContest electionContest = contestCounty.ElectionContest;
                     body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
+                    body.Add("");
+                    body.Add("");
+                    body.Add(AlignRight("Wards Reporting: ______________" + PadString(" of " + contestCounty.WardCount, 10, '_', false)));
+                    body.Add("");
                     body.Add("");
                     foreach (Response response in electionContest.Responses) {
                         string responseColumn = PadString(response.ToString(), 51, true);
