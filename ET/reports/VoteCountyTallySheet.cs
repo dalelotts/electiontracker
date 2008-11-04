@@ -81,7 +81,7 @@ namespace KnightRider.ElectionTracker.reports {
                     body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
                     body.Add("");
                     body.Add("");
-                    body.Add(AlignRight("Wards Reporting: ______________" + PadString(" of " + contestCounty.WardCount, 10, '_', false)));
+                    body.Add(AlignRight("Reporting Units: ______________" + PadString(" of " + contestCounty.WardCount, 10, '_', false)));
                     body.Add("");
                     body.Add("");
                     foreach (Response response in electionContest.Responses) {
