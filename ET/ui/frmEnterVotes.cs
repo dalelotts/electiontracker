@@ -289,5 +289,10 @@ namespace KnightRider.ElectionTracker.ui {
             toolTip1.SetToolTip(lstCounties, tooltip);
         }
 
+        private void gbContest_Enter(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
