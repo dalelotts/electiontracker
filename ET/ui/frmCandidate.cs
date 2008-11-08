@@ -63,7 +63,6 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
-            Boolean newRecord = false;
             if (dirty)
             {
                 DialogResult dr = MessageBox.Show("Do you want to save the current record first?", "Candidate not saved", MessageBoxButtons.YesNo);
