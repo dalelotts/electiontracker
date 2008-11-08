@@ -32,6 +32,8 @@ namespace KnightRider.ElectionTracker.reports {
         private List<String> groupHeader = new List<string>();
         private readonly Point previewControlLocation;
         private Boolean needToRefresh;
+        private Margins margins = new Margins(50,50,50,50);
+
         public frmReport(IReport report) {
             InitializeComponent();
             toolStrip1.Visible = false;
@@ -50,16 +52,18 @@ namespace KnightRider.ElectionTracker.reports {
                 ctlPrintDialog.AllowCurrentPage = false ;
                 ctlPrintDialog.AllowSomePages = true;
                 ctlPrintDialog.UseEXDialog = true;
+                // The document on the print document needs to be set to the same document we just previewed
                 ctlPrintDialog.Document = ctlPrintPreview.Document;
                 DialogResult result = ctlPrintDialog.ShowDialog(this);
                 if (DialogResult.OK.Equals(result)) {
                     pageCount = 0;
-                    //PrinterSettings = ctlPrintDialog.PrinterSettings;
+
                     PrinterSettings settings = ctlPrintDialog.PrinterSettings;
                     needToRefresh = true;
                     ctlPrintDialog.Document.PrinterSettings = settings;
-                    //ctlPrintDialog.Document.Print();
-                    ctlPrintPreview.Document.Print();
+                    // set the margins on the printing document to those out of the page setup dialog
+                    ctlPrintDialog.Document.DefaultPageSettings.Margins = margins;
+                    ctlPrintDialog.Document.Print();
                 }
             } catch (Exception ex) {
                 reportException("btnPrint_Click", ex);
@@ -112,13 +116,19 @@ namespace KnightRider.ElectionTracker.reports {
             report.Generate();
 
             PrintDocument document = new PrintDocument();
-            document.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50);
-            ctlPrintDialog.Document = document;
+            
+            document.DefaultPageSettings.Margins = margins;
+            ctlPageSetup.Document = document;
+            ctlPageSetup.PageSettings.Margins = margins;
+
             document.PrintPage += new PrintPageEventHandler(PrintPageHandler);
             document.DefaultPageSettings.Landscape = report.IsLandscape();
             document.DocumentName = report.Name();
             document.EndPrint += new PrintEventHandler(endPrint);
 
+            // Add document to print preview control.  Print preview is the report pane on the form window
+            //ctlPrintPreview.Document = document;
+       
             refreshReport(document);
         }
 
@@ -148,6 +158,8 @@ namespace KnightRider.ElectionTracker.reports {
                 ctlPrintPreview.Document.PrinterSettings = new PrinterSettings();
                 ctlPrintPreview.Document.PrinterSettings.PrintRange = PrintRange.AllPages;
                 ctlPrintPreview.Document.DefaultPageSettings.Landscape = report.IsLandscape();
+                // creating the new printer settings reset our margins, we need to put them back
+                ctlPrintPreview.Document.PrinterSettings.DefaultPageSettings.Margins = margins;
                 refreshReport(ctlPrintPreview.Document );
                 
             }
@@ -455,7 +467,11 @@ namespace KnightRider.ElectionTracker.reports {
                 DialogResult result = ctlPageSetup.ShowDialog(this);
                 if (DialogResult.OK.Equals(result)) {
                     document.DefaultPageSettings = ctlPageSetup.PageSettings;
+                    // Update the document with the newly entered margins
+                    margins = ctlPageSetup.PageSettings.Margins;
+                    document.DefaultPageSettings.Margins = margins;
                     refreshReport(document);
+
                 }
             } catch (Exception ex) {
                 reportException("btnPageSetup_Click", ex);
