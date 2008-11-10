@@ -49,7 +49,7 @@ namespace KnightRider.ElectionTracker.ui {
                 this.loadTask = loadTask;
                 currentElection = new Election();
                 allContests = contestDAO.findAll();
-                allCandidates = candidateDAO.findAll();
+                allCandidates = candidateDAO.findActive();
                 allCounties = countyDAO.findAll();
             } catch (Exception ex) {
                 reportException("frmElection constructor", ex);
