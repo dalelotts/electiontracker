@@ -77,7 +77,12 @@ namespace KnightRider.ElectionTracker.db {
 
             FindHibernateDelegate<Candidate> findDelegate = delegate(ISession session)
                                                                 {
-                                                                    IQuery query = session.CreateSQLQuery("select * from candidate where CandidateFirstName = '" + entity.FirstName + "' and CandidateLastName = '" + entity.LastName + "' and CandidateID != " + entity.ID + ";").AddEntity(objectType);
+                                                                    IQuery query = session.CreateSQLQuery("select * from candidate where CandidateFirstName = :FirstName and CandidateLastName = :LastName and CandidateID != :ID")
+                                                                        .AddEntity(objectType)
+                                                                        .SetString("FirstName", entity.FirstName)
+                                                                        .SetString("LastName", entity.LastName)
+                                                                        .SetInt64("ID", entity.ID);
+                                                                      
                                                                     return query.List<Candidate>();
                                                                 };
 

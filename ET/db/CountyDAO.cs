@@ -67,7 +67,10 @@ namespace KnightRider.ElectionTracker.db {
         public IList<Fault> canMakePersistent(County entity) {
             FindHibernateDelegate<County> findDelegate = delegate(ISession session)
                                                              {
-                                                                 IQuery query = session.CreateSQLQuery("select * from county where CountyName = '" + entity.Name + "' and CountyID != " + entity.ID + ";").AddEntity(objectType);
+                                                                 IQuery query = session.CreateSQLQuery("select * from county where CountyName = :Name and CountyID != :ID")
+                                                                     .AddEntity(objectType)
+                                                                     .SetString("Name", entity.Name)
+                                                                     .SetInt64("ID", entity.ID);
                                                                  return query.List<County>();
                                                              };
 
@@ -106,7 +109,9 @@ namespace KnightRider.ElectionTracker.db {
         public IList<Fault> canMakePersistent(AttributeType entity) {
             FindHibernateDelegate<AttributeType> findDelegate = delegate(ISession session)
                                                                     {
-                                                                        IQuery query = session.CreateSQLQuery("select * from attributetype where AttributeTypeName = '" + entity.Name + "';").AddEntity(typeof (AttributeType));
+                                                                        IQuery query = session.CreateSQLQuery("select * from attributetype where AttributeTypeName = :Name")
+                                                                            .AddEntity(typeof (AttributeType))
+                                                                            .SetString("Name", entity.Name);
                                                                         return query.List<AttributeType>();
                                                                     };
 
@@ -124,7 +129,9 @@ namespace KnightRider.ElectionTracker.db {
         public IList<Fault> canMakePersistent(PhoneNumberType entity) {
             FindHibernateDelegate<PhoneNumberType> findDelegate = delegate(ISession session)
                                                                       {
-                                                                          IQuery query = session.CreateSQLQuery("select * from phonenumbertype where PhoneNumberTypeName = '" + entity.Name + "';").AddEntity(typeof (PhoneNumberType));
+                                                                          IQuery query = session.CreateSQLQuery("select * from phonenumbertype where PhoneNumberTypeName = :Name")
+                                                                              .AddEntity(typeof (PhoneNumberType))
+                                                                              .SetString("Name", entity.Name);
                                                                           return query.List<PhoneNumberType>();
                                                                       };
 

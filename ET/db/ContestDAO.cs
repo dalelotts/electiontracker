@@ -66,7 +66,10 @@ namespace KnightRider.ElectionTracker.db {
             IList<Fault> result = delegateDAO.canMakePersistent(entity);
             FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
                                                               {
-                                                                  IQuery query = session.CreateSQLQuery("select * from contest where contestname = '" + entity.Name + "' and contestid != " + entity.ID + ";").AddEntity(contestObjectType);
+                                                                  IQuery query = session.CreateSQLQuery("select * from contest where contestname = :Name and contestid != :ID")
+                                                                      .AddEntity(contestObjectType)
+                                                                      .SetString("Name", entity.Name)
+                                                                      .SetInt64("ID", entity.ID);
                                                                   return query.List<Contest>();
                                                               };
 
@@ -86,7 +89,11 @@ namespace KnightRider.ElectionTracker.db {
         protected IList<Fault> performCanMakePersistent(Contest entity) {
             FindHibernateDelegate<Contest> findDelegate = delegate(ISession session)
                                                               {
-                                                                  IQuery query = session.CreateSQLQuery("select * from contest where contestname = '" + entity.Name + "' and contestid != " + entity.ID + ";").AddEntity(contestObjectType);
+                                                                  IQuery query = session.CreateSQLQuery("select * from contest where contestname = :Name and contestid != :ID")
+                                                                      .AddEntity(contestObjectType)
+                                                                      .SetString("Name", entity.Name)
+                                                                      .SetInt64("ID", entity.ID);
+
                                                                   return query.List<Contest>();
                                                               };
 

@@ -39,14 +39,20 @@ namespace KnightRider.ElectionTracker.db {
         protected override IList<Fault> performCanMakePersistent(PoliticalParty entity) {
             FindHibernateDelegate<PoliticalParty> findDuplicateNames = delegate(ISession session)
                                                                            {
-                                                                               IQuery query = session.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = '" + entity.Name + "' and pp.politicalpartyid != " + entity.ID + ";").AddEntity(objectType);
+                                                                               IQuery query = session.CreateSQLQuery("select * from politicalparty pp where pp.politicalpartyname = :Name and pp.politicalpartyid != :ID")
+                                                                                   .AddEntity(objectType)
+                                                                                   .SetString("Name", entity.Name)
+                                                                                   .SetInt64("ID", entity.ID);
                                                                                return query.List<PoliticalParty>();
                                                                            };
             IList<PoliticalParty> duplicateNames = ExecuteFind(findDuplicateNames);
 
             FindHibernateDelegate<PoliticalParty> findDuplicateAbb = delegate(ISession session)
                                                                          {
-                                                                             IQuery query = session.CreateSQLQuery("select * from politicalparty where PoliticalPartyAbbrev = '" + entity.Abbreviation + "' and PoliticalPartyID != " + entity.ID + ";").AddEntity(objectType);
+                                                                             IQuery query = session.CreateSQLQuery("select * from politicalparty where PoliticalPartyAbbrev = :Abbreviation and PoliticalPartyID != :ID")
+                                                                                 .AddEntity(objectType)
+                                                                                 .SetString("Abbreviation", entity.Abbreviation)
+                                                                                 .SetInt64("ID", entity.ID);
                                                                              return query.List<PoliticalParty>();
                                                                          };
 

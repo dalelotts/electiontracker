@@ -60,7 +60,11 @@ namespace KnightRider.ElectionTracker.db {
         public IList<ContestCounty> find(long countyID, long electionContestID) {
             FindHibernateDelegate<ContestCounty> findDelegate = delegate(ISession session)
                                                                     {
-                                                                        IQuery query = session.CreateSQLQuery("select * from contestcounty where CountyID = " + countyID + " and ElectionContestID = " + electionContestID + ";").AddEntity(objectType);
+                                                                        IQuery query = session.CreateSQLQuery("select * from contestcounty where CountyID = :countyID and ElectionContestID = :electionContestID")
+                                                                            .AddEntity(objectType)
+                                                                            .SetInt64("countyID", countyID)
+                                                                            .SetInt64("electionContestID", electionContestID);
+                                                                           
                                                                         return query.List<ContestCounty>();
                                                                     };
 
