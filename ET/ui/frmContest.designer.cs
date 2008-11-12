@@ -85,7 +85,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(354, 126);
             this.txtNotes.TabIndex = 4;
-
             // 
             // txtName
             // 
@@ -95,7 +94,6 @@ namespace KnightRider.ElectionTracker.ui
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(317, 20);
             this.txtName.TabIndex = 2;
-
             // 
             // chkActive
             // 
@@ -135,6 +133,7 @@ namespace KnightRider.ElectionTracker.ui
             this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "frmContest";
             this.Text = "Contest";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmContest_FormClosing);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.lblNotes, 0);
             this.Controls.SetChildIndex(this.lblName, 0);

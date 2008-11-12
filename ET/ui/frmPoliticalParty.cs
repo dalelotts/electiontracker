@@ -25,7 +25,7 @@ using KnightRider.ElectionTracker.db;
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmPoliticalParty : BaseMDIChild {
         private readonly PoliticalPartyDAO politicalPartyDAO;
-
+        private Boolean dirty;
         private PoliticalParty currentPoliticalParty;
 
         public frmPoliticalParty(PoliticalPartyDAO politicalPartyDAO) {
@@ -34,6 +34,9 @@ namespace KnightRider.ElectionTracker.ui {
             currentPoliticalParty = new PoliticalParty();
             refreshControls();
             refreshGoToList();
+            txtAbbrev.TextChanged += new EventHandler(DataChanged);
+            txtName.TextChanged += new EventHandler(DataChanged);
+            dirty = false;
         }
 
         private void refreshControls() {
@@ -91,6 +94,7 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         public override void btnDelete_Click(object sender, EventArgs e) {
+            //delete's but throws an error
             try {
                 IList<Fault> faults = politicalPartyDAO.canMakeTransient(currentPoliticalParty);
                 if (reportFaults(faults)) {
@@ -125,6 +129,24 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("loadPoliticalParty", ex);
+            }
+        }
+        // Event handler.  Marks the Candidate form as dirty.
+        private void DataChanged(object sender, EventArgs e)
+        {
+            dirty = true;
+        }
+        private void frmPoliticalParty_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //check for dirty
+            if (dirty)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save Political Party before closing?", "Political Party not saved", MessageBoxButtons.YesNo);
+                if (String.Equals("Yes", dr.ToString()))
+                {
+                    btnSave_Click(sender, e);
+                }
+
             }
         }
     }

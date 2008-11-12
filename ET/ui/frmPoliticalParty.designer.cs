@@ -126,6 +126,7 @@ namespace KnightRider.ElectionTracker.ui
             this.MinimumSize = new System.Drawing.Size(360, 165);
             this.Name = "frmPoliticalParty";
             this.Text = "Political Party";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPoliticalParty_FormClosing);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.chkActive, 0);
             this.Controls.SetChildIndex(this.label2, 0);

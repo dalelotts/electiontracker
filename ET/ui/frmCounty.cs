@@ -27,9 +27,9 @@ namespace KnightRider.ElectionTracker.ui {
     internal partial class frmCounty : BaseMDIChild {
         private readonly ICountyDAO countyDAO;
         private readonly LoadCountyForUI loadCountyForUI;
-
+        private Boolean dirty;
         private County currentCounty;
-
+        private Boolean cancelClose;
         public frmCounty(ICountyDAO countyDAO, LoadCountyForUI loadCountyForUI) {
             InitializeComponent();
 
@@ -41,6 +41,19 @@ namespace KnightRider.ElectionTracker.ui {
 
             currentCounty = new County();
             refreshGoToList();
+            txtCountyName.TextChanged += new EventHandler(DataChanged);
+            txtAreaCode.TextChanged += new EventHandler(DataChanged);
+            txtCountyWardCount.TextChanged += new EventHandler(DataChanged);
+            txtNotes.TextChanged += new EventHandler(DataChanged);
+            txtPhoneNumber.TextChanged += new EventHandler(DataChanged);
+            txtValue.TextChanged += new EventHandler(DataChanged);
+            txtWebsite.TextChanged += new EventHandler(DataChanged);
+            cbPhoneNumberType.TextChanged += new EventHandler(DataChanged);
+            lstPhoneNums.TextChanged += new EventHandler(DataChanged);
+            cboAttributeKey.TextChanged += new EventHandler(DataChanged);
+            lstAttributes.TextChanged += new EventHandler(DataChanged);
+            lstWebsites.TextChanged += new EventHandler(DataChanged);
+            dirty = false;
         }
 
 
@@ -240,6 +253,10 @@ namespace KnightRider.ElectionTracker.ui {
                     raiseMakePersistentEvent();
                     MessageBox.Show(this, currentCounty.Name + " county saved.", "Sucessful Save");
                 }
+                else
+                {
+                    cancelClose = true;
+                }
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
             }
@@ -364,6 +381,31 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("cbKey_Leave", ex);
+            }
+        }
+        // Event handler.  Marks the Candidate form as dirty.
+        private void DataChanged(object sender, EventArgs e)
+        {
+            dirty = true;
+        }
+
+        private void frmCounty_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //check for dirty
+            if (dirty)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save County before closing?", "County not saved", MessageBoxButtons.YesNo);
+                if (String.Equals("Yes", dr.ToString()))
+                {
+                    cancelClose = false;
+                    btnSave_Click(sender, e);
+                    if (cancelClose)
+                    {
+                        e.Cancel = true;
+                    }
+                    
+                }
+
             }
         }
     }

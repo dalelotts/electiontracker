@@ -520,6 +520,7 @@ namespace KnightRider.ElectionTracker.ui
             this.MinimumSize = new System.Drawing.Size(450, 320);
             this.Name = "frmCounty";
             this.Text = "County";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCounty_FormClosing);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.gbCounty.ResumeLayout(false);

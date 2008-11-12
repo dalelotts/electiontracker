@@ -108,6 +108,8 @@ namespace KnightRider.ElectionTracker.ui
             this.pgCounties = new System.Windows.Forms.TabPage();
             this.lstAllCounties = new System.Windows.Forms.ListBox();
             this.dgvContestCounties = new System.Windows.Forms.DataGridView();
+            this.countyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wardCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblAllCounties = new System.Windows.Forms.Label();
             this.btnAddAllCounties = new System.Windows.Forms.Button();
             this.btnRemoveCounty = new System.Windows.Forms.Button();
@@ -118,8 +120,6 @@ namespace KnightRider.ElectionTracker.ui
             this.lblCountiesContests = new System.Windows.Forms.Label();
             this.lblRequired = new System.Windows.Forms.Label();
             this.ctlToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.countyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wardCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -399,7 +399,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabElection.Location = new System.Drawing.Point(4, 22);
             this.tabElection.Name = "tabElection";
             this.tabElection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabElection.Size = new System.Drawing.Size(579, 273);
+            this.tabElection.Size = new System.Drawing.Size(575, 273);
             this.tabElection.TabIndex = 0;
             this.tabElection.Text = "Election";
             this.tabElection.UseVisualStyleBackColor = true;
@@ -467,7 +467,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabContests.Location = new System.Drawing.Point(4, 22);
             this.tabContests.Name = "tabContests";
             this.tabContests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContests.Size = new System.Drawing.Size(579, 273);
+            this.tabContests.Size = new System.Drawing.Size(575, 273);
             this.tabContests.TabIndex = 1;
             this.tabContests.Text = "Contests";
             this.tabContests.UseVisualStyleBackColor = true;
@@ -580,7 +580,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabDetails.Location = new System.Drawing.Point(4, 22);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetails.Size = new System.Drawing.Size(579, 273);
+            this.tabDetails.Size = new System.Drawing.Size(575, 273);
             this.tabDetails.TabIndex = 2;
             this.tabDetails.Text = "Candidates";
             this.tabDetails.UseVisualStyleBackColor = true;
@@ -804,6 +804,20 @@ namespace KnightRider.ElectionTracker.ui
             this.dgvContestCounties.TabIndex = 3;
             this.dgvContestCounties.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContestCounties_CellEndEdit);
             // 
+            // countyColumn
+            // 
+            this.countyColumn.FillWeight = 76.92308F;
+            this.countyColumn.HeaderText = "County";
+            this.countyColumn.Name = "countyColumn";
+            this.countyColumn.ReadOnly = true;
+            // 
+            // wardCountColumn
+            // 
+            this.wardCountColumn.FillWeight = 123.0769F;
+            this.wardCountColumn.HeaderText = "Reporting Units";
+            this.wardCountColumn.Name = "wardCountColumn";
+            this.wardCountColumn.ToolTipText = "Enter the reporting units for this county in this contest.";
+            // 
             // lblAllCounties
             // 
             this.lblAllCounties.AutoSize = true;
@@ -894,20 +908,6 @@ namespace KnightRider.ElectionTracker.ui
             this.lblRequired.TabIndex = 1;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
-            // countyColumn
-            // 
-            this.countyColumn.FillWeight = 76.92308F;
-            this.countyColumn.HeaderText = "County";
-            this.countyColumn.Name = "countyColumn";
-            this.countyColumn.ReadOnly = true;
-            // 
-            // wardCountColumn
-            // 
-            this.wardCountColumn.FillWeight = 123.0769F;
-            this.wardCountColumn.HeaderText = "Reporting Units";
-            this.wardCountColumn.Name = "wardCountColumn";
-            this.wardCountColumn.ToolTipText = "Enter the reporting units for this county in this contest.";
-            // 
             // frmElection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -917,6 +917,7 @@ namespace KnightRider.ElectionTracker.ui
             this.MinimumSize = new System.Drawing.Size(615, 400);
             this.Name = "frmElection";
             this.Text = "Election";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmElection_FormClosing);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
             this.tabControl1.ResumeLayout(false);

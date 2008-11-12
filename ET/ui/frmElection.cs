@@ -36,7 +36,7 @@ namespace KnightRider.ElectionTracker.ui {
 
         private Election currentElection;
         private ElectionContest currentElectionContest;
-
+        private Boolean dirty;
 
         //To Do: Add support for double clicking to add or remove contests, candidates, counties, etc.
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
@@ -51,6 +51,15 @@ namespace KnightRider.ElectionTracker.ui {
                 allContests = contestDAO.findAll();
                 allCandidates = candidateDAO.findActive();
                 allCounties = countyDAO.findAll();
+                dirty = false;
+
+                txtNotes.TextChanged += new EventHandler(DataChanged);
+                txtCustomResponse.TextChanged += new EventHandler(DataChanged);
+                lstContestCandidates.TextChanged += new EventHandler(DataChanged);
+                lstElectionContests.TextChanged += new EventHandler(DataChanged);
+                dgvContestCounties.TextChanged += new EventHandler(DataChanged);
+                
+
             } catch (Exception ex) {
                 reportException("frmElection constructor", ex);
             }
@@ -252,6 +261,7 @@ namespace KnightRider.ElectionTracker.ui {
                 }
                 refreshContestLists();
                 refreshCandidateLists();
+                DataChanged(sender, e);
             } catch (Exception ex) {
                 reportException("btnAddAllContests_Click", ex);
             }
@@ -278,6 +288,7 @@ namespace KnightRider.ElectionTracker.ui {
 
                     refreshContestLists();
                     refreshCandidateLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnAddContest_Click", ex);
@@ -294,6 +305,7 @@ namespace KnightRider.ElectionTracker.ui {
                     }
                     refreshContestLists();
                     refreshCandidateLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnRemoveContest_Click", ex);
@@ -306,6 +318,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentElection.ElectionContests = new List<ElectionContest>(allContests.Count);
                     refreshContestLists();
                     refreshCandidateLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnRemoveAllContests_Click", ex);
@@ -322,6 +335,7 @@ namespace KnightRider.ElectionTracker.ui {
                         currentElectionContest.Responses.Add(candidateResponse);
                     }
                     refreshCandidateLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnAddAllCandidates_Click", ex);
@@ -340,6 +354,7 @@ namespace KnightRider.ElectionTracker.ui {
                             currentElectionContest.Responses.Add(candidateResponse);
                         }
                         refreshCandidateLists();
+                        DataChanged(sender, e);
                     }
                 }
             } catch (Exception ex) {
@@ -357,6 +372,7 @@ namespace KnightRider.ElectionTracker.ui {
                             //lstDeletedResponses.Add(response);
                         }
                         refreshCandidateLists();
+                        DataChanged(sender, e);
                     }
                 }
             } catch (Exception ex) {
@@ -369,6 +385,7 @@ namespace KnightRider.ElectionTracker.ui {
                 if (currentElectionContest != null) {
                     currentElectionContest.Responses = new List<Response>(allCandidates.Count);
                     refreshCandidateLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnRemoveAllCandidates_Click", ex);
@@ -387,6 +404,7 @@ namespace KnightRider.ElectionTracker.ui {
                         currentElectionContest.Counties.Add(contestCounty);
                     }
                     refreshCountyLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnAddAllCounties_Click", ex);
@@ -405,6 +423,7 @@ namespace KnightRider.ElectionTracker.ui {
                         currentElectionContest.Counties.Add(contestCounty);
                     }
                     refreshCountyLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnAddCounty_Click", ex);
@@ -419,6 +438,7 @@ namespace KnightRider.ElectionTracker.ui {
                             currentElectionContest.Counties.Remove((ContestCounty) row.Cells[0].Value);
                         }
                         refreshCountyLists();
+                        DataChanged(sender, e);
                     }
                 }
             } catch (Exception ex) {
@@ -431,6 +451,7 @@ namespace KnightRider.ElectionTracker.ui {
                 if (currentElectionContest != null) {
                     currentElectionContest.Counties = new List<ContestCounty>(allCounties.Count);
                     refreshCountyLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnRemoveAllCounties_Click", ex);
@@ -441,6 +462,7 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 currentElectionContest = (ElectionContest) lstContestCandidate.SelectedItem;
                 refreshCandidateLists();
+                DataChanged(sender, e);
             } catch (Exception ex) {
                 reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }
@@ -457,6 +479,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentElectionContest.Responses.Add(response);
                     txtCustomResponse.Text = null;
                     refreshCandidateLists();
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnAddCustomResponse_Click", ex);
@@ -474,6 +497,7 @@ namespace KnightRider.ElectionTracker.ui {
                     int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
                     currentElectionContest.Responses.RemoveAt(ind2);
                     currentElectionContest.Responses.Insert(ind2 - 1, (Response) o);
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnResponseUp_Click", ex);
@@ -491,6 +515,7 @@ namespace KnightRider.ElectionTracker.ui {
                     int ind2 = currentElectionContest.Responses.IndexOf((Response) o);
                     currentElectionContest.Responses.RemoveAt(ind2);
                     currentElectionContest.Responses.Insert(ind2 + 1, (Response) o);
+                    DataChanged(sender, e);
                 }
             } catch (Exception ex) {
                 reportException("btnResponseDown_Click", ex);
@@ -520,6 +545,7 @@ namespace KnightRider.ElectionTracker.ui {
                     incumbent.IsIncumbent = true;
                 }
                 refreshCandidateLists();
+                DataChanged(sender, e);
             } catch (Exception ex) {
                 reportException("btnSetIncumbent_Click", ex);
             }
@@ -543,6 +569,24 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("dgvContestCounties_CellEndEdit", ex);
+            }
+        }
+        // Event handler.  Marks the Candidate form as dirty.
+        private void DataChanged(object sender, EventArgs e)
+        {
+            dirty = true;
+        }
+        private void frmElection_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //check for dirty
+            if (dirty)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save Election before closing?", "Election not saved", MessageBoxButtons.YesNo);
+                if (String.Equals("Yes", dr.ToString()))
+                {
+                    btnSave_Click(sender, e);
+                }
+
             }
         }
     }

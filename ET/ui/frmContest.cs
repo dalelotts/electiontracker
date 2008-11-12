@@ -26,7 +26,8 @@ namespace KnightRider.ElectionTracker.ui {
     internal partial class frmContest : BaseMDIChild {
         private readonly IContestDAO contestDAO;
         private Contest currentContest;
-
+        private Boolean dirty;
+        private Boolean cancelClose;
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
                 IList<Fault> faults = contestDAO.canMakeTransient(currentContest);
@@ -46,6 +47,11 @@ namespace KnightRider.ElectionTracker.ui {
             this.contestDAO = contestDAO;
 
             currentContest = new Contest();
+
+            //set up text boxes with a hanlder for text changed
+            txtName.TextChanged += new EventHandler(DataChanged);
+            txtNotes.TextChanged += new EventHandler(DataChanged);
+            dirty = false;
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
@@ -69,11 +75,16 @@ namespace KnightRider.ElectionTracker.ui {
                 bool persistData = reportFaults(faults);
 
                 //If there were no errors, persist data to the database
-                if (persistData) {
+                if (persistData)
+                {
                     currentContest = contestDAO.makePersistent(currentContest);
                     refreshControls();
                     raiseMakePersistentEvent();
                     MessageBox.Show(this, currentContest + " saved.", "Sucessful Save");
+                }
+                else
+                {
+                    cancelClose = true;
                 }
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
@@ -124,6 +135,32 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             }
             refreshControls();
+        }
+
+        // Event handler.  Marks the Candidate form as dirty.
+        private void DataChanged(object sender, EventArgs e)
+        {
+            dirty = true;
+        }
+
+        private void frmContest_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //check to see if the form is dirty and if it is, then ask to save
+            //check for dirty
+            if (dirty)
+            {
+                DialogResult dr = MessageBox.Show("Do you want to save Contest before closing?", "Contest not saved", MessageBoxButtons.YesNo);
+                if (String.Equals("Yes", dr.ToString()))
+                {
+                    cancelClose = false ;
+                    btnSave_Click(sender, e);
+                    if (cancelClose)
+                    {
+                        e.Cancel = true;
+                    }
+                }
+
+            }
         }
     }
 }
