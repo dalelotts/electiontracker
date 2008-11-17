@@ -911,7 +911,6 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnClearVotes
             // 
-            this.btnClearVotes.Enabled = false;
             this.btnClearVotes.Location = new System.Drawing.Point(520, 36);
             this.btnClearVotes.Name = "btnClearVotes";
             this.btnClearVotes.Size = new System.Drawing.Size(75, 23);

@@ -14,6 +14,8 @@ namespace KnightRider.ElectionTracker.db {
         public static readonly IList<ICriterion> ACTIVE_CRITERION = new List<ICriterion>();
         public static readonly IList<ICriterion> EMPTY_CRITERION = new List<ICriterion>();
         public static readonly IList<ICriterion> NOT_ACTIVE_CRITERION = new List<ICriterion>();
+        public static readonly IList<ICriterion> FINAL_CRITERION = new List<ICriterion>();
+        public static readonly IList<ICriterion> NOT_FINAL_CRITERION = new List<ICriterion>();
 
         private static readonly Map<Type, IList<PropertyInfo>> TYPE_TO_REQUIRED_PROPERTIES = new Map<Type, IList<PropertyInfo>>();
 
@@ -23,6 +25,8 @@ namespace KnightRider.ElectionTracker.db {
         static DelegateDAO() {
             ACTIVE_CRITERION.Add(new EqExpression("IsActive", true));
             NOT_ACTIVE_CRITERION.Add(new EqExpression("IsActive", false));
+            FINAL_CRITERION.Add(new EqExpression("IsFinal", true));
+            NOT_FINAL_CRITERION.Add(new EqExpression("IsFinal", false));
         }
 
         private readonly Type objectType = typeof (T);

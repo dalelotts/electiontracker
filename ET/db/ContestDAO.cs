@@ -46,6 +46,16 @@ namespace KnightRider.ElectionTracker.db {
             return delegateDAO.findByCriteria(DelegateDAO<Contest>.NOT_ACTIVE_CRITERION, ORDER_BY_NAME);
         }
 
+        public IList<Contest> findFinal()
+        {
+            return delegateDAO.findByCriteria(DelegateDAO<Contest>.FINAL_CRITERION, ORDER_BY_NAME);
+        }
+
+        public IList<Contest> findNotFinal()
+        {
+            return delegateDAO.findByCriteria(DelegateDAO<Contest>.NOT_FINAL_CRITERION, ORDER_BY_NAME);
+        }
+
         public Contest findById(object id, bool lockRecord, params IDAOTask<Contest>[] tasks) {
             return delegateDAO.findById(id, lockRecord, tasks);
         }

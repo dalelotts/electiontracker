@@ -49,7 +49,15 @@ namespace KnightRider.ElectionTracker.ui {
             lblContest.Location = new Point(LEFT, LEFT);
             lblContest.Width = 300;
             lblContest.AutoSize = true;
-            lblContest.Text = contestCounty.ElectionContest.Contest.Name;
+            //Check to see if the contest is 'final':
+            ElectionContest ecTemp = contestCounty.ElectionContest;
+            Contest cTemp = ecTemp.Contest;
+            String finaltext = "";
+            if (cTemp.IsFinal)
+            {
+                finaltext = "*FINAL* ";
+            }
+            lblContest.Text = finaltext + contestCounty.ElectionContest.Contest.Name;
             lblContest.TextAlign = ContentAlignment.MiddleLeft;
             lblContest.Font = new Font(lblContest.Font, FontStyle.Bold);
             Controls.Add(lblContest);
@@ -64,6 +72,14 @@ namespace KnightRider.ElectionTracker.ui {
             Controls.Add(lblWardCount);
 
             txtReporting = new TextBox();
+            //Check to see if the contest is 'final':
+            ecTemp = contestCounty.ElectionContest;
+            cTemp = ecTemp.Contest;
+
+            if (cTemp.IsFinal)
+            {
+                txtReporting.Enabled = false; //disable the Reporting Units entry box
+            }
             txtReporting.Width = 50;
             txtReporting.Location = new Point(lblWardCount.Left - txtReporting.Width - 5, lblContest.Top);
             txtReporting.Text = contestCounty.WardsReporting.ToString();
@@ -153,6 +169,14 @@ namespace KnightRider.ElectionTracker.ui {
                 Controls.Add(label);
 
                 TextBox textBox = new TextBox();
+                //Check to see if the contest is 'final':
+                ElectionContest ecTemp = contestCounty.ElectionContest;
+                Contest cTemp = ecTemp.Contest;
+
+                if (cTemp.IsFinal)
+                {
+                    textBox.Enabled = false; //disable the vote entry box
+                }
                 textBox.Text = "NA";
                 textBox.TextChanged += new EventHandler(DataChanged);
                 textBox.Enter += new EventHandler(selectAllText);

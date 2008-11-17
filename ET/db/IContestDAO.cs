@@ -5,5 +5,7 @@ namespace KnightRider.ElectionTracker.db {
     public interface IContestDAO : IGenericDAO<Contest> {
         IList<Contest> findActive();
         IList<Contest> findInactive();
+        IList<Contest> findFinal();
+        IList<Contest> findNotFinal();
     }
 }

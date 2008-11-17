@@ -27,5 +27,6 @@
     <property name="Name" column="ContestName" unique="true"  type="String" length="100" not-null="true"/>
     <property name="Notes" column="ContestNotes" type="String" length="40" />
     <property name="IsActive" column="ContestIsActive" type="Boolean" not-null="true" />
+	<property name="IsFinal" column="ContestIsFinal" type="Boolean" not-null="true" />
   </class>
 </hibernate-mapping>

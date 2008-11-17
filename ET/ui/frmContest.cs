@@ -67,6 +67,7 @@ namespace KnightRider.ElectionTracker.ui {
         public override void btnSave_Click(object sender, EventArgs e) {
             try {
                 currentContest.IsActive = chkActive.Checked;
+                currentContest.IsFinal = chkFinal.Checked;
                 currentContest.Name = txtName.Text;
                 currentContest.Notes = txtNotes.Text;
 
@@ -105,6 +106,7 @@ namespace KnightRider.ElectionTracker.ui {
 
             refreshGoToList();
             chkActive.Checked = currentContest.IsActive;
+            chkFinal.Checked = currentContest.IsFinal;
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
@@ -161,6 +163,10 @@ namespace KnightRider.ElectionTracker.ui {
                 }
 
             }
+        }
+
+        private void chkFinal_CheckedChanged(object sender, EventArgs e) {
+            currentContest.IsFinal = chkFinal.Checked;
         }
     }
 }
