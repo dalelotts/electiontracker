@@ -81,13 +81,9 @@ namespace KnightRider.ElectionTracker.core {
         }
 
         public virtual void ResetTotalVotes() {
-            IList<ResponseValue> newResponseValues = new List<ResponseValue>(ResponseValues);
-            ResponseValues.Clear();
-
-            foreach (ResponseValue rv in newResponseValues)
+            for (int i=0; i < ResponseValues.Count; i++)
             {
-                rv.VoteCount = 0;
-                ResponseValues.Add(rv);
+                ResponseValues[i].VoteCount = 0;
             }
         }
 

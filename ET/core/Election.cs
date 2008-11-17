@@ -87,13 +87,8 @@ namespace KnightRider.ElectionTracker.core {
 
         public virtual void ResetTotalVotes()
         {
-            IList<ElectionContest> newElectionContests = new List<ElectionContest>(electionContests);
-            electionContests.Clear();
-
-            foreach (ElectionContest ec in newElectionContests)
-            {
-                ec.ResetTotalVotes();
-                electionContests.Add(ec);
+            for (int i = 0; i < electionContests.Count; i++) {
+                electionContests[i].ResetTotalVotes();
             }
             
         }

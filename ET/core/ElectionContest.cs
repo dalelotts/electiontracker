@@ -78,13 +78,8 @@ namespace KnightRider.ElectionTracker.core {
         }
 
         public virtual void ResetTotalVotes() {
-            IList<ContestCounty> newContestCounties = new List<ContestCounty>(Counties);
-            Counties.Clear();
-
-            foreach (ContestCounty cc in newContestCounties)
-            {
-                cc.ResetTotalVotes();
-                Counties.Add(cc);
+            for (int i = 0; i < counties.Count; i++){
+                counties[i].ResetTotalVotes();
             }
         }
 
