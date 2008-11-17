@@ -59,6 +59,7 @@ namespace KnightRider.ElectionTracker.reports
 
                 string candidateNames = "";
                 int responseCount = responses.Count;
+                int currentRowNum = 0;
 
                 // Special case for no candidates in contest
                 if (responseCount == 0)
@@ -78,7 +79,8 @@ namespace KnightRider.ElectionTracker.reports
                 {
                     candidateNames = "";                        // initialize for next row
 
-                    int responsesThisRow = 0;   
+                    int responsesThisRow = 0;
+                    currentRowNum++;
 
                     // determine number of candidates we will fit in this row
                     int currentResponseSpaceUsage = 0;
@@ -117,7 +119,14 @@ namespace KnightRider.ElectionTracker.reports
 
                     body.Add("<KEEP_TOGETHER>");
 
-                    body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
+                    if (currentRowNum == 1)
+                    {
+                        body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
+                    }
+                    else
+                    {
+                        body.Add(CenterText(" " + electionContest.Contest.Name + " - continued", '-'));
+                    }
                     body.Add("");
                     body.Add("County           " + candidateNames + " Reporting Units       Votes");
 
