@@ -33,6 +33,9 @@ namespace KnightRider.ElectionTracker.reports
         private const int ALL_RESPONSE_SPACE = 78;
         private const int COUNTY_COLUMN_WIDTH = 17;
         private const int RESPONSES_PER_ROW = 3;        // number of responses that fit in one row
+        private const int COLUMN_PADDING = 5;
+        private const int VOTE_COUNT_WIDTH = 7;
+        private const int VOTE_PERCENTAGE_WIDTH = 12;
 
 
         public ContestVoteSummary(IList<TreeViewFilter> filters) : base("Contest Vote Summary", true, filters) { }
@@ -48,9 +51,6 @@ namespace KnightRider.ElectionTracker.reports
 
             foreach (ElectionContest electionContest in contests)
             {
-
-                body.Add("<KEEP_TOGETHER>");
-
                 // First, determine the responses.  We need to display information for all candidates, 
                 //  so will need to use all responses and generate multiple rows if needed
                 List<Response> responses = new List<Response>(electionContest.Responses);
@@ -59,80 +59,110 @@ namespace KnightRider.ElectionTracker.reports
 
                 string candidateNames = "";
                 int responseCount = responses.Count;
-                int responseRows = (responseCount + (RESPONSES_PER_ROW - 1)) / RESPONSES_PER_ROW; // generally correct, but...
 
-                if (responseRows == 0) responseRows = 1;        // special case to make sure display NO CAND. message if no responses
-
-                // assume at least one row, even if empty because of no responses
-                for (int row = 1; row <= responseRows; row++)
+                // Special case for no candidates in contest
+                if (responseCount == 0)
                 {
-                    candidateNames = "";                        // initialize for next row
+                    body.Add("<KEEP_TOGETHER>");
 
-                    int responseColumnWidth = ALL_RESPONSE_SPACE;
-                    int responsesThisRow = RESPONSES_PER_ROW;   // default to max
-
-                    if (responseCount == 0)
-                    {
-                        responsesThisRow = 0;
-                        candidateNames = PadString("----------NO CANDIDATES----------", ALL_RESPONSE_SPACE);
-                    }
-                    else
-                    {
-                        // determine the number of responses for this row
-                        if (row < responseRows)
-                        {
-                            responsesThisRow = RESPONSES_PER_ROW;
-                        }
-                        else
-                        {
-                            responsesThisRow = responseCount % RESPONSES_PER_ROW;
-                            if (responsesThisRow == 0)
-                            {        // even multiple of RESPONSES_PER_ROW
-                                responsesThisRow = RESPONSES_PER_ROW;
-                            }
-                        }
-                        // calculate column widths and fit the responses into the available space
-                        responseColumnWidth = ALL_RESPONSE_SPACE / responsesThisRow;
-                        for (int i = 0; i < responsesThisRow; i++)
-                        {
-                            Response response = responses[(row - 1) * RESPONSES_PER_ROW + i];
-                            // Divide the available space equally for all candidates.
-                            candidateNames += PadString(response.ToString(), responseColumnWidth, true);
-                        }
-                    }
+                    candidateNames = PadString("----------NO CANDIDATES----------", ALL_RESPONSE_SPACE);
 
                     body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
                     body.Add("");
                     body.Add("County           " + candidateNames + " Reporting Units     Votes");
 
+                    body.Add("</KEEP_TOGETHER>");
+                }
+
+                while (responses.Count > 0)
+                {
+                    candidateNames = "";                        // initialize for next row
+
+                    int responsesThisRow = 0;   
+
+                    // determine number of candidates we will fit in this row
+                    int currentResponseSpaceUsage = 0;
+                    while ((currentResponseSpaceUsage < ALL_RESPONSE_SPACE) && (responsesThisRow < responses.Count))
+                    {
+                        if (((Response)(responses[responsesThisRow])).ToString().Length + currentResponseSpaceUsage < ALL_RESPONSE_SPACE)
+                        {
+                            responsesThisRow++;
+                            currentResponseSpaceUsage = currentResponseSpaceUsage + ((Response)(responses[responsesThisRow - 1])).ToString().Length;
+                            int padding = 0;
+                            if (((Response)(responses[responsesThisRow - 1])).ToString().Length < VOTE_PERCENTAGE_WIDTH + VOTE_COUNT_WIDTH)
+                            {
+                                padding = VOTE_COUNT_WIDTH + VOTE_PERCENTAGE_WIDTH - ((Response)(responses[responsesThisRow - 1])).ToString().Length;
+                            }
+                            candidateNames += PadString(((Response)(responses[responsesThisRow - 1])).ToString(), ((Response)(responses[responsesThisRow - 1])).ToString().Length + COLUMN_PADDING + padding, true);
+                            currentResponseSpaceUsage = currentResponseSpaceUsage + COLUMN_PADDING + padding;  // Allow for space after name to separate columns;
+                        }
+                        else
+                        {
+                            if (responsesThisRow == 0)
+                            {
+                                // we have to put something in the row, otherwise we hang forever always looping to the next row and never advancing.
+                                candidateNames += PadString(((Response)(responses[responsesThisRow])).ToString(), ALL_RESPONSE_SPACE - COLUMN_PADDING, true);
+                                currentResponseSpaceUsage = ALL_RESPONSE_SPACE;
+                                responsesThisRow++;
+                            } else
+                            {
+                                // move on to next row
+                                currentResponseSpaceUsage = ALL_RESPONSE_SPACE;
+                            }
+                        }
+                    }
+
+                    // pad candidate names such that the reporting units and votes column always align
+                    candidateNames = PadString(candidateNames, ALL_RESPONSE_SPACE, true);
+
+                    body.Add("<KEEP_TOGETHER>");
+
+                    body.Add(CenterText(" " + electionContest.Contest.Name + " ", '='));
+                    body.Add("");
+                    body.Add("County           " + candidateNames + " Reporting Units       Votes");
+
                     foreach (ContestCounty cc in electionContest.Counties)
                     {
                         string strVoteCounts = PadString(cc.County.Name, COUNTY_COLUMN_WIDTH);
-
+                        
                         for (int i = 0; i < responsesThisRow; i++)
                         {
-                            strVoteCounts += GetVoteNumbers(responses[(row - 1) * RESPONSES_PER_ROW + i],
-                                                            cc, responseColumnWidth);
+                            int padding = 0;
+                            if (((Response)(responses[i])).ToString().Length < VOTE_PERCENTAGE_WIDTH + VOTE_COUNT_WIDTH)
+                            {
+                                padding = VOTE_COUNT_WIDTH + VOTE_PERCENTAGE_WIDTH - ((Response)(responses[i])).ToString().Length;
+                            }
+                            int stringLength = 0;
+                            if (((Response)(responses[i])).ToString().Length > ALL_RESPONSE_SPACE)
+                            {
+                                stringLength = ALL_RESPONSE_SPACE - COLUMN_PADDING;
+                            }
+                            else
+                            {
+                                stringLength = ((Response)(responses[i])).ToString().Length;
+                            }
+                            strVoteCounts += GetVoteNumbers(((Response)(responses[i])), cc, stringLength + COLUMN_PADDING + padding);
                         }
-
-                        strVoteCounts += PadString(cc.WardsReporting + "/" + cc.WardCount, 7, false);
+                       
+                        strVoteCounts += PadString(cc.WardsReporting + "/" + cc.WardCount, (COUNTY_COLUMN_WIDTH + ALL_RESPONSE_SPACE - strVoteCounts.Length + COLUMN_PADDING), false);
+                        
 
                         if (cc.WardCount > 0)
                         {
-                            strVoteCounts += PadString("(" + (((double)cc.WardsReporting / (double)cc.WardCount) * 100).ToString("0.0") + "%)", 12, false);
+                            strVoteCounts += PadString("(" + (((double)cc.WardsReporting / (double)cc.WardCount) * 100).ToString("0.0") + "%)", VOTE_PERCENTAGE_WIDTH, false);
                         }
                         else
                         {
                             if (cc.WardsReporting > 0)
                             {
-                                strVoteCounts += PadString("(100.0%)", 12, false);
+                                strVoteCounts += PadString("(100.0%)", VOTE_PERCENTAGE_WIDTH, false);
                             }
                             else
                             {
                                 strVoteCounts += PadString("(0.0%)", 12, false);
                             }
                         }
-                        strVoteCounts += PadString(" " + cc.GetTotalVotes(), 6, false);
+                        strVoteCounts += PadString(" " + cc.GetTotalVotes(), COLUMN_PADDING + 6, false);
                         body.Add(strVoteCounts);
                     }
                     body.Add("");
@@ -142,24 +172,47 @@ namespace KnightRider.ElectionTracker.reports
 
                     for (int i = 0; i < responsesThisRow; i++)
                     {
-                        int responseVotes = responses[(row - 1) * RESPONSES_PER_ROW + i].GetTotalVotes();
+                        int responseVotes = ((Response)(responses[i])).GetTotalVotes();
                         string responseString = responseVotes.ToString();
 
-                        if (totalVotes > 0)
+                        int padding = 0;
+                        if (((Response)(responses[i])).ToString().Length < VOTE_PERCENTAGE_WIDTH + VOTE_COUNT_WIDTH)
                         {
-                            strTotals += PadString(PadString(responseString, 7, false) + PadString(" (" + ((double)responseVotes / (double)totalVotes).ToString("0.0" + "%)"), 12, false), responseColumnWidth);
+                            padding = VOTE_COUNT_WIDTH + VOTE_PERCENTAGE_WIDTH - ((Response)(responses[i])).ToString().Length;
+                        }
+
+                        int stringLength = 0;
+                        if (((Response)(responses[i])).ToString().Length > ALL_RESPONSE_SPACE)
+                        {
+                            stringLength = ALL_RESPONSE_SPACE - COLUMN_PADDING;
                         }
                         else
                         {
-                            strTotals += PadString(PadString(responseString, 7, false) + PadString("(" + "0.0%)", 12, false), responseColumnWidth);
+                            stringLength = ((Response)(responses[i])).ToString().Length;
                         }
+
+                        if (totalVotes > 0)
+                        {
+                            strTotals += PadString(PadString(responseString, VOTE_COUNT_WIDTH
+                                , false) + PadString(" (" + ((double)responseVotes / (double)totalVotes).ToString("0.0" + "%)"), VOTE_PERCENTAGE_WIDTH, false), stringLength + COLUMN_PADDING + padding);
+                        }
+                        else
+                        {
+                            strTotals += PadString(PadString(responseString, VOTE_COUNT_WIDTH, false) + PadString("(" + "0.0%)", VOTE_PERCENTAGE_WIDTH, false), stringLength + COLUMN_PADDING + padding);
+                        }                       
                     }
 
-                    strTotals += PadString(electionContest.GetWardsReporting() + "/" + electionContest.GetWardCount(), 7, false) + PadString("(" + (electionContest.GetWardsReportingPercentage() * 100).ToString("0.0") + "%)", 12, false) + PadString(totalVotes.ToString(), 6, false);
-                    body.Add(strTotals);
-                }   // end - for row ...
+                    strTotals += PadString(electionContest.GetWardsReporting() + "/" + electionContest.GetWardCount(), (COUNTY_COLUMN_WIDTH + ALL_RESPONSE_SPACE - strTotals.Length + COLUMN_PADDING), false);
+                    strTotals += PadString("(" + (electionContest.GetWardsReportingPercentage() * 100).ToString("0.0") + "%)", VOTE_PERCENTAGE_WIDTH, false);
+                    strTotals += PadString(totalVotes.ToString(), COLUMN_PADDING + 6, false);
 
-                body.Add("</KEEP_TOGETHER>");
+                    body.Add(strTotals);
+
+                    body.Add("");
+                    body.Add("</KEEP_TOGETHER>");
+
+                    responses.RemoveRange(0, responsesThisRow);
+                }
             }
 
             footer.Add("Page ${Page}     " + DateTime.Now);
@@ -186,7 +239,7 @@ namespace KnightRider.ElectionTracker.reports
                 votePercentage = Math.Round(resultValue.GetVotePercentage() * 100, 2);
             }
 
-            return PadString(PadString(voteCount.ToString(), 7, false) + PadString(" (" + votePercentage + "%)", 12, false), columnWidth, true);
+            return PadString(PadString(voteCount.ToString(), VOTE_COUNT_WIDTH, false) + PadString(" (" + votePercentage + "%)", VOTE_PERCENTAGE_WIDTH, false), columnWidth, true);
         }
 
         public override Font Font()
