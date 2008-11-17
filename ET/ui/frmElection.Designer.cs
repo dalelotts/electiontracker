@@ -120,6 +120,7 @@ namespace KnightRider.ElectionTracker.ui
             this.lblCountiesContests = new System.Windows.Forms.Label();
             this.lblRequired = new System.Windows.Forms.Label();
             this.ctlToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnClearVotes = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -908,10 +909,22 @@ namespace KnightRider.ElectionTracker.ui
             this.lblRequired.TabIndex = 1;
             this.lblRequired.Text = "A * indicates a required field.";
             // 
+            // btnClearVotes
+            // 
+            this.btnClearVotes.Enabled = false;
+            this.btnClearVotes.Location = new System.Drawing.Point(520, 36);
+            this.btnClearVotes.Name = "btnClearVotes";
+            this.btnClearVotes.Size = new System.Drawing.Size(75, 23);
+            this.btnClearVotes.TabIndex = 11;
+            this.btnClearVotes.Text = "Clear Votes";
+            this.btnClearVotes.UseVisualStyleBackColor = true;
+            this.btnClearVotes.Click += new System.EventHandler(this.btnClearVotes_Click);
+            // 
             // frmElection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(607, 366);
+            this.Controls.Add(this.btnClearVotes);
             this.Controls.Add(this.tbDisplay);
             this.Controls.Add(this.lblRequired);
             this.MinimumSize = new System.Drawing.Size(615, 400);
@@ -920,6 +933,7 @@ namespace KnightRider.ElectionTracker.ui
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmElection_FormClosing);
             this.Controls.SetChildIndex(this.lblRequired, 0);
             this.Controls.SetChildIndex(this.tbDisplay, 0);
+            this.Controls.SetChildIndex(this.btnClearVotes, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1017,6 +1031,7 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.ListBox lstAllCounties;
         private System.Windows.Forms.DataGridViewTextBoxColumn countyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn wardCountColumn;
+        private System.Windows.Forms.Button btnClearVotes;
 
     }
 }

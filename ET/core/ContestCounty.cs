@@ -80,6 +80,17 @@ namespace KnightRider.ElectionTracker.core {
             return result;
         }
 
+        public virtual void ResetTotalVotes() {
+            IList<ResponseValue> newResponseValues = new List<ResponseValue>(ResponseValues);
+            ResponseValues.Clear();
+
+            foreach (ResponseValue rv in newResponseValues)
+            {
+                rv.VoteCount = 0;
+                ResponseValues.Add(rv);
+            }
+        }
+
         public override bool Equals(object obj) {
             if (obj == null) return false;
             if (this == obj) return true;

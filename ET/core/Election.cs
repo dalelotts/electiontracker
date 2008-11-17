@@ -84,5 +84,18 @@ namespace KnightRider.ElectionTracker.core {
                 return stringRepresentation.GetHashCode();
             }
         }
+
+        public virtual void ResetTotalVotes()
+        {
+            IList<ElectionContest> newElectionContests = new List<ElectionContest>(electionContests);
+            electionContests.Clear();
+
+            foreach (ElectionContest ec in newElectionContests)
+            {
+                ec.ResetTotalVotes();
+                electionContests.Add(ec);
+            }
+            
+        }
     }
 }

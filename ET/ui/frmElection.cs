@@ -187,6 +187,8 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
+        
+
         public override void btnSave_Click(object sender, EventArgs e) {
             refreshCountyLists();
 
@@ -589,5 +591,34 @@ namespace KnightRider.ElectionTracker.ui {
 
             }
         }
+
+        private void btnClearVotes_Click(object sender, EventArgs e) {
+            try {
+                DialogResult dr = MessageBox.Show("Are you SURE you want to clear this election's vote totals?", "Clear election vote results?", MessageBoxButtons.YesNo);
+                if (String.Equals("Yes", dr.ToString())) {
+                    //Clear the vote totals
+                    //IList<Fault> faults = electionDAO.canMakePersistent(currentElection);
+                    //bool persistData = reportFaults(faults);
+                    //If there were no errors, persist data to the database
+                    //if (persistData)
+                    //{
+                       // currentElection = electionDAO.makePersistent(currentElection);
+                       // refreshControls();
+                       // raiseMakePersistentEvent();
+                        currentElection.ResetTotalVotes();
+                        //Display "Votes cleared."
+                        MessageBox.Show(this, currentElection + " election votes cleared.", "Votes cleared.");
+                   // }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                reportException("btnClearVotes_Click", ex);
+            }
+
+        }
+
+        
     }
 }
