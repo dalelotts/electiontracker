@@ -60,7 +60,7 @@ namespace KnightRider.ElectionTracker.core {
                 }
             }
 
-            return "--skip-opt -Q -u " + uid + " " + database + " -p " + pwd;
+            return "--skip-opt -Q -u " + uid + " " + " --password=" + pwd + " " + database;
         }
 
         [STAThread]
@@ -68,20 +68,32 @@ namespace KnightRider.ElectionTracker.core {
             try
             {
                 Directory.CreateDirectory("backups");
-                String filename = @"backups\backup" + DateTime.Now.ToString("yyyy-MM-dd") + ".sql";
+                
+                String filename = Directory.GetCurrentDirectory() + @"\backups\backup" + DateTime.Now.ToString("yyyy-MM-dd") + ".sql";
 
                 if (!File.Exists(filename))
                 {
                     System.Diagnostics.Process proc = new System.Diagnostics.Process();
+
                     proc.EnableRaisingEvents = false;
                     proc.StartInfo.FileName = "mysqldump";
-                    proc.StartInfo.Arguments = getBackupArguments() + " > " + filename;
+                    proc.StartInfo.Arguments = getBackupArguments();
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
                     proc.Start();
+                    string output = proc.StandardOutput.ReadToEnd();
                     proc.WaitForExit();
+
+                    //Write the output to file
+                    TextWriter tw = new StreamWriter(filename);
+                    tw.Write(output);
+                    tw.Close();
+                    
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, "Error info");
                 LOG.Error(ex.Message, ex);
             }
 
