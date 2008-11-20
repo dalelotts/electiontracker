@@ -60,7 +60,7 @@ namespace KnightRider.ElectionTracker.core {
                 }
             }
 
-            return "--skip-opt -Q -u " + uid + " " + " --password=" + pwd + " " + database;
+            return " -Q -u " + uid + " " + " --password=" + pwd + " " + database;
         }
 
         [STAThread]
@@ -79,6 +79,7 @@ namespace KnightRider.ElectionTracker.core {
                     proc.StartInfo.FileName = "mysqldump";
                     proc.StartInfo.Arguments = getBackupArguments();
                     proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.CreateNoWindow = true;
                     proc.StartInfo.RedirectStandardOutput = true;
                     proc.Start();
                     string output = proc.StandardOutput.ReadToEnd();
@@ -88,7 +89,8 @@ namespace KnightRider.ElectionTracker.core {
                     TextWriter tw = new StreamWriter(filename);
                     tw.Write(output);
                     tw.Close();
-                    
+
+                    proc.Close();                    
                 }
             }
             catch (Exception ex)
