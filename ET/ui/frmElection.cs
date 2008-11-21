@@ -91,6 +91,7 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             }
             refreshControls();
+            dirty = false;
         }
 
         private void refreshContestLists() {
@@ -249,6 +250,7 @@ namespace KnightRider.ElectionTracker.ui {
                 currentElection = (Election) cboGoTo.SelectedItem;
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
+                dirty = false;
             } catch (Exception ex) {
                 reportException("cboGoTo_SelectedIndexChanged", ex);
             }
@@ -528,6 +530,7 @@ namespace KnightRider.ElectionTracker.ui {
             try {
                 currentElectionContest = (ElectionContest) lstContestCounty.SelectedItem;
                 refreshCountyLists();
+                dirty = false;
             } catch (Exception ex) {
                 reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }

@@ -124,6 +124,7 @@ namespace KnightRider.ElectionTracker.ui {
                 currentContest = (Contest) cboGoTo.SelectedItem;
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
+                dirty = false;
             } catch (Exception ex) {
                 reportException("cboGoTo_SelectedIndexChanged", ex);
             }
@@ -137,6 +138,7 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             }
             refreshControls();
+            dirty = false;
         }
 
         // Event handler.  Marks the Candidate form as dirty.

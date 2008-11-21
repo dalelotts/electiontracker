@@ -48,7 +48,6 @@ namespace KnightRider.ElectionTracker.ui {
             txtPhoneNumber.TextChanged += new EventHandler(DataChanged);
             txtValue.TextChanged += new EventHandler(DataChanged);
             txtWebsite.TextChanged += new EventHandler(DataChanged);
-            cbPhoneNumberType.TextChanged += new EventHandler(DataChanged);
             lstPhoneNums.TextChanged += new EventHandler(DataChanged);
             cboAttributeKey.TextChanged += new EventHandler(DataChanged);
             lstAttributes.TextChanged += new EventHandler(DataChanged);
@@ -270,6 +269,7 @@ namespace KnightRider.ElectionTracker.ui {
                 } else {
                     loadCounty(currentCounty.ID);
                 }
+                dirty = false;
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
                 reportException("btnReset_Click", ex);
@@ -281,6 +281,7 @@ namespace KnightRider.ElectionTracker.ui {
                 County selectedCounty = (County) cboGoTo.SelectedItem;
                 loadCounty(selectedCounty.ID);
                 base.cboGoTo_SelectedIndexChanged(sender, e);
+                dirty = false;
             } catch (Exception ex) {
                 reportException("cboGoTo_SelectedIndexChanged", ex);
             }
@@ -309,6 +310,7 @@ namespace KnightRider.ElectionTracker.ui {
                     }
                 }
                 refreshControls();
+                dirty = false;
             } catch (Exception ex) {
                 reportException("loadCounty", ex);
             }

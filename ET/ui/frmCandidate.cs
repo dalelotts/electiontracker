@@ -162,6 +162,7 @@ namespace KnightRider.ElectionTracker.ui {
                 currentCandidate = (Candidate) cboGoTo.SelectedItem;
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
+                dirty = false;
             } catch (Exception ex) {
                 reportException("cboGoTo_SelectedIndexChanged", ex);
             }
@@ -175,6 +176,7 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             }
             refreshControls();
+            dirty = false;
         }
 
         private void cboPoliticalParty_Leave(object sender, EventArgs e) {
