@@ -462,12 +462,15 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void lstContestCandidate_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                currentElectionContest = (ElectionContest) lstContestCandidate.SelectedItem;
+        private void lstContestCandidate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                currentElectionContest = (ElectionContest)lstContestCandidate.SelectedItem;
                 refreshCandidateLists();
-                DataChanged(sender, e);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }
         }
@@ -526,12 +529,16 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void lstContestCounty_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                currentElectionContest = (ElectionContest) lstContestCounty.SelectedItem;
+        private void lstContestCounty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                currentElectionContest = (ElectionContest)lstContestCounty.SelectedItem;
                 refreshCountyLists();
                 dirty = false;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }
         }
