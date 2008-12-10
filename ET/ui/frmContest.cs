@@ -21,17 +21,31 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
+using KnightRider.ElectionTracker.db.task;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class frmContest : BaseMDIChild {
+        private readonly IDAOTask<DefaultContestCounty> loadTask;
         private readonly IContestDAO contestDAO;
         private Contest currentContest;
         private Boolean dirty;
         private Boolean cancelClose;
+        private IList<County> allCounties;
+        private IList<DefaultContestCounty> defaultContestCounties;
+        private readonly IDefaultContestCountyDAO dccDAO;
+        IList<DefaultContestCounty> remCounties = new List<DefaultContestCounty>();
         public override void btnDelete_Click(object sender, EventArgs e) {
             try {
                 IList<Fault> faults = contestDAO.canMakeTransient(currentContest);
                 if (reportFaults(faults)) {
+                    foreach (DefaultContestCounty dcc in defaultContestCounties)
+                    {
+                        IList<Fault> dccFaults = dccDAO.canMakeTransient(dcc);
+                        if (reportFaults(dccFaults))
+                        {
+                            dccDAO.makeTransient(dcc);
+                        }
+                    }
                     contestDAO.makeTransient(currentContest);
                     currentContest = new Contest();
                     refreshControls();
@@ -42,12 +56,15 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        public frmContest(IContestDAO contestDAO) {
+        public frmContest(IContestDAO contestDAO, ICountyDAO countyDAO, IDefaultContestCountyDAO dccDAO, IDAOTask<DefaultContestCounty> loadTask) {
             InitializeComponent();
             this.contestDAO = contestDAO;
-
+            this.dccDAO = dccDAO;
+            this.loadTask = loadTask;
             currentContest = new Contest();
-
+            allCounties = countyDAO.findAll();
+            defaultContestCounties = dccDAO.find(currentContest.ID);
+            refreshCountyLists();
             //set up text boxes with a hanlder for text changed
             txtName.TextChanged += new EventHandler(DataChanged);
             txtNotes.TextChanged += new EventHandler(DataChanged);
@@ -74,11 +91,28 @@ namespace KnightRider.ElectionTracker.ui {
                 //Validate the current data and get a list of faults.
                 IList<Fault> faults = contestDAO.canMakePersistent(currentContest);
                 bool persistData = reportFaults(faults);
-
+                
                 //If there were no errors, persist data to the database
                 if (persistData)
                 {
                     currentContest = contestDAO.makePersistent(currentContest);
+                    foreach (DefaultContestCounty dcc in defaultContestCounties)
+                    {
+                        IList<Fault> dccFaults = dccDAO.canMakePersistent(dcc);
+                        if (reportFaults(dccFaults))
+                        {
+                            dccDAO.makePersistent(dcc);
+                        }
+                    }
+                    //try to delete any default contest counties that need to be deleted
+
+
+                    foreach (DefaultContestCounty d in remCounties)
+                    {
+                        dccDAO.makeTransient(d);
+                        defaultContestCounties.Remove(d);
+
+                    }
                     refreshControls();
                     raiseMakePersistentEvent();
                     MessageBox.Show(this, currentContest + " saved.", "Sucessful Save");
@@ -87,6 +121,10 @@ namespace KnightRider.ElectionTracker.ui {
                 {
                     cancelClose = true;
                 }
+                
+                refreshCountyLists();
+                
+
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
             }
@@ -107,6 +145,11 @@ namespace KnightRider.ElectionTracker.ui {
             refreshGoToList();
             chkActive.Checked = currentContest.IsActive;
             chkFinal.Checked = currentContest.IsFinal;
+            foreach (County county in allCounties)
+            {
+                lstAllCounties.Items.Add(county);
+            }
+            refreshCountyLists();
         }
 
         public override void btnReset_Click(object sender, EventArgs e) {
@@ -135,6 +178,12 @@ namespace KnightRider.ElectionTracker.ui {
                 Contest contest = contestDAO.findById(id.Value, false);
                 if (contest != null) {
                     currentContest = contest;
+                    IList<DefaultContestCounty> dccs = dccDAO.find(currentContest.ID);
+                    foreach (DefaultContestCounty dcc in dccs)
+                    {
+                        dcc.Contest = currentContest;
+                        defaultContestCounties.Add(dccDAO.findById(dcc.ID ,false,loadTask));
+                    }
                 }
             }
             refreshControls();
@@ -169,6 +218,129 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void chkFinal_CheckedChanged(object sender, EventArgs e) {
             currentContest.IsFinal = chkFinal.Checked;
+        }
+        private void refreshCountyLists()
+        {
+            lstAllCounties.Items.Clear();
+            dgvContestCounties.Rows.Clear();
+
+            foreach (County county in allCounties)
+            {
+                lstAllCounties.Items.Add(county);
+            }
+
+            foreach (DefaultContestCounty dcc in defaultContestCounties)
+            {
+                DataGridViewTextBoxCell countyCell = new DataGridViewTextBoxCell();
+                countyCell.Value = dcc.County;
+
+                DataGridViewTextBoxCell wardCountCell = new DataGridViewTextBoxCell();
+                wardCountCell.Value = dcc.WardCount;
+                wardCountCell.Tag = dcc.WardCount;
+
+                DataGridViewRow row = new DataGridViewRow();
+                row.Cells.Add(countyCell);
+                row.Cells.Add(wardCountCell);
+
+                dgvContestCounties.Rows.Add(row);
+                lstAllCounties.Items.Remove(dcc.County);
+            }
+        }
+
+        private void btnAddAllCounties_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                    foreach (County county in allCounties)
+                    {
+                        DefaultContestCounty defaultContestCounty = new DefaultContestCounty();
+                        defaultContestCounty.Contest = currentContest;
+                        defaultContestCounty.County = county;
+                        defaultContestCounty.WardCount = county.WardCount;
+                        defaultContestCounty.WardsReporting = 0;
+                        defaultContestCounties.Add(defaultContestCounty);
+                    }
+                    refreshCountyLists();
+                    DataChanged(sender, e);
+            }
+            catch (Exception ex)
+            {
+                reportException("btnAddAllCounties_Click", ex);
+            }
+        }
+
+        private void btnAddCounty_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListBox.SelectedObjectCollection counties = lstAllCounties.SelectedItems;
+                if (counties.Count > 0)
+                {
+                    foreach (County county in counties)
+                    {
+                        DefaultContestCounty defaultContestCounty = new DefaultContestCounty();
+                        defaultContestCounty.Contest = currentContest;
+                        defaultContestCounty.County = county;
+                        defaultContestCounty.WardCount = county.WardCount;
+                        defaultContestCounty.WardsReporting = 0;
+                        defaultContestCounties.Add(defaultContestCounty);
+                    }
+                    refreshCountyLists();
+                    DataChanged(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                reportException("btnAddCounty_Click", ex);
+            }
+        }
+
+        private void btnRemoveCounty_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (currentContest != null)
+                {
+                    if (dgvContestCounties.SelectedRows.Count > 0)
+                    {
+                        
+                        foreach (DataGridViewRow row in dgvContestCounties.SelectedRows)
+                        {
+                            foreach (DefaultContestCounty dcc in defaultContestCounties)
+                            {
+                                if (dcc.County.Equals((County)row.Cells[0].Value))
+                                {
+                                    dgvContestCounties.Rows.Remove(row);
+                                    remCounties.Add(dcc);
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                reportException("btnRemoveCounty_Click", ex);
+            }
+        }
+
+        private void btnRemoveAllCounties_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (currentContest != null)
+                {
+                    remCounties = defaultContestCounties;
+                    defaultContestCounties = new List<DefaultContestCounty>(allCounties.Count);
+                    refreshCountyLists();
+                    DataChanged(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                reportException("btnRemoveAllCounties_Click", ex);
+            }
         }
     }
 }

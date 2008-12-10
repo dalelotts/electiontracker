@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{01ACB36B-53D5-443B-9CC3-47EC018250E6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -100,6 +100,7 @@
     <Compile Include="core\CandidateResponse.cs" />
     <Compile Include="core\Contest.cs" />
     <Compile Include="core\ContestCounty.cs" />
+    <Compile Include="core\DefaultContestCounty.cs" />
     <Compile Include="core\County.cs" />
     <Compile Include="core\CountyAttribute.cs" />
     <Compile Include="core\CountyPhoneNumber.cs" />
@@ -115,6 +116,8 @@
     <Compile Include="db\CandidateDAO.cs" />
     <Compile Include="db\ContestCountyDAO.cs" />
     <Compile Include="db\ContestDAO.cs" />
+    <Compile Include="db\IDefaultContestCountyDAO.cs" />
+    <Compile Include="db\DefaultContestCountyDAO.cs" />
     <Compile Include="db\CountyDAO.cs" />
     <Compile Include="db\DelegateDAO.cs" />
     <Compile Include="db\ElectionDAO.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="db\ResponseValueDAO.cs" />
     <Compile Include="db\task\IDAOTask.cs" />
     <Compile Include="db\task\LoadCountyForUI.cs" />
+    <Compile Include="db\task\LoadDefaultContestCountyForUI.cs" />
     <Compile Include="db\task\LoadElectionForReport.cs" />
     <Compile Include="db\task\LoadElectionForReportWithResults.cs" />
     <Compile Include="db\task\LoadElectionForUI.cs" />
@@ -335,6 +339,7 @@
     <EmbeddedResource Include="core\ContestCounty.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="core\DefaultContestCounty.hbm.xml" />
     <Content Include="core\CustomResponse.hbm.xml" />
     <EmbeddedResource Include="core\ResponseValue.hbm.xml" />
     <None Include="Log4Net.xml">

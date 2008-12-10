@@ -50,6 +50,7 @@
   <object name="ResponseValueDAO" type="KnightRider.ElectionTracker.db.ResponseValueDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ResponseDAO" type="KnightRider.ElectionTracker.db.ResponseDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <object name="ContestCountyDAO" type="KnightRider.ElectionTracker.db.ContestCountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
+  <object name="DefaultContestCountyDAO" type="KnightRider.ElectionTracker.db.DefaultContestCountyDAO, ElectionTracker" autowire="autodetect" singleton="true"/>
   <!-- END DAO OBJECTS -->
 
   <!-- BEGIN DAO TASKS -->
@@ -58,6 +59,7 @@
   <object name="LoadElectionForReport" type="KnightRider.ElectionTracker.db.task.LoadElectionForReport, ElectionTracker" autowire="no" singleton="true"/>
   <object name="LoadElectionForReportWithResults" type="KnightRider.ElectionTracker.db.task.LoadElectionForReportWithResults, ElectionTracker" autowire="no" singleton="true"/>
   <object name="LoadElectionForVoteEntry" type="KnightRider.ElectionTracker.db.task.LoadElectionForVoteEntry, ElectionTracker" autowire="no" singleton="true"/>
+  <object name="LoadDefaultContestCountyForUI" type="KnightRider.ElectionTracker.db.task.LoadDefaultContestCountyForUI, ElectionTracker" autowire="no" singleton="true"/>
   <!-- END DAO TASKS -->
 
   <!-- BEGIN UI CONTROLLER -->
@@ -95,10 +97,16 @@
     <constructor-arg name="candidateDAO" ref="CandidateDAO"/>
     <constructor-arg name="countyDAO" ref="CountyDAO"/>
     <constructor-arg name="loadTask" ref="LoadElectionForUI"/>
+    <constructor-arg name="dccDAO" ref="DefaultContestCountyDAO"/>
   </object>
   <object name="KnightRider.ElectionTracker.ui.frmCounty" type="KnightRider.ElectionTracker.ui.frmCounty, ElectionTracker" autowire="constructor" singleton="false"/>
   <object name="KnightRider.ElectionTracker.ui.frmCandidate" type="KnightRider.ElectionTracker.ui.frmCandidate, ElectionTracker" autowire="constructor" singleton="false"/>
-  <object name="KnightRider.ElectionTracker.ui.frmContest" type="KnightRider.ElectionTracker.ui.frmContest, ElectionTracker" autowire="constructor" singleton="false"/>
+    <object name="KnightRider.ElectionTracker.ui.frmContest" type="KnightRider.ElectionTracker.ui.frmContest, ElectionTracker" autowire="constructor" singleton="false">
+      <constructor-arg name="contestDAO" ref="ContestDAO"/>
+      <constructor-arg name="countyDAO" ref="CountyDAO"/>
+      <constructor-arg name="dccDAO" ref="DefaultContestCountyDAO"/>
+      <constructor-arg name="loadTask" ref="LoadDefaultContestCountyForUI"/>
+    </object>
   <object name="KnightRider.ElectionTracker.ui.frmPoliticalParty" type="KnightRider.ElectionTracker.ui.frmPoliticalParty, ElectionTracker" autowire="constructor" singleton="false"/>
   <!-- END DATA ENTRY FORMS -->
 

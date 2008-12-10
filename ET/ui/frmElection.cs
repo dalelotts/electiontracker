@@ -33,6 +33,7 @@ namespace KnightRider.ElectionTracker.ui {
         private readonly IList<Contest> allContests;
         private readonly IList<Candidate> allCandidates;
         private readonly IList<County> allCounties;
+        private readonly IDefaultContestCountyDAO dccDAO;
 
         private Election currentElection;
         private ElectionContest currentElectionContest;
@@ -42,11 +43,13 @@ namespace KnightRider.ElectionTracker.ui {
         //To Do: Add support to re-order the candidates and counties so they always appear in the order displayed on this screen.
 
 
-        public frmElection(IElectionDAO electionDAO, IContestDAO contestDAO, ICandidateDAO candidateDAO, ICountyDAO countyDAO, IDAOTask<Election> loadTask) {
+        public frmElection(IElectionDAO electionDAO, IContestDAO contestDAO, ICandidateDAO candidateDAO, ICountyDAO countyDAO, IDAOTask<Election> loadTask, IDefaultContestCountyDAO dccDAO) {
+
             try {
                 InitializeComponent();
                 this.electionDAO = electionDAO;
                 this.loadTask = loadTask;
+                this.dccDAO = dccDAO;
                 currentElection = new Election();
                 allContests = contestDAO.findAll();
                 allCandidates = candidateDAO.findActive();
@@ -262,6 +265,16 @@ namespace KnightRider.ElectionTracker.ui {
                 foreach (Contest contest in allContests) {
                     ElectionContest electionContest = makeElectionContest(contest);
                     currentElection.ElectionContests.Add(electionContest);
+                    IList<DefaultContestCounty> defContCounties = dccDAO.find(contest.ID);
+                    foreach (DefaultContestCounty d in defContCounties)
+                    {
+                        ContestCounty contestCounty = new ContestCounty();
+                        contestCounty.ElectionContest = electionContest;
+                        contestCounty.County = d.County;
+                        contestCounty.WardCount = d.WardCount;
+                        contestCounty.WardsReporting = d.WardsReporting;
+                        electionContest.Counties.Add(contestCounty);
+                    }
                 }
                 refreshContestLists();
                 refreshCandidateLists();
@@ -288,6 +301,16 @@ namespace KnightRider.ElectionTracker.ui {
                     foreach (Contest contest in selectedItems) {
                         ElectionContest electionContest = makeElectionContest(contest);
                         currentElection.ElectionContests.Add(electionContest);
+                        IList<DefaultContestCounty> defContCounties = dccDAO.find(contest.ID);
+                        foreach (DefaultContestCounty d in defContCounties)
+                        {
+                            ContestCounty contestCounty = new ContestCounty();
+                            contestCounty.ElectionContest = electionContest;
+                            contestCounty.County = d.County;
+                            contestCounty.WardCount = d.WardCount;
+                            contestCounty.WardsReporting = d.WardsReporting;
+                            electionContest.Counties.Add(contestCounty);
+                        }
                     }
 
                     refreshContestLists();
@@ -468,9 +491,11 @@ namespace KnightRider.ElectionTracker.ui {
             {
                 currentElectionContest = (ElectionContest)lstContestCandidate.SelectedItem;
                 refreshCandidateLists();
-            }
-            catch (Exception ex)
-            {
+
+            } catch (Exception ex) {
+
+
+
                 reportException("lstElectionContestsDetails_SelectedIndexChanged", ex);
             }
         }
