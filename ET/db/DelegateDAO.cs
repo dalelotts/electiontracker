@@ -70,6 +70,21 @@ namespace KnightRider.ElectionTracker.db {
 
 
         public T makePersistent(T entity) {
+            /* Added the line below to fix the persistence issues with multiple saves,
+             * specifically for adding contest counties to an election. This may work
+             * due to forcing hibernate to update or at least correlate itself to
+             * the current database and perform a commit. It may also work because
+             * it forces a session to be initialized and all necessary data is 
+             * correlated correctly with the requested action and the database.
+             * 
+             * This line may not be necessary if Hibernate and its dependencies are
+             * updated to the latest releases. The line does not seem to create
+             * additional issues.
+             * 
+             * -Carl
+             * 9/10/2009
+             */
+            template.SaveOrUpdate(entity);
             return (T) template.SaveOrUpdateCopy(entity);
         }
 
