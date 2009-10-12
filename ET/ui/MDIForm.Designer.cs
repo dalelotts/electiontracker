@@ -81,8 +81,8 @@ namespace KnightRider.ElectionTracker.ui
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.countyContactFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contestVoteSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.electionQuickScanSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proofingSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.electionQuickScanSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.voteCountyTallySheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,7 +156,7 @@ namespace KnightRider.ElectionTracker.ui
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Visible = false;
             // 
@@ -166,14 +166,14 @@ namespace KnightRider.ElectionTracker.ui
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             this.toolStripSeparator.Visible = false;
             // 
             // saveToolStripMenuItem
@@ -182,21 +182,21 @@ namespace KnightRider.ElectionTracker.ui
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Visible = false;
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             this.toolStripSeparator1.Visible = false;
             // 
             // printToolStripMenuItem
@@ -205,7 +205,7 @@ namespace KnightRider.ElectionTracker.ui
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "&Print";
             this.printToolStripMenuItem.Visible = false;
             // 
@@ -214,21 +214,22 @@ namespace KnightRider.ElectionTracker.ui
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             this.printPreviewToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             this.toolStripSeparator2.Visible = false;
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // insertToolStripMenuItem
             // 
@@ -303,17 +304,17 @@ namespace KnightRider.ElectionTracker.ui
             this.contestVoteSummaryToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.contestVoteSummaryToolStripMenuItem.Text = "Contest Vote Summary";
             // 
-            // electionQuickScanSheetToolStripMenuItem
-            // 
-            this.electionQuickScanSheetToolStripMenuItem.Name = "electionQuickScanSheetToolStripMenuItem";
-            this.electionQuickScanSheetToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.electionQuickScanSheetToolStripMenuItem.Text = "Election Quick Scan Sheet";
-            // 
             // proofingSheetToolStripMenuItem
             // 
             this.proofingSheetToolStripMenuItem.Name = "proofingSheetToolStripMenuItem";
             this.proofingSheetToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.proofingSheetToolStripMenuItem.Text = "Election Proofing Sheet";
+            // 
+            // electionQuickScanSheetToolStripMenuItem
+            // 
+            this.electionQuickScanSheetToolStripMenuItem.Name = "electionQuickScanSheetToolStripMenuItem";
+            this.electionQuickScanSheetToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.electionQuickScanSheetToolStripMenuItem.Text = "Election Quick Scan Sheet";
             // 
             // voteCountyTallySheetToolStripMenuItem
             // 
