@@ -420,7 +420,8 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void btnAddAllCounties_Click(object sender, EventArgs e) {
-            try {
+            foreach (ContestCounty c in currentElectionContest.Counties)
+               try {
                 if (currentElectionContest != null) {
                     foreach (County county in allCounties) {
                         ContestCounty contestCounty = new ContestCounty();
@@ -428,7 +429,39 @@ namespace KnightRider.ElectionTracker.ui {
                         contestCounty.County = county;
                         contestCounty.WardCount = county.WardCount;
                         contestCounty.WardsReporting = 0;
-                        currentElectionContest.Counties.Add(contestCounty);
+
+                        bool exists = false;
+                        int index = 0;
+                        ContestCounty temp = new ContestCounty();
+                        //checks to see if county already exists
+                        while (!exists && (index < currentElectionContest.Counties.Count)){
+                            temp = currentElectionContest.Counties[index];
+                            if(temp.County.Name.Equals(contestCounty.County.Name)){
+                                exists = true;
+                            }
+                            index++;
+                        }
+                        //if county doesn't exist, add county
+                        if(!exists){
+                            currentElectionContest.Counties.Add(contestCounty);
+                        }
+
+                  /*
+                   * This is a bit of a round about way of checking to see if a county has already
+                   * been added to the list.  A simple .contains call on the list would normally
+                   * suffice however the .contains implicitly calls .equals which compares based
+                   * on the ContestCounty object's ID, not the name.
+                   * If you observe, the original is dealing with two different classes:
+                   * ContestCounty and County (I am usure as to why these two different classes exist)
+                   * 
+                   * As you can see the code takes a list of County objects and assigns their 
+                   * attributes to a ContestCounty attribute.  This is fine for name, ward, etc.
+                   * however a ContestCounty's ID differs from a County's ID (even though they may
+                   * share the same name.  I am unsure why the original designers made this decision).
+                   * I decided not to change the .equals method (and thus call .contains) for 
+                   * ContestCounty because I was unsure of how it would affect the rest of the application
+                   */
+  
                     }
                     refreshCountyLists();
                     DataChanged(sender, e);
@@ -439,6 +472,7 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
+            Console.WriteLine("Test-Add County Single"); 
             try {
                 ListBox.SelectedObjectCollection counties = lstAllCounties.SelectedItems;
                 if (counties.Count > 0) {
@@ -474,6 +508,7 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void btnRemoveAllCounties_Click(object sender, EventArgs e) {
+            Console.WriteLine("Test-Remove All Counties"); 
             try {
                 if (currentElectionContest != null) {
                     currentElectionContest.Counties = new List<ContestCounty>(allCounties.Count);
