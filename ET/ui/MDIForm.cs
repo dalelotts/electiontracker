@@ -26,6 +26,7 @@ using KnightRider.ElectionTracker.ui.util;
 
 namespace KnightRider.ElectionTracker.ui {
     internal partial class MDIForm : Form {
+        public event GenericEventHandler<object, ShowServerOptionsArgs> showServerOptions;
         public event GenericEventHandler<object, ShowAboutBoxArgs> showAboutBox;
         public event GenericEventHandler<object, EnterVotesArgs> enterVotes;
         public event GenericEventHandler<object, CountyFormArgs> countyForm;
@@ -42,6 +43,7 @@ namespace KnightRider.ElectionTracker.ui {
             // ToDo: Inject and autowire the events for reports using spring.
 
             aboutToolStripMenuItem.Click += new EventHandler(AboutBoxHandler);
+            ServerOptionsToolStrip.Click += new EventHandler(ServerOptionsHandler);
             voteResultsToolStripMenuItem.Click += new EventHandler(VoteResultsHandler);
             countyToolStripMenuItem.Click += new EventHandler(CountyFormHandler);
             candidateToolStripMenuItem.Click += new EventHandler(CandidateHandler);
@@ -53,6 +55,18 @@ namespace KnightRider.ElectionTracker.ui {
             voteCountyTallySheetToolStripMenuItem.Click += new EventHandler(VoteCountyTallySheetHandler);
             contestVoteSummaryToolStripMenuItem.Click += new EventHandler(ContestVoteSummaryHandler);
             electionQuickScanSheetToolStripMenuItem.Click += new EventHandler(ElectionQuickScanHandler);
+        }
+
+        private void ServerOptionsHandler(object sender, EventArgs e)
+        {
+            try
+            {
+                EventUtil.RaiseEvent<object, ShowServerOptionsArgs>(showServerOptions, this, new ShowServerOptionsArgs());
+            }
+            catch (Exception ex)
+            {
+                reportException("ServerOptionsHandler", ex);
+            }
         }
 
         private void ElectionQuickScanHandler(object sender, EventArgs e) {

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{01ACB36B-53D5-443B-9CC3-47EC018250E6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -144,6 +144,7 @@
     <Compile Include="db\VoteEntryDAO.cs" />
     <Compile Include="events\CandidateArgs.cs" />
     <Compile Include="events\ContestArgs.cs" />
+    <Compile Include="events\ShowServerOptionsArgs.cs" />
     <Compile Include="events\CountyFormArgs.cs" />
     <Compile Include="events\DBEntityArgs.cs" />
     <Compile Include="events\DefaultShowMessageSender.cs" />
@@ -158,6 +159,12 @@
     <Compile Include="events\ElectionArgs.cs" />
     <Compile Include="events\ShowErrorMessageArgs.cs" />
     <Compile Include="events\ShowMessageArgs.cs" />
+    <Compile Include="ui\frmServerOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\frmServerOptions.designer.cs">
+      <DependentUpon>frmServerOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -372,6 +379,9 @@
     </None>
     <Content Include="vote.ico" />
     <EmbeddedResource Include="core\Response.hbm.xml" />
+    <EmbeddedResource Include="ui\frmServerOptions.resx">
+      <DependentUpon>frmServerOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="reports\frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>
       <SubType>Designer</SubType>

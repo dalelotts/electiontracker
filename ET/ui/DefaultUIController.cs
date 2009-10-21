@@ -76,6 +76,12 @@ namespace KnightRider.ElectionTracker.ui {
             aboutBox.Show(mdiForm);
         }
 
+        public void HandleShowServerOptionsEvents(object sender, ShowServerOptionsArgs args)
+        {
+            frmServerOptions t = new frmServerOptions();
+            t.Show(mdiForm);
+        }
+
         public void HandleShowMessageEvent(IShowMessageSender sender, ShowMessageArgs args) {
             sender.Result = MessageBox.Show(args.Text, args.Caption);
         }
