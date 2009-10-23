@@ -17,11 +17,8 @@ namespace KnightRider.ElectionTracker.ui
         private String uname = "";
         private String passwd = "";
         private String database = "";
-        private static bool isthisfirsttime = true;
 
-        //TODO
-        //CHANGE THIS
-        private String filename = "C:\\Program Files\\Knight Rider Consulting\\Election Tracker\\spring.xml";
+        private String filename = "spring.xml";
 
         public frmServerOptions()
         {
@@ -61,18 +58,13 @@ namespace KnightRider.ElectionTracker.ui
             }
             catch
             {
-                //this will always happen once
-                if (!isthisfirsttime)
-                {
-                    MessageBox.Show("Error: need better error here");
-                }
+                MessageBox.Show("Error with reading Xml file.");
             }
 
             this.txtDatabase.Text = this.database;
             this.txtHost.Text = this.host;
             this.txtPasswd.Text = this.passwd;
             this.txtUname.Text = this.uname;
-            isthisfirsttime = false;
         }
 
         private void txtUname_TextChanged(object sender, EventArgs e)
@@ -113,12 +105,10 @@ namespace KnightRider.ElectionTracker.ui
             }
             catch
             {
-                //this will always happen once
-                if (!isthisfirsttime)
-                {
-                    MessageBox.Show("Error: need better error here");
-                }
+                MessageBox.Show("Error with saving Xml file.");
             }
+
+            MessageBox.Show("Settings saved, please restart the application.");
         }
     }
 }

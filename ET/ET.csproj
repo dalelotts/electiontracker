@@ -52,40 +52,57 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="antlr.runtime, Version=2.7.6.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\antlr.runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy, Version=1.1.5.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging, Version=1.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Common.Logging.dll</HintPath>
+      <HintPath>..\dll\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Log4Net, Version=1.1.0.2, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Common.Logging.Log4Net.dll</HintPath>
+      <HintPath>..\dll\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.0.3, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
+      <HintPath>..\dll\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\NHibernate\bin\net-2.0\NHibernate.dll</HintPath>
+      <HintPath>..\dll\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="OutlookBar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TestOutlookBar\OutlookBar\bin\Release\OutlookBar.dll</HintPath>
+      <HintPath>..\dll\OutlookBar.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Aop, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Aop.dll</HintPath>
+      <HintPath>..\dll\Spring.Aop.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Core, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Core.dll</HintPath>
+      <HintPath>..\dll\Spring.Core.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Data, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Data.dll</HintPath>
+      <HintPath>..\dll\Spring.Data.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Data.NHibernate12, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Spring.NET 1.1\bin\net\2.0\release\Spring.Data.NHibernate12.dll</HintPath>
+      <HintPath>..\dll\Spring.Data.NHibernate12.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -19,7 +19,7 @@
     <property name="CacheQueries" value="true"/>
   </object>
   <!-- Database and NHibernate Configuration -->
-  <db:provider id="DbProvider" provider="MySql" connectionString="Server=stef.cs.uwec.edu;database=electiontracker;uid=CS485GROUP03;pwd=C6215;"/>
+  <db:provider id="DbProvider" provider="MySql" connectionString="Server=stef.cs.uwec.edu;database=CS485GROUP03;uid=CS485GROUP03;pwd=C6215;"/>
   <object id="SessionFactory" type="Spring.Data.NHibernate.LocalSessionFactoryObject, Spring.Data.NHibernate12">
     <property name="DbProvider" ref="DbProvider"/>
     <!--<property name="ExposeTransactionAwareSessionFactory" value="true"/> -->
