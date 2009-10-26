@@ -24,7 +24,7 @@
 		<id name="ID" column="ContestCountyID" type="Int64">
 			<generator class="identity"/>
 		</id>
-    <bag lazy="true" inverse="true" name="ResponseValues" cascade="all-delete-orphan" >
+    <bag lazy="false" inverse="true" name="ResponseValues" cascade="all-delete-orphan" >
       <key column="ContestCountyID"/>
       <one-to-many class="KnightRider.ElectionTracker.core.ResponseValue, ElectionTracker"/>
     </bag>

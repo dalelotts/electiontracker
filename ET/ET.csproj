@@ -398,6 +398,7 @@
     <EmbeddedResource Include="core\Response.hbm.xml" />
     <EmbeddedResource Include="ui\frmServerOptions.resx">
       <DependentUpon>frmServerOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>

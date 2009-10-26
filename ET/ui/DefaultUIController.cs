@@ -141,7 +141,7 @@ namespace KnightRider.ElectionTracker.ui {
         public void HandleErrorMessage(object sender, ShowErrorMessageArgs args) {
             string message = args.Text;
             LOG.Error(message, args.Exception);
-            message += "\n\nPlease restart the application and try again.\n\nDetailed information about this error was logged to " + Application.StartupPath + "\\logs\\";
+            message += "\n\nPlease try again.\n\nDetailed information about this error was logged to " + Application.StartupPath + "\\logs\\";
             MessageBox.Show(message, args.Caption);
         }
 

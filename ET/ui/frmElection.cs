@@ -664,22 +664,38 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnClearVotes_Click(object sender, EventArgs e) {
             try {
-                DialogResult dr = MessageBox.Show("Are you SURE you want to clear this election's vote totals?", "Clear election vote results?", MessageBoxButtons.YesNo);
-                if (String.Equals("Yes", dr.ToString())) {
-                    //Clear the vote totals
-                    //IList<Fault> faults = electionDAO.canMakePersistent(currentElection);
-                    //bool persistData = reportFaults(faults);
-                    //If there were no errors, persist data to the database
-                    //if (persistData)
-                    //{
-                       // currentElection = electionDAO.makePersistent(currentElection);
-                       // refreshControls();
-                       // raiseMakePersistentEvent();
+                int temp = 0;
+
+                foreach (ElectionContest curE in currentElection.ElectionContests)
+                {
+                    temp = temp + curE.GetTotalVotes();
+                }
+
+                if (temp == 0)
+                {
+                    DialogResult dr = MessageBox.Show("There are no votes to clear.", "Please try again.", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    DialogResult dr = MessageBox.Show("Are you SURE you want to clear this election's vote totals?", "Clear election vote results?", MessageBoxButtons.YesNo);
+                    if (String.Equals("Yes", dr.ToString()))
+                    {
+                        //Clear the vote totals
+                        //IList<Fault> faults = electionDAO.canMakePersistent(currentElection);
+                        //bool persistData = reportFaults(faults);
+                        //If there were no errors, persist data to the database
+
+                        //if (persistData)
+                        //{
+                        currentElection = electionDAO.makePersistent(currentElection);
+                        refreshControls();
+                        raiseMakePersistentEvent();
                         currentElection.ResetTotalVotes();
                         //Display "Votes cleared."
                         MessageBox.Show(this, currentElection + " election votes cleared.", "Votes cleared.");
-                   // }
-                    
+                        //}
+
+                    }
                 }
             }
             catch (Exception ex)
