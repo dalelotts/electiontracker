@@ -340,15 +340,30 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void btnRemoveAllContests_Click(object sender, EventArgs e) {
-            try {
-                if (currentElection.ElectionContests.Count > 0) {
-                    currentElection.ElectionContests = new List<ElectionContest>(allContests.Count);
-                    refreshContestLists();
-                    refreshCandidateLists();
-                    DataChanged(sender, e);
-                }
-            } catch (Exception ex) {
-                reportException("btnRemoveAllContests_Click", ex);
+            switch (MessageBox.Show("Do you want move all Contests?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+            {
+            case DialogResult.Yes:
+                    try
+                    {
+                        if (currentElection.ElectionContests.Count > 0)
+                        {
+                            currentElection.ElectionContests = new List<ElectionContest>(allContests.Count);
+                            refreshContestLists();
+                            refreshCandidateLists();
+                            DataChanged(sender, e);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        reportException("btnRemoveAllContests_Click", ex);
+                    }
+                break;
+
+            case DialogResult.No:
+                break;
+
+            case DialogResult.Cancel:
+                break;
             }
         }
 
@@ -407,15 +422,31 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void btnRemoveAllCandidates_Click(object sender, EventArgs e) {
-            try {
-                if (currentElectionContest != null) {
-                    currentElectionContest.Responses = new List<Response>(allCandidates.Count);
-                    refreshCandidateLists();
-                    DataChanged(sender, e);
-                }
-            } catch (Exception ex) {
-                reportException("btnRemoveAllCandidates_Click", ex);
+        private void btnRemoveAllCandidates_Click(object sender, EventArgs e)
+        {
+            switch (MessageBox.Show("Do you want to move all Candidates?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+            {
+                case DialogResult.Yes:
+                    try
+                    {
+                        if (currentElectionContest != null)
+                        {
+                            currentElectionContest.Responses = new List<Response>(allCandidates.Count);
+                            refreshCandidateLists();
+                            DataChanged(sender, e);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        reportException("btnRemoveAllCandidates_Click", ex);
+                    }
+                    break;
+
+                case DialogResult.No:
+                    break;
+
+                case DialogResult.Cancel:
+                    break;
             }
         }
 
@@ -507,16 +538,31 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void btnRemoveAllCounties_Click(object sender, EventArgs e) {
-            Console.WriteLine("Test-Remove All Counties"); 
-            try {
-                if (currentElectionContest != null) {
-                    currentElectionContest.Counties = new List<ContestCounty>(allCounties.Count);
-                    refreshCountyLists();
-                    DataChanged(sender, e);
-                }
-            } catch (Exception ex) {
-                reportException("btnRemoveAllCounties_Click", ex);
+        private void btnRemoveAllCounties_Click(object sender, EventArgs e)
+        {
+            switch (MessageBox.Show("Do you want to move all Counties?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+            {
+                case DialogResult.Yes:
+                    try
+                    {
+                        if (currentElectionContest != null)
+                        {
+                            currentElectionContest.Counties = new List<ContestCounty>(allCounties.Count);
+                            refreshCountyLists();
+                            DataChanged(sender, e);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        reportException("btnRemoveAllCounties_Click", ex);
+                    }
+                    break;
+
+                case DialogResult.No:
+                    break;
+
+                case DialogResult.Cancel:
+                    break;
             }
         }
 

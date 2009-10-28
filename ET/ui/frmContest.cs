@@ -23,8 +23,10 @@ using KnightRider.ElectionTracker.core;
 using KnightRider.ElectionTracker.db;
 using KnightRider.ElectionTracker.db.task;
 
-namespace KnightRider.ElectionTracker.ui {
-    internal partial class frmContest : BaseMDIChild {
+namespace KnightRider.ElectionTracker.ui
+{
+    internal partial class frmContest : BaseMDIChild
+    {
         private readonly IDAOTask<DefaultContestCounty> loadTask;
         private readonly IContestDAO contestDAO;
         private Contest currentContest;
@@ -34,10 +36,13 @@ namespace KnightRider.ElectionTracker.ui {
         private IList<DefaultContestCounty> defaultContestCounties;
         private readonly IDefaultContestCountyDAO dccDAO;
         IList<DefaultContestCounty> remCounties = new List<DefaultContestCounty>();
-        public override void btnDelete_Click(object sender, EventArgs e) {
-            try {
+        public override void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 IList<Fault> faults = contestDAO.canMakeTransient(currentContest);
-                if (reportFaults(faults)) {
+                if (reportFaults(faults))
+                {
                     foreach (DefaultContestCounty dcc in defaultContestCounties)
                     {
                         IList<Fault> dccFaults = dccDAO.canMakeTransient(dcc);
@@ -51,12 +56,15 @@ namespace KnightRider.ElectionTracker.ui {
                     refreshControls();
                     raiseMakeTransientEvent();
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("btnDelete_Click", ex);
             }
         }
 
-        public frmContest(IContestDAO contestDAO, ICountyDAO countyDAO, IDefaultContestCountyDAO dccDAO, IDAOTask<DefaultContestCounty> loadTask) {
+        public frmContest(IContestDAO contestDAO, ICountyDAO countyDAO, IDefaultContestCountyDAO dccDAO, IDAOTask<DefaultContestCounty> loadTask)
+        {
             InitializeComponent();
             this.contestDAO = contestDAO;
             this.dccDAO = dccDAO;
@@ -71,18 +79,24 @@ namespace KnightRider.ElectionTracker.ui {
             dirty = false;
         }
 
-        public override void btnAdd_Click(object sender, EventArgs e) {
-            try {
+        public override void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 currentContest = new Contest();
                 refreshControls();
                 base.btnAdd_Click(sender, e);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("btnAdd_Click", ex);
             }
         }
 
-        public override void btnSave_Click(object sender, EventArgs e) {
-            try {
+        public override void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 currentContest.IsActive = chkActive.Checked;
                 currentContest.IsFinal = chkFinal.Checked;
                 currentContest.Name = txtName.Text;
@@ -91,7 +105,7 @@ namespace KnightRider.ElectionTracker.ui {
                 //Validate the current data and get a list of faults.
                 IList<Fault> faults = contestDAO.canMakePersistent(currentContest);
                 bool persistData = reportFaults(faults);
-                
+
                 //If there were no errors, persist data to the database
                 if (persistData)
                 {
@@ -121,24 +135,29 @@ namespace KnightRider.ElectionTracker.ui {
                 {
                     cancelClose = true;
                 }
-                
-                refreshCountyLists();
-                
 
-            } catch (Exception ex) {
+                refreshCountyLists();
+
+
+            }
+            catch (Exception ex)
+            {
                 reportException("btnSave_Click", ex);
             }
         }
 
-        private void refreshGoToList() {
+        private void refreshGoToList()
+        {
             IList<Contest> contests = contestDAO.findAll();
             cboGoTo.Items.Clear();
-            foreach (Contest contest in contests) {
+            foreach (Contest contest in contests)
+            {
                 cboGoTo.Items.Add(contest);
             }
         }
 
-        private void refreshControls() {
+        private void refreshControls()
+        {
             txtName.Text = currentContest.Name;
             txtNotes.Text = currentContest.Notes;
 
@@ -152,37 +171,48 @@ namespace KnightRider.ElectionTracker.ui {
             refreshCountyLists();
         }
 
-        public override void btnReset_Click(object sender, EventArgs e) {
-            try {
+        public override void btnReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 currentContest = currentContest.ID == 0 ? new Contest() : contestDAO.findById(currentContest.ID, false);
                 refreshControls();
                 base.btnReset_Click(sender, e);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("btnReset_Click", ex);
             }
         }
 
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                currentContest = (Contest) cboGoTo.SelectedItem;
+        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                currentContest = (Contest)cboGoTo.SelectedItem;
                 refreshControls();
                 base.cboGoTo_SelectedIndexChanged(sender, e);
                 dirty = false;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 
-        public void loadContest(long? id) {
-            if (id.HasValue) {
+        public void loadContest(long? id)
+        {
+            if (id.HasValue)
+            {
                 Contest contest = contestDAO.findById(id.Value, false);
-                if (contest != null) {
+                if (contest != null)
+                {
                     currentContest = contest;
                     IList<DefaultContestCounty> dccs = dccDAO.find(currentContest.ID);
                     foreach (DefaultContestCounty dcc in dccs)
                     {
                         dcc.Contest = currentContest;
-                        defaultContestCounties.Add(dccDAO.findById(dcc.ID ,false,loadTask));
+                        defaultContestCounties.Add(dccDAO.findById(dcc.ID, false, loadTask));
                     }
                 }
             }
@@ -205,7 +235,7 @@ namespace KnightRider.ElectionTracker.ui {
                 DialogResult dr = MessageBox.Show("Do you want to save Contest before closing?", "Contest not saved", MessageBoxButtons.YesNo);
                 if (String.Equals("Yes", dr.ToString()))
                 {
-                    cancelClose = false ;
+                    cancelClose = false;
                     btnSave_Click(sender, e);
                     if (cancelClose)
                     {
@@ -216,7 +246,8 @@ namespace KnightRider.ElectionTracker.ui {
             }
         }
 
-        private void chkFinal_CheckedChanged(object sender, EventArgs e) {
+        private void chkFinal_CheckedChanged(object sender, EventArgs e)
+        {
             currentContest.IsFinal = chkFinal.Checked;
         }
         private void refreshCountyLists()
@@ -251,17 +282,17 @@ namespace KnightRider.ElectionTracker.ui {
         {
             try
             {
-                    foreach (County county in allCounties)
-                    {
-                        DefaultContestCounty defaultContestCounty = new DefaultContestCounty();
-                        defaultContestCounty.Contest = currentContest;
-                        defaultContestCounty.County = county;
-                        defaultContestCounty.WardCount = county.WardCount;
-                        defaultContestCounty.WardsReporting = 0;
-                        defaultContestCounties.Add(defaultContestCounty);
-                    }
-                    refreshCountyLists();
-                    DataChanged(sender, e);
+                foreach (County county in allCounties)
+                {
+                    DefaultContestCounty defaultContestCounty = new DefaultContestCounty();
+                    defaultContestCounty.Contest = currentContest;
+                    defaultContestCounty.County = county;
+                    defaultContestCounty.WardCount = county.WardCount;
+                    defaultContestCounty.WardsReporting = 0;
+                    defaultContestCounties.Add(defaultContestCounty);
+                }
+                refreshCountyLists();
+                DataChanged(sender, e);
             }
             catch (Exception ex)
             {
@@ -303,7 +334,7 @@ namespace KnightRider.ElectionTracker.ui {
                 {
                     if (dgvContestCounties.SelectedRows.Count > 0)
                     {
-                        
+
                         foreach (DataGridViewRow row in dgvContestCounties.SelectedRows)
                         {
                             foreach (DefaultContestCounty dcc in defaultContestCounties)
@@ -315,7 +346,7 @@ namespace KnightRider.ElectionTracker.ui {
                                 }
                             }
                         }
-                        
+
                     }
                 }
             }
@@ -327,19 +358,32 @@ namespace KnightRider.ElectionTracker.ui {
 
         private void btnRemoveAllCounties_Click(object sender, EventArgs e)
         {
-            try
+            switch (MessageBox.Show("Do you want to move all Counties?", "Confirm",
+                            MessageBoxButtons.YesNoCancel,
+                            MessageBoxIcon.Question))
             {
-                if (currentContest != null)
-                {
-                    remCounties = defaultContestCounties;
-                    defaultContestCounties = new List<DefaultContestCounty>(allCounties.Count);
-                    refreshCountyLists();
-                    DataChanged(sender, e);
-                }
-            }
-            catch (Exception ex)
-            {
-                reportException("btnRemoveAllCounties_Click", ex);
+                case DialogResult.Yes:
+                    try
+                    {
+                        if (currentContest != null)
+                        {
+                            remCounties = defaultContestCounties;
+                            defaultContestCounties = new List<DefaultContestCounty>(allCounties.Count);
+                            refreshCountyLists();
+                            DataChanged(sender, e);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        reportException("btnRemoveAllCounties_Click", ex);
+                    }
+                    break;
+
+                case DialogResult.No:
+                    break;
+
+                case DialogResult.Cancel:
+                    break;
             }
         }
     }
