@@ -50,8 +50,6 @@ namespace KnightRider.ElectionTracker.ui
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseMDIChild));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.cboGoTo = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -64,8 +62,6 @@ namespace KnightRider.ElectionTracker.ui
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboGoTo,
-            this.toolStripSeparator3,
             this.btnAdd,
             this.btnSave,
             this.toolStripSeparator4,
@@ -77,21 +73,6 @@ namespace KnightRider.ElectionTracker.ui
             this.toolStrip1.Size = new System.Drawing.Size(355, 25);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // cboGoTo
-            // 
-            this.cboGoTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cboGoTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboGoTo.Name = "cboGoTo";
-            this.cboGoTo.Size = new System.Drawing.Size(175, 25);
-            this.cboGoTo.Text = "Go To:";
-            this.cboGoTo.ToolTipText = "Go To:";
-            this.cboGoTo.SelectedIndexChanged += new System.EventHandler(this.cboGoTo_SelectedIndexChanged);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // btnAdd
             // 
@@ -161,8 +142,6 @@ namespace KnightRider.ElectionTracker.ui
 
         #endregion
 
-        protected System.Windows.Forms.ToolStripComboBox cboGoTo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         protected System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

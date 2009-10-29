@@ -33,7 +33,6 @@ namespace KnightRider.ElectionTracker.ui {
             this.politicalPartyDAO = politicalPartyDAO;
             currentPoliticalParty = new PoliticalParty();
             refreshControls();
-            refreshGoToList();
             txtAbbrev.TextChanged += new EventHandler(DataChanged);
             txtName.TextChanged += new EventHandler(DataChanged);
             dirty = false;
@@ -43,14 +42,6 @@ namespace KnightRider.ElectionTracker.ui {
             txtName.Text = currentPoliticalParty.Name;
             txtAbbrev.Text = currentPoliticalParty.Abbreviation;
             chkActive.Checked = currentPoliticalParty.IsActive;
-            refreshGoToList();
-        }
-
-        private void refreshGoToList() {
-            IList<PoliticalParty> politicalParties = politicalPartyDAO.findAll();
-            foreach (PoliticalParty politicalParty in politicalParties) {
-                cboGoTo.Items.Add(politicalParty);
-            }
         }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
@@ -74,7 +65,6 @@ namespace KnightRider.ElectionTracker.ui {
                 //If there were no errors, persist data to the database
                 if (reportFaults(faults)) {
                     currentPoliticalParty = politicalPartyDAO.makePersistent(currentPoliticalParty);
-                    refreshGoToList();
                     raiseMakePersistentEvent();
                     MessageBox.Show(this, currentPoliticalParty.Name + " party saved.", "Sucessful Save");;
                 }
@@ -105,17 +95,6 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("btnDelete_Click", ex);
-            }
-        }
-
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                currentPoliticalParty = (PoliticalParty) cboGoTo.SelectedItem;
-                refreshControls();
-                base.cboGoTo_SelectedIndexChanged(sender, e);
-                dirty = false;
-            } catch (Exception ex) {
-                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 

@@ -75,15 +75,6 @@ namespace KnightRider.ElectionTracker.ui {
             refreshContestLists();
             refreshCountyLists();
             refreshCandidateLists();
-            refreshGoToList();
-        }
-
-        private void refreshGoToList() {
-            IList<Election> elections = electionDAO.findAll();
-            cboGoTo.Items.Clear();
-            foreach (Election election in elections) {
-                cboGoTo.Items.Add(election);
-            }
         }
 
         public void loadElection(long? id) {
@@ -245,17 +236,6 @@ namespace KnightRider.ElectionTracker.ui {
                 }
             } catch (Exception ex) {
                 reportException("btnDelete_Click", ex);
-            }
-        }
-
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                currentElection = (Election) cboGoTo.SelectedItem;
-                refreshControls();
-                base.cboGoTo_SelectedIndexChanged(sender, e);
-                dirty = false;
-            } catch (Exception ex) {
-                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 

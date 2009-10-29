@@ -146,22 +146,11 @@ namespace KnightRider.ElectionTracker.ui
             }
         }
 
-        private void refreshGoToList()
-        {
-            IList<Contest> contests = contestDAO.findAll();
-            cboGoTo.Items.Clear();
-            foreach (Contest contest in contests)
-            {
-                cboGoTo.Items.Add(contest);
-            }
-        }
-
         private void refreshControls()
         {
             txtName.Text = currentContest.Name;
             txtNotes.Text = currentContest.Notes;
 
-            refreshGoToList();
             chkActive.Checked = currentContest.IsActive;
             chkFinal.Checked = currentContest.IsFinal;
             foreach (County county in allCounties)
@@ -182,21 +171,6 @@ namespace KnightRider.ElectionTracker.ui
             catch (Exception ex)
             {
                 reportException("btnReset_Click", ex);
-            }
-        }
-
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                currentContest = (Contest)cboGoTo.SelectedItem;
-                refreshControls();
-                base.cboGoTo_SelectedIndexChanged(sender, e);
-                dirty = false;
-            }
-            catch (Exception ex)
-            {
-                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 

@@ -54,13 +54,6 @@ namespace KnightRider.ElectionTracker.ui {
         {
             dirty = true;
         }
-        private void refreshGoToList() {
-            IList<Candidate> candidates = candidateDAO.findAll();
-            cboGoTo.Items.Clear();
-            foreach (Candidate candidate in candidates) {
-                cboGoTo.Items.Add(candidate);
-            }
-        }
 
         public override void btnAdd_Click(object sender, EventArgs e) {
             if (dirty)
@@ -103,7 +96,6 @@ namespace KnightRider.ElectionTracker.ui {
             }
             chkActive.Checked = currentCandidate.IsActive;
 
-            refreshGoToList();
             dirty = false;
         }
 
@@ -136,7 +128,6 @@ namespace KnightRider.ElectionTracker.ui {
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     currentCandidate = candidateDAO.makePersistent(currentCandidate);
-                    refreshGoToList();
                     raiseMakePersistentEvent();
                     MessageBox.Show(this, currentCandidate + " saved.", "Sucessful Save");
                 }
@@ -153,18 +144,6 @@ namespace KnightRider.ElectionTracker.ui {
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
                 reportException("btnReset_Click", ex);
-            }
-        }
-
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                // To Do: Detect Dirty
-                currentCandidate = (Candidate) cboGoTo.SelectedItem;
-                refreshControls();
-                base.cboGoTo_SelectedIndexChanged(sender, e);
-                dirty = false;
-            } catch (Exception ex) {
-                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 

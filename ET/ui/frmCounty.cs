@@ -40,7 +40,6 @@ namespace KnightRider.ElectionTracker.ui {
             refreshAttributeTypes();
 
             currentCounty = new County();
-            refreshGoToList();
             txtCountyName.TextChanged += new EventHandler(DataChanged);
             txtAreaCode.TextChanged += new EventHandler(DataChanged);
             txtCountyWardCount.TextChanged += new EventHandler(DataChanged);
@@ -55,15 +54,6 @@ namespace KnightRider.ElectionTracker.ui {
             dirty = false;
         }
 
-
-        private void refreshGoToList() {
-            IList<County> counties = countyDAO.findAll();
-            cboGoTo.Items.Clear();
-            foreach (County county in counties) {
-                cboGoTo.Items.Add(county);
-            }
-        }
-
         private void refreshControls() {
             //clear the fields
             txtCountyName.Text = currentCounty.Name;
@@ -74,7 +64,6 @@ namespace KnightRider.ElectionTracker.ui {
             refreshPhoneNumbers();
             refreshWebsites();
             refreshAttributes();
-            refreshGoToList();
         }
 
         private void refreshPhoneNumbers() {
@@ -248,7 +237,6 @@ namespace KnightRider.ElectionTracker.ui {
                 //If there were no errors, persist data to the database
                 if (persistData) {
                     currentCounty = countyDAO.makePersistent(currentCounty);
-                    refreshGoToList();
                     raiseMakePersistentEvent();
                     MessageBox.Show(this, currentCounty.Name + " county saved.", "Sucessful Save");
                 }
@@ -273,17 +261,6 @@ namespace KnightRider.ElectionTracker.ui {
                 base.btnReset_Click(sender, e);
             } catch (Exception ex) {
                 reportException("btnReset_Click", ex);
-            }
-        }
-
-        public override void cboGoTo_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                County selectedCounty = (County) cboGoTo.SelectedItem;
-                loadCounty(selectedCounty.ID);
-                base.cboGoTo_SelectedIndexChanged(sender, e);
-                dirty = false;
-            } catch (Exception ex) {
-                reportException("cboGoTo_SelectedIndexChanged", ex);
             }
         }
 
