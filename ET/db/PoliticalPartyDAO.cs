@@ -82,8 +82,14 @@ namespace KnightRider.ElectionTracker.db {
             return findByCriteria(NOT_ACTIVE_CRITERION, order_BY_NAME);
         }
 
-        public override IList<Fault> canMakeTransient(PoliticalParty entity) {
-            return new List<Fault>();
+        public override IList<Fault> canMakeTransient(PoliticalParty entity)
+        {
+            IList<Fault> faults = new List<Fault>();
+            if (entity.IsActive)
+            {
+                faults.Add(new Fault(false, "May not be able to delete because party may have candidates"));
+            }
+            return faults;
         }
     }
 }

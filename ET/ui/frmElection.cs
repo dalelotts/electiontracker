@@ -210,6 +210,8 @@ namespace KnightRider.ElectionTracker.ui {
             } catch (Exception ex) {
                 reportException("btnSave_Click", ex);
             }
+
+            dgvContestCounties.Rows.Clear();
         }
 
 
