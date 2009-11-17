@@ -91,24 +91,31 @@ namespace KnightRider.ElectionTracker.ui
         {
             String connectionStr = "Server=" + this.host + ";database=" + this.database + ";uid=" + this.uname + ";pwd=" + this.passwd + ";";
 
-            try
+            if (this.txtUname.ToString().ToLower().Contains("root") || this.txtUname.ToString().ToLower().Contains("admin"))
             {
-                XmlDocument xDoc = new XmlDocument();
-                xDoc.Load(filename);
-                
-                XmlNode provider = xDoc.GetElementsByTagName("db:provider").Item(0);
-
-                XmlAttributeCollection attributes = provider.Attributes;
-                attributes.GetNamedItem("connectionString").Value = connectionStr;
-
-                xDoc.Save(filename);
+                MessageBox.Show("Please do NOT use root/admin accounts as the account for this application!");
             }
-            catch
+            else
             {
-                MessageBox.Show("Error with saving Xml file.");
-            }
+                try
+                {
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.Load(filename);
 
-            MessageBox.Show("Settings saved, please restart the application.");
+                    XmlNode provider = xDoc.GetElementsByTagName("db:provider").Item(0);
+
+                    XmlAttributeCollection attributes = provider.Attributes;
+                    attributes.GetNamedItem("connectionString").Value = connectionStr;
+
+                    xDoc.Save(filename);
+                }
+                catch
+                {
+                    MessageBox.Show("Error with saving Xml file.");
+                }
+
+                MessageBox.Show("Settings saved, please restart the application.");
+            }
         }
     }
 }
