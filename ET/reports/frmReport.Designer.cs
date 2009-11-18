@@ -197,7 +197,7 @@ namespace KnightRider.ElectionTracker.reports {
             this.Controls.Add(this.ctlPrintPreview);
             this.Controls.Add(this.btnPrint);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(450, 450);
+            this.MinimumSize = new System.Drawing.Size(650, 450);
             this.Name = "frmReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "4";
