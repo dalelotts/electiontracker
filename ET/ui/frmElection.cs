@@ -450,11 +450,11 @@ namespace KnightRider.ElectionTracker.ui {
         }
 
         private void btnAddAllCounties_Click(object sender, EventArgs e) {
-            foreach (ContestCounty c in currentElectionContest.Counties)
+           
+            if (currentElectionContest != null) {
                try {
-                if (currentElectionContest != null) {
-                    foreach (County county in allCounties) {
-                        ContestCounty contestCounty = new ContestCounty();
+                    foreach (County county in allCounties) {        				//go through the entire list of counties
+                        ContestCounty contestCounty = new ContestCounty();			//setting up ContestCounty information
                         contestCounty.ElectionContest = currentElectionContest;
                         contestCounty.County = county;
                         contestCounty.WardCount = county.WardCount;
@@ -464,18 +464,20 @@ namespace KnightRider.ElectionTracker.ui {
                         int index = 0;
                         ContestCounty temp = new ContestCounty();
                         //checks to see if county already exists
-                        while (!exists && (index < currentElectionContest.Counties.Count)){
-                            temp = currentElectionContest.Counties[index];
-                            if(temp.County.Name.Equals(contestCounty.County.Name)){
+                        Console.WriteLine("Print out test 01");
+                        while (!exists && (index < currentElectionContest.Counties.Count)){ 
+                            temp = currentElectionContest.Counties[index];              
+                            if(temp.County.Name.Equals(contestCounty.County.Name)){		//check to see if it currently exists
                                 exists = true;
                             }
                             index++;
                         }
+                        Console.WriteLine("Print out test 02");
                         //if county doesn't exist, add county
                         if(!exists){
                             currentElectionContest.Counties.Add(contestCounty);
                         }
-
+                        Console.WriteLine("Print out test 03");
                   /*
                    * This is a bit of a round about way of checking to see if a county has already
                    * been added to the list.  A simple .contains call on the list would normally
@@ -495,11 +497,13 @@ namespace KnightRider.ElectionTracker.ui {
                     }
                     refreshCountyLists();
                     DataChanged(sender, e);
-                }
-            } catch (Exception ex) {
-                reportException("btnAddAllCounties_Click", ex);
-            }
-        }
+                
+				} catch (Exception ex) {
+					reportException("btnAddAllCounties_Click", ex);
+				}
+				Console.WriteLine("Print out test 04");
+			}
+		}
 
         private void btnAddCounty_Click(object sender, EventArgs e) {
             Console.WriteLine("Test-Add County Single"); 

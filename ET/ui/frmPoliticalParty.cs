@@ -27,14 +27,17 @@ namespace KnightRider.ElectionTracker.ui {
         private readonly PoliticalPartyDAO politicalPartyDAO;
         private Boolean dirty;
         private PoliticalParty currentPoliticalParty;
+        private readonly IList<Candidate> allCandidates;
 
-        public frmPoliticalParty(PoliticalPartyDAO politicalPartyDAO) {
+        public frmPoliticalParty(PoliticalPartyDAO politicalPartyDAO, ICandidateDAO candidateDAO)
+        {
             InitializeComponent();
             this.politicalPartyDAO = politicalPartyDAO;
             currentPoliticalParty = new PoliticalParty();
             refreshControls();
             txtAbbrev.TextChanged += new EventHandler(DataChanged);
             txtName.TextChanged += new EventHandler(DataChanged);
+            allCandidates = candidateDAO.findAll();
             dirty = false;
         }
 
@@ -86,12 +89,35 @@ namespace KnightRider.ElectionTracker.ui {
         public override void btnDelete_Click(object sender, EventArgs e) {
             //delete's but throws an error
             try {
+                
+                bool containCandidates = false;
+                int index = 0;
+                /*The user is unable to delete a party if it has candidates due to a foreign key constraint on the database.
+                 * A list of candidates belonging to the party is not automatically generated when party information is
+                 * queried.  Have to pull all candidates from database and check to see if any of them are members.
+                 This is extrememly inefficient and will get slower as candidates are added*/
+                while(!containCandidates &&(index < allCandidates.Count))   
+                {
+                    if (allCandidates[index].PoliticalParty != null)
+                    {
+                        if (allCandidates[index].PoliticalParty.ID==currentPoliticalParty.ID)
+                        {
+                            containCandidates = true;
+                        }
+                    }
+                    index++;
+                }
+
                 IList<Fault> faults = politicalPartyDAO.canMakeTransient(currentPoliticalParty);
-                if (reportFaults(faults)) {
+                if (reportFaults(faults) && !containCandidates)
+                {
                     politicalPartyDAO.makeTransient(currentPoliticalParty);
                     currentPoliticalParty = new PoliticalParty();
                     refreshControls();
                     raiseMakeTransientEvent();
+                }else
+                {
+                    MessageBox.Show("Cannot Delete a party with members","Cannot Delete",MessageBoxButtons.OK);
                 }
             } catch (Exception ex) {
                 reportException("btnDelete_Click", ex);

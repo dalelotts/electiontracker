@@ -107,7 +107,9 @@
       <constructor-arg name="dccDAO" ref="DefaultContestCountyDAO"/>
       <constructor-arg name="loadTask" ref="LoadDefaultContestCountyForUI"/>
     </object>
-  <object name="KnightRider.ElectionTracker.ui.frmPoliticalParty" type="KnightRider.ElectionTracker.ui.frmPoliticalParty, ElectionTracker" autowire="constructor" singleton="false"/>
+  <object name="KnightRider.ElectionTracker.ui.frmPoliticalParty" type="KnightRider.ElectionTracker.ui.frmPoliticalParty, ElectionTracker" autowire="constructor" singleton="false">
+    <constructor-arg name="candidateDAO" ref="CandidateDAO"/>
+  </object>
   <!-- END DATA ENTRY FORMS -->
 
   <!-- BEGIN TREE VIEW FILTERS -->

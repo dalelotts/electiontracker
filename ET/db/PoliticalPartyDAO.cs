@@ -84,12 +84,7 @@ namespace KnightRider.ElectionTracker.db {
 
         public override IList<Fault> canMakeTransient(PoliticalParty entity)
         {
-            IList<Fault> faults = new List<Fault>();
-            if (entity.IsActive)
-            {
-                faults.Add(new Fault(false, "May not be able to delete because party may have candidates"));
-            }
-            return faults;
+            return new List<Fault>();
         }
     }
 }
