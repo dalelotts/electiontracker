@@ -80,9 +80,7 @@ namespace KnightRider.ElectionTracker.ui
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabContests = new System.Windows.Forms.TabPage();
-            this.btnAddAllContests = new System.Windows.Forms.Button();
             this.btnRemoveContest = new System.Windows.Forms.Button();
-            this.btnRemoveAllContests = new System.Windows.Forms.Button();
             this.btnAddContest = new System.Windows.Forms.Button();
             this.lstAllContests = new System.Windows.Forms.ListBox();
             this.lstElectionContests = new System.Windows.Forms.ListBox();
@@ -94,9 +92,7 @@ namespace KnightRider.ElectionTracker.ui
             this.btnResponseUp = new System.Windows.Forms.Button();
             this.btnAddCustomResponse = new System.Windows.Forms.Button();
             this.txtCustomResponse = new System.Windows.Forms.TextBox();
-            this.btnAddAllCandidates = new System.Windows.Forms.Button();
             this.btnRemoveCandidate = new System.Windows.Forms.Button();
-            this.btnRemoveAllCandidates = new System.Windows.Forms.Button();
             this.btnAddCandidate = new System.Windows.Forms.Button();
             this.lstContestCandidate = new System.Windows.Forms.ListBox();
             this.lstAllCandidates = new System.Windows.Forms.ListBox();
@@ -111,9 +107,7 @@ namespace KnightRider.ElectionTracker.ui
             this.countyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wardCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblAllCounties = new System.Windows.Forms.Label();
-            this.btnAddAllCounties = new System.Windows.Forms.Button();
             this.btnRemoveCounty = new System.Windows.Forms.Button();
-            this.btnRemoveAllCounties = new System.Windows.Forms.Button();
             this.btnAddCounty = new System.Windows.Forms.Button();
             this.lblMemberCounties = new System.Windows.Forms.Label();
             this.lstContestCounty = new System.Windows.Forms.ListBox();
@@ -457,9 +451,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // tabContests
             // 
-            this.tabContests.Controls.Add(this.btnAddAllContests);
             this.tabContests.Controls.Add(this.btnRemoveContest);
-            this.tabContests.Controls.Add(this.btnRemoveAllContests);
             this.tabContests.Controls.Add(this.btnAddContest);
             this.tabContests.Controls.Add(this.lstAllContests);
             this.tabContests.Controls.Add(this.lstElectionContests);
@@ -473,17 +465,6 @@ namespace KnightRider.ElectionTracker.ui
             this.tabContests.Text = "Contests";
             this.tabContests.UseVisualStyleBackColor = true;
             // 
-            // btnAddAllContests
-            // 
-            this.btnAddAllContests.Location = new System.Drawing.Point(258, 31);
-            this.btnAddAllContests.Name = "btnAddAllContests";
-            this.btnAddAllContests.Size = new System.Drawing.Size(27, 24);
-            this.btnAddAllContests.TabIndex = 4;
-            this.btnAddAllContests.Text = "<<";
-            this.ctlToolTip.SetToolTip(this.btnAddAllContests, "Add all contests.");
-            this.btnAddAllContests.UseVisualStyleBackColor = true;
-            this.btnAddAllContests.Click += new System.EventHandler(this.btnAddAllContests_Click);
-            // 
             // btnRemoveContest
             // 
             this.btnRemoveContest.Image = global::KnightRider.ElectionTracker.Properties.Resources.arrow_right;
@@ -494,17 +475,6 @@ namespace KnightRider.ElectionTracker.ui
             this.ctlToolTip.SetToolTip(this.btnRemoveContest, "Remove selected contest.");
             this.btnRemoveContest.UseVisualStyleBackColor = true;
             this.btnRemoveContest.Click += new System.EventHandler(this.btnRemoveContest_Click);
-            // 
-            // btnRemoveAllContests
-            // 
-            this.btnRemoveAllContests.Location = new System.Drawing.Point(258, 121);
-            this.btnRemoveAllContests.Name = "btnRemoveAllContests";
-            this.btnRemoveAllContests.Size = new System.Drawing.Size(27, 24);
-            this.btnRemoveAllContests.TabIndex = 7;
-            this.btnRemoveAllContests.Text = ">>";
-            this.ctlToolTip.SetToolTip(this.btnRemoveAllContests, "Remove all contests.");
-            this.btnRemoveAllContests.UseVisualStyleBackColor = true;
-            this.btnRemoveAllContests.Click += new System.EventHandler(this.btnRemoveAllContests_Click);
             // 
             // btnAddContest
             // 
@@ -567,9 +537,7 @@ namespace KnightRider.ElectionTracker.ui
             this.tabDetails.Controls.Add(this.btnResponseUp);
             this.tabDetails.Controls.Add(this.btnAddCustomResponse);
             this.tabDetails.Controls.Add(this.txtCustomResponse);
-            this.tabDetails.Controls.Add(this.btnAddAllCandidates);
             this.tabDetails.Controls.Add(this.btnRemoveCandidate);
-            this.tabDetails.Controls.Add(this.btnRemoveAllCandidates);
             this.tabDetails.Controls.Add(this.btnAddCandidate);
             this.tabDetails.Controls.Add(this.lstContestCandidate);
             this.tabDetails.Controls.Add(this.lstAllCandidates);
@@ -638,40 +606,20 @@ namespace KnightRider.ElectionTracker.ui
             this.txtCustomResponse.Size = new System.Drawing.Size(153, 20);
             this.txtCustomResponse.TabIndex = 5;
             // 
-            // btnAddAllCandidates
-            // 
-            this.btnAddAllCandidates.Location = new System.Drawing.Point(378, 84);
-            this.btnAddAllCandidates.Name = "btnAddAllCandidates";
-            this.btnAddAllCandidates.Size = new System.Drawing.Size(27, 24);
-            this.btnAddAllCandidates.TabIndex = 9;
-            this.btnAddAllCandidates.Text = "<<";
-            this.btnAddAllCandidates.UseVisualStyleBackColor = true;
-            this.btnAddAllCandidates.Click += new System.EventHandler(this.btnAddAllCandidates_Click);
-            // 
             // btnRemoveCandidate
             // 
             this.btnRemoveCandidate.Image = global::KnightRider.ElectionTracker.Properties.Resources.arrow_right;
-            this.btnRemoveCandidate.Location = new System.Drawing.Point(378, 144);
+            this.btnRemoveCandidate.Location = new System.Drawing.Point(378, 112);
             this.btnRemoveCandidate.Name = "btnRemoveCandidate";
             this.btnRemoveCandidate.Size = new System.Drawing.Size(27, 24);
             this.btnRemoveCandidate.TabIndex = 11;
             this.btnRemoveCandidate.UseVisualStyleBackColor = true;
             this.btnRemoveCandidate.Click += new System.EventHandler(this.btnRemoveCandidate_Click);
             // 
-            // btnRemoveAllCandidates
-            // 
-            this.btnRemoveAllCandidates.Location = new System.Drawing.Point(378, 174);
-            this.btnRemoveAllCandidates.Name = "btnRemoveAllCandidates";
-            this.btnRemoveAllCandidates.Size = new System.Drawing.Size(27, 24);
-            this.btnRemoveAllCandidates.TabIndex = 12;
-            this.btnRemoveAllCandidates.Text = ">>";
-            this.btnRemoveAllCandidates.UseVisualStyleBackColor = true;
-            this.btnRemoveAllCandidates.Click += new System.EventHandler(this.btnRemoveAllCandidates_Click);
-            // 
             // btnAddCandidate
             // 
             this.btnAddCandidate.Image = global::KnightRider.ElectionTracker.Properties.Resources.arrow_left;
-            this.btnAddCandidate.Location = new System.Drawing.Point(379, 114);
+            this.btnAddCandidate.Location = new System.Drawing.Point(379, 82);
             this.btnAddCandidate.Name = "btnAddCandidate";
             this.btnAddCandidate.Size = new System.Drawing.Size(27, 24);
             this.btnAddCandidate.TabIndex = 10;
@@ -755,9 +703,7 @@ namespace KnightRider.ElectionTracker.ui
             this.pgCounties.Controls.Add(this.lstAllCounties);
             this.pgCounties.Controls.Add(this.dgvContestCounties);
             this.pgCounties.Controls.Add(this.lblAllCounties);
-            this.pgCounties.Controls.Add(this.btnAddAllCounties);
             this.pgCounties.Controls.Add(this.btnRemoveCounty);
-            this.pgCounties.Controls.Add(this.btnRemoveAllCounties);
             this.pgCounties.Controls.Add(this.btnAddCounty);
             this.pgCounties.Controls.Add(this.lblMemberCounties);
             this.pgCounties.Controls.Add(this.lstContestCounty);
@@ -828,40 +774,20 @@ namespace KnightRider.ElectionTracker.ui
             this.lblAllCounties.TabIndex = 4;
             this.lblAllCounties.Text = "Available Counties";
             // 
-            // btnAddAllCounties
-            // 
-            this.btnAddAllCounties.Location = new System.Drawing.Point(367, 62);
-            this.btnAddAllCounties.Name = "btnAddAllCounties";
-            this.btnAddAllCounties.Size = new System.Drawing.Size(27, 24);
-            this.btnAddAllCounties.TabIndex = 6;
-            this.btnAddAllCounties.Text = "<<";
-            this.btnAddAllCounties.UseVisualStyleBackColor = true;
-            this.btnAddAllCounties.Click += new System.EventHandler(this.btnAddAllCounties_Click);
-            // 
             // btnRemoveCounty
             // 
             this.btnRemoveCounty.Image = global::KnightRider.ElectionTracker.Properties.Resources.arrow_right;
-            this.btnRemoveCounty.Location = new System.Drawing.Point(367, 118);
+            this.btnRemoveCounty.Location = new System.Drawing.Point(367, 62);
             this.btnRemoveCounty.Name = "btnRemoveCounty";
             this.btnRemoveCounty.Size = new System.Drawing.Size(27, 24);
             this.btnRemoveCounty.TabIndex = 8;
             this.btnRemoveCounty.UseVisualStyleBackColor = true;
             this.btnRemoveCounty.Click += new System.EventHandler(this.btnRemoveCounty_Click);
             // 
-            // btnRemoveAllCounties
-            // 
-            this.btnRemoveAllCounties.Location = new System.Drawing.Point(367, 146);
-            this.btnRemoveAllCounties.Name = "btnRemoveAllCounties";
-            this.btnRemoveAllCounties.Size = new System.Drawing.Size(27, 24);
-            this.btnRemoveAllCounties.TabIndex = 9;
-            this.btnRemoveAllCounties.Text = ">>";
-            this.btnRemoveAllCounties.UseVisualStyleBackColor = true;
-            this.btnRemoveAllCounties.Click += new System.EventHandler(this.btnRemoveAllCounties_Click);
-            // 
             // btnAddCounty
             // 
             this.btnAddCounty.Image = global::KnightRider.ElectionTracker.Properties.Resources.arrow_left;
-            this.btnAddCounty.Location = new System.Drawing.Point(367, 90);
+            this.btnAddCounty.Location = new System.Drawing.Point(367, 34);
             this.btnAddCounty.Name = "btnAddCounty";
             this.btnAddCounty.Size = new System.Drawing.Size(27, 24);
             this.btnAddCounty.TabIndex = 7;
@@ -922,7 +848,7 @@ namespace KnightRider.ElectionTracker.ui
             // frmElection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(607, 366);
+            this.ClientSize = new System.Drawing.Size(607, 373);
             this.Controls.Add(this.btnClearVotes);
             this.Controls.Add(this.tbDisplay);
             this.Controls.Add(this.lblRequired);
@@ -992,9 +918,7 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblMemberContests;
-        private System.Windows.Forms.Button btnAddAllContests;
         private System.Windows.Forms.Button btnRemoveContest;
-        private System.Windows.Forms.Button btnRemoveAllContests;
         private System.Windows.Forms.Button btnAddContest;
         private System.Windows.Forms.ListBox lstAllContests;
         private System.Windows.Forms.ListBox lstElectionContests;
@@ -1004,9 +928,7 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.ListBox lstContestCandidate;
         private System.Windows.Forms.ListBox lstAllCandidates;
         private System.Windows.Forms.ListBox lstContestCandidates;
-        private System.Windows.Forms.Button btnAddAllCandidates;
         private System.Windows.Forms.Button btnRemoveCandidate;
-        private System.Windows.Forms.Button btnRemoveAllCandidates;
         private System.Windows.Forms.Button btnAddCandidate;
         private System.Windows.Forms.TextBox txtCustomResponse;
         private System.Windows.Forms.Button btnAddCustomResponse;
@@ -1018,9 +940,7 @@ namespace KnightRider.ElectionTracker.ui
         private System.Windows.Forms.TabPage pgCounties;
         private System.Windows.Forms.DataGridView dgvContestCounties;
         private System.Windows.Forms.Label lblAllCounties;
-        private System.Windows.Forms.Button btnAddAllCounties;
         private System.Windows.Forms.Button btnRemoveCounty;
-        private System.Windows.Forms.Button btnRemoveAllCounties;
         private System.Windows.Forms.Button btnAddCounty;
         private System.Windows.Forms.Label lblMemberCounties;
         private System.Windows.Forms.ListBox lstContestCounty;
