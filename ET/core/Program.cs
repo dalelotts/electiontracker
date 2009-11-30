@@ -65,40 +65,6 @@ namespace KnightRider.ElectionTracker.core {
 
         [STAThread]
         public static void Main(string[] args) {
-            try
-            {
-                Directory.CreateDirectory("backups");
-                
-                String filename = Directory.GetCurrentDirectory() + @"\backups\backup" + DateTime.Now.ToString("yyyy-MM-dd") + ".sql";
-
-                if (!File.Exists(filename))
-                {
-                    System.Diagnostics.Process proc = new System.Diagnostics.Process();
-
-                    proc.EnableRaisingEvents = false;
-                    proc.StartInfo.FileName = "mysqldump";
-                    proc.StartInfo.Arguments = getBackupArguments();
-                    proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.CreateNoWindow = true;
-                    proc.StartInfo.RedirectStandardOutput = true;
-                    proc.Start();
-                    string output = proc.StandardOutput.ReadToEnd();
-                    proc.WaitForExit();
-
-                    //Write the output to file
-                    TextWriter tw = new StreamWriter(filename);
-                    tw.Write(output);
-                    tw.Close();
-
-                    proc.Close();                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error info");
-                LOG.Error(ex.Message, ex);
-            }
-
             try {
                 Application.EnableVisualStyles();
                 IApplicationContext ctx = ContextRegistry.GetContext("spring.root");
