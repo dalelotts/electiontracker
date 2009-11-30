@@ -88,8 +88,8 @@ namespace KnightRider.ElectionTracker.ui {
 
         public override void btnDelete_Click(object sender, EventArgs e) {
             //delete's but throws an error
+            //because its trying to save the data - dont save when its a null string in party name
             try {
-                
                 bool containCandidates = false;
                 int index = 0;
                 /*The user is unable to delete a party if it has candidates due to a foreign key constraint on the database.
@@ -115,6 +115,7 @@ namespace KnightRider.ElectionTracker.ui {
                     currentPoliticalParty = new PoliticalParty();
                     refreshControls();
                     raiseMakeTransientEvent();
+                    dirty = false;
                 }else
                 {
                     MessageBox.Show("Cannot Delete a party with members","Cannot Delete",MessageBoxButtons.OK);
@@ -149,7 +150,7 @@ namespace KnightRider.ElectionTracker.ui {
             if (dirty)
             {
                 DialogResult dr = MessageBox.Show("Do you want to save Political Party before closing?", "Political Party not saved", MessageBoxButtons.YesNo);
-                if (String.Equals("Yes", dr.ToString()))
+                if (String.Equals("Yes", dr.ToString()) && !this.txtName.Text.ToString().Equals(""))
                 {
                     btnSave_Click(sender, e);
                 }

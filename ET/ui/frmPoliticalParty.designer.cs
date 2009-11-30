@@ -116,7 +116,7 @@ namespace KnightRider.ElectionTracker.ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 131);
+            this.ClientSize = new System.Drawing.Size(352, 138);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtAbbrev);
             this.Controls.Add(this.label1);
