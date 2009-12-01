@@ -740,6 +740,7 @@ namespace KnightRider.ElectionTracker.ui {
                         refreshControls();
                         raiseMakePersistentEvent();
                         currentElection.ResetTotalVotes();
+                        this.btnSave_Click(sender, e);
                         //Display "Votes cleared."
                         MessageBox.Show(this, currentElection + " election votes cleared.", "Votes cleared.");
                         //}

@@ -837,11 +837,11 @@ namespace KnightRider.ElectionTracker.ui
             // 
             // btnClearVotes
             // 
-            this.btnClearVotes.Location = new System.Drawing.Point(520, 36);
+            this.btnClearVotes.Location = new System.Drawing.Point(484, 36);
             this.btnClearVotes.Name = "btnClearVotes";
-            this.btnClearVotes.Size = new System.Drawing.Size(75, 23);
+            this.btnClearVotes.Size = new System.Drawing.Size(111, 23);
             this.btnClearVotes.TabIndex = 11;
-            this.btnClearVotes.Text = "Clear Votes";
+            this.btnClearVotes.Text = "Clear Election Votes";
             this.btnClearVotes.UseVisualStyleBackColor = true;
             this.btnClearVotes.Click += new System.EventHandler(this.btnClearVotes_Click);
             // 
