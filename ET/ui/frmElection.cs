@@ -196,21 +196,21 @@ namespace KnightRider.ElectionTracker.ui {
                 currentElection.IsActive = chkActive.Checked;
                 currentElection.Date = dtpDate.Value;
                 //get all the elections to check if there already exists an election with the same date.
-                //IList<Election> testDate = electionDAO.findAll();
-                //foreach (Election elec in testDate)
-                //{
-                //    if (elec.Date == currentElection.Date)
-                //    {
-                //        MessageBox.Show(this, "Unable to save:\n" + currentElection + " election already exists.\n Please edit the existing election, or delete it.", "Error in Saving");
-                //        //exit this method since data already exists
-                //        //Since we are exiting, there is no data saved.
-                //        //If the data of this current election is checked elsewhere, this part of the code can be moved there.
-                //        //NOTE: The date is checked upon save button click, which means that the user could still enter data.
-                //        // so that upon selecting a date, a warning will show.
-                //        // Or overwriting can be supported, in which the methods below need to be changed.
-                //        return;
-                //    }
-                //}
+                IList<Election> testDate = electionDAO.findAll();
+                foreach (Election elec in testDate)
+                {
+                    if ((elec.Date == currentElection.Date) && !(elec.Equals(currentElection)))
+                    {
+                        MessageBox.Show(this, "Unable to save:\n" + currentElection + " election already exists.\n Please edit the existing election, or delete it.", "Error in Saving");
+                        //exit this method since data already exists
+                        //Since we are exiting, there is no data saved.
+                        //If the data of this current election is checked elsewhere, this part of the code can be moved there.
+                        //NOTE: The date is checked upon save button click, which means that the user could still enter data.
+                        // so that upon selecting a date, a warning will show.
+                        // Or overwriting can be supported, in which the methods below need to be changed.
+                        return;
+                    }
+                }
 
                 currentElection.Notes = txtNotes.Text;
 
