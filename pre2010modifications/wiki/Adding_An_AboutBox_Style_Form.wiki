@@ -1,0 +1,44 @@
+#summary Learn how to add a "AboutBox" style form to the project.
+
+
+= Introduction =
+
+An "AboutBox" style is a form that pops up, but is not called through makeMDIChildForm().
+
+= The Code =
+
+Looking at how the original AboutBox is made we find these lines of code:
+
+{{{
+public event GenericEventHandler<object, ShowAboutBoxArgs> showAboutBox;
+...
+aboutToolStripMenuItem.Click += new EventHandler(AboutBoxHandler);
+...
+private void AboutBoxHandler(object sender, EventArgs e)
+{
+    try
+    {
+        EventUtil.RaiseEvent<object, ShowAboutBoxArgs>(showAboutBox, this, new ShowAboutBoxArgs());
+    }
+    catch (Exception ex)
+    {
+        reportException("AboutBoxHandler", ex);
+    }
+}
+
+
+}}}
+ShowAboutBoxArgs is defined as
+
+{{{
+namespace KnightRider.ElectionTracker.events {
+    internal sealed class ShowAboutBoxArgs : EventArgs {}
+}
+}}}
+
+= Flow =
+
+  # User clicks "About..."
+  # AboutBoxHandler() is invoked because of "aboutToolStripMenuItem.Click += new EventHandler(AboutBoxHandler);"
+  # RaiseEvent(showAboutBox, this, new ShowAboutBoxArgs()) is called.
+  # showAboutBox(this, ShowAboutBoxArgs()) is called.
