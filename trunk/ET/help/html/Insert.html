@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+<LINK REL=StyleSheet HREF="insert.css" TYPE="text/css" MEDIA=screen>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft HTML Help Workshop 4.0">
+<title>Election Tracker Help</title>
+<style>@import url(coUA.css);
+    #ar5
+    {
+        height: 11px;
+    }
+    #ar1
+    {
+        width: 11px;
+    }
+</style>
+<link disabled rel="stylesheet" href="htmlhelp.css">
+<script language="JavaScript" src="JavaScript/prototype.js"></script>
+<script language="JavaScript" src="JavaScript/scriptaculous.js"></script>
+<script language="JavaScript" src="JavaScript/master.js"></script>
+<script language="JavaScript" src="JavaScript/effects.js"></script>
+
+</head>
+<BODY background="images/green.jpg" STYLE="background-repeat:repeat-y;">
+	
+<h1>Insert</h1>
+ 	<a href="#" onclick="doExpand(can, ar_candidate); return false;">
+		<img src="images/arrowrt.gif" id="ar_candidate" border=0/>Candidate
+	</a>
+	
+	<div CLASS="expara" ID="can" STYLE="display:none">	
+		<ul>
+			<li>Enter the Candidate name and political party.</li>
+			<li>If the candidate is currently active, leave the "Active?" checkbox checked.</li>
+				
+			<div id = "add_candidate_div" style="display:none">
+				<img src="images/add_candidate.PNG" id = "add_candidate" border=0/>
+			</div>
+			
+			<a href="#" onclick="Effect.Swap(add_candidate_div, show_candidate, hide_candidate); return false;">
+				<div/>
+				<label id = "show_candidate">Click here to see an example</label>
+				<label id = "hide_candidate", style = "display:none">Click here to hide</label>
+			</a>
+			
+			<li>Click the floppy disk <img src="images/save.PNG" border=1/> to save.</li>
+			<li>You can then click the plus <img src="images/plus.PNG" border=1/> to clear the page and add another candidate.</li>
+			<li>To clear the page without saving, click the back arrow <img src = "images/back.PNG" border=1/></li>
+		</ul>
+	</div>
+	<div/>
+	
+	
+	<a href="#" onclick = "doExpand(con, ar_con); return false;">
+		<img src="images/arrowrt.gif" id="ar_con" border=0/>Contest
+	</a>
+	<div CLASS="expara" id="con" style="display:none">
+		<ul>
+			<li>Enter the name of the contest and any associated notes.</li>
+			<li>If the contest is active, leave the "Active?" box checked.</li>
+			<li>If the contest is final, check the "Final?" box.</li>
+			<div id = "add_contest_div" style="display:none">
+				<img src="images/add_contest_contest.PNG" id = "add_contest_contest" border=0/>
+			</div>
+			
+			<a href="#" onclick="Effect.Swap(add_contest_div, show_contest_contest, hide_contest_contest); return false;">
+				<div/>
+				<label id = "show_contest_contest">Click here to see an example</label>
+				<label id = "hide_contest_contest", style = "display:none">Click here to hide</label>
+			</a>
+			<li>To add a county into the contest, click the counties tab.</li>
+			<li>Click on one of the Available Counties and click the left green arrow button 
+				<img src = "images/left_green_arrow.PNG"/></li>
+			<li>To add multiple counties at one time hold donw the "Ctrl" button and select from the Available Counties, then click the left green arrow button.</li>
+			<li>To add all counties, click the left double arrow button 
+				<img src = "images/double_left_arrow.PNG"/></li>
+			<li>To remove a county, click on it and click the right green arrow button. 
+				<img src = "images/right_green_arrow.PNG"/></li>
+			<li>To remove all counties, click the right double arrow button 
+				<img src = "images/double_right_arrow.PNG"/></li>
+			
+			<div id = "add_contest_county_div" style="display:none">
+				<img src="images/add_contest.PNG" border=0/>
+			</div>
+			
+			<a href="#" onclick="Effect.Swap(add_contest_county_div, show_contest_county, hide_contest_county); return false;">
+				<div/>
+				<label id = "show_contest_county">Click here to see an example</label>
+				<label id = "hide_contest_county", style = "display:none">Click here to hide</label>
+			</a>
+			
+			<li>To change the number of reporting units, double click on the Reporting Units field for the county and enter in the number.</li>
+			
+			<div id = "add_contest_county_rep_div" style="display:none">
+				<img src="images/add_contest_county.PNG" border=0/>
+			</div>
+			
+			<a href="#" onclick="Effect.Swap(add_contest_county_rep_div, show_contest_county_rep, hide_contest_county_rep); return false;">
+				<div/>
+				<label id = "show_contest_county_rep">Click here to see an example</label>
+				<label id = "hide_contest_county_rep", style = "display:none">Click here to hide</label>
+			</a>
+			<li>Click the floppy disk <img src="images/save.PNG" border=1/> to save.</li>
+			<li>You can then click the plus <img src="images/plus.PNG" border=1/> to clear the page and add another candidate.</li>
+			<li>To clear the page without saving, click the back arrow <img src = "images/back.PNG" border=1/></li>
+		</ul>
+	</div>
+	<div/>
+	
+	
+	
+	<a href="#" onclick="doExpand(county, ar_county); return false;">
+		<img src="images/arrowrt.gif" id="ar_county" border=0/>County
+	</a>
+	<div CLASS="expara" ID="county" STYLE="display:none">	
+		<ul>
+			<li>Enter the county name and number of reporting units, as well as any notes associated with the county.</li>
+			<div id = "add_county_county_div" style="display:none">
+				<img src="images/add_county_county.PNG" border=0/>
+			</div>
+			<a href="#" onclick="Effect.Swap(add_county_county_div, show_county_county, hide_county_county); return false;">
+				<div/>
+				<label id = "show_county_county">Click here to see an example</label>
+				<label id = "hide_county_county", style = "display:none">Click here to hide</label>
+			</a>
+
+			
+			
+			<li>To add phone numbers, click the Phone Numbers tab, select the type of phone number, and enter the number.</li>
+			<li>To remove a phone number, select the number and click the "Remove" button.</li>
+			<div id = "add_county_phone_div" style="display:none">
+				<img src="images/add_county_phone.PNG" border=0/>
+			</div>
+			<a href="#" onclick="Effect.Swap(add_county_phone_div, show_county_phone, hide_county_phone); return false;">
+				<div/>
+				<label id = "show_county_phone">Click here to see an example</label>
+				<label id = "hide_county_phone", style = "display:none">Click here to hide</label>
+			</a>
+			
+			
+			
+			<li>Click the floppy disk <img src="images/save.PNG" border=1/> to save.</li>
+			<li>You can then click the plus <img src="images/plus.PNG" border=1/> to clear the page and add another candidate.</li>
+			<li>To clear the page without saving, click the back arrow <img src = "images/back.PNG" border=1/></li>
+		</ul>
+	</div>
+	<div/>
+
+	
+	
+	<a href="#" onclick="doExpand(election, ar_election); return false;">
+		<img src="images/arrowrt.gif" id="ar_election" border=0/>Election
+	</a>
+	
+	<div CLASS="expara" ID="election" STYLE="display:none">	
+		<ul>
+			<li>Select a date for the election.  If the election is active, leave the "Active?" button checked.</li>
+			<li>Make any notes you want for the election.</li>
+			<div id = "add_election_election_div" style="display:none">
+				<img src="images/add_election_election.PNG" border=0/>
+			</div>
+			
+			<a href="#" onclick="Effect.Swap(add_election_election_div, show_election_election, hide_election_election); return false;">
+				<div/>
+				<label id = "show_election_election">Click here to see an example</label>
+				<label id = "hide_election_election", style = "display:none">Click here to hide</label>
+			</a>
+	
+			<li>To add contests to the election click the contests tab.</li>
+			<li>Select the contests from the right side table and click the green left-pointing arrow button to add <img src = "images/left_green_arrow.PNG" border=1/></li>
+			<li>To add multiple contests at a time, hold down "Ctrl" and click what contests you want to add.  Then click the green left-pointing arrow button.</li>
+	
+			<li>To remove contests, select the contest from the left table and clcik the right-pointing arrow button <img src = "images/right_green_arrow.PNG" border=1/></li>
+			<li>To remove multiple contests at a time, hold down "Ctrl" and click what contests you want to remove.  Then click the green right-pointing arrow button.</li>
+			
+			<div id = "add_election_contest_div" style="display:none">
+				<img src="images/add_election_contest.PNG" border=0/>
+			</div>
+			
+			<a href="#" onclick="Effect.Swap(add_election_contest_div, show_election_contest, hide_election_contest); return false;">
+				<div/>
+				<label id = "show_election_contest">Click here to see an example</label>
+				<label id = "hide_election_contest", style = "display:none">Click here to hide</label>
+			</a>
+			
+			
+			<li>To add candidates into the contests, click the "Candidates" tab.</li>
+			<li>Select a contest.  The candidates currently in the contest will pop up in the "Candidates" window.</li>
+			<li>Select a candidate from the "Available Candidates" window and click the green left-pointing arrow button to add.  <img src = "images/left_green_arrow.PNG" border=1/></li>
+			<li>To add multiple candidates at a time, hold down "Ctrl" and select the candidates before clicking the green arrow button.</li>
+			<li>To select a candidate as the incumbent, highlight the candidate and click the check button <img src = "images/check_box.PNG" border=1 /></li>
+			<li>To remove a candidate select the contest you wish to remove from, and select the candidate.  Then click the green right-pointing arrow button <img src = "images/right_green_arrow.PNG" border=1/></li>
+			
+			<div id = "add_election_candidate_div" style="display:none">
+				<img src="images/add_election_candidate.PNG" border=0/>
+			</div>
+					
+			<a href="#" onclick="Effect.Swap(add_election_candidate_div, show_election_candidate, hide_election_candidate); return false;">
+				<div/>
+				<label id = "show_election_candidate">Click here to see an example</label>
+				<label id = "hide_election_candidate", style = "display:none">Click here to hide</label>
+			</a>
+			
+			<li>To add counties to the election click the "Counties" tab.</li>
+			<li>Select the contest you want to add the counties to from the "Contests" table.</li>
+			<li>Select the county you want to add from the "Available Counties" table and click the green left-pointing arrow button. <img src = "images/left_green_arrow.PNG" border = 1 /></li>
+			<li>To add multiple counties at a time, hold down "Ctrl" and select the candidates before clicking the green arrow button. <li>
+			<li>If you need to add/change the number of reporting units for the county, double click on the "Reporting Units" column for the county you want.  You can then enter in the number you would like.</li>
+			<li>To remove a county click on the county name and click the green right-pointing arrow button. <img src = "images/right_green_arrow.PNG" border = 1 /> </li>
+			
+			<div id = "add_election_counties_div" style="display:none">
+				<img src="images/add_election_counties.PNG" border=0/>
+			</div>
+					
+			<a href="#" onclick="Effect.Swap(add_election_counties_div, show_election_counties, hide_election_counties); return false;">
+				<div/>
+				<label id = "show_election_counties">Click here to see an example (Note the reporting units are just for example purpouses)</label>
+				<label id = "hide_election_counties", style = "display:none">Click here to hide</label>
+			</a>
+			
+			
+				
+			
+			<li>Click the floppy disk <img src="images/save.PNG" border=1/> to save.</li>
+			<li>You can then click the plus <img src="images/plus.PNG" border=1/> to clear the page and add another candidate.</li>
+			<li>To clear the page without saving, click the back arrow <img src = "images/back.PNG" border=1/></li>
+		</ul>
+	</div>
+	<div/>
+	
+	<a href="#" onclick="doExpand(party, ar_party); return false;">
+		<img src="images/arrowrt.gif" id="ar_party" border=0/>Party
+	</a>
+	<div CLASS="expara" ID="party" STYLE="display:none">	
+		<ul>
+			<li>Enter the party name and abbreviation.  If the party is active, leave the "Active?" box checked.</li>
+			<div id = "add_party_div" style="display:none">
+				<img src="images/add_political_party.PNG" border=0/>
+			</div>
+			<a href="#" onclick="Effect.Swap(add_party_div, show_party, hide_party); return false;">
+				<div/>
+				<label id = "show_party">Click here to see an example</label>
+				<label id = "hide_party", style = "display:none">Click here to hide</label>
+			</a>
+
+			<li>Click the floppy disk <img src="images/save.PNG" border=1/> to save.</li>
+			<li>You can then click the plus <img src="images/plus.PNG" border=1/> to clear the page and add another candidate.</li>
+			<li>To clear the page without saving, click the back arrow <img src = "images/back.PNG" border=1/></li>
+		</ul>
+	</div>
+	<div/>
+
+	
+	
+	<a href="#" onclick="doExpand(vote_results, ar_vote_results); return false;">
+	<img src="images/arrowrt.gif" id="ar_vote_results" border=0/>Vote Results
+	</a>
+	<div CLASS="expara" ID="vote_results" STYLE="display:none">	
+		<ul>
+			<li>Select the election from the drop down box in the "Election" section.</li>
+			<li>Select the county from the list of counties in the left table.</li>
+			<li>Type the number of Reporting Units, and the number of votes per candidate.</li>
+			<li>You can jump to the next field to edit by using the "Tab" key.</li>
+			<li>Click the "Save" button to save the data <img src = "images/enter_votes_save.PNG" border=1 /> </li>
+			
+			<div id = "add_votes_div" style="display:none">
+				<img src="images/add_votes.PNG" border=0/>
+			</div>
+			<a href="#" onclick="Effect.Swap(add_votes_div, show_votes, hide_votes); return false;">
+				<div/>
+				<label id = "show_votes">Click here to see an example</label>
+				<label id = "hide_votes", style = "display:none">Click here to hide</label>
+			</a>
+		</ul>
+	</div>
+	<div/>
+	
+	
+	
+	
+	</BODY>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
