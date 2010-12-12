@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+	<meta http-equiv="Content-Type"
+	content="text/html; charset=iso-8859-1">
+	<meta name="GENERATOR" content="Microsoft HTML Help Workshop 4.0">
+	<title>Server Options</title>
+
+	<style>@import url(coUA.css);
+		#ar5
+		{
+			height: 11px;
+		}
+		#ar1
+		{
+			width: 11px;
+		}
+	</style>
+	<link disabled rel="stylesheet" href="htmlhelp.css">
+	<script language="JavaScript" src="JavaScript/prototype.js"></script>
+	<script language="JavaScript" src="JavaScript/scriptaculous.js"></script>
+	<script language="JavaScript" src="JavaScript/master.js"></script>
+	
+</head>
+<BODY background="images/green.jpg" STYLE="background-repeat:repeat-y;">
+	
+<h1>Server Options</h1>
+ 	<a href="#" onclick="doExpand(server_options, ar_server_options)">
+		<img src="images/arrowrt.gif" id="ar_server_options" border=0/>Server Options
+	</a>
+	
+	<div CLASS="expara" ID="server_options" STYLE="display:none">	
+		<ul>
+			<li>In order to change the database server options, click "File -> Server Options"</li>
+			<li>Enter the Username, Host, Password, and Database Table name.</li>
+			<li>Click the "Save" button <img src = "images/enter_votes_save.PNG" border = 1/></li>
+			<li>You will be prompted to restart the application.  Press "OK" and restart.</li>
+			<li>If you do not want to save the settings, just close out of the "MySQL Server Settings" window.</li>
+		</ul>
+	
+		<div id = "server_options_div" style="display:none">
+			<img src="images/server_options.PNG" border=0/>
+		</div>
+	
+		<a href="#" onclick="Effect.Swap(server_options_div, show_server_options, hide_server_options); return false;">
+			<div/>
+			<label id = "show_server_options">Click here to see an example</label>
+			<label id = "hide_server_options", style = "display:none">Click here to hide</label>
+		</a>
+	</div>
+	</BODY>
+</html>
+
+
