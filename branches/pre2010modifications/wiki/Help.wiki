@@ -1,0 +1,83 @@
+The information provided shows basic use of the election tracker and its many features.
+
+<wiki:toc max_depth="1" />
+
+= Creating an election =
+
+1. Go under the insert menu
+
+2. Select an election
+
+3. Set the date of the election and any other data.
+
+4. Hit save and the election should be created!
+
+= Creating a candidate =
+
+1. Go under the insert menu
+
+2. Select Candidate
+
+3. Enter in the required fields and select save.
+
+= Creating a contest =
+
+1. Go under the insert menu
+
+2. Select Contest
+
+3. Enter in the required fields and select save.
+
+= Creating a county =
+
+1. Go under the insert menu
+
+2. Select County
+
+3. Enter in the required fields and select save.
+
+= Creating a political party =
+
+1. Go under the insert menu
+
+2. Select Political Party
+
+3. Enter in the required fields and select save.
+
+= Inserting vote results =
+
+1. Go under the insert menu
+
+2. Select Vote Results
+
+3. Select which election you would like to enter votes for.
+
+4. Enter in the votes for the counties.
+
+5. Select save.
+
+= Clearing votes =
+
+1. Select an election from elections - active tab.
+
+2. Hit the clear election vote button.
+
+3. Select save.
+
+= Changing to inactive/active =
+
+1. Open up what you wish to change from active/inactive.
+
+2. Uncheck/check the active check box.
+
+3. Select save.
+
+= Changing server options =
+
+1. Go under the file menu
+
+2. Select Server options.
+
+3. Fill in all the fields and select save.
+
+4. Restart the application.
