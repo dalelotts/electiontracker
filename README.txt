@@ -1,5 +1,7 @@
-This is a Subversion repository; use the 'svnadmin' tool to examine
-it.  Do not add, delete, or modify files here unless you know how
-to avoid corrupting the repository.
+#EletctionTracker
+Originally written as a class project while I was attending UWEC in 2005. 
+This application was written for the Eau Claire office of Wisconsin Public Radio (WPR).
 
-Visit http://subversion.tigris.org/ for more information. 
+## Original description
+I am hoping this application can serve as an example – perhaps even a template – for building simple Windows Forms applications using Spring and nHibernate. 
+Once everything is working nicely I will thoroughly document the source code regarding the reasons for various design decisions and implementations. (I Obvoiusly never got around to this part)
