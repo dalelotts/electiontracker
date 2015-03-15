@@ -1,5 +1,5 @@
 #ElectionTracker
-This was written as a class project while I was attending UWEC in 2005. I haven't worked in .Net since.
+This was written as a class project while I was attending UWEC in 2005. This was my first .Net project, and likely my last. =)
 
 This application was written for the Eau Claire office of Wisconsin Public Radio (WPR).
 
